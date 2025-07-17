@@ -1,0 +1,172 @@
+/* static/css/login.css */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.login-box {
+    background: rgba(26, 26, 26, 0.9);
+    border: 2px solid var(--glow-color);
+    border-radius: 10px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.3),
+        inset 0 0 30px rgba(0, 255, 65, 0.1);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px var(--glow-color));
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-shadow: 0 0 10px var(--glow-color);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    opacity: 0.8;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-text);
+    z-index: 2;
+}
+
+.sauron-input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(42, 42, 42, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--primary-text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.sauron-input:focus {
+    outline: none;
+    border-color: var(--glow-color);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    background: rgba(42, 42, 42, 1);
+}
+
+.sauron-input::placeholder {
+    color: var(--tertiary-text);
+}
+
+.input-group label {
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tertiary-text);
+    font-size: 12px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.sauron-input:focus + label,
+.sauron-input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    opacity: 1;
+    background: var(--secondary-bg);
+    padding: 0 5px;
+    color: var(--glow-color);
+}
+
+.login-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--tertiary-text), var(--secondary-text));
+    border: 1px solid var(--glow-color);
+    border-radius: 5px;
+    color: var(--primary-bg);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-text), var(--primary-text));
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+    transform: translateY(-2px);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.messages {
+    margin-top: 1rem;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+.message.error {
+    background: rgba(255, 51, 51, 0.1);
+    border: 1px solid var(--error-text);
+    color: var(--error-text);
+}
+
+.message.success {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--primary-text);
+    color: var(--primary-text);
+}
+
+.message.info {
+    background: rgba(0, 204, 51, 0.1);
+    border: 1px solid var(--secondary-text);
+    color: var(--secondary-text);
+}

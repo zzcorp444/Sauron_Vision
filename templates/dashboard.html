@@ -1,0 +1,148 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <img src="{% static 'images/sv_logo_00.png' %}" alt="SV" class="header-logo">
+            <h1>SAURON VISION</h1>
+        </div>
+        <div class="header-center">
+            <div class="market-status">
+                <span class="status-indicator active"></span>
+                <span>MARKET {{ market_status }}</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>{{ user.user_id }}</span>
+                <div class="alerts">
+                    <i class="fas fa-bell"></i>
+                    <span class="alert-count">{{ active_alerts }}</span>
+                </div>
+            </div>
+            <a href="{% url 'logout' %}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="overview">
+                    <i class="fas fa-eye"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-section="market-scanner">
+                    <i class="fas fa-search"></i>
+                    <span>Market Scanner</span>
+                </a>
+                <a href="#" class="nav-item" data-section="strategy-builder">
+                    <i class="fas fa-cogs"></i>
+                    <span>Strategy Builder</span>
+                </a>
+                <a href="#" class="nav-item" data-section="risk-monitor">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Risk Monitor</span>
+                </a>
+                <a href="#" class="nav-item" data-section="sentiment-analysis">
+                    <i class="fas fa-brain"></i>
+                    <span>Sentiment Analysis</span>
+                </a>
+                <a href="#" class="nav-item" data-section="terminal">
+                    <i class="fas fa-terminal"></i>
+                    <span>Terminal</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Market Overview</h2>
+                    <div class="section-controls">
+                        <button class="control-btn">
+                            <i class="fas fa-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>Portfolio Status</h3>
+                        <div class="card-content">
+                            <div class="metric">
+                                <span class="value">$125,847</span>
+                                <span class="label">Total Value</span>
+                            </div>
+                            <div class="metric">
+                                <span class="value positive">+2.35%</span>
+                                <span class="label">Today's Change</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <h3>Active Positions</h3>
+                        <div class="card-content">
+                            <div class="position-list">
+                                <div class="position-item">
+                                    <span class="symbol">AAPL</span>
+                                    <span class="value">$150.25</span>
+                                    <span class="change positive">+1.25%</span>
+                                </div>
+                                <div class="position-item">
+                                    <span class="symbol">GOOGL</span>
+                                    <span class="value">$2750.50</span>
+                                    <span class="change negative">-0.75%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <h3>Recent Signals</h3>
+                        <div class="card-content">
+                            <div class="signal-list">
+                                <div class="signal-item">
+                                    <span class="signal-type buy">BUY</span>
+                                    <span class="signal-symbol">TSLA</span>
+                                    <span class="signal-time">2m ago</span>
+                                </div>
+                                <div class="signal-item">
+                                    <span class="signal-type sell">SELL</span>
+                                    <span class="signal-symbol">MSFT</span>
+                                    <span class="signal-time">15m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Terminal Section -->
+            <section id="terminal" class="content-section">
+                {% include 'components/terminal.html' %}
+            </section>
+
+            <!-- Other sections would be included here -->
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,180 @@
+<!-- templates/components/terminal.html -->
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-title">
+            <i class="fas fa-terminal"></i>
+            <span>Sauron Vision Terminal</span>
+        </div>
+        <div class="terminal-controls">
+            <button class="terminal-btn" id="clear-terminal">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button class="terminal-btn" id="terminal-help">
+                <i class="fas fa-question"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="terminal-output" id="terminal-output">
+        <div class="terminal-line welcome">
+            <span class="timestamp">[{{ user.date_joined|date:"H:i:s" }}]</span>
+            <span class="system">SYSTEM</span>
+            <span class="message">Welcome to Sauron Vision Terminal. The Eye sees all.</span>
+        </div>
+        <div class="terminal-line info">
+            <span class="timestamp">[{{ user.date_joined|date:"H:i:s" }}]</span>
+            <span class="system">SYSTEM</span>
+            <span class="message">Type 'help' for available commands.</span>
+        </div>
+    </div>
+    
+    <div class="terminal-input-container">
+        <span class="terminal-prompt">{{ user.user_id }}@sauron-vision:~$</span>
+        <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false">
+    </div>
+</div>
+
+<style>
+.terminal-container {
+    background: var(--primary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 10px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 10px 10px 0 0;
+}
+
+.terminal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-text);
+    font-weight: 600;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.terminal-btn {
+    padding: 0.5rem;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--secondary-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.terminal-btn:hover {
+    border-color: var(--glow-color);
+    color: var(--primary-text);
+}
+
+.terminal-output {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+}
+
+.terminal-line {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.terminal-line.welcome .message {
+    color: var(--primary-text);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.terminal-line.info .message {
+    color: var(--secondary-text);
+}
+
+.terminal-line.error .message {
+    color: var(--error-text);
+}
+
+.terminal-line.success .message {
+    color: var(--primary-text);
+}
+
+.timestamp {
+    color: var(--tertiary-text);
+    font-size: 0.8rem;
+    min-width: 70px;
+}
+
+.system {
+    color: var(--warning-text);
+    font-weight: 600;
+    min-width: 60px;
+}
+
+.command {
+    color: var(--secondary-text);
+    font-weight: 600;
+}
+
+.terminal-input-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--secondary-bg);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 10px 10px;
+}
+
+.terminal-prompt {
+    color: var(--primary-text);
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    outline: none;
+    caret-color: var(--glow-color);
+}
+
+.terminal-input::placeholder {
+    color: var(--tertiary-text);
+}
+
+/* Scrollbar for terminal */
+.terminal-output::-webkit-scrollbar {
+    width: 6px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: var(--primary-bg);
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: var(--tertiary-text);
+    border-radius: 3px;
+}
+</style>
