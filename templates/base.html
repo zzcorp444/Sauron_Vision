@@ -18,34 +18,46 @@
     <!-- Eye background -->
     <div class="eye-bg">
         <div class="eye">
-            <!-- Electronic circuits -->
-            <div class="eye-circuits">
-                <div class="circuit-node"></div>
-                <div class="circuit-node"></div>
-                <div class="circuit-node"></div>
-                <div class="circuit-node"></div>
-                <div class="circuit-node"></div>
-                <div class="circuit-node"></div>
+            <!-- Eye Shape SVG -->
+            <div class="eye-shape">
+                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Eye outline - almond shape -->
+                    <path class="eye-outline" d="M 50 200 Q 400 50, 750 200 Q 400 350, 50 200 Z" />
+                    
+                    <!-- Circuit veins on the left -->
+                    <path class="circuit-vein left" d="M 100 200 Q 150 150, 200 180 L 220 180 L 220 190 L 250 190" />
+                    <path class="circuit-vein left" d="M 120 220 Q 170 250, 210 220 L 230 220 L 230 210 L 260 210" />
+                    <path class="circuit-vein left" d="M 90 180 Q 140 130, 190 170 L 210 170 L 210 180 L 240 180" />
+                    
+                    <!-- Circuit veins on the right -->
+                    <path class="circuit-vein right" d="M 700 200 Q 650 150, 600 180 L 580 180 L 580 190 L 550 190" />
+                    <path class="circuit-vein right" d="M 680 220 Q 630 250, 590 220 L 570 220 L 570 210 L 540 210" />
+                    <path class="circuit-vein right" d="M 710 180 Q 660 130, 610 170 L 590 170 L 590 180 L 560 180" />
+                </svg>
             </div>
             
+            <!-- Pupil with globe -->
             <div class="pupil">
                 <div class="globe">
-                    <!-- Longitude lines (vertical) -->
-                    <div class="globe-line long1"></div>
-                    <div class="globe-line long2"></div>
-                    <div class="globe-line long3"></div>
-                    <div class="globe-line long4"></div>
-                    <div class="globe-line long5"></div>
-                    <div class="globe-line long6"></div>
+                    <!-- Meridians (Vertical lines) -->
+                    <div class="globe-line meridian meridian1"></div>
+                    <div class="globe-line meridian meridian2"></div>
+                    <div class="globe-line meridian meridian3"></div>
+                    <div class="globe-line meridian meridian4"></div>
+                    <div class="globe-line meridian meridian5"></div>
+                    <div class="globe-line meridian meridian6"></div>
                     
-                    <!-- Latitude lines (horizontal) -->
-                    <div class="globe-line lat1"></div>
-                    <div class="globe-line lat2"></div>
-                    <div class="globe-line lat3"></div>
-                    <div class="globe-line lat4"></div>
-                    <div class="globe-line lat5"></div>
+                    <!-- Parallels (Horizontal lines) -->
+                    <div class="globe-line parallel parallel1"></div>
+                    <div class="globe-line parallel parallel2"></div>
+                    <div class="globe-line parallel parallel3"></div>
+                    <div class="globe-line parallel parallel4"></div>
+                    <div class="globe-line parallel parallel5"></div>
                     
-                    <!-- Market dots positioned on globe surface -->
+                    <!-- Equator -->
+                    <div class="globe-line equator"></div>
+                    
+                    <!-- Market dots on globe surface -->
                     <div class="market-dot nyse" data-market="NYSE"></div>
                     <div class="market-dot nasdaq" data-market="NASDAQ"></div>
                     <div class="market-dot lse" data-market="London"></div>
@@ -61,7 +73,7 @@
         </div>
     </div>
     
-    <!-- Code bits scrolling -->
+    <!-- Code bits scrolling - Enhanced variety -->
     <div class="code-scroll-container">
         <div class="code-bit">
             <pre>def analyze_market(data):<br>    return insights</pre>
@@ -84,17 +96,41 @@
         <div class="code-bit">
             <pre>optimize_portfolio(assets)<br>rebalance()</pre>
         </div>
+        <div class="code-bit">
+            <pre>signals = detect_patterns(chart)<br>if signals: execute()</pre>
+        </div>
+        <div class="code-bit">
+            <pre>correlation = analyze_pairs(assets)<br>hedge_position(correlation)</pre>
+        </div>
+        <div class="code-bit">
+            <pre>news = scrape_sentiment(sources)<br>adjust_strategy(news)</pre>
+        </div>
+        <div class="code-bit">
+            <pre>backtest = run_simulation(strategy)<br>optimize_parameters(backtest)</pre>
+        </div>
+        <div class="code-bit">
+            <pre>alert = monitor_markets(24/7)<br>notify_trader(alert)</pre>
+        </div>
     </div>
     
-    <!-- Price movements ticker -->
+    <!-- Price movements ticker - Enhanced variety -->
     <div class="price-ticker-container">
         <div class="price-ticker">
-            <span>AAPL $150.25 +1.2%</span>
-            <span>GOOGL $2750.50 -0.5%</span>
-            <span>TSLA $850.75 +3.1%</span>
-            <span>MSFT $300.40 +0.8%</span>
-            <span>AMZN $3400.20 -1.2%</span>
-            <span>BTC $45000.00 +2.5%</span>
+            <span class="positive">AAPL $150.25 +1.2%</span>
+            <span class="negative">GOOGL $2750.50 -0.5%</span>
+            <span class="positive">TSLA $850.75 +3.1%</span>
+            <span class="positive">MSFT $300.40 +0.8%</span>
+            <span class="negative">AMZN $3400.20 -1.2%</span>
+            <span class="positive">BTC $45000.00 +2.5%</span>
+            <span class="negative">ETH $2800.00 -0.3%</span>
+            <span class="positive">NVDA $450.30 +5.2%</span>
+            <span class="negative">META $325.60 -1.8%</span>
+            <span class="positive">AMD $120.45 +2.3%</span>
+            <span class="positive">SPY $435.20 +0.4%</span>
+            <span class="negative">QQQ $365.80 -0.2%</span>
+            <span class="positive">GLD $185.30 +0.6%</span>
+            <span class="negative">VIX $15.20 -3.5%</span>
+            <span class="positive">NFLX $425.10 +1.9%</span>
         </div>
     </div>
     

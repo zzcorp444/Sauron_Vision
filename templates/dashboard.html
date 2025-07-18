@@ -18,6 +18,53 @@
             <div class="market-status">
                 <span class="status-indicator active"></span>
                 <span>MARKET {{ market_status }}</span>
+                
+                <!-- Market Status Popup -->
+                <div class="market-status-popup">
+                    <div class="market-group">
+                        <h4><i class="fas fa-circle" style="color: var(--primary-text);"></i> Open Markets</h4>
+                        <div class="market-list">
+                            <div class="market-item open">
+                                <span class="market-name">NYSE</span>
+                                <span class="market-time">9:30 AM - 4:00 PM EST</span>
+                            </div>
+                            <div class="market-item open">
+                                <span class="market-name">NASDAQ</span>
+                                <span class="market-time">9:30 AM - 4:00 PM EST</span>
+                            </div>
+                            <div class="market-item open">
+                                <span class="market-name">London Stock Exchange</span>
+                                <span class="market-time">8:00 AM - 4:30 PM GMT</span>
+                            </div>
+                            <div class="market-item open">
+                                <span class="market-name">Crypto (24/7)</span>
+                                <span class="market-time">Always Open</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="market-group">
+                        <h4><i class="fas fa-circle" style="color: var(--error-text);"></i> Closed Markets</h4>
+                        <div class="market-list">
+                            <div class="market-item closed">
+                                <span class="market-name">Tokyo Stock Exchange</span>
+                                <span class="market-time">9:00 AM - 3:00 PM JST</span>
+                            </div>
+                            <div class="market-item closed">
+                                <span class="market-name">Shanghai Exchange</span>
+                                <span class="market-time">9:30 AM - 3:00 PM CST</span>
+                            </div>
+                            <div class="market-item closed">
+                                <span class="market-name">Hong Kong Exchange</span>
+                                <span class="market-time">9:30 AM - 4:00 PM HKT</span>
+                            </div>
+                            <div class="market-item closed">
+                                <span class="market-name">Sydney Exchange</span>
+                                <span class="market-time">10:00 AM - 4:00 PM AEDT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="header-right">

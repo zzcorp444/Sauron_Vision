@@ -23,7 +23,6 @@
 
 .header-logo {
     height: 40px;
-    /* filter: drop-shadow(0 0 5px var(--glow-color)); */
 }
 
 .header-left h1 {
@@ -43,6 +42,16 @@
     gap: 0.5rem;
     font-size: 0.9rem;
     color: var(--secondary-text);
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.market-status:hover {
+    background: var(--accent-bg);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
 .status-indicator {
@@ -55,6 +64,101 @@
 
 .status-indicator.active {
     background: var(--primary-text);
+}
+
+/* Market Status Popup */
+.market-status-popup {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 250px;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    z-index: 100;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.market-status:hover .market-status-popup {
+    display: block;
+    opacity: 1;
+}
+
+.market-status-popup::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--glow-color);
+}
+
+.market-group {
+    margin-bottom: 1rem;
+}
+
+.market-group:last-child {
+    margin-bottom: 0;
+}
+
+.market-group h4 {
+    color: var(--primary-text);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.market-group h4 i {
+    font-size: 0.8rem;
+}
+
+.market-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.market-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.market-item:hover {
+    background: var(--accent-bg);
+}
+
+.market-name {
+    color: var(--secondary-text);
+}
+
+.market-time {
+    color: var(--tertiary-text);
+    font-size: 0.75rem;
+}
+
+.market-item.open .market-name {
+    color: var(--primary-text);
+}
+
+.market-item.closed .market-name {
+    color: var(--tertiary-text);
 }
 
 .header-right {
@@ -376,5 +480,10 @@
     
     .overview-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .market-status-popup {
+        left: 0;
+        transform: translateX(0);
     }
 }

@@ -97,8 +97,14 @@ body {
 }
 
 @keyframes circuit-pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
+    0%, 100% { 
+        stroke-dashoffset: 0;
+        opacity: 0.3;
+    }
+    50% { 
+        stroke-dashoffset: 100;
+        opacity: 0.8;
+    }
 }
 
 /* Matrix Background Effect */
@@ -158,94 +164,59 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
 }
 
-/* Eye outline using SVG for perfect almond shape */
-.eye::before {
-    content: '';
+/* Eye Shape SVG */
+.eye-shape {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cpath d='M 50 200 Q 200 50, 400 200 Q 600 350, 750 200 Q 600 50, 400 200 Q 200 350, 50 200' stroke='rgba(0, 255, 65, 0.3)' stroke-width='3' fill='none'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    z-index: 1;
 }
 
-/* Electronic circuits on the sides of the eye */
-.eye::after {
-    content: '';
-    position: absolute;
+.eye-shape svg {
     width: 100%;
     height: 100%;
-    background-image: 
-        /* Left side circuits */
-        linear-gradient(90deg, transparent 0%, rgba(0, 255, 65, 0.1) 2px, transparent 2px),
-        linear-gradient(0deg, transparent 0%, rgba(0, 255, 65, 0.1) 2px, transparent 2px),
-        /* Right side circuits */
-        linear-gradient(90deg, transparent 0%, rgba(0, 255, 65, 0.1) 2px, transparent 2px),
-        linear-gradient(0deg, transparent 0%, rgba(0, 255, 65, 0.1) 2px, transparent 2px);
-    background-size: 
-        20px 20px,
-        20px 20px,
-        20px 20px,
-        20px 20px;
-    background-position:
-        0 0,
-        0 0,
-        100% 0,
-        100% 0;
-    background-repeat: repeat;
-    mask-image: linear-gradient(90deg, 
-        rgba(0,0,0,0.5) 0%, 
-        transparent 25%, 
-        transparent 75%, 
-        rgba(0,0,0,0.5) 100%
-    );
+}
+
+.eye-outline {
+    fill: none;
+    stroke: rgba(0, 255, 65, 0.3);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.2));
+}
+
+/* Circuit Veins */
+.circuit-vein {
+    stroke: rgba(0, 255, 65, 0.2);
+    stroke-width: 1;
+    fill: none;
+    stroke-dasharray: 5 10;
     animation: circuit-pulse 4s ease-in-out infinite;
 }
 
-/* Circuit nodes */
-.eye-circuits {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+.circuit-vein.left {
+    animation-delay: 0s;
 }
 
-.circuit-node {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--glow-color);
-    border-radius: 50%;
-    box-shadow: 0 0 6px var(--glow-color);
-    opacity: 0.5;
-    animation: circuit-pulse 3s ease-in-out infinite;
+.circuit-vein.right {
+    animation-delay: 2s;
 }
 
-/* Position circuit nodes */
-.circuit-node:nth-child(1) { top: 30%; left: 10%; animation-delay: 0s; }
-.circuit-node:nth-child(2) { top: 50%; left: 15%; animation-delay: 0.5s; }
-.circuit-node:nth-child(3) { top: 70%; left: 10%; animation-delay: 1s; }
-.circuit-node:nth-child(4) { top: 30%; right: 10%; animation-delay: 1.5s; }
-.circuit-node:nth-child(5) { top: 50%; right: 15%; animation-delay: 2s; }
-.circuit-node:nth-child(6) { top: 70%; right: 10%; animation-delay: 2.5s; }
-
-/* Pupil (container for globe) - Made bigger */
+/* Pupil (container for globe) */
 .pupil {
     width: 380px;
     height: 380px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
+    z-index: 10;
     box-shadow: 
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
 }
 
-/* Globe - Matches pupil size */
+/* Globe */
 .globe {
     width: 100%;
     height: 100%;
@@ -253,120 +224,82 @@ body {
     transform-style: preserve-3d;
     animation: spin-globe 20s linear infinite;
     position: relative;
-    background: radial-gradient(circle at 30% 30%, 
-        rgba(0, 255, 65, 0.1), 
-        transparent 70%
-    );
-    box-shadow: 
-        inset -20px -20px 40px rgba(0, 0, 0, 0.5),
-        inset 20px 20px 40px rgba(0, 255, 65, 0.1);
+    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 65, 0.1), transparent 70%);
 }
 
-/* Globe lines for 3D effect - Enhanced for better visibility */
+/* Globe lines for 3D effect - Meridians (Vertical) */
 .globe-line {
     position: absolute;
     background: transparent;
-    border: 1px solid rgba(0, 255, 65, 0.3);
+    border: 1px solid rgba(0, 255, 65, 0.15);
     border-radius: 50%;
     pointer-events: none;
 }
 
-/* Vertical lines (longitude) */
-.globe-line.long1 {
+/* Vertical lines (Meridians) */
+.globe-line.meridian {
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    transform: rotateY(0deg);
 }
 
-.globe-line.long2 {
+.meridian1 { transform: rotateY(0deg); }
+.meridian2 { transform: rotateY(30deg); }
+.meridian3 { transform: rotateY(60deg); }
+.meridian4 { transform: rotateY(90deg); }
+.meridian5 { transform: rotateY(120deg); }
+.meridian6 { transform: rotateY(150deg); }
+
+/* Horizontal lines (Parallels) */
+.globe-line.parallel {
     width: 100%;
-    height: 100%;
-    top: 0;
     left: 0;
-    transform: rotateY(30deg);
+    border-radius: 50%;
+    transform-style: preserve-3d;
 }
 
-.globe-line.long3 {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transform: rotateY(60deg);
-}
-
-.globe-line.long4 {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transform: rotateY(90deg);
-}
-
-.globe-line.long5 {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transform: rotateY(120deg);
-}
-
-.globe-line.long6 {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transform: rotateY(150deg);
-}
-
-/* Horizontal lines (latitude) - Fixed for better visibility */
-.globe-line.lat1 {
-    width: 80%;
-    height: 80%;
-    top: 10%;
-    left: 10%;
-    transform: rotateX(60deg);
-    border-width: 1.5px;
-}
-
-.globe-line.lat2 {
-    width: 60%;
-    height: 60%;
-    top: 20%;
-    left: 20%;
-    transform: rotateX(30deg);
-    border-width: 1.5px;
-}
-
-.globe-line.lat3 {
-    width: 95%;
+.parallel1 {
     height: 95%;
     top: 2.5%;
-    left: 2.5%;
-    transform: rotateX(90deg);
-    border-width: 1.5px;
+    transform: rotateX(15deg);
 }
 
-.globe-line.lat4 {
-    width: 60%;
-    height: 60%;
-    top: 20%;
-    left: 20%;
-    transform: rotateX(-30deg);
-    border-width: 1.5px;
-}
-
-.globe-line.lat5 {
-    width: 80%;
+.parallel2 {
     height: 80%;
     top: 10%;
-    left: 10%;
-    transform: rotateX(-60deg);
-    border-width: 1.5px;
+    transform: rotateX(30deg);
 }
 
-/* Market Dots - Positioned on globe surface */
+.parallel3 {
+    height: 60%;
+    top: 20%;
+    transform: rotateX(45deg);
+}
+
+.parallel4 {
+    height: 40%;
+    top: 30%;
+    transform: rotateX(60deg);
+}
+
+.parallel5 {
+    height: 20%;
+    top: 40%;
+    transform: rotateX(75deg);
+}
+
+/* Equator - special parallel */
+.globe-line.equator {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid rgba(0, 255, 65, 0.3);
+    transform: rotateX(90deg);
+}
+
+/* Market Dots - Positioned on Globe Surface */
 .market-dot {
     position: absolute;
     width: 8px;
@@ -384,70 +317,70 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dots positioned on globe surface using 3D transforms */
+/* Market dot positions - scattered on globe surface */
 .market-dot.nyse {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(-74deg) rotateX(40deg);
+    top: 35%;
+    left: 25%;
+    transform: translateZ(190px);
 }
 
 .market-dot.nasdaq {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(-75deg) rotateX(38deg);
+    top: 38%;
+    left: 23%;
+    transform: translateZ(190px);
 }
 
 .market-dot.lse {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(0deg) rotateX(52deg);
+    top: 30%;
+    left: 48%;
+    transform: translateZ(190px);
 }
 
 .market-dot.tokyo {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(140deg) rotateX(36deg);
+    top: 40%;
+    left: 75%;
+    transform: translateZ(190px);
 }
 
 .market-dot.shanghai {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(121deg) rotateX(31deg);
+    top: 45%;
+    left: 70%;
+    transform: translateZ(190px);
 }
 
 .market-dot.hongkong {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(114deg) rotateX(22deg);
+    top: 55%;
+    left: 72%;
+    transform: translateZ(190px);
 }
 
 .market-dot.frankfurt {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(9deg) rotateX(50deg);
+    top: 32%;
+    left: 52%;
+    transform: translateZ(190px);
 }
 
 .market-dot.sydney {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(151deg) rotateX(-34deg);
+    top: 70%;
+    left: 80%;
+    transform: translateZ(190px);
 }
 
 .market-dot.toronto {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(-79deg) rotateX(44deg);
+    top: 35%;
+    left: 20%;
+    transform: translateZ(190px);
 }
 
 .market-dot.singapore {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translateZ(190px) rotateY(104deg) rotateX(1deg);
+    top: 60%;
+    left: 68%;
+    transform: translateZ(190px);
 }
 
 @keyframes pulse-red {
     0%, 100% {
-        transform: scale(1);
+        transform: translateZ(190px) scale(1);
         box-shadow: 
             0 0 10px #ff3333,
             0 0 20px #ff3333,
@@ -455,7 +388,7 @@ body {
             inset 0 0 4px #ff0000;
     }
     50% {
-        transform: scale(1.5);
+        transform: translateZ(190px) scale(1.3);
         box-shadow: 
             0 0 15px #ff3333,
             0 0 30px #ff3333,
@@ -491,35 +424,7 @@ body {
     bottom: 120%;
 }
 
-/* Data flow animation */
-.data-flow {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--primary-text);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--primary-text);
-    animation: data-flow 3s linear infinite;
-}
-
-@keyframes data-flow {
-    0% {
-        transform: translate(0, 0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate(200px, 50px);
-        opacity: 0;
-    }
-}
-
-/* Code scroll container */
+/* Code scroll container - Enhanced */
 .code-scroll-container {
     position: fixed;
     top: 0;
@@ -539,18 +444,23 @@ body {
     color: var(--secondary-text);
     font-size: 12px;
     white-space: pre;
-    animation: scroll-code 20s linear infinite;
+    animation: scroll-code 25s linear infinite;
 }
 
-.code-bit:nth-child(1) { animation-delay: -3s; }
-.code-bit:nth-child(2) { animation-delay: -6s; }
-.code-bit:nth-child(3) { animation-delay: -9s; }
-.code-bit:nth-child(4) { animation-delay: -12s; }
-.code-bit:nth-child(5) { animation-delay: -15s; }
-.code-bit:nth-child(6) { animation-delay: -18s; }
-.code-bit:nth-child(7) { animation-delay: 0s; }
+.code-bit:nth-child(1) { animation-delay: 0s; }
+.code-bit:nth-child(2) { animation-delay: -2s; }
+.code-bit:nth-child(3) { animation-delay: -4s; }
+.code-bit:nth-child(4) { animation-delay: -6s; }
+.code-bit:nth-child(5) { animation-delay: -8s; }
+.code-bit:nth-child(6) { animation-delay: -10s; }
+.code-bit:nth-child(7) { animation-delay: -12s; }
+.code-bit:nth-child(8) { animation-delay: -14s; }
+.code-bit:nth-child(9) { animation-delay: -16s; }
+.code-bit:nth-child(10) { animation-delay: -18s; }
+.code-bit:nth-child(11) { animation-delay: -20s; }
+.code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container */
+/* Price ticker container - Enhanced */
 .price-ticker-container {
     position: fixed;
     bottom: 10%;
@@ -567,13 +477,21 @@ body {
     display: flex;
     gap: 40px;
     white-space: nowrap;
-    animation: ticker-move 30s linear infinite;
+    animation: ticker-move 40s linear infinite;
     color: var(--secondary-text);
     font-size: 16px;
 }
 
 .price-ticker span {
     display: inline-block;
+}
+
+.price-ticker span.positive {
+    color: var(--primary-text);
+}
+
+.price-ticker span.negative {
+    color: var(--error-text);
 }
 
 /* Global Styles */
@@ -851,7 +769,7 @@ input, textarea, select {
         height: 280px;
     }
     .market-dot {
-        transform: scale(0.75);
+        transform: translateZ(140px) scale(0.75);
     }
     .code-scroll-container {
         width: 200px;
@@ -873,8 +791,9 @@ input, textarea, select {
         height: 180px;
     }
     .market-dot {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
+        transform: translateZ(90px);
     }
     
     .market-dot::after {
