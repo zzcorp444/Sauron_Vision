@@ -160,8 +160,8 @@ body {
 
 /* Pupil (container for globe) */
 .pupil {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -173,7 +173,6 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 65, 0.3), rgba(0, 136, 34, 0.3));
     transform-style: preserve-3d;
     animation: spin-globe 20s linear infinite;
     position: relative;
@@ -188,60 +187,68 @@ body {
     border-radius: 50%;
 }
 
-.lat1 {
-    width: 180px;
-    height: 180px;
-    top: 10px;
-    left: 10px;
-    transform: rotateX(20deg);
-}
-
-.lat2 {
-    width: 160px;
-    height: 160px;
-    top: 20px;
-    left: 20px;
-    transform: rotateX(40deg);
-}
-
-.lat3 {
-    width: 140px;
-    height: 140px;
-    top: 30px;
-    left: 30px;
-    transform: rotateX(60deg);
-}
-
 .long1 {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    transform: rotateY(0deg);
+}
+
+.long2 {
+    width: 280px;
+    height: 280px;
     top: 0;
     left: 0;
     transform: rotateY(30deg);
 }
 
-.long2 {
-    width: 200px;
-    height: 200px;
+.long3 {
+    width: 280px;
+    height: 280px;
     top: 0;
     left: 0;
     transform: rotateY(60deg);
 }
 
-.long3 {
-    width: 200px;
-    height: 200px;
+.long4 {
+    width: 280px;
+    height: 280px;
     top: 0;
     left: 0;
     transform: rotateY(90deg);
 }
 
-.long4 {
-    width: 200px;
-    height: 200px;
+.long5 {
+    width: 280px;
+    height: 280px;
     top: 0;
     left: 0;
     transform: rotateY(120deg);
+}
+
+.long6 {
+    width: 280px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    transform: rotateY(150deg);
+}
+
+.lat1 {
+    width: 280px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    transform: rotateX(30deg);
+}
+
+.lat2 {
+    width: 280px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    transform: rotateX(-30deg);
 }
 
 /* Market Dots */
@@ -267,43 +274,43 @@ body {
 
 /* Scattered market dot positions */
 .market-dot.nyse {
-    transform: rotateY(-74deg) rotateX(40.7deg) translateZ(100px);
+    transform: rotateY(74deg) rotateX(-40.7deg) translateZ(140px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-74deg) rotateX(40deg) translateZ(100px);
+    transform: rotateY(74deg) rotateX(-40deg) translateZ(140px);
 }
 
 .market-dot.lse {
-    transform: rotateY(0.1deg) rotateX(51.5deg) translateZ(100px);
+    transform: rotateY(0.1deg) rotateX(-51.5deg) translateZ(140px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(139.7deg) rotateX(35.7deg) translateZ(100px);
+    transform: rotateY(-139.7deg) rotateX(-35.7deg) translateZ(140px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121.5deg) rotateX(31.2deg) translateZ(100px);
+    transform: rotateY(-121.5deg) rotateX(-31.2deg) translateZ(140px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114.2deg) rotateX(22.3deg) translateZ(100px);
+    transform: rotateY(-114.2deg) rotateX(-22.3deg) translateZ(140px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(8.7deg) rotateX(50.1deg) translateZ(100px);
+    transform: rotateY(-8.7deg) rotateX(-50.1deg) translateZ(140px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151.2deg) rotateX(-33.9deg) translateZ(100px);
+    transform: rotateY(-151.2deg) rotateX(33.9deg) translateZ(140px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79.4deg) rotateX(43.7deg) translateZ(100px);
+    transform: rotateY(79.4deg) rotateX(-43.7deg) translateZ(140px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103.8deg) rotateX(1.3deg) translateZ(100px);
+    transform: rotateY(-103.8deg) rotateX(-1.3deg) translateZ(140px);
 }
 
 @keyframes pulse-red {
@@ -390,7 +397,7 @@ body {
     overflow: hidden;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.1;
+    opacity: 0.3;
 }
 
 .code-bit {
