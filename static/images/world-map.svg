@@ -1,49 +1,72 @@
 <!-- static/images/world-map.svg -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
-  <!-- Simplified world map outline -->
-  <g stroke="#00ff41" stroke-width="0.5" fill="none" opacity="0.3">
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#00ff41" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Grid background -->
+  <rect width="1200" height="600" fill="url(#grid)"/>
+  
+  <!-- World map outlines -->
+  <g stroke="#00ff41" stroke-width="1" fill="none" opacity="0.6">
     <!-- North America -->
-    <path d="M 200 150 L 180 180 L 170 220 L 180 250 L 200 270 L 220 280 L 250 270 L 280 250 L 300 220 L 320 180 L 340 150 L 320 140 L 300 130 L 280 120 L 250 110 L 220 120 L 200 130 Z M 240 140 L 250 145 L 260 140 L 255 135 Z"/>
+    <path d="M 150 180 L 180 150 L 220 140 L 260 130 L 300 140 L 340 160 L 360 180 L 350 220 L 320 250 L 280 270 L 240 280 L 200 270 L 170 240 L 160 210 L 150 180 Z M 240 160 L 250 165 L 260 160 L 255 155 Z"/>
     
     <!-- South America -->
-    <path d="M 280 320 L 270 340 L 260 360 L 255 380 L 250 400 L 245 420 L 250 440 L 260 460 L 270 470 L 280 465 L 290 450 L 295 430 L 300 410 L 305 390 L 300 370 L 295 350 L 290 330 Z"/>
+    <path d="M 260 320 L 250 340 L 240 370 L 235 400 L 240 430 L 250 460 L 270 480 L 290 475 L 300 450 L 305 420 L 310 390 L 305 360 L 295 330 L 280 310 L 260 320 Z"/>
     
     <!-- Europe -->
-    <path d="M 550 150 L 540 160 L 530 170 L 540 180 L 550 190 L 560 195 L 570 190 L 580 180 L 590 170 L 600 160 L 590 150 L 580 145 L 570 140 L 560 145 Z M 600 180 L 610 185 L 620 180 L 615 175 Z"/>
+    <path d="M 540 140 L 560 130 L 580 135 L 600 140 L 620 150 L 615 170 L 600 180 L 580 185 L 560 180 L 545 170 L 540 150 L 540 140 Z M 600 170 L 610 175 L 620 170 L 615 165 Z"/>
     
     <!-- Africa -->
-    <path d="M 570 250 L 560 270 L 555 290 L 550 310 L 545 330 L 540 350 L 545 370 L 550 390 L 560 400 L 570 395 L 580 390 L 590 380 L 595 360 L 600 340 L 605 320 L 600 300 L 595 280 L 590 260 L 580 250 Z"/>
+    <path d="M 560 240 L 550 260 L 545 290 L 540 320 L 545 350 L 550 380 L 560 400 L 580 410 L 600 400 L 610 380 L 615 350 L 610 320 L 605 290 L 595 260 L 580 240 L 560 240 Z"/>
     
     <!-- Asia -->
-    <path d="M 700 140 L 680 150 L 660 160 L 650 180 L 660 200 L 680 210 L 700 220 L 720 230 L 740 240 L 760 230 L 780 220 L 800 210 L 820 200 L 840 190 L 860 180 L 880 170 L 900 160 L 920 150 L 940 140 L 920 130 L 900 120 L 880 110 L 860 120 L 840 130 L 820 140 L 800 130 L 780 120 L 760 110 L 740 120 L 720 130 Z"/>
+    <path d="M 680 120 L 720 110 L 760 100 L 800 110 L 840 120 L 880 130 L 920 140 L 960 150 L 980 170 L 970 190 L 950 210 L 920 220 L 880 230 L 840 220 L 800 210 L 760 200 L 720 190 L 680 180 L 660 160 L 670 140 L 680 120 Z"/>
     
     <!-- Australia -->
-    <path d="M 900 400 L 880 410 L 870 420 L 880 430 L 900 440 L 920 445 L 940 440 L 960 430 L 970 420 L 960 410 L 940 400 L 920 395 Z"/>
+    <path d="M 880 420 L 920 410 L 960 415 L 980 430 L 975 450 L 950 460 L 920 455 L 890 445 L 880 430 L 880 420 Z"/>
     
-    <!-- Grid lines for tech effect -->
-    <line x1="0" y1="100" x2="1200" y2="100" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="0" y1="200" x2="1200" y2="200" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="0" y1="300" x2="1200" y2="300" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="0" y1="400" x2="1200" y2="400" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="0" y1="500" x2="1200" y2="500" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <!-- Indonesia -->
+    <path d="M 800 380 L 820 385 L 840 380 L 835 375 Z M 850 385 L 870 390 L 890 385 L 885 380 Z"/>
     
-    <line x1="100" y1="0" x2="100" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="200" y1="0" x2="200" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="300" y1="0" x2="300" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="400" y1="0" x2="400" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="500" y1="0" x2="500" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="600" y1="0" x2="600" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="700" y1="0" x2="700" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="800" y1="0" x2="800" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="900" y1="0" x2="900" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="1000" y1="0" x2="1000" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
-    <line x1="1100" y1="0" x2="1100" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <!-- Japan -->
+    <path d="M 920 220 L 925 240 L 920 250 L 915 240 Z M 930 230 L 935 245 L 930 255 L 925 245 Z"/>
+    
+    <!-- UK -->
+    <path d="M 510 155 L 515 160 L 510 165 L 505 160 Z"/>
   </g>
   
-  <!-- Scanning line effect -->
-  <line x1="0" y1="0" x2="0" y2="600" stroke="#00ff41" stroke-width="2" opacity="0.6">
-    <animate attributeName="x1" from="0" to="1200" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="x2" from="0" to="1200" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0.6;0" dur="10s" repeatCount="indefinite"/>
+  <!-- Connection lines between markets -->
+  <g stroke="#00ff41" stroke-width="0.3" opacity="0.2">
+    <line x1="300" y1="200" x2="600" y2="160"/>
+    <line x1="300" y1="200" x2="920" y2="240"/>
+    <line x1="600" y1="160" x2="920" y2="240"/>
+    <line x1="600" y1="160" x2="800" y2="200"/>
+    <line x1="920" y1="240" x2="960" y2="440"/>
+  </g>
+  
+  <!-- Animated scan line -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#00ff41" stroke-width="2" opacity="0.8">
+    <animate attributeName="x1" from="-10" to="1210" dur="20s" repeatCount="indefinite"/>
+    <animate attributeName="x2" from="-10" to="1210" dur="20s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="20s" repeatCount="indefinite"/>
   </line>
+  
+  <!-- Radar circles -->
+  <g stroke="#00ff41" stroke-width="0.5" fill="none" opacity="0.3">
+    <circle cx="600" cy="300" r="100">
+      <animate attributeName="r" from="100" to="400" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" from="0.3" to="0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 </svg>

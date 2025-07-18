@@ -122,6 +122,7 @@ body {
     z-index: -2;
     background: var(--primary-bg);
     overflow: hidden;
+    pointer-events: none; /* Make sure it doesn't interfere with clicks */
 }
 
 .world-map-bg::before {
@@ -131,102 +132,152 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/static/images/world-map.svg');
-    background-size: cover;
+    background-image: url('../images/world-map.svg');
+    background-size: contain;
     background-position: center;
-    opacity: 0.05;
-    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(90deg);
+    background-repeat: no-repeat;
+    opacity: 0.4; /* Increased opacity to make it more visible */
+}
+
+/* Alternative: If the map is still not visible, try this simpler approach */
+.world-map-bg img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: auto;
+    opacity: 0.3;
+    filter: brightness(1) contrast(1.2);
 }
 
 .market-dot {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: var(--error-text);
+    width: 8px;
+    height: 8px;
+    background: #ff3333;
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--error-text);
+    box-shadow: 
+        0 0 10px #ff3333,
+        0 0 20px #ff3333,
+        0 0 30px #ff3333;
     animation: pulse-red 2s infinite;
+    z-index: 10;
 }
 
 @keyframes pulse-red {
     0%, 100% {
         transform: scale(1);
-        opacity: 0.8;
+        box-shadow: 
+            0 0 10px #ff3333,
+            0 0 20px #ff3333,
+            0 0 30px #ff3333;
     }
     50% {
-        transform: scale(1.5);
-        opacity: 0.4;
+        transform: scale(1.2);
+        box-shadow: 
+            0 0 15px #ff3333,
+            0 0 30px #ff3333,
+            0 0 45px #ff3333;
     }
 }
 
-/* Market locations */
+/* Update market dot positions for better accuracy */
 .market-dot.nyse {
-    top: 38%;
+    top: 32%;
     left: 25%;
 }
 
 .market-dot.nasdaq {
-    top: 36%;
+    top: 31%;
     left: 24%;
 }
 
 .market-dot.lse {
-    top: 30%;
+    top: 26%;
     left: 49%;
 }
 
 .market-dot.tokyo {
-    top: 40%;
-    left: 82%;
+    top: 36%;
+    left: 86%;
 }
 
 .market-dot.shanghai {
-    top: 42%;
-    left: 78%;
+    top: 38%;
+    left: 82%;
 }
 
 .market-dot.hongkong {
-    top: 48%;
-    left: 77%;
+    top: 42%;
+    left: 81%;
 }
 
 .market-dot.frankfurt {
-    top: 31%;
+    top: 27%;
     left: 52%;
 }
 
 .market-dot.sydney {
-    top: 75%;
-    left: 85%;
+    top: 68%;
+    left: 88%;
 }
 
 .market-dot.toronto {
-    top: 35%;
-    left: 22%;
+    top: 30%;
+    left: 23%;
 }
 
 .market-dot.singapore {
-    top: 58%;
-    left: 75%;
+    top: 50%;
+    left: 79%;
 }
 
 .market-dot::after {
     content: attr(data-market);
     position: absolute;
-    bottom: 100%;
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid var(--error-text);
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid #ff3333;
     padding: 5px 10px;
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--primary-text);
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    z-index: 100;
 }
 
 .market-dot:hover::after {
     opacity: 1;
+}
+
+/* Add some extra visual effects */
+.market-dot::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid #ff3333;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
 }
