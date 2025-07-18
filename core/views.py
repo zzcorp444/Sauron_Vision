@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .models import User, UserSession
 from .forms import SauronLoginForm
+from ai_core.llm_interface import SauronAI
 import json
 
 
@@ -99,3 +100,26 @@ def api_market_data(request):
 def terminal_view(request):
     """Terminal interface view"""
     return render(request, 'components/terminal.html')
+
+
+@login_required
+def ai_analysis(request):
+    """AI-powered market analysis endpoint"""
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        ai = SauronAI()
+
+        analysis_type = data.get('type', 'market')
+
+        if analysis_type == 'market':
+            result = ai.analyze_market(data.get('market_data', {}))
+        elif analysis_type == 'strategy':
+            result = ai.generate_strategy(data.get('parameters', {}))
+        elif analysis_type == 'signal':
+            result = ai.explain_signal(data.get('signal_data', {}))
+        else:
+            result = "Unknown analysis type"
+
+        return JsonResponse({'analysis': result})
+
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
