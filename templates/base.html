@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sauron Vision{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/sv_logo_00.png' %}" type="image/png">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +18,8 @@
     <!-- Eye background -->
     <div class="eye-bg">
         <div class="eye">
+            <div class="eye-triangle left"></div>
+            <div class="eye-triangle right"></div>
             <div class="pupil">
                 <div class="globe">
                     <!-- Latitude and longitude lines for 3D effect -->
