@@ -120,6 +120,46 @@
     background: var(--secondary-bg);
     border-right: 1px solid var(--border-color);
     padding: 1rem 0;
+    position: relative;
+    transition: width 0.3s ease;
+}
+
+.sidebar.retracted {
+    width: 60px;
+}
+
+.sidebar.retracted .nav-item span {
+    display: none;
+}
+
+.sidebar.retracted .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 1rem;
+    right: -15px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    border-color: var(--glow-color);
+}
+
+.sidebar-toggle i {
+    color: var(--secondary-text);
+    transition: transform 0.3s ease;
 }
 
 .nav-menu {

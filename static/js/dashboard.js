@@ -8,6 +8,7 @@ class SauronDashboard {
 
     init() {
         this.setupNavigation();
+        this.setupSidebarToggle();
         this.setupWebSocket();
         this.startDataUpdates();
         this.setupEventListeners();
@@ -38,6 +39,17 @@ class SauronDashboard {
                 }
             });
         });
+    }
+
+    setupSidebarToggle() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('retracted');
+            });
+        }
     }
 
     setupWebSocket() {
@@ -124,7 +136,7 @@ class SauronDashboard {
                 <strong>${alert.title}</strong>
                 <p>${alert.message}</p>
             </div>
-            <button class="alert-close">&times;</button>
+            <button class="alert-close">×</button>
         `;
         
         document.body.appendChild(alertEl);
