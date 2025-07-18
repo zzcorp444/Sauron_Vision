@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sauron Vision{% endblock %}</title>
     {% load static %}
-    <link rel="icon" href="{% static 'images/sv_logo_00.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'images/sv_logo_02.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,20 +18,34 @@
     <!-- Eye background -->
     <div class="eye-bg">
         <div class="eye">
-            <div class="eye-triangle left"></div>
-            <div class="eye-triangle right"></div>
+            <!-- Electronic circuits -->
+            <div class="eye-circuits">
+                <div class="circuit-node"></div>
+                <div class="circuit-node"></div>
+                <div class="circuit-node"></div>
+                <div class="circuit-node"></div>
+                <div class="circuit-node"></div>
+                <div class="circuit-node"></div>
+            </div>
+            
             <div class="pupil">
                 <div class="globe">
-                    <!-- Latitude and longitude lines for 3D effect -->
+                    <!-- Longitude lines (vertical) -->
                     <div class="globe-line long1"></div>
                     <div class="globe-line long2"></div>
                     <div class="globe-line long3"></div>
                     <div class="globe-line long4"></div>
                     <div class="globe-line long5"></div>
                     <div class="globe-line long6"></div>
+                    
+                    <!-- Latitude lines (horizontal) -->
                     <div class="globe-line lat1"></div>
                     <div class="globe-line lat2"></div>
-                    <!-- Market dots -->
+                    <div class="globe-line lat3"></div>
+                    <div class="globe-line lat4"></div>
+                    <div class="globe-line lat5"></div>
+                    
+                    <!-- Market dots positioned on globe surface -->
                     <div class="market-dot nyse" data-market="NYSE"></div>
                     <div class="market-dot nasdaq" data-market="NASDAQ"></div>
                     <div class="market-dot lse" data-market="London"></div>
