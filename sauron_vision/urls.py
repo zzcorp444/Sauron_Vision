@@ -25,4 +25,9 @@ urlpatterns = [
     path('', include('core.urls')),
     path('api/market/', include('market_data.urls')),
     path('api/strategy/', include('strategy_engine.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('api/ai/', include('ai_core.urls')),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

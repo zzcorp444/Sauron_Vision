@@ -15,6 +15,7 @@ class MarketData(models.Model):
         indexes = [
             models.Index(fields=['symbol', 'timestamp']),
         ]
+        ordering = ['-timestamp']
 
 
 class NewsData(models.Model):
@@ -27,6 +28,9 @@ class NewsData(models.Model):
     symbols = models.JSONField(default=list)
     published_at = models.DateTimeField()
     scraped_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-published_at']
 
 
 class Alert(models.Model):
@@ -41,3 +45,6 @@ class Alert(models.Model):
         default='medium'
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
