@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 from .models import User, UserSession
 from .forms import SauronLoginForm
-from ai_core.llm_interface import SauronAI
 import json
 
 
@@ -66,9 +65,18 @@ class LoginView(View):
 @login_required
 def dashboard(request):
     """Main dashboard view"""
+    # Fix: Check if the Alert model exists before querying
+    active_alerts = 0
+    try:
+        from market_data.models import Alert
+        active_alerts = Alert.objects.filter(user=request.user, is_read=False).count()
+    except Exception:
+        # Table doesn't exist yet, return 0
+        active_alerts = 0
+
     context = {
         'user': request.user,
-        'active_alerts': request.user.alert_set.filter(is_read=False).count(),
+        'active_alerts': active_alerts,
         'market_status': 'OPEN',  # This would be dynamic
     }
     return render(request, 'dashboard.html', context)
@@ -106,20 +114,24 @@ def terminal_view(request):
 def ai_analysis(request):
     """AI-powered market analysis endpoint"""
     if request.method == 'POST':
-        data = json.loads(request.body)
-        ai = SauronAI()
+        try:
+            from ai_core.llm_interface import SauronAI
+            data = json.loads(request.body)
+            ai = SauronAI()
 
-        analysis_type = data.get('type', 'market')
+            analysis_type = data.get('type', 'market')
 
-        if analysis_type == 'market':
-            result = ai.analyze_market(data.get('market_data', {}))
-        elif analysis_type == 'strategy':
-            result = ai.generate_strategy(data.get('parameters', {}))
-        elif analysis_type == 'signal':
-            result = ai.explain_signal(data.get('signal_data', {}))
-        else:
-            result = "Unknown analysis type"
+            if analysis_type == 'market':
+                result = ai.analyze_market(data.get('market_data', {}))
+            elif analysis_type == 'strategy':
+                result = ai.generate_strategy(data.get('parameters', {}))
+            elif analysis_type == 'signal':
+                result = ai.explain_signal(data.get('signal_data', {}))
+            else:
+                result = "Unknown analysis type"
 
-        return JsonResponse({'analysis': result})
+            return JsonResponse({'analysis': result})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Method not allowed'}, status=405)
