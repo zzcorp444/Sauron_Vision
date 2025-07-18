@@ -79,6 +79,23 @@ body {
     50% { box-shadow: 0 0 20px var(--glow-color); }
 }
 
+@keyframes spin-globe {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+@keyframes scroll-code {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 0.3; }
+    80% { opacity: 0.3; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+@keyframes ticker-move {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+}
+
 /* Matrix Background Effect */
 .background-matrix {
     position: fixed;
@@ -163,6 +180,18 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+/* Globe container */
+.globe-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) perspective(1000px);
+    animation: spin-globe 60s linear infinite;
+}
+
 /* CSS-based continents */
 .continent {
     position: absolute;
@@ -173,96 +202,169 @@ body {
         0 0 20px rgba(0, 255, 65, 0.1);
 }
 
-/* North America */
+/* Detailed continents */
 .continent.north-america {
-    width: 180px;
-    height: 140px;
-    top: 22%;
-    left: 18%;
-    border-radius: 30% 70% 70% 30% / 60% 40% 60% 40%;
-    transform: rotate(-25deg);
-}
-
-.continent.north-america::before {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 80px;
-    top: -20px;
-    right: -10px;
-    border: 1px solid rgba(0, 255, 65, 0.2);
-    border-radius: 50% 50% 30% 70% / 70% 30% 50% 50%;
-    transform: rotate(15deg);
-}
-
-/* South America */
-.continent.south-america {
-    width: 90px;
-    height: 160px;
-    top: 48%;
-    left: 23%;
-    border-radius: 50% 50% 70% 30% / 30% 30% 70% 70%;
-    transform: rotate(10deg);
-}
-
-/* Europe */
-.continent.europe {
-    width: 100px;
-    height: 80px;
-    top: 20%;
-    left: 47%;
-    border-radius: 40% 60% 50% 50% / 60% 60% 40% 40%;
-}
-
-.continent.europe::before {
-    content: '';
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 10px;
-    right: -30px;
-    border: 1px solid rgba(0, 255, 65, 0.2);
-    border-radius: 30% 70% 70% 30% / 70% 30% 30% 70%;
-}
-
-/* Africa */
-.continent.africa {
-    width: 120px;
-    height: 160px;
-    top: 38%;
-    left: 46%;
-    border-radius: 50% 50% 60% 40% / 40% 40% 60% 60%;
-}
-
-/* Asia */
-.continent.asia {
-    width: 260px;
-    height: 160px;
-    top: 18%;
-    left: 58%;
-    border-radius: 30% 70% 50% 50% / 50% 50% 50% 50%;
-    transform: rotate(10deg);
-}
-
-.continent.asia::before {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 100px;
-    bottom: -50px;
-    right: 20px;
-    border: 1px solid rgba(0, 255, 65, 0.2);
-    border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+    width: 200px;
+    height: 180px;
+    top: 100px;
+    left: 100px;
+    border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
     transform: rotate(-20deg);
 }
 
-/* Australia */
+.continent.south-america {
+    width: 120px;
+    height: 200px;
+    top: 300px;
+    left: 150px;
+    border-radius: 50% 50% 80% 20% / 30% 30% 70% 70%;
+    transform: rotate(15deg);
+}
+
+.continent.europe {
+    width: 120px;
+    height: 100px;
+    top: 120px;
+    left: 350px;
+    border-radius: 50% 50% 60% 40% / 60% 60% 40% 40%;
+}
+
+.continent.africa {
+    width: 140px;
+    height: 200px;
+    top: 250px;
+    left: 330px;
+    border-radius: 60% 40% 70% 30% / 40% 40% 60% 60%;
+}
+
+.continent.asia {
+    width: 300px;
+    height: 200px;
+    top: 100px;
+    left: 400px;
+    border-radius: 40% 60% 50% 50% / 50% 50% 50% 50%;
+    transform: rotate(5deg);
+}
+
 .continent.australia {
+    width: 100px;
+    height: 80px;
+    top: 400px;
+    left: 450px;
+    border-radius: 70% 30% 50% 50% / 50% 70% 30% 50%;
+}
+
+.continent.antarctica {
+    width: 300px;
+    height: 100px;
+    top: 500px;
+    left: 150px;
+    border-radius: 50%;
+}
+
+/* Additional continent details */
+.continent-detail {
+    position: absolute;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.na-detail1 {
     width: 80px;
-    height: 60px;
-    top: 68%;
-    left: 78%;
-    border-radius: 60% 40% 50% 50% / 50% 70% 30% 50%;
+    height: 100px;
+    top: 80px;
+    left: 80px;
+    border-radius: 30% 70% 50% 50%;
+}
+
+.na-detail2 {
+    width: 60px;
+    height: 80px;
+    top: 200px;
+    left: 120px;
+    border-radius: 50% 50% 30% 70%;
+}
+
+.sa-detail1 {
+    width: 50px;
+    height: 70px;
+    top: 350px;
+    left: 180px;
+    border-radius: 40% 60% 60% 40%;
+}
+
+.eu-detail1 {
+    width: 50px;
+    height: 50px;
+    top: 140px;
+    left: 380px;
+    border-radius: 30% 70% 70% 30%;
+}
+
+.af-detail1 {
+    width: 60px;
+    height: 80px;
+    top: 300px;
+    left: 360px;
+    border-radius: 50% 50% 60% 40%;
+}
+
+.as-detail1 {
+    width: 100px;
+    height: 120px;
+    top: 150px;
+    left: 500px;
+    border-radius: 40% 60% 50% 50%;
+}
+
+.au-detail1 {
+    width: 40px;
+    height: 40px;
+    top: 420px;
+    left: 480px;
+    border-radius: 60% 40% 50% 50%;
+}
+
+/* Electronic circuits */
+.circuit-line {
+    position: absolute;
+    background: transparent;
+    border-top: 1px dashed rgba(0, 255, 65, 0.3);
+}
+
+.circuit1 {
+    width: 200px;
+    top: 200px;
+    left: 100px;
+    transform: rotate(30deg);
+}
+
+.circuit2 {
+    width: 300px;
+    top: 300px;
+    left: 300px;
+    transform: rotate(-15deg);
+}
+
+.circuit3 {
+    width: 250px;
+    top: 400px;
+    left: 200px;
+    transform: rotate(10deg);
+}
+
+.circuit4 {
+    width: 150px;
+    top: 150px;
+    left: 450px;
+    transform: rotate(45deg);
+}
+
+.circuit5 {
+    width: 180px;
+    top: 350px;
+    left: 400px;
+    transform: rotate(-30deg);
 }
 
 /* Connection lines between continents */
@@ -301,17 +403,17 @@ body {
 /* Market Dots */
 .market-dot {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     background: #ff3333;
     border-radius: 50%;
     cursor: pointer;
     z-index: 20;
     box-shadow: 
+        0 0 5px #ff3333,
         0 0 10px #ff3333,
-        0 0 20px #ff3333,
-        0 0 30px #ff3333,
-        inset 0 0 5px #ff0000;
+        0 0 15px #ff3333,
+        inset 0 0 3px #ff0000;
     animation: pulse-red 2s infinite;
 }
 
@@ -319,18 +421,18 @@ body {
     0%, 100% {
         transform: scale(1);
         box-shadow: 
+            0 0 5px #ff3333,
             0 0 10px #ff3333,
-            0 0 20px #ff3333,
-            0 0 30px #ff3333,
-            inset 0 0 5px #ff0000;
+            0 0 15px #ff3333,
+            inset 0 0 3px #ff0000;
     }
     50% {
-        transform: scale(1.3);
+        transform: scale(1.2);
         box-shadow: 
+            0 0 8px #ff3333,
             0 0 15px #ff3333,
-            0 0 30px #ff3333,
-            0 0 45px #ff3333,
-            inset 0 0 8px #ff0000;
+            0 0 25px #ff3333,
+            inset 0 0 5px #ff0000;
     }
 }
 
@@ -412,31 +514,6 @@ body {
     bottom: 120%;
 }
 
-/* Market dot ripple effect */
-.market-dot::before {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 2px solid #ff3333;
-    animation: ripple 2s infinite;
-}
-
-@keyframes ripple {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(3);
-        opacity: 0;
-    }
-}
-
 /* Data flow animation */
 .data-flow {
     position: absolute;
@@ -463,6 +540,60 @@ body {
         transform: translate(200px, 50px);
         opacity: 0;
     }
+}
+
+/* Code scroll container */
+.code-scroll-container {
+    position: fixed;
+    top: 0;
+    right: 10%;
+    width: 300px;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.1;
+}
+
+.code-bit {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    color: var(--tertiary-text);
+    font-size: 12px;
+    white-space: pre;
+    animation: scroll-code 20s linear infinite;
+}
+
+.code-bit:nth-child(1) { animation-delay: -5s; }
+.code-bit:nth-child(2) { animation-delay: -10s; }
+.code-bit:nth-child(3) { animation-delay: -15s; }
+.code-bit:nth-child(4) { animation-delay: 0s; }
+
+/* Price ticker container */
+.price-ticker-container {
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.15;
+}
+
+.price-ticker {
+    display: flex;
+    gap: 40px;
+    white-space: nowrap;
+    animation: ticker-move 30s linear infinite;
+    color: var(--secondary-text);
+    font-size: 16px;
+}
+
+.price-ticker span {
+    display: inline-block;
 }
 
 /* Global Styles */
@@ -731,8 +862,12 @@ input, textarea, select {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .continent {
-        transform: scale(0.9);
+    .globe-container {
+        transform: scale(0.9) translate(-50%, -50%) perspective(1000px);
+    }
+    .code-scroll-container {
+        width: 200px;
+        right: 5%;
     }
 }
 
@@ -747,12 +882,19 @@ input, textarea, select {
     }
     
     .market-dot {
-        width: 6px;
-        height: 6px;
+        width: 4px;
+        height: 4px;
     }
     
     .market-dot::after {
         font-size: 10px;
+    }
+    .code-scroll-container {
+        width: 150px;
+        right: 2%;
+    }
+    .price-ticker {
+        font-size: 14px;
     }
 }
 
@@ -768,6 +910,13 @@ input, textarea, select {
     .world-map-bg {
         transform: scale(0.6);
     }
+    .code-scroll-container {
+        display: none;
+    }
+    .price-ticker-container {
+        bottom: 5%;
+        height: 30px;
+    }
 }
 
 /* Print Styles */
@@ -778,7 +927,9 @@ input, textarea, select {
     }
     
     .world-map-bg,
-    .background-matrix {
+    .background-matrix,
+    .code-scroll-container,
+    .price-ticker-container {
         display: none;
     }
 }

@@ -16,25 +16,73 @@
 <body>
     <!-- World Map Background - Using inline SVG -->
     <div class="world-map-bg">
-        <!-- CSS-based continents -->
-        <div class="continent north-america"></div>
-        <div class="continent south-america"></div>
-        <div class="continent europe"></div>
-        <div class="continent africa"></div>
-        <div class="continent asia"></div>
-        <div class="continent australia"></div>
-        
-        <!-- Market dots -->
-        <div class="market-dot nyse" data-market="NYSE"></div>
-        <div class="market-dot nasdaq" data-market="NASDAQ"></div>
-        <div class="market-dot lse" data-market="London"></div>
-        <div class="market-dot tokyo" data-market="Tokyo"></div>
-        <div class="market-dot shanghai" data-market="Shanghai"></div>
-        <div class="market-dot hongkong" data-market="Hong Kong"></div>
-        <div class="market-dot frankfurt" data-market="Frankfurt"></div>
-        <div class="market-dot sydney" data-market="Sydney"></div>
-        <div class="market-dot toronto" data-market="Toronto"></div>
-        <div class="market-dot singapore" data-market="Singapore"></div>
+        <!-- Globe container for spinning -->
+        <div class="globe-container">
+            <!-- Detailed continents -->
+            <div class="continent north-america"></div>
+            <div class="continent south-america"></div>
+            <div class="continent europe"></div>
+            <div class="continent africa"></div>
+            <div class="continent asia"></div>
+            <div class="continent australia"></div>
+            <div class="continent antarctica"></div>
+            
+            <!-- Additional shapes for detailed continents -->
+            <div class="continent-detail na-detail1"></div>
+            <div class="continent-detail na-detail2"></div>
+            <div class="continent-detail sa-detail1"></div>
+            <div class="continent-detail eu-detail1"></div>
+            <div class="continent-detail af-detail1"></div>
+            <div class="continent-detail as-detail1"></div>
+            <div class="continent-detail au-detail1"></div>
+            
+            <!-- Electronic circuits -->
+            <div class="circuit-line circuit1"></div>
+            <div class="circuit-line circuit2"></div>
+            <div class="circuit-line circuit3"></div>
+            <div class="circuit-line circuit4"></div>
+            <div class="circuit-line circuit5"></div>
+            
+            <!-- Market dots -->
+            <div class="market-dot nyse" data-market="NYSE"></div>
+            <div class="market-dot nasdaq" data-market="NASDAQ"></div>
+            <div class="market-dot lse" data-market="London"></div>
+            <div class="market-dot tokyo" data-market="Tokyo"></div>
+            <div class="market-dot shanghai" data-market="Shanghai"></div>
+            <div class="market-dot hongkong" data-market="Hong Kong"></div>
+            <div class="market-dot frankfurt" data-market="Frankfurt"></div>
+            <div class="market-dot sydney" data-market="Sydney"></div>
+            <div class="market-dot toronto" data-market="Toronto"></div>
+            <div class="market-dot singapore" data-market="Singapore"></div>
+        </div>
+    </div>
+    
+    <!-- Code bits scrolling -->
+    <div class="code-scroll-container">
+        <div class="code-bit">
+            <pre>def analyze_market(data):<br>    return insights</pre>
+        </div>
+        <div class="code-bit">
+            <pre>strategy = generate_strategy(params)<br>execute_trade(strategy)</pre>
+        </div>
+        <div class="code-bit">
+            <pre>if sentiment > 0.7:<br>    buy_asset()</pre>
+        </div>
+        <div class="code-bit">
+            <pre>risk = calculate_var(portfolio)<br>alert if risk > threshold</pre>
+        </div>
+    </div>
+    
+    <!-- Price movements ticker -->
+    <div class="price-ticker-container">
+        <div class="price-ticker">
+            <span>AAPL $150.25 +1.2%</span>
+            <span>GOOGL $2750.50 -0.5%</span>
+            <span>TSLA $850.75 +3.1%</span>
+            <span>MSFT $300.40 +0.8%</span>
+            <span>AMZN $3400.20 -1.2%</span>
+            <span>BTC $45000.00 +2.5%</span>
+        </div>
     </div>
     
     <div class="sauron-container">
