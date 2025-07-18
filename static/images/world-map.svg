@@ -1,0 +1,49 @@
+<!-- static/images/world-map.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <!-- Simplified world map outline -->
+  <g stroke="#00ff41" stroke-width="0.5" fill="none" opacity="0.3">
+    <!-- North America -->
+    <path d="M 200 150 L 180 180 L 170 220 L 180 250 L 200 270 L 220 280 L 250 270 L 280 250 L 300 220 L 320 180 L 340 150 L 320 140 L 300 130 L 280 120 L 250 110 L 220 120 L 200 130 Z M 240 140 L 250 145 L 260 140 L 255 135 Z"/>
+    
+    <!-- South America -->
+    <path d="M 280 320 L 270 340 L 260 360 L 255 380 L 250 400 L 245 420 L 250 440 L 260 460 L 270 470 L 280 465 L 290 450 L 295 430 L 300 410 L 305 390 L 300 370 L 295 350 L 290 330 Z"/>
+    
+    <!-- Europe -->
+    <path d="M 550 150 L 540 160 L 530 170 L 540 180 L 550 190 L 560 195 L 570 190 L 580 180 L 590 170 L 600 160 L 590 150 L 580 145 L 570 140 L 560 145 Z M 600 180 L 610 185 L 620 180 L 615 175 Z"/>
+    
+    <!-- Africa -->
+    <path d="M 570 250 L 560 270 L 555 290 L 550 310 L 545 330 L 540 350 L 545 370 L 550 390 L 560 400 L 570 395 L 580 390 L 590 380 L 595 360 L 600 340 L 605 320 L 600 300 L 595 280 L 590 260 L 580 250 Z"/>
+    
+    <!-- Asia -->
+    <path d="M 700 140 L 680 150 L 660 160 L 650 180 L 660 200 L 680 210 L 700 220 L 720 230 L 740 240 L 760 230 L 780 220 L 800 210 L 820 200 L 840 190 L 860 180 L 880 170 L 900 160 L 920 150 L 940 140 L 920 130 L 900 120 L 880 110 L 860 120 L 840 130 L 820 140 L 800 130 L 780 120 L 760 110 L 740 120 L 720 130 Z"/>
+    
+    <!-- Australia -->
+    <path d="M 900 400 L 880 410 L 870 420 L 880 430 L 900 440 L 920 445 L 940 440 L 960 430 L 970 420 L 960 410 L 940 400 L 920 395 Z"/>
+    
+    <!-- Grid lines for tech effect -->
+    <line x1="0" y1="100" x2="1200" y2="100" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="0" y1="500" x2="1200" y2="500" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    
+    <line x1="100" y1="0" x2="100" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="200" y1="0" x2="200" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="300" y1="0" x2="300" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="400" y1="0" x2="400" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="500" y1="0" x2="500" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="600" y1="0" x2="600" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="700" y1="0" x2="700" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="800" y1="0" x2="800" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="900" y1="0" x2="900" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="1000" y1="0" x2="1000" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+    <line x1="1100" y1="0" x2="1100" y2="600" stroke="#00ff41" stroke-width="0.2" opacity="0.2"/>
+  </g>
+  
+  <!-- Scanning line effect -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#00ff41" stroke-width="2" opacity="0.6">
+    <animate attributeName="x1" from="0" to="1200" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="x2" from="0" to="1200" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0" dur="10s" repeatCount="indefinite"/>
+  </line>
+</svg>
