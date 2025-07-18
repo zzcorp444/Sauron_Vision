@@ -19,6 +19,14 @@
         <div class="eye">
             <div class="pupil">
                 <div class="globe">
+                    <!-- Latitude and longitude lines for 3D effect -->
+                    <div class="globe-line lat1"></div>
+                    <div class="globe-line lat2"></div>
+                    <div class="globe-line lat3"></div>
+                    <div class="globe-line long1"></div>
+                    <div class="globe-line long2"></div>
+                    <div class="globe-line long3"></div>
+                    <div class="globe-line long4"></div>
                     <!-- Market dots -->
                     <div class="market-dot nyse" data-market="NYSE"></div>
                     <div class="market-dot nasdaq" data-market="NASDAQ"></div>
@@ -48,6 +56,15 @@
         </div>
         <div class="code-bit">
             <pre>risk = calculate_var(portfolio)<br>alert if risk > threshold</pre>
+        </div>
+        <div class="code-bit">
+            <pre>price = fetch_price(symbol)<br>plot_chart(price)</pre>
+        </div>
+        <div class="code-bit">
+            <pre>model = train_ml_model(data)<br>predict = model.predict()</pre>
+        </div>
+        <div class="code-bit">
+            <pre>optimize_portfolio(assets)<br>rebalance()</pre>
         </div>
     </div>
     
