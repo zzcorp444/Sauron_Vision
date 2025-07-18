@@ -14,6 +14,20 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <!-- World Map Background -->
+    <div class="world-map-bg">
+        <div class="market-dot nyse" data-market="NYSE"></div>
+        <div class="market-dot nasdaq" data-market="NASDAQ"></div>
+        <div class="market-dot lse" data-market="London"></div>
+        <div class="market-dot tokyo" data-market="Tokyo"></div>
+        <div class="market-dot shanghai" data-market="Shanghai"></div>
+        <div class="market-dot hongkong" data-market="Hong Kong"></div>
+        <div class="market-dot frankfurt" data-market="Frankfurt"></div>
+        <div class="market-dot sydney" data-market="Sydney"></div>
+        <div class="market-dot toronto" data-market="Toronto"></div>
+        <div class="market-dot singapore" data-market="Singapore"></div>
+    </div>
+    
     <div class="sauron-container">
         {% block content %}{% endblock %}
     </div>

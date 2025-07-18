@@ -1,0 +1,189 @@
+<!-- templates/vision.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vision.css' %}">
+<style>
+    #vision-container {
+        width: 100%;
+        height: calc(100vh - 80px);
+        position: relative;
+        background: #0a0a0a;
+    }
+    
+    #three-canvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .vision-overlay {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(26, 26, 26, 0.9);
+        border: 1px solid var(--glow-color);
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 300px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .vision-controls {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(26, 26, 26, 0.9);
+        border: 1px solid var(--glow-color);
+        border-radius: 10px;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .ai-insight {
+        margin: 10px 0;
+        padding: 10px;
+        background: rgba(0, 255, 65, 0.1);
+        border-radius: 5px;
+        border-left: 3px solid var(--glow-color);
+    }
+    
+    .probability-indicator {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 5px 0;
+    }
+    
+    .probability-bar {
+        flex: 1;
+        height: 8px;
+        background: rgba(0, 255, 65, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    
+    .probability-fill {
+        height: 100%;
+        background: var(--glow-color);
+        transition: width 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <img src="{% static 'images/sv_logo_00.png' %}" alt="SV" class="header-logo">
+            <h1>SAURON VISION - 3D</h1>
+        </div>
+        <div class="header-center">
+            <div class="symbol-selector">
+                <input type="text" id="symbol-input" value="AAPL" class="symbol-input">
+                <button id="load-symbol" class="control-btn">Load</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="toggle-ai" class="control-btn active">AI Overlay</button>
+            <button id="toggle-3d" class="control-btn active">3D Mode</button>
+            <a href="{% url 'dashboard' %}" class="control-btn">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+    </header>
+
+    <!-- Vision Container -->
+    <div id="vision-container">
+        <canvas id="three-canvas"></canvas>
+        
+        <!-- AI Insights Overlay -->
+        <div class="vision-overlay" id="ai-overlay">
+            <h3><i class="fas fa-brain"></i> AI Insights</h3>
+            
+            <div class="ai-insight">
+                <strong>Sentiment Analysis</strong>
+                <div class="probability-indicator">
+                    <span>Bullish</span>
+                    <div class="probability-bar">
+                        <div class="probability-fill" id="sentiment-bar" style="width: 72%"></div>
+                    </div>
+                    <span id="sentiment-value">72%</span>
+                </div>
+            </div>
+            
+            <div class="ai-insight">
+                <strong>Pattern Detection</strong>
+                <div id="pattern-list">
+                    <div class="pattern-item">
+                        <i class="fas fa-chart-line"></i> Ascending Triangle
+                        <span class="confidence">85%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ai-insight">
+                <strong>Anomaly Detection</strong>
+                <div id="anomaly-status">
+                    <i class="fas fa-check-circle" style="color: var(--glow-color)"></i>
+                    Normal Market Conditions
+                </div>
+            </div>
+            
+            <div class="ai-insight">
+                <strong>Risk Metrics</strong>
+                <div id="risk-metrics">
+                    <div>VaR (1d): <span id="var-value">-2.5%</span></div>
+                    <div>Volatility: <span id="vol-value">2.3%</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="vision-controls">
+            <h4>View Controls</h4>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="show-predictions" checked>
+                    Price Predictions
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="show-probability" checked>
+                    Probability Clouds
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="show-correlations" checked>
+                    Correlations
+                </label>
+            </div>
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="show-volume" checked>
+                    Volume Profile
+                </label>
+            </div>
+            <div class="control-group">
+                <label>Time Depth</label>
+                <input type="range" id="time-depth" min="1" max="5" value="3">
+            </div>
+        </div>
+        
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading Vision Data...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="{% static 'js/vision3d.js' %}"></script>
+{% endblock %}

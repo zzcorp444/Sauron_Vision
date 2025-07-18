@@ -135,3 +135,83 @@ def ai_analysis(request):
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+
+@login_required
+def vision_view(request):
+    """3D Vision trading interface"""
+    context = {
+        'user': request.user,
+        'default_symbol': 'AAPL',
+    }
+    return render(request, 'vision.html', context)
+
+
+@login_required
+def api_vision_data(request, symbol):
+    """API endpoint for Vision 3D data"""
+    import numpy as np
+    from datetime import datetime, timedelta
+
+    # Generate sample data - replace with real data
+    now = datetime.now()
+
+    # Price data with predictions
+    price_data = []
+    for i in range(100):
+        time = now - timedelta(minutes=100 - i)
+        price = 150 + np.sin(i / 10) * 5 + np.random.random() * 2
+        price_data.append({
+            'time': time.isoformat(),
+            'price': price,
+            'volume': int(1000000 + np.random.random() * 500000),
+            'prediction': price + np.random.random() * 2 - 1,
+            'confidence': 0.7 + np.random.random() * 0.3
+        })
+
+    # AI insights
+    ai_insights = {
+        'sentiment': {
+            'overall': 0.72,
+            'news': 0.68,
+            'social': 0.75,
+            'trend': 'bullish'
+        },
+        'patterns': [
+            {'type': 'ascending_triangle', 'confidence': 0.85, 'target': 155},
+            {'type': 'support_level', 'price': 148, 'strength': 0.9}
+        ],
+        'correlations': [
+            {'symbol': 'QQQ', 'correlation': 0.82},
+            {'symbol': 'SPY', 'correlation': 0.76}
+        ],
+        'anomalies': [
+            {'time': (now - timedelta(minutes=30)).isoformat(), 'type': 'volume_spike', 'severity': 0.7}
+        ],
+        'risk_metrics': {
+            'var_1d': -2.5,
+            'volatility': 0.023,
+            'beta': 1.15
+        }
+    }
+
+    # Probability clouds (price ranges)
+    probability_clouds = []
+    for i in range(1, 6):  # Next 5 periods
+        future_time = now + timedelta(minutes=i * 5)
+        current_price = price_data[-1]['price']
+        probability_clouds.append({
+            'time': future_time.isoformat(),
+            'ranges': [
+                {'probability': 0.68, 'low': current_price - i * 0.5, 'high': current_price + i * 0.5},
+                {'probability': 0.95, 'low': current_price - i * 1.0, 'high': current_price + i * 1.0}
+            ]
+        })
+
+    return JsonResponse({
+        'symbol': symbol,
+        'price_data': price_data,
+        'ai_insights': ai_insights,
+        'probability_clouds': probability_clouds,
+        'last_update': now.isoformat()
+    })

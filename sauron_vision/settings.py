@@ -97,7 +97,7 @@ ASGI_APPLICATION = 'sauron_vision.asgi.application'
 }"""
 
 DATABASES = {
-        'default': dj_database_url.parse('postgresql://zz_corp:A3F30cXXRWEidjyPZzGcyhvdovPqeZHL@dpg-d1sohdemcj7s73e9n4f0-a/eu_zzcorp_db_00')
+        'default': dj_database_url.parse('postgresql://zz_corp:A3F30cXXRWEidjyPZzGcyhvdovPqeZHL@dpg-d1sohdemcj7s73e9n4f0-a.frankfurt-postgres.render.com/eu_zzcorp_db_00')
 }
 
 # Redis for Channels and Celery - Updated for Render
