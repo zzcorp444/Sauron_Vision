@@ -274,43 +274,43 @@ body {
 
 /* Scattered market dot positions */
 .market-dot.nyse {
-    transform: rotateY(74deg) rotateX(-40.7deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(74deg) rotateX(-40.7deg) translateZ(140px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(74deg) rotateX(-40deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(74deg) rotateX(-40deg) translateZ(140px);
 }
 
 .market-dot.lse {
-    transform: rotateY(0.1deg) rotateX(-51.5deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(0.1deg) rotateX(-51.5deg) translateZ(140px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(-139.7deg) rotateX(-35.7deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-139.7deg) rotateX(-35.7deg) translateZ(140px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(-121.5deg) rotateX(-31.2deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-121.5deg) rotateX(-31.2deg) translateZ(140px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(-114.2deg) rotateX(-22.3deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-114.2deg) rotateX(-22.3deg) translateZ(140px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(-8.7deg) rotateX(-50.1deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-8.7deg) rotateX(-50.1deg) translateZ(140px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(-151.2deg) rotateX(33.9deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-151.2deg) rotateX(33.9deg) translateZ(140px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(79.4deg) rotateX(-43.7deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(79.4deg) rotateX(-43.7deg) translateZ(140px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(-103.8deg) rotateX(-1.3deg) translateZ(140px);
+    transform: translate(-50%, -50%) rotateY(-103.8deg) rotateX(-1.3deg) translateZ(140px);
 }
 
 @keyframes pulse-red {
