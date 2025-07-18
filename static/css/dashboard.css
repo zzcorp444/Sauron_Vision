@@ -22,9 +22,8 @@
 }
 
 .header-logo {
-    width: 40px;
     height: 40px;
-    filter: drop-shadow(0 0 5px var(--glow-color));
+    /* filter: drop-shadow(0 0 5px var(--glow-color)); */
 }
 
 .header-left h1 {
