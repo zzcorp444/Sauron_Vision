@@ -150,7 +150,7 @@ body {
     width: 800px;
     height: 400px;
     border: 3px solid rgba(0, 255, 65, 0.3);
-    border-radius: 70% 70% 100% 100% / 50% 50% 100% 100%;
+    border-radius: 50% 50% 100% 100% / 60% 60% 100% 100%;
     position: relative;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
     display: flex;
@@ -272,8 +272,6 @@ body {
 /* Market Dots */
 .market-dot {
     position: absolute;
-    top: 50%;
-    left: 50%;
     width: 6px;
     height: 6px;
     background: #ff3333;
@@ -286,8 +284,8 @@ body {
         0 0 30px #ff3333,
         inset 0 0 4px #ff0000;
     animation: pulse-red 2s infinite;
-    transform-origin: center;
     transform-style: preserve-3d;
+    transform-origin: 140px 140px;
 }
 
 /* Scattered market dot positions */
@@ -415,7 +413,7 @@ body {
     overflow: hidden;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.65;
+    opacity: 0.9;
 }
 
 .code-bit {
@@ -446,7 +444,7 @@ body {
     overflow: hidden;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.3;
+    opacity: 0.25;
 }
 
 .price-ticker {
