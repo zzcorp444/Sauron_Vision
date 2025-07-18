@@ -26,13 +26,13 @@ body {
     font-size: 14px;
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
 }
 
 .sauron-container {
     min-height: 100vh;
     position: relative;
-    z-index: 1;
-    background: transparent;
+    z-index: 10;
 }
 
 /* Scrollbar Styling */
@@ -87,7 +87,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 1;
     opacity: 0.1;
 }
 
@@ -113,18 +113,19 @@ body {
     animation: matrix-rain 20s linear infinite;
 }
 
-/* World Map Background */
+/* ===== WORLD MAP CSS DESIGN ===== */
 .world-map-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 0; /* Changed from -2 to 0 */
-    background: transparent;
+    height: 100vh;
+    z-index: 1;
     pointer-events: none;
+    overflow: hidden;
 }
 
+/* Grid background */
 .world-map-bg::before {
     content: '';
     position: absolute;
@@ -132,38 +133,186 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/world-map.svg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.4;
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
-/* Alternative for inline SVG */
-.world-map-svg {
+/* Radar sweep effect */
+.world-map-bg::after {
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(0, 255, 65, 0.1) 10deg,
+        transparent 40deg
+    );
+    animation: radar-sweep 8s linear infinite;
+    transform-origin: center;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: auto;
-    max-width: 1200px;
-    opacity: 0.5;
+}
+
+@keyframes radar-sweep {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* CSS-based continents */
+.continent {
+    position: absolute;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    box-shadow: 
+        inset 0 0 20px rgba(0, 255, 65, 0.05),
+        0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+/* North America */
+.continent.north-america {
+    width: 180px;
+    height: 140px;
+    top: 22%;
+    left: 18%;
+    border-radius: 30% 70% 70% 30% / 60% 40% 60% 40%;
+    transform: rotate(-25deg);
+}
+
+.continent.north-america::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    top: -20px;
+    right: -10px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 50% 50% 30% 70% / 70% 30% 50% 50%;
+    transform: rotate(15deg);
+}
+
+/* South America */
+.continent.south-america {
+    width: 90px;
+    height: 160px;
+    top: 48%;
+    left: 23%;
+    border-radius: 50% 50% 70% 30% / 30% 30% 70% 70%;
+    transform: rotate(10deg);
+}
+
+/* Europe */
+.continent.europe {
+    width: 100px;
+    height: 80px;
+    top: 20%;
+    left: 47%;
+    border-radius: 40% 60% 50% 50% / 60% 60% 40% 40%;
+}
+
+.continent.europe::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: -30px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 30% 70% 70% 30% / 70% 30% 30% 70%;
+}
+
+/* Africa */
+.continent.africa {
+    width: 120px;
+    height: 160px;
+    top: 38%;
+    left: 46%;
+    border-radius: 50% 50% 60% 40% / 40% 40% 60% 60%;
+}
+
+/* Asia */
+.continent.asia {
+    width: 260px;
+    height: 160px;
+    top: 18%;
+    left: 58%;
+    border-radius: 30% 70% 50% 50% / 50% 50% 50% 50%;
+    transform: rotate(10deg);
+}
+
+.continent.asia::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 100px;
+    bottom: -50px;
+    right: 20px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+    transform: rotate(-20deg);
+}
+
+/* Australia */
+.continent.australia {
+    width: 80px;
+    height: 60px;
+    top: 68%;
+    left: 78%;
+    border-radius: 60% 40% 50% 50% / 50% 70% 30% 50%;
+}
+
+/* Connection lines between continents */
+.trade-route {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 255, 65, 0.3) 50%, 
+        transparent 100%);
+    transform-origin: left center;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.trade-route.atlantic {
+    width: 200px;
+    top: 30%;
+    left: 28%;
+    transform: rotate(10deg);
+}
+
+.trade-route.pacific {
+    width: 180px;
+    top: 35%;
+    left: 75%;
+    transform: rotate(-5deg);
+}
+
+.trade-route.indian {
+    width: 150px;
+    top: 50%;
+    left: 55%;
+    transform: rotate(20deg);
 }
 
 /* Market Dots */
 .market-dot {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: #ff3333;
     border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
     box-shadow: 
         0 0 10px #ff3333,
         0 0 20px #ff3333,
-        0 0 30px #ff3333;
+        0 0 30px #ff3333,
+        inset 0 0 5px #ff0000;
     animation: pulse-red 2s infinite;
-    z-index: 100;
 }
 
 @keyframes pulse-red {
@@ -172,102 +321,108 @@ body {
         box-shadow: 
             0 0 10px #ff3333,
             0 0 20px #ff3333,
-            0 0 30px #ff3333;
+            0 0 30px #ff3333,
+            inset 0 0 5px #ff0000;
     }
     50% {
-        transform: scale(1.2);
+        transform: scale(1.3);
         box-shadow: 
             0 0 15px #ff3333,
             0 0 30px #ff3333,
-            0 0 45px #ff3333;
+            0 0 45px #ff3333,
+            inset 0 0 8px #ff0000;
     }
 }
 
-/* Market locations */
+/* Market dot positions */
 .market-dot.nyse {
-    top: 32%;
+    top: 28%;
     left: 25%;
 }
 
 .market-dot.nasdaq {
-    top: 31%;
+    top: 27%;
     left: 24%;
 }
 
 .market-dot.lse {
-    top: 26%;
+    top: 24%;
     left: 49%;
 }
 
 .market-dot.tokyo {
-    top: 36%;
-    left: 86%;
+    top: 34%;
+    left: 85%;
 }
 
 .market-dot.shanghai {
-    top: 38%;
-    left: 82%;
-}
-
-.market-dot.hongkong {
-    top: 42%;
+    top: 36%;
     left: 81%;
 }
 
+.market-dot.hongkong {
+    top: 41%;
+    left: 80%;
+}
+
 .market-dot.frankfurt {
-    top: 27%;
+    top: 25%;
     left: 52%;
 }
 
 .market-dot.sydney {
-    top: 68%;
-    left: 88%;
+    top: 69%;
+    left: 87%;
 }
 
 .market-dot.toronto {
-    top: 30%;
+    top: 26%;
     left: 23%;
 }
 
 .market-dot.singapore {
-    top: 50%;
-    left: 79%;
+    top: 52%;
+    left: 78%;
 }
 
+/* Market dot tooltips */
 .market-dot::after {
     content: attr(data-market);
     position: absolute;
-    bottom: 120%;
+    bottom: 150%;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(26, 26, 26, 0.95);
     border: 1px solid #ff3333;
-    padding: 5px 10px;
     border-radius: 5px;
+    padding: 5px 10px;
     font-size: 11px;
     font-family: var(--font-mono);
     color: var(--primary-text);
     white-space: nowrap;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     pointer-events: none;
     z-index: 100;
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
 }
 
 .market-dot:hover::after {
     opacity: 1;
+    bottom: 120%;
 }
 
+/* Market dot ripple effect */
 .market-dot::before {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    border: 1px solid #ff3333;
+    border: 2px solid #ff3333;
     animation: ripple 2s infinite;
 }
 
@@ -278,6 +433,34 @@ body {
     }
     100% {
         transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Data flow animation */
+.data-flow {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-text);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-text);
+    animation: data-flow 3s linear infinite;
+}
+
+@keyframes data-flow {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(200px, 50px);
         opacity: 0;
     }
 }
@@ -305,17 +488,9 @@ input, textarea, select {
 }
 
 /* Utility Classes */
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-left {
-    text-align: left;
-}
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
 
 .mt-1 { margin-top: 0.5rem; }
 .mt-2 { margin-top: 1rem; }
@@ -332,42 +507,27 @@ input, textarea, select {
 .p-3 { padding: 1.5rem; }
 .p-4 { padding: 2rem; }
 
-.flex {
-    display: flex;
-}
-
+.flex { display: flex; }
 .flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .flex-between {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .flex-column {
     display: flex;
     flex-direction: column;
 }
 
-.grid {
-    display: grid;
-}
+.grid { display: grid; }
 
-.hidden {
-    display: none !important;
-}
-
-.visible {
-    visibility: visible !important;
-}
-
-.invisible {
-    visibility: hidden !important;
-}
+.hidden { display: none !important; }
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
 
 /* Loading States */
 .loading {
@@ -571,14 +731,19 @@ input, textarea, select {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .sauron-container {
-        padding: 0 1rem;
+    .continent {
+        transform: scale(0.9);
     }
 }
 
 @media (max-width: 768px) {
     body {
         font-size: 13px;
+    }
+    
+    .world-map-bg {
+        transform: scale(0.8);
+        transform-origin: center;
     }
     
     .market-dot {
@@ -600,8 +765,8 @@ input, textarea, select {
         font-size: 12px;
     }
     
-    .world-map-svg {
-        width: 100%;
+    .world-map-bg {
+        transform: scale(0.6);
     }
 }
 

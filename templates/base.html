@@ -16,28 +16,13 @@
 <body>
     <!-- World Map Background - Using inline SVG -->
     <div class="world-map-bg">
-        <svg class="world-map-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
-            <g stroke="#00ff41" stroke-width="2" fill="none" opacity="0.5">
-                <!-- Simple world outline -->
-                <!-- North America -->
-                <path d="M 150 180 L 180 150 L 220 140 L 260 130 L 300 140 L 340 160 L 360 180 L 350 220 L 320 250 L 280 270 L 240 280 L 200 270 L 170 240 L 160 210 L 150 180 Z"/>
-                
-                <!-- South America -->
-                <path d="M 260 320 L 250 340 L 240 370 L 235 400 L 240 430 L 250 460 L 270 480 L 290 475 L 300 450 L 305 420 L 310 390 L 305 360 L 295 330 L 280 310 L 260 320 Z"/>
-                
-                <!-- Europe -->
-                <path d="M 540 140 L 560 130 L 580 135 L 600 140 L 620 150 L 615 170 L 600 180 L 580 185 L 560 180 L 545 170 L 540 150 L 540 140 Z"/>
-                
-                <!-- Africa -->
-                <path d="M 560 240 L 550 260 L 545 290 L 540 320 L 545 350 L 550 380 L 560 400 L 580 410 L 600 400 L 610 380 L 615 350 L 610 320 L 605 290 L 595 260 L 580 240 L 560 240 Z"/>
-                
-                <!-- Asia -->
-                <path d="M 680 120 L 720 110 L 760 100 L 800 110 L 840 120 L 880 130 L 920 140 L 960 150 L 980 170 L 970 190 L 950 210 L 920 220 L 880 230 L 840 220 L 800 210 L 760 200 L 720 190 L 680 180 L 660 160 L 670 140 L 680 120 Z"/>
-                
-                <!-- Australia -->
-                <path d="M 880 420 L 920 410 L 960 415 L 980 430 L 975 450 L 950 460 L 920 455 L 890 445 L 880 430 L 880 420 Z"/>
-            </g>
-        </svg>
+        <!-- CSS-based continents -->
+        <div class="continent north-america"></div>
+        <div class="continent south-america"></div>
+        <div class="continent europe"></div>
+        <div class="continent africa"></div>
+        <div class="continent asia"></div>
+        <div class="continent australia"></div>
         
         <!-- Market dots -->
         <div class="market-dot nyse" data-market="NYSE"></div>
