@@ -81,6 +81,148 @@
         </div>
     </header>
 
+    <!-- News Intelligence Bar -->
+    <div class="news-intelligence-bar">
+        <div class="news-bar-header">
+            <div class="news-bar-title">
+                <i class="fas fa-newspaper"></i>
+                <span>Market Intelligence Feed</span>
+            </div>
+            <div class="news-bar-controls">
+                <button class="news-filter-btn active" data-filter="all">All</button>
+                <button class="news-filter-btn" data-filter="news">News</button>
+                <button class="news-filter-btn" data-filter="social">Social</button>
+                <button class="news-filter-btn" data-filter="analysis">Analysis</button>
+                <button class="news-filter-btn" data-filter="alerts">Alerts</button>
+            </div>
+        </div>
+        
+        <div class="news-content">
+            <!-- News Item 1 -->
+            <div class="news-item" data-type="news">
+                <div class="news-source">
+                    <span class="news-source-name">Bloomberg</span>
+                    <span class="news-time">2 min ago</span>
+                </div>
+                <h4 class="news-headline">Fed Signals Pause in Rate Hikes as Inflation Shows Signs of Cooling</h4>
+                <p class="news-summary">Federal Reserve officials indicated they may hold interest rates steady in the upcoming meeting, citing recent economic data...</p>
+                <div class="news-meta">
+                    <div class="sentiment-indicator positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Bullish</span>
+                    </div>
+                    <div class="social-metrics">
+                        <span class="social-metric"><i class="fab fa-twitter"></i> 1.2k</span>
+                        <span class="social-metric"><i class="fas fa-comments"></i> 342</span>
+                    </div>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Fed</span>
+                    <span class="news-tag">Rates</span>
+                    <span class="news-tag ticker">SPY</span>
+                </div>
+            </div>
+            
+            <!-- News Item 2 -->
+            <div class="news-item" data-type="social">
+                <div class="news-source">
+                    <span class="news-source-name">Reddit - r/wallstreetbets</span>
+                    <span class="news-time">5 min ago</span>
+                </div>
+                <h4 class="news-headline">Unusual Options Activity Detected on NVDA - Large Call Volumes</h4>
+                <p class="news-summary">Traders reporting massive call option purchases for NVDA $500 strike expiring next month. Volume 10x normal...</p>
+                <div class="news-meta">
+                    <div class="sentiment-indicator positive">
+                        <i class="fas fa-fire"></i>
+                        <span>Hot</span>
+                    </div>
+                    <div class="social-metrics">
+                        <span class="social-metric"><i class="fas fa-arrow-up"></i> 5.8k</span>
+                        <span class="social-metric"><i class="fas fa-comments"></i> 892</span>
+                    </div>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Options</span>
+                    <span class="news-tag ticker">NVDA</span>
+                    <span class="news-tag">Unusual Activity</span>
+                </div>
+            </div>
+            
+            <!-- News Item 3 -->
+            <div class="news-item" data-type="analysis">
+                <div class="news-source">
+                    <span class="news-source-name">Sauron AI Analysis</span>
+                    <span class="news-time">10 min ago</span>
+                </div>
+                <h4 class="news-headline">Pattern Alert: AAPL Forming Ascending Triangle on 4H Chart</h4>
+                <p class="news-summary">Technical analysis indicates a bullish pattern formation with 85% historical success rate. Target price: $165...</p>
+                <div class="news-meta">
+                    <div class="sentiment-indicator positive">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Technical Buy</span>
+                    </div>
+                    <div class="social-metrics">
+                        <span class="social-metric"><i class="fas fa-eye"></i> 2.3k</span>
+                    </div>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag ticker">AAPL</span>
+                    <span class="news-tag">Technical</span>
+                    <span class="news-tag">Pattern</span>
+                </div>
+            </div>
+            
+            <!-- News Item 4 -->
+            <div class="news-item" data-type="news">
+                <div class="news-source">
+                    <span class="news-source-name">Reuters</span>
+                    <span class="news-time">15 min ago</span>
+                </div>
+                <h4 class="news-headline">Tesla Announces Record Q4 Deliveries, Beats Analyst Estimates</h4>
+                <p class="news-summary">Electric vehicle maker Tesla reported delivering 484,507 vehicles in Q4, surpassing Wall Street expectations...</p>
+                <div class="news-meta">
+                    <div class="sentiment-indicator positive">
+                        <i class="fas fa-rocket"></i>
+                        <span>Very Bullish</span>
+                    </div>
+                    <div class="social-metrics">
+                        <span class="social-metric"><i class="fab fa-twitter"></i> 3.5k</span>
+                        <span class="social-metric"><i class="fas fa-share"></i> 1.2k</span>
+                    </div>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag ticker">TSLA</span>
+                    <span class="news-tag">Earnings</span>
+                    <span class="news-tag">EVs</span>
+                </div>
+            </div>
+            
+            <!-- News Item 5 -->
+            <div class="news-item" data-type="alerts">
+                <div class="news-source">
+                    <span class="news-source-name">Market Alert</span>
+                    <span class="news-time">20 min ago</span>
+                </div>
+                <h4 class="news-headline">VIX Spike Alert: Volatility Index Jumps 15% in Last Hour</h4>
+                <p class="news-summary">Market volatility indicator showing unusual movement. Risk management protocols activated...</p>
+                <div class="news-meta">
+                    <div class="sentiment-indicator negative">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Risk Alert</span>
+                    </div>
+                    <div class="social-metrics">
+                        <span class="social-metric"><i class="fas fa-bell"></i> High Priority</span>
+                    </div>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag ticker">VIX</span>
+                    <span class="news-tag">Volatility</span>
+                    <span class="news-tag">Risk</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="dashboard-main">
         <!-- Sidebar -->
@@ -199,4 +341,33 @@
 
 {% block extra_js %}
 <script src="{% static 'js/dashboard.js' %}"></script>
+<script>
+// News filter functionality
+document.querySelectorAll('.news-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Filter news items
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.news-item').forEach(item => {
+            if (filter === 'all' || item.dataset.type === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Make news items clickable
+document.querySelectorAll('.news-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // In a real app, this would open the full article or analysis
+        console.log('Opening article...');
+    });
+});
+</script>
 {% endblock %}

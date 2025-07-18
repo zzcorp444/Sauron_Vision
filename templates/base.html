@@ -20,32 +20,66 @@
         <div class="eye">
             <!-- Eye Shape SVG -->
             <div class="eye-shape">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Eye outline - almond shape -->
-                    <path class="eye-outline" d="M 50 200 Q 400 50, 750 200 Q 400 350, 50 200 Z" />
+                <svg viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Eye outline - almond shape with thicker center -->
+                    <path class="eye-outline" d="M 50 225 Q 200 100, 450 50 Q 700 100, 850 225 Q 700 350, 450 400 Q 200 350, 50 225 Z" />
                     
-                    <!-- Circuit veins on the left -->
-                    <path class="circuit-vein left" d="M 100 200 Q 150 150, 200 180 L 220 180 L 220 190 L 250 190" />
-                    <path class="circuit-vein left" d="M 120 220 Q 170 250, 210 220 L 230 220 L 230 210 L 260 210" />
-                    <path class="circuit-vein left" d="M 90 180 Q 140 130, 190 170 L 210 170 L 210 180 L 240 180" />
+                    <!-- Electronic Circuit Veins - Left Side -->
+                    <g class="circuit-group left">
+                        <!-- Main circuit paths -->
+                        <path class="circuit-vein" d="M 100 225 L 120 225 L 120 200 L 150 200 L 150 180 L 180 180" />
+                        <circle class="circuit-node" cx="120" cy="225" r="3" />
+                        <circle class="circuit-node" cx="150" cy="200" r="3" />
+                        <rect class="circuit-node" x="175" y="175" width="10" height="10" />
+                        
+                        <path class="circuit-vein" d="M 110 250 L 130 250 L 130 240 L 160 240 L 160 220 L 190 220" />
+                        <circle class="circuit-node" cx="130" cy="250" r="3" />
+                        <rect class="circuit-node" x="155" y="235" width="10" height="10" />
+                        
+                        <path class="circuit-vein" d="M 90 200 L 110 200 L 110 180 L 140 180 L 140 160 L 170 160" />
+                        <circle class="circuit-node" cx="110" cy="200" r="3" />
+                        <circle class="circuit-node" cx="140" cy="180" r="3" />
+                        
+                        <!-- Connector lines -->
+                        <path class="circuit-vein" d="M 150 200 L 150 220" />
+                        <path class="circuit-vein" d="M 140 180 L 160 180" />
+                    </g>
                     
-                    <!-- Circuit veins on the right -->
-                    <path class="circuit-vein right" d="M 700 200 Q 650 150, 600 180 L 580 180 L 580 190 L 550 190" />
-                    <path class="circuit-vein right" d="M 680 220 Q 630 250, 590 220 L 570 220 L 570 210 L 540 210" />
-                    <path class="circuit-vein right" d="M 710 180 Q 660 130, 610 170 L 590 170 L 590 180 L 560 180" />
+                    <!-- Electronic Circuit Veins - Right Side -->
+                    <g class="circuit-group right">
+                        <!-- Main circuit paths -->
+                        <path class="circuit-vein" d="M 800 225 L 780 225 L 780 200 L 750 200 L 750 180 L 720 180" />
+                        <circle class="circuit-node" cx="780" cy="225" r="3" />
+                        <circle class="circuit-node" cx="750" cy="200" r="3" />
+                        <rect class="circuit-node" x="715" y="175" width="10" height="10" />
+                        
+                        <path class="circuit-vein" d="M 790 250 L 770 250 L 770 240 L 740 240 L 740 220 L 710 220" />
+                        <circle class="circuit-node" cx="770" cy="250" r="3" />
+                        <rect class="circuit-node" x="735" y="235" width="10" height="10" />
+                        
+                        <path class="circuit-vein" d="M 810 200 L 790 200 L 790 180 L 760 180 L 760 160 L 730 160" />
+                        <circle class="circuit-node" cx="790" cy="200" r="3" />
+                        <circle class="circuit-node" cx="760" cy="180" r="3" />
+                        
+                        <!-- Connector lines -->
+                        <path class="circuit-vein" d="M 750 200 L 750 220" />
+                        <path class="circuit-vein" d="M 760 180 L 740 180" />
+                    </g>
                 </svg>
             </div>
             
             <!-- Pupil with globe -->
             <div class="pupil">
                 <div class="globe">
-                    <!-- Meridians (Vertical lines) -->
-                    <div class="globe-line meridian meridian1"></div>
-                    <div class="globe-line meridian meridian2"></div>
-                    <div class="globe-line meridian meridian3"></div>
-                    <div class="globe-line meridian meridian4"></div>
-                    <div class="globe-line meridian meridian5"></div>
-                    <div class="globe-line meridian meridian6"></div>
+                    <!-- Meridians (Vertical lines) - Properly shaped -->
+                    <svg class="globe-meridians" viewBox="0 0 360 360" style="position: absolute; width: 100%; height: 100%;">
+                        <ellipse cx="180" cy="180" rx="180" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" />
+                        <ellipse cx="180" cy="180" rx="150" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(30 180 180)" />
+                        <ellipse cx="180" cy="180" rx="120" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(60 180 180)" />
+                        <ellipse cx="180" cy="180" rx="90" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(90 180 180)" />
+                        <ellipse cx="180" cy="180" rx="120" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(120 180 180)" />
+                        <ellipse cx="180" cy="180" rx="150" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(150 180 180)" />
+                    </svg>
                     
                     <!-- Parallels (Horizontal lines) -->
                     <div class="globe-line parallel parallel1"></div>
@@ -57,7 +91,7 @@
                     <!-- Equator -->
                     <div class="globe-line equator"></div>
                     
-                    <!-- Market dots on globe surface -->
+                    <!-- Market dots on globe surface - 13 total -->
                     <div class="market-dot nyse" data-market="NYSE"></div>
                     <div class="market-dot nasdaq" data-market="NASDAQ"></div>
                     <div class="market-dot lse" data-market="London"></div>
@@ -68,6 +102,9 @@
                     <div class="market-dot sydney" data-market="Sydney"></div>
                     <div class="market-dot toronto" data-market="Toronto"></div>
                     <div class="market-dot singapore" data-market="Singapore"></div>
+                    <div class="market-dot mumbai" data-market="Mumbai"></div>
+                    <div class="market-dot dubai" data-market="Dubai"></div>
+                    <div class="market-dot zurich" data-market="Zurich"></div>
                 </div>
             </div>
         </div>
