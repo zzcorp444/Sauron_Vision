@@ -240,6 +240,12 @@
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 150;
     overflow-y: auto;
+    transform: translateX(-200px);
+    transition: transform 0.3s ease;
+}
+
+.news-intelligence-bar.visible {
+    transform: translateX(0);
 }
 
 .news-bar-header {
@@ -406,14 +412,14 @@
     border-right: 1px solid var(--border-color);
     padding: 1rem 0;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: width 0.3s ease;
     z-index: 200;
     height: calc(100vh - 120px);
     overflow-y: auto;
 }
 
 .sidebar.retracted {
-    transform: translateX(-190px);
+    width: 60px;
 }
 
 .sidebar.retracted .nav-item span {
@@ -809,7 +815,7 @@
 }
 
 .signal-item:hover .signal-details {
-    max-height: 100px;
+    max-height: 150px;
     opacity: 1;
     margin-top: 0.5rem;
 }
@@ -864,6 +870,11 @@
     color: var(--primary-bg);
 }
 
+.signal-type.hedge {
+    background: #9a59d1;
+    color: var(--primary-bg);
+}
+
 .signal-time {
     font-size: 0.8rem;
     color: var(--tertiary-text);
@@ -901,6 +912,45 @@
     color: var(--warning-text);
 }
 
+/* Performance Metrics Enhanced */
+.performance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.metric-chart {
+    height: 60px;
+    background: rgba(0, 255, 65, 0.05);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.pie-chart {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--primary-text) 0deg 216deg,
+        var(--error-text) 216deg 288deg,
+        var(--warning-text) 288deg 360deg
+    );
+}
+
+.line-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.line-chart svg {
+    width: 100%;
+    height: 100%;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-layout {
@@ -912,6 +962,7 @@
         width: 100%;
         height: 200px;
         order: 1;
+        transform: translateX(0);
     }
     
     .dashboard-main {
@@ -921,7 +972,6 @@
     .sidebar {
         width: 100%;
         order: 3;
-        transform: none;
     }
     
     .content-area {
@@ -943,6 +993,10 @@
     }
     
     .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .performance-grid {
         grid-template-columns: 1fr;
     }
     

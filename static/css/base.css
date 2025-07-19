@@ -185,9 +185,11 @@ body {
 
 .eye-outline {
     fill: none;
-    stroke: rgba(0, 255, 65, 0.6);
-    stroke-width: 5;
-    filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.8)) drop-shadow(0 0 50px rgba(0, 255, 65, 0.4));
+    stroke: rgba(0, 255, 65, 0.8);
+    stroke-width: 8;
+    filter: drop-shadow(0 0 40px rgba(0, 255, 65, 1)) 
+            drop-shadow(0 0 80px rgba(0, 255, 65, 0.6))
+            drop-shadow(0 0 120px rgba(0, 255, 65, 0.3));
 }
 
 /* Electronic Circuit Veins */
@@ -245,7 +247,7 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Vertical lines (Meridians) - Creating 3D effect with thicker poles */
+/* Vertical lines (Meridians) - Creating 3D effect with enhanced thickness */
 .globe-line.meridian {
     width: 100%;
     height: 100%;
@@ -255,36 +257,36 @@ body {
 
 .meridian1 { 
     transform: rotateY(0deg);
-    border: 3px solid rgba(0, 255, 65, 0.4);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+    border: 5px solid rgba(0, 255, 65, 0.6);
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.6), inset 0 0 15px rgba(0, 255, 65, 0.3);
 }
 .meridian2 { 
     transform: rotateY(30deg);
-    border: 2.5px solid rgba(0, 255, 65, 0.35);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    border: 4px solid rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), inset 0 0 12px rgba(0, 255, 65, 0.25);
 }
 .meridian3 { 
     transform: rotateY(60deg);
-    border: 2px solid rgba(0, 255, 65, 0.3);
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+    border: 3.5px solid rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4), inset 0 0 10px rgba(0, 255, 65, 0.2);
 }
 .meridian4 { 
     transform: rotateY(90deg);
-    border: 2px solid rgba(0, 255, 65, 0.25);
-    box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
+    border: 3px solid rgba(0, 255, 65, 0.35);
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.35), inset 0 0 8px rgba(0, 255, 65, 0.18);
 }
 .meridian5 { 
     transform: rotateY(120deg);
-    border: 2px solid rgba(0, 255, 65, 0.3);
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+    border: 3.5px solid rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4), inset 0 0 10px rgba(0, 255, 65, 0.2);
 }
 .meridian6 { 
     transform: rotateY(150deg);
-    border: 2.5px solid rgba(0, 255, 65, 0.35);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    border: 4px solid rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), inset 0 0 12px rgba(0, 255, 65, 0.25);
 }
 
-/* Horizontal lines (Parallels) - Creating 3D effect */
+/* Horizontal lines (Parallels) - Enhanced thickness */
 .globe-line.parallel {
     width: 100%;
     left: 0;
@@ -296,39 +298,43 @@ body {
     height: 90%;
     top: 5%;
     transform: rotateX(20deg);
-    border: 1.5px solid rgba(0, 255, 65, 0.2);
+    border: 3px solid rgba(0, 255, 65, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 }
 
 .parallel2 {
     height: 70%;
     top: 15%;
     transform: rotateX(40deg);
-    border: 1.5px solid rgba(0, 255, 65, 0.18);
+    border: 2.5px solid rgba(0, 255, 65, 0.25);
+    box-shadow: 0 0 12px rgba(0, 255, 65, 0.25);
 }
 
 .parallel3 {
     height: 50%;
     top: 25%;
     transform: rotateX(60deg);
-    border: 1.5px solid rgba(0, 255, 65, 0.15);
+    border: 2.5px solid rgba(0, 255, 65, 0.22);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.22);
 }
 
 .parallel4 {
     height: 30%;
     top: 35%;
     transform: rotateX(80deg);
-    border: 1.5px solid rgba(0, 255, 65, 0.12);
+    border: 2px solid rgba(0, 255, 65, 0.18);
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.18);
 }
 
-/* Equator - special parallel */
+/* Equator - special parallel with enhanced glow */
 .globe-line.equator {
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    border: 3.5px solid rgba(0, 255, 65, 0.5);
+    border: 5px solid rgba(0, 255, 65, 0.7);
     transform: rotateX(90deg);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
 /* Market Dots - 3D Positioned on Globe Surface */
@@ -349,17 +355,17 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - spread across different levels and positions */
+/* Market dot positions - properly scattered in 3D space */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-45deg) rotateX(-20deg) translateZ(180px);
+    transform: rotateY(-45deg) rotateX(-30deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(10deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
@@ -367,39 +373,39 @@ body {
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(-15deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(-25deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(94deg) rotateX(5deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(10deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(25deg) rotateX(30deg) translateZ(180px);
+    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-45deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-95deg) rotateX(55deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(-30deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
-    transform: rotateY(72deg) rotateX(19deg) translateZ(180px);
+    transform: rotateY(72deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(-10deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(-15deg) rotateX(60deg) translateZ(180px);
+    transform: rotateY(-15deg) rotateX(70deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
