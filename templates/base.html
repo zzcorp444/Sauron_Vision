@@ -15,77 +15,6 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Binary Matrix Rain - Top Left -->
-    <div class="binary-matrix" id="binary-matrix"></div>
-    
-    <!-- Code Stream Above Ticker -->
-    <div class="code-stream">
-        <div class="code-line">const market = await analyze({symbol: 'AAPL', timeframe: '1D', indicators: ['RSI', 'MACD', 'BB']}); if(market.signal === 'BUY') { executeOrder({type: 'MARKET', quantity: calculatePosition(risk)}); }</div>
-    </div>
-    
-    <!-- Info Banner -->
-    <div class="info-banner">
-        <div class="info-content">
-            <div class="info-item">
-                <i class="fas fa-eye"></i>
-                <span>Sauron Vision Active - Monitoring 127 Assets</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-chart-line"></i>
-                <span>3 Strategies Running | 12 Signals Generated Today</span>
-            </div>
-            <div class="info-item warning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Fed Meeting Tomorrow 2:00 PM EST</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-server"></i>
-                <span>System Load: 42% | Latency: 12ms</span>
-            </div>
-            <div class="info-item critical">
-                <i class="fas fa-fire"></i>
-                <span>VIX Spike Detected - Risk Management Active</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-brain"></i>
-                <span>AI Confidence: 87.3% | Next Update: 3min</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-globe"></i>
-                <span>Asian Markets Open in 2h 15m</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="info-item">
-                <i class="fas fa-eye"></i>
-                <span>Sauron Vision Active - Monitoring 127 Assets</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-chart-line"></i>
-                <span>3 Strategies Running | 12 Signals Generated Today</span>
-            </div>
-            <div class="info-item warning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Fed Meeting Tomorrow 2:00 PM EST</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-server"></i>
-                <span>System Load: 42% | Latency: 12ms</span>
-            </div>
-            <div class="info-item critical">
-                <i class="fas fa-fire"></i>
-                <span>VIX Spike Detected - Risk Management Active</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-brain"></i>
-                <span>AI Confidence: 87.3% | Next Update: 3min</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-globe"></i>
-                <span>Asian Markets Open in 2h 15m</span>
-            </div>
-        </div>
-    </div>
-    
     <!-- Eye background -->
     <div class="eye-bg">
         <div class="eye">
@@ -178,6 +107,37 @@
         </div>
     </div>
     
+    <!-- Binary matrix top left -->
+    <div class="binary-matrix"></div>
+    
+    <!-- Code ticker above price ticker -->
+    <div class="code-ticker-container">
+        <div class="code-ticker">
+            <span>def analyze_market(data): return insights;</span>
+            <span>strategy = generate_strategy(params);</span>
+            <span>execute_trade(strategy);</span>
+            <span>if sentiment > 0.7: buy_asset();</span>
+            <span>risk = calculate_var(portfolio);</span>
+            <span>alert if risk > threshold;</span>
+            <span>price = fetch_price(symbol);</span>
+            <span>plot_chart(price);</span>
+            <span>model = train_ml_model(data);</span>
+            <span>predict = model.predict();</span>
+            <span>optimize_portfolio(assets);</span>
+            <span>rebalance();</span>
+            <span>signals = detect_patterns(chart);</span>
+            <span>if signals: execute();</span>
+            <span>correlation = analyze_pairs(assets);</span>
+            <span>hedge_position(correlation);</span>
+            <span>news = scrape_sentiment(sources);</span>
+            <span>adjust_strategy(news);</span>
+            <span>backtest = run_simulation(strategy);</span>
+            <span>optimize_parameters(backtest);</span>
+            <span>alert = monitor_markets(24/7);</span>
+            <span>notify_trader(alert);</span>
+        </div>
+    </div>
+    
     <!-- Code bits scrolling - Enhanced variety -->
     <div class="code-scroll-container">
         <div class="code-bit">
@@ -218,33 +178,28 @@
         </div>
     </div>
     
-    <!-- Price Action Icons -->
-    <div class="price-action-icons">
-        <div class="action-icon" data-filter="all" data-tooltip="All Assets">
-            <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7"/></svg>
-        </div>
-        <div class="action-icon" data-filter="consolidation" data-tooltip="Consolidation">
-            <svg viewBox="0 0 16 16"><rect x="2" y="6" width="12" height="4"/></svg>
-        </div>
-        <div class="action-icon" data-filter="setup" data-tooltip="Setup Forming">
-            <svg viewBox="0 0 16 16"><path d="M2,12 L6,8 L10,10 L14,4"/></svg>
-        </div>
-        <div class="action-icon" data-filter="signal" data-tooltip="Live Signal">
-            <svg viewBox="0 0 16 16"><path d="M8,2 L10,6 L14,6 L11,9 L12,13 L8,11 L4,13 L5,9 L2,6 L6,6 Z"/></svg>
-        </div>
-        <div class="action-icon" data-filter="bullish" data-tooltip="High Increase">
-            <svg viewBox="0 0 16 16"><path d="M8,2 L8,14 M4,6 L8,2 L12,6"/></svg>
-        </div>
-        <div class="action-icon" data-filter="bearish" data-tooltip="High Decrease">
-            <svg viewBox="0 0 16 16"><path d="M8,14 L8,2 M4,10 L8,14 L12,10"/></svg>
-        </div>
-        <div class="action-icon" data-filter="volume" data-tooltip="High Volume">
-            <svg viewBox="0 0 16 16"><rect x="2" y="8" width="2" height="6"/><rect x="5" y="4" width="2" height="10"/><rect x="8" y="6" width="2" height="8"/><rect x="11" y="2" width="2" height="12"/></svg>
-        </div>
-    </div>
-    
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
+        <div class="action-filters">
+            <button class="filter-btn" data-action="consolidation" title="Consolidations">
+                <i class="fas fa-compress-arrows-alt"></i>
+            </button>
+            <button class="filter-btn" data-action="setup" title="Set Up Formation">
+                <i class="fas fa-tools"></i>
+            </button>
+            <button class="filter-btn" data-action="signal" title="Signal Live">
+                <i class="fas fa-broadcast-tower"></i>
+            </button>
+            <button class="filter-btn" data-action="increase" title="High Increase">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <button class="filter-btn" data-action="decrease" title="High Decrease">
+                <i class="fas fa-arrow-down"></i>
+            </button>
+            <button class="filter-btn" data-action="volume" title="High Volumes">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
@@ -252,7 +207,7 @@
         </div>
         <div class="price-ticker">
             <!-- Extended ticker items -->
-            <div class="ticker-item" data-tags="bullish volume">
+            <div class="ticker-item" data-action="increase">
                 <div class="ticker-header">
                     <span class="ticker-symbol">AAPL</span>
                     <span class="ticker-price">$150.25</span>
@@ -275,7 +230,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-tags="bearish consolidation">
+            <div class="ticker-item" data-action="decrease">
                 <div class="ticker-header">
                     <span class="ticker-symbol">GOOGL</span>
                     <span class="ticker-price">$2750.50</span>
@@ -298,7 +253,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-tags="bullish setup signal">
+            <div class="ticker-item" data-action="volume">
                 <div class="ticker-header">
                     <span class="ticker-symbol">TSLA</span>
                     <span class="ticker-price">$850.75</span>
@@ -321,7 +276,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-tags="consolidation">
+            <div class="ticker-item" data-action="setup">
                 <div class="ticker-header">
                     <span class="ticker-symbol">MSFT</span>
                     <span class="ticker-price">$300.40</span>
@@ -344,7 +299,260 @@
                 </div>
             </div>
             
-            <!-- Continue with more ticker items... -->
+            <div class="ticker-item" data-action="consolidation">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">AMZN</span>
+                    <span class="ticker-price">$3400.20</span>
+                    <span class="ticker-change negative">-1.2%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,12 8,10 16,8 24,10 32,13 40,15 48,17 56,19 65,21" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="30" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="40" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 760K</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="signal">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">BTC</span>
+                    <span class="ticker-price">$45000.00</span>
+                    <span class="ticker-change positive">+2.5%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,20 8,18 16,15 24,13 32,10 40,8 48,6 56,4 65,2" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="20" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="30" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="40" y="17" width="6" height="8" />
+                        <rect class="volume-bar" x="50" y="19" width="6" height="6" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 3.2M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="increase">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">ETH</span>
+                    <span class="ticker-price">$2800.00</span>
+                    <span class="ticker-change negative">-0.3%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,15 8,13 16,10 24,12 32,9 40,7 48,9 56,11 65,13" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 2.8M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="decrease">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">NVDA</span>
+                    <span class="ticker-price">$450.30</span>
+                    <span class="ticker-change positive">+5.2%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,25 8,23 16,20 24,17 32,14 40,11 48,8 56,5 65,2" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="20" y="17" width="6" height="8" />
+                        <rect class="volume-bar" x="30" y="16" width="6" height="9" />
+                        <rect class="volume-bar" x="40" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="50" y="18" width="6" height="7" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 4.1M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="consolidation">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">META</span>
+                    <span class="ticker-price">$325.60</span>
+                    <span class="ticker-change negative">-1.8%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,8 8,10 16,13 24,15 32,18 40,20 48,22 56,20 65,23" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="30" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="40" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="50" y="21" width="6" height="4" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 1.5M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="setup">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">AMD</span>
+                    <span class="ticker-price">$120.45</span>
+                    <span class="ticker-change positive">+2.3%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,19 8,17 16,14 24,16 32,13 40,10 48,8 56,6 65,4" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 2.1M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="signal">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">SPY</span>
+                    <span class="ticker-price">$435.20</span>
+                    <span class="ticker-change positive">+0.4%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,16 8,15 16,13 24,14 32,12 40,11 48,10 56,9 65,8" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="30" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="40" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="50" y="22" width="6" height="3" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 8.5M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="consolidation">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">QQQ</span>
+                    <span class="ticker-price">$365.80</span>
+                    <span class="ticker-change negative">-0.2%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,14 8,13 16,11 24,12 32,10 40,9 48,11 56,12 65,14" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="30" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="40" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="50" y="21" width="6" height="4" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 6.2M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="volume">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">GLD</span>
+                    <span class="ticker-price">$185.30</span>
+                    <span class="ticker-change positive">+0.6%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,17 8,16 16,15 24,14 32,13 40,12 48,11 56,10 65,9" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="50" y="21" width="6" height="4" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 1.8M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="signal">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">VIX</span>
+                    <span class="ticker-price">$15.20</span>
+                    <span class="ticker-change negative">-3.5%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,8 8,10 16,12 24,15 32,17 40,19 48,16 56,18 65,20" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="30" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="40" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 3.5M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="setup">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">NFLX</span>
+                    <span class="ticker-price">$425.10</span>
+                    <span class="ticker-change positive">+1.9%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,21 8,19 16,16 24,14 32,11 40,9 48,7 56,5 65,3" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="30" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="40" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="50" y="19" width="6" height="6" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 1.9M</span>
+                </div>
+            </div>
+            
+            <!-- Continue with more assets... -->
         </div>
     </div>
     
@@ -355,30 +563,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/terminal.js' %}"></script>
     <script>
-        // Binary matrix generation
-        function generateBinaryMatrix() {
-            const matrix = document.getElementById('binary-matrix');
-            const rows = 10;
-            const cols = 20;
-            let html = '';
-            
-            for (let i = 0; i < rows; i++) {
-                for (let j = 0; j < cols; j++) {
-                    const delay = (i * cols + j) * 0.1;
-                    html += `<span style="animation-delay: ${delay}s">${Math.random() > 0.5 ? '1' : '0'}</span>`;
-                }
-                html += '<br>';
-            }
-            
-            matrix.innerHTML = html;
-        }
-        
-        // Update binary matrix periodically
-        generateBinaryMatrix();
-        setInterval(() => {
-            generateBinaryMatrix();
-        }, 5000);
-        
         // Toggle charts functionality
         document.getElementById('toggle-charts').addEventListener('click', function() {
             this.classList.toggle('active');
@@ -393,42 +577,6 @@
                 detail.classList.toggle('show');
             });
         });
-        
-        // Price action filter functionality
-        document.querySelectorAll('.action-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                // Toggle active state
-                if (this.dataset.filter === 'all') {
-                    document.querySelectorAll('.action-icon').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    document.querySelectorAll('.ticker-item').forEach(item => {
-                        item.style.display = 'flex';
-                    });
-                } else {
-                    this.classList.toggle('active');
-                    const activeFilters = Array.from(document.querySelectorAll('.action-icon.active'))
-                        .map(i => i.dataset.filter)
-                        .filter(f => f !== 'all');
-                    
-                    if (activeFilters.length === 0) {
-                        document.querySelector('[data-filter="all"]').classList.add('active');
-                        document.querySelectorAll('.ticker-item').forEach(item => {
-                            item.style.display = 'flex';
-                        });
-                    } else {
-                        document.querySelector('[data-filter="all"]').classList.remove('active');
-                        document.querySelectorAll('.ticker-item').forEach(item => {
-                            const tags = item.dataset.tags ? item.dataset.tags.split(' ') : [];
-                            const hasActiveTag = activeFilters.some(filter => tags.includes(filter));
-                            item.style.display = hasActiveTag ? 'flex' : 'none';
-                        });
-                    }
-                }
-            });
-        });
-        
-        // Set "all" filter as active by default
-        document.querySelector('[data-filter="all"]').classList.add('active');
     </script>
     {% block extra_js %}{% endblock %}
 </body>

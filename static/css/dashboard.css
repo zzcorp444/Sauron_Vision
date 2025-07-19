@@ -176,23 +176,9 @@
     font-size: 0.9rem;
 }
 
-.alerts,
-.notifications {
+.notifications, .alerts {
     position: relative;
     cursor: pointer;
-    font-size: 1.1rem;
-    color: var(--secondary-text);
-    transition: all 0.3s ease;
-}
-
-.alerts:hover,
-.notifications:hover {
-    color: var(--primary-text);
-}
-
-.alerts.has-new,
-.notifications.has-new {
-    animation: blink 2s infinite;
 }
 
 .alert-count {
@@ -230,12 +216,33 @@
     color: var(--error-text);
 }
 
+/* Notice Bar */
+.notice-bar {
+    background: var(--accent-bg);
+    padding: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-color);
+    z-index: 150;
+    position: relative;
+}
+
+.notice-text {
+    display: inline-block;
+    animation: ticker-move 60s linear infinite;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.notice-text span {
+    margin-right: 50px;
+}
+
 /* Main Layout Container */
 .dashboard-layout {
     display: flex;
     flex: 1;
     position: relative;
-    margin-top: 90px; /* Account for header + info banner */
 }
 
 .dashboard-main {
@@ -250,12 +257,12 @@
     top: 0;
     left: 0;
     width: 260px;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 120px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 150;
     overflow-y: auto;
-    transform: translateX(-260px);
+    transform: translateX(-200px);
     transition: transform 0.3s ease;
 }
 
@@ -429,7 +436,7 @@
     position: relative;
     transition: width 0.3s ease;
     z-index: 200;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 120px);
     overflow-y: auto;
 }
 
@@ -568,22 +575,19 @@
     gap: 2rem;
 }
 
-/* Fixed height cards with expand functionality */
 .overview-card {
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    position: relative;
-    height: 180px;
+    height: 200px;
     overflow: hidden;
+    position: relative;
 }
 
 .overview-card.expanded {
     height: auto;
-    max-height: 600px;
-    overflow-y: auto;
 }
 
 .overview-card:hover {
@@ -600,67 +604,61 @@
 .card-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    height: calc(100% - 40px);
-    overflow: hidden;
+    gap: 1rem;
 }
 
-.overview-card.expanded .card-content {
-    overflow: visible;
-}
-
-/* Expand button */
-.expand-btn {
+/* Expand Arrow */
+.expand-arrow {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    background: var(--accent-bg);
-    border: 1px solid var(--glow-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    bottom: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
     cursor: pointer;
-    opacity: 0.3;
+    font-size: 12px;
+    padding: 5px;
     transition: all 0.3s ease;
 }
 
-.overview-card:hover .expand-btn {
-    opacity: 1;
+.expand-arrow:hover {
+    color: var(--glow-color);
+    transform: scale(1.2);
 }
 
-.expand-btn:hover {
-    background: var(--glow-color);
-    color: var(--primary-bg);
-}
-
-.expand-btn i {
-    font-size: 12px;
-    color: var(--primary-text);
+.expand-arrow i {
     transition: transform 0.3s ease;
 }
 
-.overview-card.expanded .expand-btn i {
+.overview-card.expanded .expand-arrow i {
     transform: rotate(180deg);
-}
-
-/* Special height for specific cards */
-.signals-overview {
-    height: 380px; /* Double height */
-}
-
-.signals-overview.expanded {
-    height: auto;
-    max-height: 800px;
 }
 
 /* Portfolio Status Grid */
 .portfolio-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 1rem;
+}
+
+.portfolio-graphs {
+    display: none;
+    margin-top: 1rem;
+}
+
+.portfolio-graphs.hidden {
+    display: none;
+}
+
+.graph-placeholder {
+    height: 150px;
+    background: var(--accent-bg);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-text);
+    margin-bottom: 1rem;
 }
 
 .metric {
@@ -670,7 +668,7 @@
 }
 
 .metric .value {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--primary-text);
 }
@@ -688,23 +686,23 @@
 }
 
 .metric .label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--secondary-text);
 }
 
 .position-list, .signal-list {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 .position-item {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0.75rem;
     background: var(--accent-bg);
     border-radius: 5px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     position: relative;
     transition: all 0.3s ease;
 }
@@ -718,16 +716,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
 }
 
 .chart-toggle {
     position: absolute;
-    bottom: 3px;
+    bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
     border-radius: 50%;
@@ -738,7 +736,7 @@
     opacity: 0;
     transition: all 0.3s ease;
     color: var(--secondary-text);
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .position-item:hover .chart-toggle {
@@ -754,8 +752,8 @@
 .mini-chart-container {
     display: none;
     grid-template-columns: 1fr 1fr;
-    gap: 0.3rem;
-    margin-top: 0.3rem;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .mini-chart-container.show {
@@ -763,7 +761,7 @@
 }
 
 .mini-chart {
-    height: 25px;
+    height: 30px;
     background: rgba(0, 255, 65, 0.05);
     border-radius: 3px;
     overflow: hidden;
@@ -787,8 +785,8 @@
 .position-data {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    font-size: 0.75rem;
+    gap: 0.3rem;
+    font-size: 0.8rem;
 }
 
 .data-row {
@@ -807,27 +805,37 @@
 .chart-info {
     display: flex;
     justify-content: space-between;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--tertiary-text);
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
 }
 
 /* Signals Section - Vertical Layout */
+.signals-overview {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    grid-row: span 2;
+}
+
+.signals-overview:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
 .signals-sections {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    max-height: 300px;
+    gap: 1.5rem;
+    max-height: 500px;
     overflow-y: auto;
-}
-
-.overview-card.expanded .signals-sections {
-    max-height: none;
 }
 
 .signal-section {
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.8rem;
+    padding-bottom: 1rem;
 }
 
 .signal-section:last-child {
@@ -837,26 +845,26 @@
 
 .signal-section h4 {
     color: var(--primary-text);
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
 }
 
 .signal-section-list {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
 }
 
 .signal-item {
     display: flex;
     flex-direction: column;
-    padding: 0.4rem;
+    padding: 0.5rem;
     background: var(--accent-bg);
     border-radius: 5px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -883,16 +891,16 @@
 }
 
 .signal-item:hover .signal-details {
-    max-height: 120px;
+    max-height: 150px;
     opacity: 1;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
 }
 
 .detail-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
-    margin: 0.15rem 0;
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
 }
 
 .detail-label {
@@ -917,9 +925,9 @@
 }
 
 .signal-type {
-    padding: 0.2rem 0.4rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 3px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
 }
 
@@ -944,7 +952,7 @@
 }
 
 .signal-time {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--tertiary-text);
 }
 
@@ -953,7 +961,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.3rem 0;
+    padding: 0.5rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -963,13 +971,13 @@
 
 .insight-label {
     color: var(--tertiary-text);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
 }
 
 .insight-value {
     color: var(--primary-text);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
 }
 
 .insight-value.positive {
@@ -984,38 +992,29 @@
 .performance-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .metric-chart {
-    height: 40px;
+    height: 60px;
     background: rgba(0, 255, 65, 0.05);
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
-.overview-card.expanded .metric-chart {
-    height: 60px;
-}
-
 .pie-chart {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: conic-gradient(
         var(--primary-text) 0deg 216deg,
         var(--error-text) 216deg 288deg,
         var(--warning-text) 288deg 360deg
     );
-}
-
-.overview-card.expanded .pie-chart {
-    width: 50px;
-    height: 50px;
 }
 
 .line-chart {
@@ -1028,25 +1027,10 @@
     height: 100%;
 }
 
-/* Portfolio Overview Expanded Charts */
-.portfolio-chart {
-    display: none;
-    margin-top: 1rem;
-    height: 200px;
-    background: var(--accent-bg);
-    border-radius: 5px;
-    padding: 1rem;
-}
-
-.overview-card.expanded .portfolio-chart {
-    display: block;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column;
-        margin-top: 120px;
     }
     
     .news-intelligence-bar {
@@ -1096,4 +1080,13 @@
         left: 0;
         transform: translateX(0);
     }
+}
+
+.notifications.blink, .alerts.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
