@@ -111,75 +111,79 @@ body {
     }
 }
 
-@keyframes binary-rain {
-    0% { transform: translateY(-100vh); opacity: 0; }
-    20% { opacity: 0.8; }
-    80% { opacity: 0.8; }
-    100% { transform: translateY(100vh); opacity: 0; }
+@keyframes binary-scroll {
+    0% { transform: translateY(100vh); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-@keyframes code-scroll {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+@keyframes code-line-scroll {
+    0% { transform: translateX(100%); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateX(-100%); opacity: 0; }
 }
 
-/* Binary Matrix Background */
-.binary-matrix {
+/* Binary Rain Background */
+.binary-rain {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 30%;
+    left: 10%;
+    width: 300px;
     height: 100vh;
+    overflow: hidden;
     pointer-events: none;
     z-index: 1;
     opacity: 0.15;
-    overflow: hidden;
 }
 
 .binary-column {
     position: absolute;
     font-family: var(--font-mono);
-    font-size: 18px;
+    font-size: 16px;
     color: var(--primary-text);
     white-space: pre;
-    animation: binary-rain 8s linear infinite;
+    animation: binary-scroll 25s linear infinite;
 }
 
-.binary-column:nth-child(1) { left: 5%; animation-delay: 0s; }
-.binary-column:nth-child(2) { left: 15%; animation-delay: -1s; }
-.binary-column:nth-child(3) { left: 25%; animation-delay: -2s; }
-.binary-column:nth-child(4) { left: 35%; animation-delay: -3s; }
-.binary-column:nth-child(5) { left: 45%; animation-delay: -4s; }
-.binary-column:nth-child(6) { left: 55%; animation-delay: -5s; }
-.binary-column:nth-child(7) { left: 65%; animation-delay: -6s; }
-.binary-column:nth-child(8) { left: 75%; animation-delay: -7s; }
+.binary-column:nth-child(1) { left: 0%; animation-delay: 0s; }
+.binary-column:nth-child(2) { left: 15%; animation-delay: -3s; }
+.binary-column:nth-child(3) { left: 30%; animation-delay: -6s; }
+.binary-column:nth-child(4) { left: 45%; animation-delay: -9s; }
+.binary-column:nth-child(5) { left: 60%; animation-delay: -12s; }
+.binary-column:nth-child(6) { left: 75%; animation-delay: -15s; }
+.binary-column:nth-child(7) { left: 90%; animation-delay: -18s; }
 
-/* Encoded Code Stream */
-.code-stream {
+/* Code Line Scroll */
+.code-line-scroll {
     position: fixed;
-    top: 20%;
+    top: calc(100vh - 200px);
+    left: 0;
     width: 100%;
-    height: 50px;
+    height: 40px;
     overflow: hidden;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .code-line {
     position: absolute;
+    top: 0;
     white-space: nowrap;
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--secondary-text);
-    animation: code-scroll 25s linear infinite;
-    top: 50%;
-    transform: translateY(-50%);
+    animation: code-line-scroll 30s linear infinite;
 }
 
 .code-line:nth-child(1) { animation-delay: 0s; }
-.code-line:nth-child(2) { animation-delay: -8s; top: 20%; }
-.code-line:nth-child(3) { animation-delay: -16s; top: 80%; }
+.code-line:nth-child(2) { animation-delay: -5s; }
+.code-line:nth-child(3) { animation-delay: -10s; }
+.code-line:nth-child(4) { animation-delay: -15s; }
+.code-line:nth-child(5) { animation-delay: -20s; }
+.code-line:nth-child(6) { animation-delay: -25s; }
 
 /* Matrix Background Effect */
 .background-matrix {
@@ -407,7 +411,7 @@ body {
     box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
-/* Market Dots - Distributed around globe surface */
+/* Market Dots - 3D Positioned on Globe Surface - Distributed */
 .market-dot {
     position: absolute;
     width: 8px;
@@ -425,17 +429,17 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - Distributed around the globe */
+/* Market dot positions - properly distributed around the globe */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-75deg) rotateX(42deg) translateZ(180px);
+    transform: rotateY(-70deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(0deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
@@ -451,15 +455,15 @@ body {
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(10deg) rotateX(50deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(50deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-34deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(44deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(43deg) translateZ(180px);
 }
 
 .market-dot.singapore {
@@ -475,27 +479,35 @@ body {
 }
 
 .market-dot.zurich {
-    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(46deg) translateZ(180px);
 }
 
-.market-dot.saopaulo {
-    transform: rotateY(-46deg) rotateX(-23deg) translateZ(180px);
-}
-
-.market-dot.mexico {
-    transform: rotateY(-99deg) rotateX(19deg) translateZ(180px);
-}
-
-.market-dot.johannesburg {
-    transform: rotateY(28deg) rotateX(-26deg) translateZ(180px);
+.market-dot.brazil {
+    transform: rotateY(-47deg) rotateX(-15deg) translateZ(180px);
 }
 
 .market-dot.moscow {
     transform: rotateY(37deg) rotateX(55deg) translateZ(180px);
 }
 
+.market-dot.mexico {
+    transform: rotateY(-99deg) rotateX(19deg) translateZ(180px);
+}
+
+.market-dot.chile {
+    transform: rotateY(-70deg) rotateX(-33deg) translateZ(180px);
+}
+
+.market-dot.south_africa {
+    transform: rotateY(28deg) rotateX(-26deg) translateZ(180px);
+}
+
 .market-dot.seoul {
     transform: rotateY(126deg) rotateX(37deg) translateZ(180px);
+}
+
+.market-dot.stockholm {
+    transform: rotateY(18deg) rotateX(59deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -580,7 +592,106 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - With gradient background and icons */
+/* Asset Status Icons */
+.asset-status-bar {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: rgba(26, 26, 26, 0.8);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    overflow-x: auto;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid var(--border-color);
+}
+
+.asset-status-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 11px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.asset-status-item:hover {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--glow-color);
+}
+
+.asset-status-item.active {
+    background: rgba(0, 255, 65, 0.2);
+    border: 1px solid var(--glow-color);
+}
+
+.status-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+}
+
+.status-icon.consolidation {
+    background: var(--warning-text);
+    color: white;
+}
+
+.status-icon.setup {
+    background: var(--secondary-text);
+    color: var(--primary-bg);
+}
+
+.status-icon.signal {
+    background: var(--primary-text);
+    color: var(--primary-bg);
+    animation: pulse 1s infinite;
+}
+
+.status-icon.high-increase {
+    background: var(--primary-text);
+    color: var(--primary-bg);
+}
+
+.status-icon.high-decrease {
+    background: var(--error-text);
+    color: white;
+}
+
+.status-icon.high-volume {
+    background: #9a59d1;
+    color: white;
+}
+
+.asset-symbol {
+    font-weight: 600;
+    color: var(--primary-text);
+}
+
+.asset-change {
+    font-size: 10px;
+}
+
+.asset-change.positive {
+    color: var(--primary-text);
+}
+
+.asset-change.negative {
+    color: var(--error-text);
+}
+
+/* Price ticker container - With gradient background */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
@@ -593,7 +704,6 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
-    padding-top: 20px;
 }
 
 .ticker-controls {
@@ -624,52 +734,6 @@ body {
     color: var(--primary-bg);
 }
 
-/* Price Action Icons */
-.price-action-icons {
-    position: absolute;
-    top: -20px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    overflow: hidden;
-    z-index: 101;
-}
-
-.action-icon {
-    position: absolute;
-    font-size: 14px;
-    color: var(--secondary-text);
-    animation: ticker-move 120s linear infinite;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.action-icon.consolidation {
-    color: var(--warning-text);
-}
-
-.action-icon.setup {
-    color: var(--primary-text);
-    animation: pulse 2s infinite;
-}
-
-.action-icon.signal {
-    color: var(--glow-color);
-    animation: glow-pulse 1s infinite;
-}
-
-.action-icon.high-increase {
-    color: #00ff00;
-}
-
-.action-icon.high-decrease {
-    color: var(--error-text);
-}
-
-.action-icon.high-volume {
-    color: #ffff00;
-}
-
 .price-ticker {
     display: flex;
     gap: 20px;
@@ -683,7 +747,6 @@ body {
     min-width: 65px;
     padding: 3px;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .ticker-header {
@@ -1072,12 +1135,9 @@ input, textarea, select {
         font-size: 14px;
     }
     
-    .binary-matrix {
-        width: 20%;
-    }
-    
-    .code-stream {
-        top: 15%;
+    .binary-rain,
+    .code-line-scroll {
+        display: none;
     }
 }
 
@@ -1104,14 +1164,6 @@ input, textarea, select {
     .price-ticker-container {
         bottom: 0;
     }
-    
-    .binary-matrix {
-        display: none;
-    }
-    
-    .code-stream {
-        display: none;
-    }
 }
 
 /* Print Styles */
@@ -1125,8 +1177,9 @@ input, textarea, select {
     .background-matrix,
     .code-scroll-container,
     .price-ticker-container,
-    .binary-matrix,
-    .code-stream {
+    .binary-rain,
+    .code-line-scroll,
+    .asset-status-bar {
         display: none;
     }
 }

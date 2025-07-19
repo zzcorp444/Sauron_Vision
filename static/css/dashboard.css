@@ -216,53 +216,53 @@
     color: var(--error-text);
 }
 
-/* Status Notice Bar */
-.status-notice-bar {
-    background: linear-gradient(135deg, var(--accent-bg), var(--secondary-bg));
+/* Notifications Banner */
+.notifications-banner {
+    background: linear-gradient(90deg, 
+        rgba(0, 255, 65, 0.1) 0%, 
+        rgba(0, 204, 51, 0.1) 50%, 
+        rgba(0, 153, 39, 0.1) 100%);
     border-bottom: 1px solid var(--border-color);
     padding: 0.5rem 2rem;
-    font-size: 0.85rem;
-    color: var(--secondary-text);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    position: relative;
     z-index: 199;
+    position: relative;
+    overflow: hidden;
 }
 
-.notice-content {
+.notifications-content {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    animation: scroll-notices 30s linear infinite;
+    gap: 1rem;
+    white-space: nowrap;
+    animation: scroll-notifications 60s linear infinite;
 }
 
-.notice-item {
+.notification-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    white-space: nowrap;
-    padding: 0 1rem;
+    color: var(--primary-text);
+    font-size: 0.9rem;
+    margin-right: 3rem;
 }
 
-.notice-item i {
+.notification-item i {
     color: var(--glow-color);
 }
 
-.notice-item.critical {
+.notification-priority.high {
     color: var(--error-text);
 }
 
-.notice-item.warning {
+.notification-priority.medium {
     color: var(--warning-text);
 }
 
-.notice-item.success {
-    color: var(--primary-text);
+.notification-priority.low {
+    color: var(--secondary-text);
 }
 
-@keyframes scroll-notices {
+@keyframes scroll-notifications {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
@@ -286,7 +286,7 @@
     top: 0;
     left: 0;
     width: 260px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 170px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 150;
@@ -465,7 +465,7 @@
     position: relative;
     transition: width 0.3s ease;
     z-index: 200;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 170px);
     overflow-y: auto;
 }
 
@@ -484,6 +484,10 @@
 
 .sidebar.retracted .nav-item i {
     font-size: 1.2rem;
+}
+
+.sidebar.retracted .sidebar-toggle i {
+    transform: rotate(180deg);
 }
 
 .sidebar-toggle {
@@ -510,10 +514,6 @@
 .sidebar-toggle i {
     color: var(--secondary-text);
     transition: transform 0.3s ease;
-}
-
-.sidebar.retracted .sidebar-toggle i {
-    transform: rotate(180deg);
 }
 
 .nav-menu {
@@ -610,9 +610,11 @@
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    height: 400px; /* Fixed height */
+    height: 300px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .overview-card:hover {
@@ -627,12 +629,11 @@
 }
 
 .card-content {
+    flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: calc(100% - 60px);
-    overflow-y: auto;
-    transition: all 0.3s ease;
 }
 
 /* Card Expand Button */
@@ -640,19 +641,19 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 20px;
-    height: 20px;
-    background: transparent;
+    width: 25px;
+    height: 25px;
+    background: var(--accent-bg);
     border: 1px solid var(--glow-color);
-    border-radius: 3px;
-    color: var(--glow-color);
-    cursor: pointer;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    color: var(--glow-color);
+    font-size: 12px;
     opacity: 0.7;
     transition: all 0.3s ease;
-    font-size: 10px;
 }
 
 .card-expand-btn:hover {
@@ -663,7 +664,7 @@
 
 .overview-card.expanded {
     height: auto;
-    max-height: 80vh;
+    max-height: 600px;
 }
 
 .overview-card.expanded .card-expand-btn i {
@@ -710,8 +711,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    max-height: 300px;
-    overflow-y: auto;
 }
 
 .position-item {
@@ -828,6 +827,57 @@
     margin-top: 0.25rem;
 }
 
+/* Portfolio Charts */
+.portfolio-charts {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.portfolio-charts.show {
+    display: grid;
+}
+
+.chart-container {
+    height: 150px;
+    background: rgba(0, 255, 65, 0.05);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.chart-title {
+    color: var(--secondary-text);
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.chart-visual {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to right, 
+        var(--error-text) 0%, 
+        var(--warning-text) 50%, 
+        var(--primary-text) 100%);
+    border-radius: 3px;
+    position: relative;
+}
+
+.donut-chart {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--primary-text) 0deg 180deg,
+        var(--warning-text) 180deg 270deg,
+        var(--error-text) 270deg 360deg
+    );
+}
+
 /* Signals Section - Vertical Layout */
 .signals-overview {
     background: var(--secondary-bg);
@@ -836,9 +886,11 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     grid-row: span 2;
-    height: 400px; /* Fixed height */
+    height: 620px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .signals-overview:hover {
@@ -850,8 +902,9 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    height: calc(100% - 80px);
+    max-height: 500px;
     overflow-y: auto;
+    flex: 1;
 }
 
 .signal-section {
@@ -977,6 +1030,59 @@
     color: var(--tertiary-text);
 }
 
+/* Risk Monitor Card */
+.risk-monitor-card {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.risk-monitor-card:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.risk-metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    flex: 1;
+}
+
+.risk-metric {
+    background: var(--accent-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.risk-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.risk-value.warning {
+    color: var(--warning-text);
+}
+
+.risk-value.danger {
+    color: var(--error-text);
+}
+
+.risk-label {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+}
+
 /* AI Insights */
 .ai-insight {
     display: flex;
@@ -1100,10 +1206,5 @@
     .market-status-popup {
         left: 0;
         transform: translateX(0);
-    }
-
-    .overview-card {
-        height: auto;
-        min-height: 300px;
     }
 }

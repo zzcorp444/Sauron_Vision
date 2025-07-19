@@ -81,40 +81,36 @@
         </div>
     </header>
 
-    <!-- Status Notice Bar -->
-    <div class="status-notice-bar">
-        <div class="notice-content">
-            <div class="notice-item success">
-                <i class="fas fa-eye"></i>
-                <span>Sauron Vision: Actively monitoring 2,847 global markets</span>
+    <!-- Notifications Banner -->
+    <div class="notifications-banner">
+        <div class="notifications-content">
+            <div class="notification-item">
+                <i class="fas fa-eye notification-priority high"></i>
+                <span>Sauron Vision scanning 15,847 assets across global markets</span>
             </div>
-            <div class="notice-item warning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Fed Meeting: Rate decision scheduled for Wednesday 2:00 PM EST</span>
+            <div class="notification-item">
+                <i class="fas fa-robot notification-priority medium"></i>
+                <span>AI Engine detected 7 pattern formations in the last hour</span>
             </div>
-            <div class="notice-item">
-                <i class="fas fa-robot"></i>
-                <span>AI Engine: Processing 156,234 data points per second</span>
+            <div class="notification-item">
+                <i class="fas fa-chart-line notification-priority low"></i>
+                <span>3 active trading strategies generating signals</span>
             </div>
-            <div class="notice-item critical">
-                <i class="fas fa-satellite"></i>
-                <span>Breaking: Unusual options activity detected in Tech sector</span>
+            <div class="notification-item">
+                <i class="fas fa-shield-alt notification-priority medium"></i>
+                <span>Risk monitoring systems operational - Portfolio protection active</span>
             </div>
-            <div class="notice-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Portfolio Performance: +2.35% today, outperforming SPY by 1.8%</span>
+            <div class="notification-item">
+                <i class="fas fa-bell notification-priority high"></i>
+                <span>Fed announcement scheduled for 2:00 PM EST - Market volatility expected</span>
             </div>
-            <div class="notice-item success">
-                <i class="fas fa-shield-alt"></i>
-                <span>Risk Management: All positions within acceptable parameters</span>
+            <div class="notification-item">
+                <i class="fas fa-globe notification-priority low"></i>
+                <span>Global market correlation at 0.82 - High synchronization detected</span>
             </div>
-            <div class="notice-item warning">
-                <i class="fas fa-globe"></i>
-                <span>Global Markets: Volatility spike detected in Asian markets</span>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-microchip"></i>
-                <span>Strategy Engine: 7 active strategies, 12 signals generated today</span>
+            <div class="notification-item">
+                <i class="fas fa-database notification-priority medium"></i>
+                <span>Processing 2.3M data points per second from 45 exchanges</span>
             </div>
         </div>
     </div>
@@ -222,6 +218,8 @@
                         <span class="news-tag">Earnings</span>
                     </div>
                 </div>
+                
+                <!-- More news items... -->
             </div>
         </div>
 
@@ -280,9 +278,6 @@
                     <div class="overview-grid">
                         <div class="overview-card">
                             <h3>Portfolio Status</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="portfolio-grid">
                                     <div class="metric">
@@ -318,14 +313,34 @@
                                         <span class="label">Portfolio Score</span>
                                     </div>
                                 </div>
+                                
+                                <!-- Portfolio Charts -->
+                                <div class="portfolio-charts" id="portfolio-charts">
+                                    <div class="chart-container">
+                                        <div class="chart-title">Performance Trend</div>
+                                        <div class="chart-visual"></div>
+                                    </div>
+                                    <div class="chart-container">
+                                        <div class="chart-title">Asset Allocation</div>
+                                        <div class="donut-chart"></div>
+                                    </div>
+                                    <div class="chart-container">
+                                        <div class="chart-title">Risk Distribution</div>
+                                        <div class="chart-visual"></div>
+                                    </div>
+                                    <div class="chart-container">
+                                        <div class="chart-title">Monthly Returns</div>
+                                        <div class="chart-visual"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                         
                         <div class="overview-card">
                             <h3>Active Positions</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="position-list">
                                     <div class="position-item">
@@ -375,64 +390,17 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- More position items... -->
-                                    <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
-                                        <div class="position-header">
-                                            <span class="symbol">GOOGL</span>
-                                            <span class="value">$2750.50</span>
-                                            <span class="change negative">-0.75%</span>
-                                        </div>
-                                        <div class="mini-chart-container">
-                                            <div class="mini-chart">
-                                                <svg class="chart-svg">
-                                                    <polyline class="price-line" points="0,8 15,10 30,12 45,10 60,15 75,17 90,19 100,21" />
-                                                    <rect class="volume-bars" x="0" y="26" width="8" height="4" />
-                                                    <rect class="volume-bars" x="15" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="30" y="27" width="8" height="3" />
-                                                    <rect class="volume-bars" x="45" y="23" width="8" height="7" />
-                                                    <rect class="volume-bars" x="60" y="25" width="8" height="5" />
-                                                    <rect class="volume-bars" x="75" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="90" y="26" width="8" height="4" />
-                                                </svg>
-                                            </div>
-                                            <div class="position-data">
-                                                <div class="data-row">
-                                                    <span class="data-label">Risk:</span>
-                                                    <span class="data-value">Medium</span>
-                                                </div>
-                                                <div class="data-row">
-                                                    <span class="data-label">Sentiment:</span>
-                                                    <span class="data-value">Bearish</span>
-                                                </div>
-                                                <div class="data-row">
-                                                    <span class="data-label">Action:</span>
-                                                    <span class="data-value">Watch</span>
-                                                </div>
-                                                <div class="data-row">
-                                                    <span class="data-label">Target:</span>
-                                                    <span class="data-value">$2650</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="chart-info">
-                                            <span>1H</span>
-                                            <span>Vol: 850K</span>
-                                        </div>
-                                    </div>
+                                    <!-- Continue with other position items as before... -->
                                     
-                                    <!-- More positions... -->
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                         
                         <div class="signals-overview">
                             <h3>Trading Signals</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="signals-sections">
                                     <div class="signal-section">
@@ -467,20 +435,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- More signal items... -->
+                                            
+                                            <!-- Continue with other signal items as before... -->
+                                            
                                         </div>
                                     </div>
-                                    <!-- More signal sections... -->
+                                    
+                                    <!-- Continue with other signal sections as before... -->
+                                    
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
 
                         <!-- AI Market Analysis Card -->
                         <div class="overview-card">
                             <h3>AI Market Analysis</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="ai-insight">
                                     <span class="insight-label">Market Sentiment:</span>
@@ -499,14 +471,14 @@
                                     <span class="insight-value">Hold with trailing stop</span>
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
 
                         <!-- Performance Metrics Card -->
                         <div class="overview-card">
                             <h3>Performance Metrics</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="performance-grid">
                                     <div class="metric">
@@ -544,14 +516,50 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Risk Monitor Card -->
+                        <div class="risk-monitor-card">
+                            <h3>Risk Monitor</h3>
+                            <div class="card-content">
+                                <div class="risk-metrics-grid">
+                                    <div class="risk-metric">
+                                        <div class="risk-value">-2.5%</div>
+                                        <div class="risk-label">VaR (1 day)</div>
+                                    </div>
+                                    <div class="risk-metric">
+                                        <div class="risk-value warning">68.5</div>
+                                        <div class="risk-label">Portfolio Heat</div>
+                                    </div>
+                                    <div class="risk-metric">
+                                        <div class="risk-value">1.15</div>
+                                        <div class="risk-label">Beta</div>
+                                    </div>
+                                    <div class="risk-metric">
+                                        <div class="risk-value danger">-8.3%</div>
+                                        <div class="risk-label">Max Drawdown</div>
+                                    </div>
+                                    <div class="risk-metric">
+                                        <div class="risk-value">2.3%</div>
+                                        <div class="risk-label">Volatility</div>
+                                    </div>
+                                    <div class="risk-metric">
+                                        <div class="risk-value warning">75%</div>
+                                        <div class="risk-label">Margin Used</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                         
                         <!-- Market Intelligence Overview Card -->
                         <div class="overview-card">
                             <h3>Market Intelligence Overview</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="ai-insight">
                                     <span class="insight-label">Market Regime:</span>
@@ -578,14 +586,14 @@
                                     <span class="insight-value positive">Bullish Bias</span>
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                         
                         <!-- Sauron's Vision Eye Card -->
                         <div class="overview-card">
                             <h3>Sauron's Vision Eye</h3>
-                            <button class="card-expand-btn" onclick="toggleCardExpand(this)">
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
                             <div class="card-content">
                                 <div class="ai-insight">
                                     <span class="insight-label">Pattern Recognition:</span>
@@ -612,6 +620,9 @@
                                     <span class="insight-value warning">Fed Meeting (3 days)</span>
                                 </div>
                             </div>
+                            <button class="card-expand-btn" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                         </div>
                     </div>
                 </section>
@@ -679,16 +690,23 @@ function toggleChart(button) {
 }
 
 // Card expand functionality
-function toggleCardExpand(button) {
-    const card = button.parentElement;
+function toggleCard(button) {
+    const card = button.closest('.overview-card, .risk-monitor-card');
     const icon = button.querySelector('i');
+    const charts = card.querySelector('.portfolio-charts');
     
     card.classList.toggle('expanded');
     
     if (card.classList.contains('expanded')) {
         icon.className = 'fas fa-chevron-up';
+        if (charts) {
+            charts.classList.add('show');
+        }
     } else {
         icon.className = 'fas fa-chevron-down';
+        if (charts) {
+            charts.classList.remove('show');
+        }
     }
 }
 
