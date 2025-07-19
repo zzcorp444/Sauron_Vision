@@ -71,22 +71,19 @@
             <!-- Pupil with globe -->
             <div class="pupil">
                 <div class="globe">
-                    <!-- Meridians (Vertical lines) - Properly shaped -->
-                    <svg class="globe-meridians" viewBox="0 0 360 360" style="position: absolute; width: 100%; height: 100%;">
-                        <ellipse cx="180" cy="180" rx="180" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" />
-                        <ellipse cx="180" cy="180" rx="150" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(30 180 180)" />
-                        <ellipse cx="180" cy="180" rx="120" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(60 180 180)" />
-                        <ellipse cx="180" cy="180" rx="90" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(90 180 180)" />
-                        <ellipse cx="180" cy="180" rx="120" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(120 180 180)" />
-                        <ellipse cx="180" cy="180" rx="150" ry="180" fill="none" stroke="rgba(0, 255, 65, 0.15)" stroke-width="1" transform="rotate(150 180 180)" />
-                    </svg>
+                    <!-- Vertical lines (Meridians) - Creating 3D sphere effect -->
+                    <div class="globe-line meridian meridian1"></div>
+                    <div class="globe-line meridian meridian2"></div>
+                    <div class="globe-line meridian meridian3"></div>
+                    <div class="globe-line meridian meridian4"></div>
+                    <div class="globe-line meridian meridian5"></div>
+                    <div class="globe-line meridian meridian6"></div>
                     
-                    <!-- Parallels (Horizontal lines) -->
+                    <!-- Horizontal lines (Parallels) - Creating 3D sphere effect -->
                     <div class="globe-line parallel parallel1"></div>
                     <div class="globe-line parallel parallel2"></div>
                     <div class="globe-line parallel parallel3"></div>
                     <div class="globe-line parallel parallel4"></div>
-                    <div class="globe-line parallel parallel5"></div>
                     
                     <!-- Equator -->
                     <div class="globe-line equator"></div>
@@ -150,24 +147,86 @@
         </div>
     </div>
     
-    <!-- Price movements ticker - Enhanced variety -->
+    <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
+        <div class="ticker-controls">
+            <button class="toggle-charts-btn" id="toggle-charts">
+                <i class="fas fa-chart-line"></i> Charts
+            </button>
+        </div>
         <div class="price-ticker">
-            <span class="positive">AAPL $150.25 +1.2%</span>
-            <span class="negative">GOOGL $2750.50 -0.5%</span>
-            <span class="positive">TSLA $850.75 +3.1%</span>
-            <span class="positive">MSFT $300.40 +0.8%</span>
-            <span class="negative">AMZN $3400.20 -1.2%</span>
-            <span class="positive">BTC $45000.00 +2.5%</span>
-            <span class="negative">ETH $2800.00 -0.3%</span>
-            <span class="positive">NVDA $450.30 +5.2%</span>
-            <span class="negative">META $325.60 -1.8%</span>
-            <span class="positive">AMD $120.45 +2.3%</span>
-            <span class="positive">SPY $435.20 +0.4%</span>
-            <span class="negative">QQQ $365.80 -0.2%</span>
-            <span class="positive">GLD $185.30 +0.6%</span>
-            <span class="negative">VIX $15.20 -3.5%</span>
-            <span class="positive">NFLX $425.10 +1.9%</span>
+            <!-- Ticker Items with Charts -->
+            <div class="ticker-item">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">AAPL</span>
+                    <span class="ticker-price">$150.25</span>
+                    <span class="ticker-change positive">+1.2%</span>
+                </div>
+                <div class="ticker-chart" id="chart-AAPL">
+                    <svg class="chart-svg">
+                        <polyline class="chart-line" points="0,35 10,32 20,28 30,30 40,25 50,22 60,20 70,18 80,15 90,12 100,10 110,8 120,10" />
+                        <rect class="volume-bar" x="0" y="45" width="10" height="5" />
+                        <rect class="volume-bar" x="20" y="43" width="10" height="7" />
+                        <rect class="volume-bar" x="40" y="44" width="10" height="6" />
+                        <rect class="volume-bar" x="60" y="42" width="10" height="8" />
+                        <rect class="volume-bar" x="80" y="45" width="10" height="5" />
+                        <rect class="volume-bar" x="100" y="43" width="10" height="7" />
+                    </svg>
+                </div>
+                <div class="chart-details" id="details-AAPL">
+                    <span>1H</span>
+                    <span>Vol: 1.2M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">GOOGL</span>
+                    <span class="ticker-price">$2750.50</span>
+                    <span class="ticker-change negative">-0.5%</span>
+                </div>
+                <div class="ticker-chart" id="chart-GOOGL">
+                    <svg class="chart-svg">
+                        <polyline class="chart-line" points="0,10 10,12 20,15 30,13 40,18 50,20 60,22 70,25 80,28 90,30 100,32 110,35 120,33" />
+                        <rect class="volume-bar" x="0" y="45" width="10" height="5" />
+                        <rect class="volume-bar" x="20" y="43" width="10" height="7" />
+                        <rect class="volume-bar" x="40" y="46" width="10" height="4" />
+                        <rect class="volume-bar" x="60" y="42" width="10" height="8" />
+                        <rect class="volume-bar" x="80" y="44" width="10" height="6" />
+                        <rect class="volume-bar" x="100" y="45" width="10" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details" id="details-GOOGL">
+                    <span>1H</span>
+                    <span>Vol: 850K</span>
+                </div>
+            </div>
+            
+            <!-- More ticker items... -->
+            <div class="ticker-item">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">TSLA</span>
+                    <span class="ticker-price">$850.75</span>
+                    <span class="ticker-change positive">+3.1%</span>
+                </div>
+                <div class="ticker-chart" id="chart-TSLA">
+                    <svg class="chart-svg">
+                        <polyline class="chart-line" points="0,40 10,35 20,30 30,25 40,20 50,18 60,15 70,12 80,10 90,8 100,5 110,3 120,5" />
+                        <rect class="volume-bar" x="0" y="45" width="10" height="5" />
+                        <rect class="volume-bar" x="20" y="41" width="10" height="9" />
+                        <rect class="volume-bar" x="40" y="43" width="10" height="7" />
+                        <rect class="volume-bar" x="60" y="40" width="10" height="10" />
+                        <rect class="volume-bar" x="80" y="42" width="10" height="8" />
+                        <rect class="volume-bar" x="100" y="41" width="10" height="9" />
+                    </svg>
+                </div>
+                <div class="chart-details" id="details-TSLA">
+                    <span>1H</span>
+                    <span>Vol: 2.5M</span>
+                </div>
+            </div>
+            
+            <!-- Continue with more assets... -->
         </div>
     </div>
     
@@ -177,6 +236,22 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/terminal.js' %}"></script>
+    <script>
+        // Toggle charts functionality
+        document.getElementById('toggle-charts').addEventListener('click', function() {
+            this.classList.toggle('active');
+            const charts = document.querySelectorAll('.ticker-chart');
+            const details = document.querySelectorAll('.chart-details');
+            
+            charts.forEach(chart => {
+                chart.classList.toggle('show');
+            });
+            
+            details.forEach(detail => {
+                detail.classList.toggle('show');
+            });
+        });
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

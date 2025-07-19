@@ -92,7 +92,7 @@ body {
 }
 
 @keyframes ticker-move {
-    0% { transform: translateX(100vw); }
+    0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
 
@@ -242,9 +242,10 @@ body {
     border: 1px solid rgba(0, 255, 65, 0.15);
     border-radius: 50%;
     pointer-events: none;
+    transform-style: preserve-3d;
 }
 
-/* Vertical lines (Meridians) */
+/* Vertical lines (Meridians) - Creating 3D effect */
 .globe-line.meridian {
     width: 100%;
     height: 100%;
@@ -252,14 +253,32 @@ body {
     left: 0;
 }
 
-.meridian1 { transform: rotateY(0deg); }
-.meridian2 { transform: rotateY(30deg); }
-.meridian3 { transform: rotateY(60deg); }
-.meridian4 { transform: rotateY(90deg); }
-.meridian5 { transform: rotateY(120deg); }
-.meridian6 { transform: rotateY(150deg); }
+.meridian1 { 
+    transform: rotateY(0deg);
+    border: 2px solid rgba(0, 255, 65, 0.3);
+}
+.meridian2 { 
+    transform: rotateY(30deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.25);
+}
+.meridian3 { 
+    transform: rotateY(60deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.2);
+}
+.meridian4 { 
+    transform: rotateY(90deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.15);
+}
+.meridian5 { 
+    transform: rotateY(120deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.2);
+}
+.meridian6 { 
+    transform: rotateY(150deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.25);
+}
 
-/* Horizontal lines (Parallels) */
+/* Horizontal lines (Parallels) - Creating 3D effect */
 .globe-line.parallel {
     width: 100%;
     left: 0;
@@ -268,33 +287,31 @@ body {
 }
 
 .parallel1 {
-    height: 95%;
-    top: 2.5%;
-    transform: rotateX(15deg);
+    height: 90%;
+    top: 5%;
+    transform: rotateX(20deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.2);
 }
 
 .parallel2 {
-    height: 80%;
-    top: 10%;
-    transform: rotateX(30deg);
+    height: 70%;
+    top: 15%;
+    transform: rotateX(40deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.18);
 }
 
 .parallel3 {
-    height: 60%;
-    top: 20%;
-    transform: rotateX(45deg);
+    height: 50%;
+    top: 25%;
+    transform: rotateX(60deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.15);
 }
 
 .parallel4 {
-    height: 40%;
-    top: 30%;
-    transform: rotateX(60deg);
-}
-
-.parallel5 {
-    height: 20%;
-    top: 40%;
-    transform: rotateX(75deg);
+    height: 30%;
+    top: 35%;
+    transform: rotateX(80deg);
+    border: 1.5px solid rgba(0, 255, 65, 0.12);
 }
 
 /* Equator - special parallel */
@@ -303,8 +320,9 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    border: 2px solid rgba(0, 255, 65, 0.3);
+    border: 2.5px solid rgba(0, 255, 65, 0.4);
     transform: rotateX(90deg);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
 /* Market Dots - 3D Positioned on Globe Surface */
@@ -460,38 +478,133 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - Enhanced */
+/* Price ticker container - Enhanced with Charts */
 .price-ticker-container {
     position: fixed;
-    bottom: 10%;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 40px;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.25;
+    background: rgba(26, 26, 26, 0.95);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.ticker-controls {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 101;
+}
+
+.toggle-charts-btn {
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--secondary-text);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-charts-btn:hover {
+    border-color: var(--glow-color);
+    color: var(--primary-text);
+}
+
+.toggle-charts-btn.active {
+    background: var(--glow-color);
+    color: var(--primary-bg);
 }
 
 .price-ticker {
     display: flex;
-    gap: 40px;
-    white-space: nowrap;
-    animation: ticker-move 40s linear infinite;
+    gap: 30px;
+    padding: 10px 20px;
+    animation: ticker-move 60s linear infinite;
+}
+
+.ticker-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.ticker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.ticker-symbol {
+    font-weight: 600;
+    color: var(--primary-text);
+    font-size: 14px;
+}
+
+.ticker-price {
+    font-size: 13px;
     color: var(--secondary-text);
-    font-size: 16px;
 }
 
-.price-ticker span {
-    display: inline-block;
+.ticker-change {
+    font-size: 12px;
 }
 
-.price-ticker span.positive {
+.ticker-change.positive {
     color: var(--primary-text);
 }
 
-.price-ticker span.negative {
+.ticker-change.negative {
     color: var(--error-text);
+}
+
+.ticker-chart {
+    height: 50px;
+    margin: 5px 0;
+    background: rgba(0, 255, 65, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.3s ease;
+}
+
+.ticker-chart.show {
+    opacity: 1;
+    max-height: 50px;
+}
+
+.chart-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-line {
+    fill: none;
+    stroke: var(--primary-text);
+    stroke-width: 1.5;
+}
+
+.volume-bar {
+    fill: rgba(0, 255, 65, 0.2);
+}
+
+.chart-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--tertiary-text);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chart-details.show {
+    opacity: 1;
 }
 
 /* Global Styles */
@@ -828,8 +941,7 @@ input, textarea, select {
         display: none;
     }
     .price-ticker-container {
-        bottom: 5%;
-        height: 30px;
+        bottom: 0;
     }
 }
 
