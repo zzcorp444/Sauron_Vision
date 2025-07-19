@@ -216,6 +216,57 @@
     color: var(--error-text);
 }
 
+/* Status Notice Bar */
+.status-notice-bar {
+    background: linear-gradient(135deg, var(--accent-bg), var(--secondary-bg));
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    z-index: 199;
+}
+
+.notice-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    animation: scroll-notices 30s linear infinite;
+}
+
+.notice-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    padding: 0 1rem;
+}
+
+.notice-item i {
+    color: var(--glow-color);
+}
+
+.notice-item.critical {
+    color: var(--error-text);
+}
+
+.notice-item.warning {
+    color: var(--warning-text);
+}
+
+.notice-item.success {
+    color: var(--primary-text);
+}
+
+@keyframes scroll-notices {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 /* Main Layout Container */
 .dashboard-layout {
     display: flex;
@@ -414,7 +465,7 @@
     position: relative;
     transition: width 0.3s ease;
     z-index: 200;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 160px);
     overflow-y: auto;
 }
 
@@ -433,10 +484,6 @@
 
 .sidebar.retracted .nav-item i {
     font-size: 1.2rem;
-}
-
-.sidebar.retracted .sidebar-toggle i {
-    transform: rotate(180deg);
 }
 
 .sidebar-toggle {
@@ -463,6 +510,10 @@
 .sidebar-toggle i {
     color: var(--secondary-text);
     transition: transform 0.3s ease;
+}
+
+.sidebar.retracted .sidebar-toggle i {
+    transform: rotate(180deg);
 }
 
 .nav-menu {
@@ -559,6 +610,9 @@
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
+    height: 400px; /* Fixed height */
+    overflow: hidden;
+    position: relative;
 }
 
 .overview-card:hover {
@@ -576,6 +630,44 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+/* Card Expand Button */
+.card-expand-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 1px solid var(--glow-color);
+    border-radius: 3px;
+    color: var(--glow-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    font-size: 10px;
+}
+
+.card-expand-btn:hover {
+    opacity: 1;
+    background: var(--glow-color);
+    color: var(--primary-bg);
+}
+
+.overview-card.expanded {
+    height: auto;
+    max-height: 80vh;
+}
+
+.overview-card.expanded .card-expand-btn i {
+    transform: rotate(180deg);
 }
 
 /* Portfolio Status Grid */
@@ -618,6 +710,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .position-item {
@@ -742,6 +836,9 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     grid-row: span 2;
+    height: 400px; /* Fixed height */
+    overflow: hidden;
+    position: relative;
 }
 
 .signals-overview:hover {
@@ -753,7 +850,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-height: 500px;
+    height: calc(100% - 80px);
     overflow-y: auto;
 }
 
@@ -1003,5 +1100,10 @@
     .market-status-popup {
         left: 0;
         transform: translateX(0);
+    }
+
+    .overview-card {
+        height: auto;
+        min-height: 300px;
     }
 }

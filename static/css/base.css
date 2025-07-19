@@ -111,6 +111,76 @@ body {
     }
 }
 
+@keyframes binary-rain {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes code-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Binary Matrix Background */
+.binary-matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
+    overflow: hidden;
+}
+
+.binary-column {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--primary-text);
+    white-space: pre;
+    animation: binary-rain 8s linear infinite;
+}
+
+.binary-column:nth-child(1) { left: 5%; animation-delay: 0s; }
+.binary-column:nth-child(2) { left: 15%; animation-delay: -1s; }
+.binary-column:nth-child(3) { left: 25%; animation-delay: -2s; }
+.binary-column:nth-child(4) { left: 35%; animation-delay: -3s; }
+.binary-column:nth-child(5) { left: 45%; animation-delay: -4s; }
+.binary-column:nth-child(6) { left: 55%; animation-delay: -5s; }
+.binary-column:nth-child(7) { left: 65%; animation-delay: -6s; }
+.binary-column:nth-child(8) { left: 75%; animation-delay: -7s; }
+
+/* Encoded Code Stream */
+.code-stream {
+    position: fixed;
+    top: 20%;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.3;
+}
+
+.code-line {
+    position: absolute;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--secondary-text);
+    animation: code-scroll 25s linear infinite;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.code-line:nth-child(1) { animation-delay: 0s; }
+.code-line:nth-child(2) { animation-delay: -8s; top: 20%; }
+.code-line:nth-child(3) { animation-delay: -16s; top: 80%; }
+
 /* Matrix Background Effect */
 .background-matrix {
     position: fixed;
@@ -337,7 +407,7 @@ body {
     box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
-/* Market Dots - 3D Positioned on Globe Surface */
+/* Market Dots - Distributed around globe surface */
 .market-dot {
     position: absolute;
     width: 8px;
@@ -355,13 +425,13 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - properly scattered in 3D space */
+/* Market dot positions - Distributed around the globe */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-45deg) rotateX(-30deg) translateZ(180px);
+    transform: rotateY(-75deg) rotateX(42deg) translateZ(180px);
 }
 
 .market-dot.lse {
@@ -373,39 +443,59 @@ body {
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(-25deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(31deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(10deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(22deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
+    transform: rotateY(10deg) rotateX(50deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-34deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(44deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
-    transform: rotateY(72deg) rotateX(25deg) translateZ(180px);
+    transform: rotateY(72deg) rotateX(19deg) translateZ(180px);
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(-15deg) rotateX(70deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
+}
+
+.market-dot.saopaulo {
+    transform: rotateY(-46deg) rotateX(-23deg) translateZ(180px);
+}
+
+.market-dot.mexico {
+    transform: rotateY(-99deg) rotateX(19deg) translateZ(180px);
+}
+
+.market-dot.johannesburg {
+    transform: rotateY(28deg) rotateX(-26deg) translateZ(180px);
+}
+
+.market-dot.moscow {
+    transform: rotateY(37deg) rotateX(55deg) translateZ(180px);
+}
+
+.market-dot.seoul {
+    transform: rotateY(126deg) rotateX(37deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -490,7 +580,7 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - With gradient background */
+/* Price ticker container - With gradient background and icons */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
@@ -503,6 +593,7 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
+    padding-top: 20px;
 }
 
 .ticker-controls {
@@ -533,6 +624,52 @@ body {
     color: var(--primary-bg);
 }
 
+/* Price Action Icons */
+.price-action-icons {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    z-index: 101;
+}
+
+.action-icon {
+    position: absolute;
+    font-size: 14px;
+    color: var(--secondary-text);
+    animation: ticker-move 120s linear infinite;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.action-icon.consolidation {
+    color: var(--warning-text);
+}
+
+.action-icon.setup {
+    color: var(--primary-text);
+    animation: pulse 2s infinite;
+}
+
+.action-icon.signal {
+    color: var(--glow-color);
+    animation: glow-pulse 1s infinite;
+}
+
+.action-icon.high-increase {
+    color: #00ff00;
+}
+
+.action-icon.high-decrease {
+    color: var(--error-text);
+}
+
+.action-icon.high-volume {
+    color: #ffff00;
+}
+
 .price-ticker {
     display: flex;
     gap: 20px;
@@ -546,6 +683,7 @@ body {
     min-width: 65px;
     padding: 3px;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .ticker-header {
@@ -933,6 +1071,14 @@ input, textarea, select {
     .price-ticker {
         font-size: 14px;
     }
+    
+    .binary-matrix {
+        width: 20%;
+    }
+    
+    .code-stream {
+        top: 15%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -958,6 +1104,14 @@ input, textarea, select {
     .price-ticker-container {
         bottom: 0;
     }
+    
+    .binary-matrix {
+        display: none;
+    }
+    
+    .code-stream {
+        display: none;
+    }
 }
 
 /* Print Styles */
@@ -970,7 +1124,9 @@ input, textarea, select {
     .eye-bg,
     .background-matrix,
     .code-scroll-container,
-    .price-ticker-container {
+    .price-ticker-container,
+    .binary-matrix,
+    .code-stream {
         display: none;
     }
 }
