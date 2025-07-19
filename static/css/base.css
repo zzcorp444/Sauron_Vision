@@ -349,17 +349,17 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - maximally separated on globe surface */
+/* Market dot positions - spread across different levels and positions */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-60deg) rotateX(20deg) translateZ(180px);
+    transform: rotateY(-45deg) rotateX(-20deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(0deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(10deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
@@ -367,27 +367,27 @@ body {
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(10deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(-15deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(-10deg) translateZ(180px);
+    transform: rotateY(94deg) rotateX(5deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(8deg) rotateX(30deg) translateZ(180px);
+    transform: rotateY(25deg) rotateX(30deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-45deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(55deg) translateZ(180px);
+    transform: rotateY(-95deg) rotateX(55deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(-30deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
@@ -395,11 +395,11 @@ body {
 }
 
 .market-dot.dubai {
-    transform: rotateY(45deg) rotateX(15deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(-10deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(20deg) rotateX(60deg) translateZ(180px);
+    transform: rotateY(-15deg) rotateX(60deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -484,14 +484,19 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - Transparent */
+/* Price ticker container - With gradient background */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: transparent;
+    background: linear-gradient(to top, 
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(26, 26, 26, 0.8) 50%, 
+        rgba(26, 26, 26, 0.3) 80%, 
+        rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
+    backdrop-filter: blur(5px);
 }
 
 .ticker-controls {
@@ -526,7 +531,7 @@ body {
     display: flex;
     gap: 20px;
     padding: 8px 15px;
-    animation: ticker-move 80s linear infinite;
+    animation: ticker-move 120s linear infinite;
 }
 
 .ticker-item {

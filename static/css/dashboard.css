@@ -13,6 +13,8 @@
     background: var(--secondary-bg);
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    position: relative;
 }
 
 .header-left {
@@ -232,11 +234,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 260px; /* 10px bigger than sidebar */
-    height: 100%;
+    width: 260px;
+    height: calc(100vh - 120px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 5;
+    z-index: 150;
     overflow-y: auto;
 }
 
@@ -246,7 +248,7 @@
     background: white;
     padding: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    z-index: 160;
 }
 
 .news-bar-title {
@@ -404,12 +406,14 @@
     border-right: 1px solid var(--border-color);
     padding: 1rem 0;
     position: relative;
-    transition: width 0.3s ease;
-    z-index: 20;
+    transition: transform 0.3s ease;
+    z-index: 200;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
 }
 
 .sidebar.retracted {
-    width: 60px;
+    transform: translateX(-190px);
 }
 
 .sidebar.retracted .nav-item span {
@@ -427,11 +431,6 @@
 
 .sidebar.retracted .sidebar-toggle i {
     transform: rotate(180deg);
-}
-
-/* Show news when sidebar is retracted */
-.sidebar.retracted + .content-area {
-    margin-left: 200px;
 }
 
 .sidebar-toggle {
@@ -497,9 +496,9 @@
 .content-area {
     flex: 1;
     padding: 2rem;
-    padding-bottom: 100px; /* Add space for ticker */
+    padding-bottom: 150px;
     overflow-y: auto;
-    transition: margin-left 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .content-section {
@@ -573,6 +572,13 @@
     gap: 1rem;
 }
 
+/* Portfolio Status Grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
 .metric {
     display: flex;
     flex-direction: column;
@@ -580,7 +586,7 @@
 }
 
 .metric .value {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--primary-text);
 }
@@ -593,8 +599,12 @@
     color: var(--error-text);
 }
 
+.metric .value.warning {
+    color: var(--warning-text);
+}
+
 .metric .label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--secondary-text);
 }
 
@@ -612,6 +622,12 @@
     border-radius: 5px;
     font-size: 0.9rem;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.position-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
 }
 
 .position-header {
@@ -621,47 +637,52 @@
     margin-bottom: 0.5rem;
 }
 
-.chart-lock {
+.chart-toggle {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 20px;
     height: 20px;
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
-    border-radius: 3px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     color: var(--secondary-text);
-    font-size: 12px;
+    font-size: 10px;
 }
 
-.position-item:hover .chart-lock {
+.position-item:hover .chart-toggle {
     opacity: 1;
 }
 
-.chart-lock.locked {
+.chart-toggle.locked {
     border-color: var(--glow-color);
     color: var(--primary-text);
     opacity: 1;
 }
 
+.mini-chart-container {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.mini-chart-container.show {
+    display: grid;
+}
+
 .mini-chart {
-    height: 40px;
-    position: relative;
-    margin: 0.5rem 0;
+    height: 30px;
     background: rgba(0, 255, 65, 0.05);
     border-radius: 3px;
     overflow: hidden;
-    display: none;
-}
-
-.mini-chart.locked {
-    display: block !important;
 }
 
 .chart-svg {
@@ -679,26 +700,80 @@
     fill: rgba(0, 255, 65, 0.2);
 }
 
+.position-data {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.data-label {
+    color: var(--tertiary-text);
+}
+
+.data-value {
+    color: var(--primary-text);
+}
+
 .chart-info {
     display: flex;
     justify-content: space-between;
     font-size: 0.7rem;
     color: var(--tertiary-text);
     margin-top: 0.25rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
-.chart-lock.locked + .position-header + .mini-chart + .chart-info {
-    opacity: 1;
+/* Signals Section - Vertical Layout */
+.signals-overview {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    grid-row: span 2;
 }
 
-.signal-list {
+.signals-overview:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.signals-sections {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-height: 250px;
+    gap: 1.5rem;
+    max-height: 500px;
     overflow-y: auto;
+}
+
+.signal-section {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.signal-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.signal-section h4 {
+    color: var(--primary-text);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.signal-section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 .signal-item {
@@ -784,6 +859,11 @@
     color: var(--primary-bg);
 }
 
+.signal-type.watch {
+    background: var(--warning-text);
+    color: var(--primary-bg);
+}
+
 .signal-time {
     font-size: 0.8rem;
     color: var(--tertiary-text);
@@ -841,11 +921,11 @@
     .sidebar {
         width: 100%;
         order: 3;
+        transform: none;
     }
     
     .content-area {
         order: 4;
-        margin-left: 0 !important;
     }
     
     .nav-menu {
@@ -859,6 +939,10 @@
     }
     
     .overview-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-grid {
         grid-template-columns: 1fr;
     }
     
