@@ -17,6 +17,52 @@
     position: relative;
 }
 
+/* Info Ticker Bar - New */
+.info-ticker-bar {
+    background: var(--accent-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
+    overflow: hidden;
+    position: relative;
+    height: 35px;
+}
+
+.info-ticker-content {
+    display: flex;
+    animation: info-scroll 60s linear infinite;
+    white-space: nowrap;
+}
+
+.info-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 30px;
+    color: var(--secondary-text);
+    font-size: 12px;
+}
+
+.info-ticker-item i {
+    color: var(--primary-text);
+}
+
+.info-ticker-item.critical {
+    color: var(--error-text);
+}
+
+.info-ticker-item.warning {
+    color: var(--warning-text);
+}
+
+.info-ticker-item.success {
+    color: var(--primary-text);
+}
+
+@keyframes info-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 .header-left {
     display: flex;
     align-items: center;
@@ -216,57 +262,6 @@
     color: var(--error-text);
 }
 
-/* Notifications Banner */
-.notifications-banner {
-    background: linear-gradient(90deg, 
-        rgba(0, 255, 65, 0.1) 0%, 
-        rgba(0, 204, 51, 0.1) 50%, 
-        rgba(0, 153, 39, 0.1) 100%);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem 2rem;
-    z-index: 199;
-    position: relative;
-    overflow: hidden;
-}
-
-.notifications-content {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    white-space: nowrap;
-    animation: scroll-notifications 60s linear infinite;
-}
-
-.notification-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--primary-text);
-    font-size: 0.9rem;
-    margin-right: 3rem;
-}
-
-.notification-item i {
-    color: var(--glow-color);
-}
-
-.notification-priority.high {
-    color: var(--error-text);
-}
-
-.notification-priority.medium {
-    color: var(--warning-text);
-}
-
-.notification-priority.low {
-    color: var(--secondary-text);
-}
-
-@keyframes scroll-notifications {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
 /* Main Layout Container */
 .dashboard-layout {
     display: flex;
@@ -286,12 +281,12 @@
     top: 0;
     left: 0;
     width: 260px;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 155px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 150;
     overflow-y: auto;
-    transform: translateX(-200px);
+    transform: translateX(-260px);
     transition: transform 0.3s ease;
 }
 
@@ -465,7 +460,7 @@
     position: relative;
     transition: width 0.3s ease;
     z-index: 200;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 155px);
     overflow-y: auto;
 }
 
@@ -604,17 +599,21 @@
     gap: 2rem;
 }
 
+/* Fixed height cards with expand button */
 .overview-card {
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    height: 300px;
-    overflow: hidden;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    height: 280px;
+    overflow: hidden;
+}
+
+.overview-card.expanded {
+    height: auto;
+    min-height: 280px;
 }
 
 .overview-card:hover {
@@ -629,20 +628,24 @@
 }
 
 .card-content {
-    flex: 1;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: calc(100% - 50px);
+    overflow-y: auto;
 }
 
-/* Card Expand Button */
-.card-expand-btn {
+.overview-card.expanded .card-content {
+    height: auto;
+}
+
+/* Expand button */
+.expand-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
     background: var(--accent-bg);
     border: 1px solid var(--glow-color);
     border-radius: 50%;
@@ -650,24 +653,27 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--glow-color);
-    font-size: 12px;
-    opacity: 0.7;
+    opacity: 0;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.card-expand-btn:hover {
-    opacity: 1;
+.overview-card:hover .expand-btn {
+    opacity: 0.7;
+}
+
+.expand-btn:hover {
+    opacity: 1 !important;
     background: var(--glow-color);
-    color: var(--primary-bg);
 }
 
-.overview-card.expanded {
-    height: auto;
-    max-height: 600px;
+.expand-btn i {
+    color: var(--primary-text);
+    font-size: 12px;
+    transition: transform 0.3s ease;
 }
 
-.overview-card.expanded .card-expand-btn i {
+.overview-card.expanded .expand-btn i {
     transform: rotate(180deg);
 }
 
@@ -705,6 +711,39 @@
 .metric .label {
     font-size: 0.8rem;
     color: var(--secondary-text);
+}
+
+/* Portfolio Charts - New */
+.portfolio-charts {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.overview-card.expanded .portfolio-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.chart-container {
+    height: 150px;
+    background: var(--accent-bg);
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+}
+
+.chart-title {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    margin-bottom: 5px;
+}
+
+.chart-svg {
+    width: 100%;
+    height: calc(100% - 20px);
 }
 
 .position-list, .signal-list {
@@ -827,58 +866,7 @@
     margin-top: 0.25rem;
 }
 
-/* Portfolio Charts */
-.portfolio-charts {
-    display: none;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.portfolio-charts.show {
-    display: grid;
-}
-
-.chart-container {
-    height: 150px;
-    background: rgba(0, 255, 65, 0.05);
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.chart-title {
-    color: var(--secondary-text);
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-}
-
-.chart-visual {
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(to right, 
-        var(--error-text) 0%, 
-        var(--warning-text) 50%, 
-        var(--primary-text) 100%);
-    border-radius: 3px;
-    position: relative;
-}
-
-.donut-chart {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: conic-gradient(
-        var(--primary-text) 0deg 180deg,
-        var(--warning-text) 180deg 270deg,
-        var(--error-text) 270deg 360deg
-    );
-}
-
-/* Signals Section - Vertical Layout */
+/* Signals Section - Fixed height */
 .signals-overview {
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
@@ -886,11 +874,13 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     grid-row: span 2;
-    height: 620px;
-    overflow: hidden;
+    height: 580px;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
+}
+
+.signals-overview.expanded {
+    height: auto;
 }
 
 .signals-overview:hover {
@@ -902,9 +892,12 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-height: 500px;
+    max-height: calc(100% - 50px);
     overflow-y: auto;
-    flex: 1;
+}
+
+.signals-overview.expanded .signals-sections {
+    max-height: none;
 }
 
 .signal-section {
@@ -1030,59 +1023,6 @@
     color: var(--tertiary-text);
 }
 
-/* Risk Monitor Card */
-.risk-monitor-card {
-    background: var(--secondary-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.risk-monitor-card:hover {
-    border-color: var(--glow-color);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-}
-
-.risk-metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    flex: 1;
-}
-
-.risk-metric {
-    background: var(--accent-bg);
-    padding: 1rem;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.risk-value {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-text);
-    margin-bottom: 0.5rem;
-}
-
-.risk-value.warning {
-    color: var(--warning-text);
-}
-
-.risk-value.danger {
-    color: var(--error-text);
-}
-
-.risk-label {
-    font-size: 0.8rem;
-    color: var(--secondary-text);
-}
-
 /* AI Insights */
 .ai-insight {
     display: flex;
@@ -1152,6 +1092,72 @@
 .line-chart svg {
     width: 100%;
     height: 100%;
+}
+
+/* Risk Monitoring Card - New */
+.risk-monitoring-card {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+}
+
+.risk-monitoring-card.expanded {
+    height: auto;
+}
+
+.risk-monitoring-card:hover {
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.risk-metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.risk-metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.risk-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.risk-level {
+    width: 100%;
+    height: 8px;
+    background: var(--accent-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.risk-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.risk-fill.low {
+    background: var(--primary-text);
+    width: 33%;
+}
+
+.risk-fill.medium {
+    background: var(--warning-text);
+    width: 66%;
+}
+
+.risk-fill.high {
+    background: var(--error-text);
+    width: 90%;
 }
 
 /* Responsive Design */

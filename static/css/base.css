@@ -111,79 +111,66 @@ body {
     }
 }
 
-@keyframes binary-scroll {
-    0% { transform: translateY(100vh); opacity: 0; }
-    10% { opacity: 0.7; }
-    90% { opacity: 0.7; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+@keyframes code-stream {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
-@keyframes code-line-scroll {
-    0% { transform: translateX(100%); opacity: 0; }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
-    100% { transform: translateX(-100%); opacity: 0; }
+@keyframes binary-change {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
-/* Binary Rain Background */
-.binary-rain {
+/* Matrix Binary Background - New */
+.binary-matrix {
     position: fixed;
-    top: 0;
-    left: 10%;
-    width: 300px;
-    height: 100vh;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.15;
-}
-
-.binary-column {
-    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
     font-family: var(--font-mono);
-    font-size: 16px;
-    color: var(--primary-text);
-    white-space: pre;
-    animation: binary-scroll 25s linear infinite;
+    font-size: 14px;
+    color: var(--tertiary-text);
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.binary-column:nth-child(1) { left: 0%; animation-delay: 0s; }
-.binary-column:nth-child(2) { left: 15%; animation-delay: -3s; }
-.binary-column:nth-child(3) { left: 30%; animation-delay: -6s; }
-.binary-column:nth-child(4) { left: 45%; animation-delay: -9s; }
-.binary-column:nth-child(5) { left: 60%; animation-delay: -12s; }
-.binary-column:nth-child(6) { left: 75%; animation-delay: -15s; }
-.binary-column:nth-child(7) { left: 90%; animation-delay: -18s; }
+.binary-row {
+    display: flex;
+    gap: 8px;
+}
 
-/* Code Line Scroll */
-.code-line-scroll {
+.binary-digit {
+    animation: binary-change 2s infinite;
+}
+
+.binary-digit:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+/* Code Stream - New */
+.code-stream {
     position: fixed;
-    top: calc(100vh - 200px);
+    top: 170px;
     left: 0;
     width: 100%;
-    height: 40px;
+    height: 30px;
     overflow: hidden;
-    pointer-events: none;
     z-index: 2;
-    opacity: 0.2;
+    pointer-events: none;
 }
 
 .code-line {
     position: absolute;
-    top: 0;
     white-space: nowrap;
-    font-family: var(--font-mono);
+    color: var(--tertiary-text);
     font-size: 12px;
-    color: var(--secondary-text);
-    animation: code-line-scroll 30s linear infinite;
+    font-family: var(--font-mono);
+    opacity: 0.4;
+    animation: code-stream 30s linear infinite;
 }
-
-.code-line:nth-child(1) { animation-delay: 0s; }
-.code-line:nth-child(2) { animation-delay: -5s; }
-.code-line:nth-child(3) { animation-delay: -10s; }
-.code-line:nth-child(4) { animation-delay: -15s; }
-.code-line:nth-child(5) { animation-delay: -20s; }
-.code-line:nth-child(6) { animation-delay: -25s; }
 
 /* Matrix Background Effect */
 .background-matrix {
@@ -411,7 +398,7 @@ body {
     box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
-/* Market Dots - 3D Positioned on Globe Surface - Distributed */
+/* Market Dots - Updated positions to spread across globe */
 .market-dot {
     position: absolute;
     width: 8px;
@@ -429,13 +416,13 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - properly distributed around the globe */
+/* Market dot positions - Properly distributed across globe surface */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-70deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(-122deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.lse {
@@ -443,7 +430,7 @@ body {
 }
 
 .market-dot.tokyo {
-    transform: rotateY(140deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(139deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
@@ -455,7 +442,7 @@ body {
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(8deg) rotateX(50deg) translateZ(180px);
+    transform: rotateY(10deg) rotateX(50deg) translateZ(180px);
 }
 
 .market-dot.sydney {
@@ -479,35 +466,7 @@ body {
 }
 
 .market-dot.zurich {
-    transform: rotateY(8deg) rotateX(46deg) translateZ(180px);
-}
-
-.market-dot.brazil {
-    transform: rotateY(-47deg) rotateX(-15deg) translateZ(180px);
-}
-
-.market-dot.moscow {
-    transform: rotateY(37deg) rotateX(55deg) translateZ(180px);
-}
-
-.market-dot.mexico {
-    transform: rotateY(-99deg) rotateX(19deg) translateZ(180px);
-}
-
-.market-dot.chile {
-    transform: rotateY(-70deg) rotateX(-33deg) translateZ(180px);
-}
-
-.market-dot.south_africa {
-    transform: rotateY(28deg) rotateX(-26deg) translateZ(180px);
-}
-
-.market-dot.seoul {
-    transform: rotateY(126deg) rotateX(37deg) translateZ(180px);
-}
-
-.market-dot.stockholm {
-    transform: rotateY(18deg) rotateX(59deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -592,106 +551,7 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Asset Status Icons */
-.asset-status-bar {
-    position: fixed;
-    bottom: 80px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background: rgba(26, 26, 26, 0.8);
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    overflow-x: auto;
-    backdrop-filter: blur(5px);
-    border-top: 1px solid var(--border-color);
-}
-
-.asset-status-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-right: 20px;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 11px;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 100px;
-}
-
-.asset-status-item:hover {
-    background: rgba(0, 255, 65, 0.1);
-    border: 1px solid var(--glow-color);
-}
-
-.asset-status-item.active {
-    background: rgba(0, 255, 65, 0.2);
-    border: 1px solid var(--glow-color);
-}
-
-.status-icon {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-}
-
-.status-icon.consolidation {
-    background: var(--warning-text);
-    color: white;
-}
-
-.status-icon.setup {
-    background: var(--secondary-text);
-    color: var(--primary-bg);
-}
-
-.status-icon.signal {
-    background: var(--primary-text);
-    color: var(--primary-bg);
-    animation: pulse 1s infinite;
-}
-
-.status-icon.high-increase {
-    background: var(--primary-text);
-    color: var(--primary-bg);
-}
-
-.status-icon.high-decrease {
-    background: var(--error-text);
-    color: white;
-}
-
-.status-icon.high-volume {
-    background: #9a59d1;
-    color: white;
-}
-
-.asset-symbol {
-    font-weight: 600;
-    color: var(--primary-text);
-}
-
-.asset-change {
-    font-size: 10px;
-}
-
-.asset-change.positive {
-    color: var(--primary-text);
-}
-
-.asset-change.negative {
-    color: var(--error-text);
-}
-
-/* Price ticker container - With gradient background */
+/* Price ticker container - With gradient background and icons */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
@@ -704,6 +564,73 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
+}
+
+/* Price Action Icons - New */
+.price-action-icons {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 20px;
+    z-index: 101;
+}
+
+.action-icon {
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.action-icon:hover {
+    border-color: var(--glow-color);
+    transform: translateY(-2px);
+}
+
+.action-icon.active {
+    background: var(--glow-color);
+    color: var(--primary-bg);
+}
+
+.action-icon i {
+    font-size: 16px;
+    color: var(--secondary-text);
+}
+
+.action-icon.active i {
+    color: var(--primary-bg);
+}
+
+.action-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid var(--glow-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.action-icon:hover::after {
+    opacity: 1;
 }
 
 .ticker-controls {
@@ -738,6 +665,7 @@ body {
     display: flex;
     gap: 20px;
     padding: 8px 15px;
+    padding-top: 30px;
     animation: ticker-move 120s linear infinite;
 }
 
@@ -747,6 +675,45 @@ body {
     min-width: 65px;
     padding: 3px;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Price action indicators on ticker items */
+.ticker-item.consolidating::before,
+.ticker-item.breakout::before,
+.ticker-item.high-volume::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticker-item.consolidating::before {
+    content: '⟷';
+    background: var(--warning-text);
+    color: var(--primary-bg);
+    font-size: 12px;
+}
+
+.ticker-item.breakout::before {
+    content: '↗';
+    background: var(--primary-text);
+    color: var(--primary-bg);
+    font-size: 12px;
+}
+
+.ticker-item.high-volume::before {
+    content: '▊';
+    background: var(--secondary-text);
+    color: var(--primary-bg);
+    font-size: 12px;
 }
 
 .ticker-header {
@@ -1134,11 +1101,6 @@ input, textarea, select {
     .price-ticker {
         font-size: 14px;
     }
-    
-    .binary-rain,
-    .code-line-scroll {
-        display: none;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1176,10 +1138,7 @@ input, textarea, select {
     .eye-bg,
     .background-matrix,
     .code-scroll-container,
-    .price-ticker-container,
-    .binary-rain,
-    .code-line-scroll,
-    .asset-status-bar {
+    .price-ticker-container {
         display: none;
     }
 }
