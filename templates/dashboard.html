@@ -253,6 +253,63 @@
                                     <span class="value positive">+2.35%</span>
                                     <span class="label">Today's Change</span>
                                 </div>
+                                <div class="metric">
+                                    <span class="value">$15,234</span>
+                                    <span class="label">Available Cash</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="value">8</span>
+                                    <span class="label">Active Positions</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="value">1.15</span>
+                                    <span class="label">Portfolio Beta</span>
+                                </div>
+                            </div>
+                            <!-- AI Market Analysis Card -->
+                            <div class="overview-card">
+                                <h3>AI Market Analysis</h3>
+                                <div class="card-content">
+                                    <div class="ai-insight">
+                                        <span class="insight-label">Market Sentiment:</span>
+                                        <span class="insight-value positive">Bullish (72%)</span>
+                                    </div>
+                                    <div class="ai-insight">
+                                        <span class="insight-label">Trend Strength:</span>
+                                        <span class="insight-value">Strong Uptrend</span>
+                                    </div>
+                                    <div class="ai-insight">
+                                        <span class="insight-label">Risk Level:</span>
+                                        <span class="insight-value warning">Medium</span>
+                                    </div>
+                                    <div class="ai-insight">
+                                        <span class="insight-label">Recommended Action:</span>
+                                        <span class="insight-value">Hold with trailing stop</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Performance Metrics Card -->
+                            <div class="overview-card">
+                                <h3>Performance Metrics</h3>
+                                <div class="card-content">
+                                    <div class="metric">
+                                        <span class="value positive">+15.7%</span>
+                                        <span class="label">YTD Return</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">1.82</span>
+                                        <span class="label">Sharpe Ratio</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">65%</span>
+                                        <span class="label">Win Rate</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value negative">-8.3%</span>
+                                        <span class="label">Max Drawdown</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -261,6 +318,9 @@
                             <div class="card-content">
                                 <div class="position-list">
                                     <div class="position-item">
+                                        <button class="chart-lock" onclick="toggleLock(this)">
+                                            <i class="fas fa-lock-open"></i>
+                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">AAPL</span>
                                             <span class="value">$150.25</span>
@@ -282,6 +342,9 @@
                                         </div>
                                     </div>
                                     <div class="position-item">
+                                        <button class="chart-lock" onclick="toggleLock(this)">
+                                            <i class="fas fa-lock-open"></i>
+                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">GOOGL</span>
                                             <span class="value">$2750.50</span>
@@ -307,107 +370,99 @@
                         </div>
                         
                         <div class="overview-card">
-    <h3>Recent Signals</h3>
-    <div class="card-content">
-        <div class="signal-list">
-            <div class="signal-item">
-                <span class="signal-type buy">BUY</span>
-                <span class="signal-symbol">TSLA</span>
-                <span class="signal-time">2m ago</span>
-                <div class="signal-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Size:</span>
-                        <span class="detail-value">100 shares</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risk:</span>
-                        <span class="detail-value">Medium (2.5%)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Target:</span>
-                        <span class="detail-value">$875.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="signal-item">
-                <span class="signal-type sell">SELL</span>
-                <span class="signal-symbol">MSFT</span>
-                <span class="signal-time">15m ago</span>
-                <div class="signal-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Size:</span>
-                        <span class="detail-value">50 shares</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risk:</span>
-                        <span class="detail-value">Low (1.2%)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Target:</span>
-                        <span class="detail-value">$295.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="signal-item">
-                <span class="signal-type buy">BUY</span>
-                <span class="signal-symbol">NVDA</span>
-                <span class="signal-time">28m ago</span>
-                <div class="signal-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Size:</span>
-                        <span class="detail-value">75 shares</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risk:</span>
-                        <span class="detail-value">High (3.8%)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Target:</span>
-                        <span class="detail-value">$465.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="signal-item">
-                <span class="signal-type buy">BUY</span>
-                <span class="signal-symbol">AMD</span>
-                <span class="signal-time">45m ago</span>
-                <div class="signal-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Size:</span>
-                        <span class="detail-value">200 shares</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risk:</span>
-                        <span class="detail-value">Medium (2.1%)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Target:</span>
-                        <span class="detail-value">$125.50</span>
-                    </div>
-                </div>
-            </div>
-            <div class="signal-item">
-                <span class="signal-type sell">SELL</span>
-                <span class="signal-symbol">META</span>
-                <span class="signal-time">1h ago</span>
-                <div class="signal-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Size:</span>
-                        <span class="detail-value">80 shares</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risk:</span>
-                        <span class="detail-value">Low (1.5%)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Target:</span>
-                        <span class="detail-value">$315.00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="overview-card">
+                            <h3>Recent Signals</h3>
+                            <div class="card-content">
+                                <div class="signal-list">
+                                    <div class="signal-item">
+                                        <div class="signal-header">
+                                            <span class="signal-type buy">BUY</span>
+                                            <span class="signal-symbol">TSLA</span>
+                                            <span class="signal-time">2m ago</span>
+                                        </div>
+                                        <div class="signal-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Size:</span>
+                                                <span class="detail-value">100 shares</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Risk:</span>
+                                                <span class="detail-value">Medium (2.5%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="signal-item">
+                                        <div class="signal-header">
+                                            <span class="signal-type buy">SELL</span>
+                                            <span class="signal-symbol">USOIL</span>
+                                            <span class="signal-time">3m ago</span>
+                                        </div>
+                                        <div class="signal-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Size:</span>
+                                                <span class="detail-value">800 Contracts</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Risk:</span>
+                                                <span class="detail-value">Medium (2.5%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="signal-item">
+                                        <div class="signal-header">
+                                            <span class="signal-type sell">SELL</span>
+                                            <span class="signal-symbol">MSFT</span>
+                                            <span class="signal-time">15m ago</span>
+                                        </div>
+                                        <div class="signal-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Size:</span>
+                                                <span class="detail-value">50 shares</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Risk:</span>
+                                                <span class="detail-value">Low (1.2%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="signal-item">
+                                        <div class="signal-header">
+                                            <span class="signal-type buy">BUY</span>
+                                            <span class="signal-symbol">NVDA</span>
+                                            <span class="signal-time">28m ago</span>
+                                        </div>
+                                        <div class="signal-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Size:</span>
+                                                <span class="detail-value">75 shares</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Risk:</span>
+                                                <span class="detail-value">High (3.8%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="signal-item">
+                                        <div class="signal-header">
+                                            <span class="signal-type buy">BUY</span>
+                                            <span class="signal-symbol">AMD</span>
+                                            <span class="signal-time">45m ago</span>
+                                        </div>
+                                        <div class="signal-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Size:</span>
+                                                <span class="detail-value">200 shares</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Risk:</span>
+                                                <span class="detail-value">Medium (2.1%)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Repeat for 4 more signals -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -464,5 +519,18 @@ document.querySelectorAll('.news-item').forEach(item => {
         console.log('Opening article...');
     });
 });
+
+function toggleLock(button) {
+    button.classList.toggle('locked');
+    const chart = button.parentElement.querySelector('.mini-chart');
+    chart.classList.toggle('locked');
+    
+    const icon = button.querySelector('i');
+    if (button.classList.contains('locked')) {
+        icon.className = 'fas fa-lock';
+    } else {
+        icon.className = 'fas fa-lock-open';
+    }
+}
 </script>
 {% endblock %}
