@@ -81,276 +81,287 @@
         </div>
     </header>
 
-    <!-- News Intelligence Bar -->
-    <div class="news-intelligence-bar">
-        <div class="news-bar-header">
-            <div class="news-bar-title">
-                <i class="fas fa-newspaper"></i>
-                <span>Market Intelligence Feed</span>
-            </div>
-            <div class="news-bar-controls">
-                <button class="news-filter-btn active" data-filter="all">All</button>
-                <button class="news-filter-btn" data-filter="news">News</button>
-                <button class="news-filter-btn" data-filter="social">Social</button>
-                <button class="news-filter-btn" data-filter="analysis">Analysis</button>
-                <button class="news-filter-btn" data-filter="alerts">Alerts</button>
-            </div>
-        </div>
-        
-        <div class="news-content">
-            <!-- News Item 1 -->
-            <div class="news-item" data-type="news">
-                <div class="news-source">
-                    <span class="news-source-name">Bloomberg</span>
-                    <span class="news-time">2 min ago</span>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- News Intelligence Bar - Behind Sidebar -->
+        <div class="news-intelligence-bar">
+            <div class="news-bar-header">
+                <div class="news-bar-title">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Market Intelligence</span>
                 </div>
-                <h4 class="news-headline">Fed Signals Pause in Rate Hikes as Inflation Shows Signs of Cooling</h4>
-                <p class="news-summary">Federal Reserve officials indicated they may hold interest rates steady in the upcoming meeting, citing recent economic data...</p>
-                <div class="news-meta">
-                    <div class="sentiment-indicator positive">
-                        <i class="fas fa-arrow-up"></i>
-                        <span>Bullish</span>
-                    </div>
-                    <div class="social-metrics">
-                        <span class="social-metric"><i class="fab fa-twitter"></i> 1.2k</span>
-                        <span class="social-metric"><i class="fas fa-comments"></i> 342</span>
-                    </div>
-                </div>
-                <div class="news-tags">
-                    <span class="news-tag">Fed</span>
-                    <span class="news-tag">Rates</span>
-                    <span class="news-tag ticker">SPY</span>
+                <div class="news-bar-controls">
+                    <button class="news-filter-btn active" data-filter="all">All</button>
+                    <button class="news-filter-btn" data-filter="news">News</button>
+                    <button class="news-filter-btn" data-filter="social">Social</button>
+                    <button class="news-filter-btn" data-filter="analysis">Analysis</button>
+                    <button class="news-filter-btn" data-filter="alerts">Alerts</button>
                 </div>
             </div>
             
-            <!-- News Item 2 -->
-            <div class="news-item" data-type="social">
-                <div class="news-source">
-                    <span class="news-source-name">Reddit - r/wallstreetbets</span>
-                    <span class="news-time">5 min ago</span>
-                </div>
-                <h4 class="news-headline">Unusual Options Activity Detected on NVDA - Large Call Volumes</h4>
-                <p class="news-summary">Traders reporting massive call option purchases for NVDA $500 strike expiring next month. Volume 10x normal...</p>
-                <div class="news-meta">
-                    <div class="sentiment-indicator positive">
-                        <i class="fas fa-fire"></i>
-                        <span>Hot</span>
+            <div class="news-content">
+                <!-- News Items -->
+                <div class="news-item" data-type="news">
+                    <div class="news-source">
+                        <span class="news-source-name">Bloomberg</span>
+                        <span class="news-time">2 min ago</span>
                     </div>
-                    <div class="social-metrics">
-                        <span class="social-metric"><i class="fas fa-arrow-up"></i> 5.8k</span>
-                        <span class="social-metric"><i class="fas fa-comments"></i> 892</span>
+                    <h4 class="news-headline">Fed Signals Pause in Rate Hikes as Inflation Shows Signs of Cooling</h4>
+                    <p class="news-summary">Federal Reserve officials indicated they may hold interest rates steady in the upcoming meeting...</p>
+                    <div class="news-meta">
+                        <div class="sentiment-indicator positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Bullish</span>
+                        </div>
+                        <div class="social-metrics">
+                            <span class="social-metric"><i class="fab fa-twitter"></i> 1.2k</span>
+                            <span class="social-metric"><i class="fas fa-comments"></i> 342</span>
+                        </div>
                     </div>
-                </div>
-                <div class="news-tags">
-                    <span class="news-tag">Options</span>
-                    <span class="news-tag ticker">NVDA</span>
-                    <span class="news-tag">Unusual Activity</span>
-                </div>
-            </div>
-            
-            <!-- News Item 3 -->
-            <div class="news-item" data-type="analysis">
-                <div class="news-source">
-                    <span class="news-source-name">Sauron AI Analysis</span>
-                    <span class="news-time">10 min ago</span>
-                </div>
-                <h4 class="news-headline">Pattern Alert: AAPL Forming Ascending Triangle on 4H Chart</h4>
-                <p class="news-summary">Technical analysis indicates a bullish pattern formation with 85% historical success rate. Target price: $165...</p>
-                <div class="news-meta">
-                    <div class="sentiment-indicator positive">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Technical Buy</span>
-                    </div>
-                    <div class="social-metrics">
-                        <span class="social-metric"><i class="fas fa-eye"></i> 2.3k</span>
-                    </div>
-                </div>
-                <div class="news-tags">
-                    <span class="news-tag ticker">AAPL</span>
-                    <span class="news-tag">Technical</span>
-                    <span class="news-tag">Pattern</span>
-                </div>
-            </div>
-            
-            <!-- News Item 4 -->
-            <div class="news-item" data-type="news">
-                <div class="news-source">
-                    <span class="news-source-name">Reuters</span>
-                    <span class="news-time">15 min ago</span>
-                </div>
-                <h4 class="news-headline">Tesla Announces Record Q4 Deliveries, Beats Analyst Estimates</h4>
-                <p class="news-summary">Electric vehicle maker Tesla reported delivering 484,507 vehicles in Q4, surpassing Wall Street expectations...</p>
-                <div class="news-meta">
-                    <div class="sentiment-indicator positive">
-                        <i class="fas fa-rocket"></i>
-                        <span>Very Bullish</span>
-                    </div>
-                    <div class="social-metrics">
-                        <span class="social-metric"><i class="fab fa-twitter"></i> 3.5k</span>
-                        <span class="social-metric"><i class="fas fa-share"></i> 1.2k</span>
-                    </div>
-                </div>
-                <div class="news-tags">
-                    <span class="news-tag ticker">TSLA</span>
-                    <span class="news-tag">Earnings</span>
-                    <span class="news-tag">EVs</span>
-                </div>
-            </div>
-            
-            <!-- News Item 5 -->
-            <div class="news-item" data-type="alerts">
-                <div class="news-source">
-                    <span class="news-source-name">Market Alert</span>
-                    <span class="news-time">20 min ago</span>
-                </div>
-                <h4 class="news-headline">VIX Spike Alert: Volatility Index Jumps 15% in Last Hour</h4>
-                <p class="news-summary">Market volatility indicator showing unusual movement. Risk management protocols activated...</p>
-                <div class="news-meta">
-                    <div class="sentiment-indicator negative">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Risk Alert</span>
-                    </div>
-                    <div class="social-metrics">
-                        <span class="social-metric"><i class="fas fa-bell"></i> High Priority</span>
-                    </div>
-                </div>
-                <div class="news-tags">
-                    <span class="news-tag ticker">VIX</span>
-                    <span class="news-tag">Volatility</span>
-                    <span class="news-tag">Risk</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="dashboard-main">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <button class="sidebar-toggle" id="sidebar-toggle">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item active" data-section="overview">
-                    <i class="fas fa-eye"></i>
-                    <span>Overview</span>
-                </a>
-                <a href="#" class="nav-item" data-section="market-scanner">
-                    <i class="fas fa-search"></i>
-                    <span>Market Scanner</span>
-                </a>
-                <a href="{% url 'vision' %}" class="nav-item">
-                    <i class="fas fa-cube"></i>
-                    <span>Vision 3D</span>
-                </a>
-                <a href="#" class="nav-item" data-section="strategy-builder">
-                    <i class="fas fa-cogs"></i>
-                    <span>Strategy Builder</span>
-                </a>
-                <a href="#" class="nav-item" data-section="risk-monitor">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Risk Monitor</span>
-                </a>
-                <a href="#" class="nav-item" data-section="sentiment-analysis">
-                    <i class="fas fa-brain"></i>
-                    <span>Sentiment Analysis</span>
-                </a>
-                <a href="#" class="nav-item" data-section="terminal">
-                    <i class="fas fa-terminal"></i>
-                    <span>Terminal</span>
-                </a>
-            </nav>
-        </aside>
-
-        <!-- Content Area -->
-        <div class="content-area">
-            <!-- Overview Section -->
-            <section id="overview" class="content-section active">
-                <div class="section-header">
-                    <h2>Market Overview</h2>
-                    <div class="section-controls">
-                        <button class="control-btn">
-                            <i class="fas fa-refresh"></i>
-                        </button>
+                    <div class="news-tags">
+                        <span class="news-tag">Fed</span>
+                        <span class="news-tag">Rates</span>
+                        <span class="news-tag ticker">SPY</span>
                     </div>
                 </div>
                 
-                <div class="overview-grid">
-                    <div class="overview-card">
-                        <h3>Portfolio Status</h3>
-                        <div class="card-content">
-                            <div class="metric">
-                                <span class="value">$125,847</span>
-                                <span class="label">Total Value</span>
-                            </div>
-                            <div class="metric">
-                                <span class="value positive">+2.35%</span>
-                                <span class="label">Today's Change</span>
-                            </div>
+                <div class="news-item" data-type="social">
+                    <div class="news-source">
+                        <span class="news-source-name">Reddit - WSB</span>
+                        <span class="news-time">5 min ago</span>
+                    </div>
+                    <h4 class="news-headline">Unusual Options Activity Detected on NVDA</h4>
+                    <p class="news-summary">Massive call option purchases for NVDA $500 strike...</p>
+                    <div class="news-meta">
+                        <div class="sentiment-indicator positive">
+                            <i class="fas fa-fire"></i>
+                            <span>Hot</span>
+                        </div>
+                        <div class="social-metrics">
+                            <span class="social-metric"><i class="fas fa-arrow-up"></i> 5.8k</span>
                         </div>
                     </div>
-                    
-                    <div class="overview-card">
-                        <h3>Active Positions</h3>
-                        <div class="card-content">
-                            <div class="position-list">
-                                <div class="position-item">
-                                    <span class="symbol">AAPL</span>
-                                    <span class="value">$150.25</span>
-                                    <span class="change positive">+1.25%</span>
-                                </div>
-                                <div class="position-item">
-                                    <span class="symbol">GOOGL</span>
-                                    <span class="value">$2750.50</span>
-                                    <span class="change negative">-0.75%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="overview-card">
-                        <h3>Recent Signals</h3>
-                        <div class="card-content">
-                            <div class="signal-list">
-                                <div class="signal-item">
-                                    <span class="signal-type buy">BUY</span>
-                                    <span class="signal-symbol">TSLA</span>
-                                    <span class="signal-time">2m ago</span>
-                                </div>
-                                <div class="signal-item">
-                                    <span class="signal-type sell">SELL</span>
-                                    <span class="signal-symbol">MSFT</span>
-                                    <span class="signal-time">15m ago</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="news-tags">
+                        <span class="news-tag ticker">NVDA</span>
+                        <span class="news-tag">Options</span>
                     </div>
                 </div>
-            </section>
-
-            <!-- Terminal Section -->
-            <section id="terminal" class="content-section">
-                {% include 'components/terminal.html' %}
-            </section>
-
-            <!-- Other sections would be included here -->
+                
+                <div class="news-item" data-type="analysis">
+                    <div class="news-source">
+                        <span class="news-source-name">Sauron AI</span>
+                        <span class="news-time">10 min ago</span>
+                    </div>
+                    <h4 class="news-headline">Pattern Alert: AAPL Ascending Triangle</h4>
+                    <p class="news-summary">Bullish pattern formation with 85% success rate...</p>
+                    <div class="news-meta">
+                        <div class="sentiment-indicator positive">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Buy Signal</span>
+                        </div>
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag ticker">AAPL</span>
+                        <span class="news-tag">Technical</span>
+                    </div>
+                </div>
+                
+                <div class="news-item" data-type="news">
+                    <div class="news-source">
+                        <span class="news-source-name">Reuters</span>
+                        <span class="news-time">15 min ago</span>
+                    </div>
+                    <h4 class="news-headline">Tesla Q4 Deliveries Beat Estimates</h4>
+                    <p class="news-summary">484,507 vehicles delivered, beating expectations...</p>
+                    <div class="news-meta">
+                        <div class="sentiment-indicator positive">
+                            <i class="fas fa-rocket"></i>
+                            <span>Bullish</span>
+                        </div>
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag ticker">TSLA</span>
+                        <span class="news-tag">Earnings</span>
+                    </div>
+                </div>
+                
+                <!-- More news items... -->
+            </div>
         </div>
-    </main>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item active" data-section="overview">
+                        <i class="fas fa-eye"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="market-scanner">
+                        <i class="fas fa-search"></i>
+                        <span>Market Scanner</span>
+                    </a>
+                    <a href="{% url 'vision' %}" class="nav-item">
+                        <i class="fas fa-cube"></i>
+                        <span>Vision 3D</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="strategy-builder">
+                        <i class="fas fa-cogs"></i>
+                        <span>Strategy Builder</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="risk-monitor">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Risk Monitor</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="sentiment-analysis">
+                        <i class="fas fa-brain"></i>
+                        <span>Sentiment Analysis</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="terminal">
+                        <i class="fas fa-terminal"></i>
+                        <span>Terminal</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header">
+                        <h2>Market Overview</h2>
+                        <div class="section-controls">
+                            <button class="control-btn">
+                                <i class="fas fa-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <h3>Portfolio Status</h3>
+                            <div class="card-content">
+                                <div class="metric">
+                                    <span class="value">$125,847</span>
+                                    <span class="label">Total Value</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="value positive">+2.35%</span>
+                                    <span class="label">Today's Change</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overview-card">
+                            <h3>Active Positions</h3>
+                            <div class="card-content">
+                                <div class="position-list">
+                                    <div class="position-item">
+                                        <div class="position-header">
+                                            <span class="symbol">AAPL</span>
+                                            <span class="value">$150.25</span>
+                                            <span class="change positive">+1.25%</span>
+                                        </div>
+                                        <div class="mini-chart">
+                                            <svg class="chart-svg">
+                                                <polyline class="price-line" points="0,30 10,28 20,25 30,27 40,22 50,20 60,18 70,15 80,12 90,10 100,8" />
+                                                <rect class="volume-bars" x="0" y="35" width="10" height="5" />
+                                                <rect class="volume-bars" x="20" y="33" width="10" height="7" />
+                                                <rect class="volume-bars" x="40" y="34" width="10" height="6" />
+                                                <rect class="volume-bars" x="60" y="32" width="10" height="8" />
+                                                <rect class="volume-bars" x="80" y="35" width="10" height="5" />
+                                            </svg>
+                                        </div>
+                                        <div class="chart-info">
+                                            <span>1H</span>
+                                            <span>Vol: 1.2M</span>
+                                        </div>
+                                    </div>
+                                    <div class="position-item">
+                                        <div class="position-header">
+                                            <span class="symbol">GOOGL</span>
+                                            <span class="value">$2750.50</span>
+                                            <span class="change negative">-0.75%</span>
+                                        </div>
+                                        <div class="mini-chart">
+                                            <svg class="chart-svg">
+                                                <polyline class="price-line" points="0,10 10,12 20,15 30,13 40,18 50,20 60,22 70,25 80,28 90,30 100,32" />
+                                                <rect class="volume-bars" x="0" y="35" width="10" height="5" />
+                                                <rect class="volume-bars" x="20" y="33" width="10" height="7" />
+                                                <rect class="volume-bars" x="40" y="36" width="10" height="4" />
+                                                <rect class="volume-bars" x="60" y="32" width="10" height="8" />
+                                                <rect class="volume-bars" x="80" y="34" width="10" height="6" />
+                                            </svg>
+                                        </div>
+                                        <div class="chart-info">
+                                            <span>1H</span>
+                                            <span>Vol: 850K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overview-card">
+                            <h3>Recent Signals</h3>
+                            <div class="card-content">
+                                <div class="signal-list">
+                                    <div class="signal-item">
+                                        <span class="signal-type buy">BUY</span>
+                                        <span class="signal-symbol">TSLA</span>
+                                        <span class="signal-time">2m ago</span>
+                                    </div>
+                                    <div class="signal-item">
+                                        <span class="signal-type sell">SELL</span>
+                                        <span class="signal-symbol">MSFT</span>
+                                        <span class="signal-time">15m ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Terminal Section -->
+                <section id="terminal" class="content-section">
+                    {% include 'components/terminal.html' %}
+                </section>
+
+                <!-- Other sections would be included here -->
+            </div>
+        </main>
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/dashboard.js' %}"></script>
 <script>
+// Enhanced sidebar toggle to show/hide news
+document.getElementById('sidebar-toggle').addEventListener('click', function() {
+    const sidebar = document.querySelector('.sidebar');
+    const contentArea = document.querySelector('.content-area');
+    
+    sidebar.classList.toggle('retracted');
+    
+    // Adjust content area margin to reveal news
+    if (sidebar.classList.contains('retracted')) {
+        contentArea.style.marginLeft = '240px';
+    } else {
+        contentArea.style.marginLeft = '0';
+    }
+});
+
 // News filter functionality
 document.querySelectorAll('.news-filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-        // Remove active class from all buttons
         document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
         this.classList.add('active');
         
-        // Filter news items
         const filter = this.dataset.filter;
         document.querySelectorAll('.news-item').forEach(item => {
             if (filter === 'all' || item.dataset.type === filter) {
@@ -365,7 +376,6 @@ document.querySelectorAll('.news-filter-btn').forEach(btn => {
 // Make news items clickable
 document.querySelectorAll('.news-item').forEach(item => {
     item.addEventListener('click', function() {
-        // In a real app, this would open the full article or analysis
         console.log('Opening article...');
     });
 });
