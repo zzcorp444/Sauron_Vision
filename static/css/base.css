@@ -185,9 +185,9 @@ body {
 
 .eye-outline {
     fill: none;
-    stroke: rgba(0, 255, 65, 0.3);
-    stroke-width: 3;
-    filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.2));
+    stroke: rgba(0, 255, 65, 0.6);
+    stroke-width: 5;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.8)) drop-shadow(0 0 50px rgba(0, 255, 65, 0.4));
 }
 
 /* Electronic Circuit Veins */
@@ -284,17 +284,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
-/* Equator - special parallel */
-.globe-line.equator {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border: 3.5px solid rgba(0, 255, 65, 0.5);
-    transform: rotateX(90deg);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
-}
-
 /* Horizontal lines (Parallels) - Creating 3D effect */
 .globe-line.parallel {
     width: 100%;
@@ -337,9 +326,9 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    border: 2.5px solid rgba(0, 255, 65, 0.4);
+    border: 3.5px solid rgba(0, 255, 65, 0.5);
     transform: rotateX(90deg);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
 /* Market Dots - 3D Positioned on Globe Surface */
@@ -495,16 +484,87 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - Enhanced with Charts */
+/* Price ticker container - Transparent */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(26, 26, 26, 0.8);
-    border-top: 1px solid var(--border-color);
+    background: transparent;
     z-index: 100;
-    backdrop-filter: blur(10px);
+}
+
+.ticker-controls {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 101;
+}
+
+.toggle-charts-btn {
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--secondary-text);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-charts-btn:hover {
+    border-color: var(--glow-color);
+    color: var(--primary-text);
+}
+
+.toggle-charts-btn.active {
+    background: var(--glow-color);
+    color: var(--primary-bg);
+}
+
+.price-ticker {
+    display: flex;
+    gap: 20px;
+    padding: 8px 15px;
+    animation: ticker-move 80s linear infinite;
+}
+
+.ticker-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 65px;
+    padding: 3px;
+    transition: all 0.3s ease;
+}
+
+.ticker-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 3px;
+}
+
+.ticker-symbol {
+    font-weight: 600;
+    color: var(--primary-text);
+    font-size: 12px;
+}
+
+.ticker-price {
+    font-size: 11px;
+    color: var(--secondary-text);
+}
+
+.ticker-change {
+    font-size: 10px;
+}
+
+.ticker-change.positive {
+    color: var(--primary-text);
+}
+
+.ticker-change.negative {
+    color: var(--error-text);
 }
 
 .ticker-chart {
@@ -521,67 +581,6 @@ body {
 .ticker-chart.show {
     opacity: 1;
     max-height: 25px;
-}
-
-.price-ticker {
-    display: flex;
-    gap: 20px;
-    padding: 8px 15px;
-    animation: ticker-move 80s linear infinite;
-}
-
-.ticker-item {
-    display: flex;
-    flex-direction: column;
-    min-width: 100px;
-    padding: 3px;
-    transition: all 0.3s ease;
-}
-
-.ticker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.ticker-symbol {
-    font-weight: 600;
-    color: var(--primary-text);
-    font-size: 14px;
-}
-
-.ticker-price {
-    font-size: 13px;
-    color: var(--secondary-text);
-}
-
-.ticker-change {
-    font-size: 12px;
-}
-
-.ticker-change.positive {
-    color: var(--primary-text);
-}
-
-.ticker-change.negative {
-    color: var(--error-text);
-}
-
-.ticker-chart {
-    height: 50px;
-    margin: 5px 0;
-    background: rgba(0, 255, 65, 0.05);
-    border-radius: 3px;
-    overflow: hidden;
-    opacity: 0;
-    max-height: 0;
-    transition: all 0.3s ease;
-}
-
-.ticker-chart.show {
-    opacity: 1;
-    max-height: 50px;
 }
 
 .chart-svg {
@@ -602,7 +601,7 @@ body {
 .chart-details {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
+    font-size: 9px;
     color: var(--tertiary-text);
     opacity: 0;
     transition: opacity 0.3s ease;
