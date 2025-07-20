@@ -108,15 +108,8 @@
     </div>
     
     <!-- Binary paragraph top left -->
-    <div class="binary-paragraph" id="binary-paragraph">
-        <pre>01010101 01101001 00100000 01010011 01100001 01110101 01110010 01101111 01101110 00100000 01010110 01101001 01110011 01101001 01101111 01101110</pre>
-    </div>
-    
-    <!-- Code line above tickers -->
-    <div class="code-line-container">
-        <div class="code-line">
-            <pre>import trading_module; def execute_trade(): analyze_market() and generate_strategy(); run_backtest(); optimize_portfolio(); monitor_risks(); # Sauron Vision AI Core v1.0</pre>
-        </div>
+    <div class="binary-paragraph">
+        <p id="binary-text"></p>
     </div>
     
     <!-- Code bits scrolling - Enhanced variety -->
@@ -159,35 +152,28 @@
         </div>
     </div>
     
-    <!-- Notices band below header -->
-    <div class="notices-band">
-        <div class="notices-content">
-            <span><i class="fas fa-brain"></i> Sauron AI analyzing markets...</span>
-            <span><i class="fas fa-chart-line"></i> Global markets open - Trading active</span>
-            <span><i class="fas fa-bell"></i> New signal detected in AAPL</span>
-            <span><i class="fas fa-shield-alt"></i> Risk level: Medium</span>
-            <span><i class="fas fa-newspaper"></i> Fed announcement in 2 hours</span>
-            <span><i class="fas fa-globe"></i> Crypto volatility high</span>
-            <span><i class="fas fa-rocket"></i> TSLA earnings beat estimates</span>
-        </div>
+    <!-- Encoded code line above tickers -->
+    <div class="encoded-code-line">
+        <code id="encoded-code">encoded code scrolling from right to left...</code>
     </div>
     
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
-        <!-- Action icons above tickers -->
-        <div class="action-icons">
-            <button class="action-icon" data-action="all"><i class="fas fa-th"></i> All</button>
-            <button class="action-icon" data-action="consolidation"><i class="fas fa-compress-arrows-alt"></i> Consolidation</button>
-            <button class="action-icon" data-action="setup"><i class="fas fa-tools"></i> Set Up</button>
-            <button class="action-icon" data-action="signal"><i class="fas fa-bell"></i> Signal Live</button>
-            <button class="action-icon" data-action="increase"><i class="fas fa-arrow-up"></i> High Increase</button>
-            <button class="action-icon" data-action="decrease"><i class="fas fa-arrow-down"></i> High Decrease</button>
-            <button class="action-icon" data-action="volume"><i class="fas fa-volume-up"></i> High Volume</button>
-        </div>
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
             </button>
+            <button class="hide-tickers-btn" id="hide-tickers">
+                <i class="fas fa-eye-slash"></i> Hide
+            </button>
+        </div>
+        <div class="price-action-filters">
+            <button class="filter-btn" data-filter="consolidation"><i class="fas fa-compress-arrows-alt"></i> Consolidation</button>
+            <button class="filter-btn" data-filter="setup"><i class="fas fa-tools"></i> Setup</button>
+            <button class="filter-btn" data-filter="signal"><i class="fas fa-bell"></i> Signal</button>
+            <button class="filter-btn" data-filter="increase"><i class="fas fa-arrow-up"></i> Increase</button>
+            <button class="filter-btn" data-filter="decrease"><i class="fas fa-arrow-down"></i> Decrease</button>
+            <button class="filter-btn" data-filter="volume"><i class="fas fa-chart-bar"></i> High Volume</button>
         </div>
         <div class="price-ticker">
             <!-- Extended ticker items -->
@@ -561,31 +547,38 @@
                 detail.classList.toggle('show');
             });
         });
-        // Binary paragraph update
-        function updateBinaryParagraph() {
-            const binaryEl = document.getElementById('binary-paragraph');
-            if (binaryEl) {
-                let binary = '';
-                for (let i = 0; i < 200; i++) {
-                    binary += Math.random() > 0.5 ? '1' : '0';
-                    if (i % 8 === 7) binary += ' ';
-                    if (i % 32 === 31) binary += '\n';
-                }
-                binaryEl.textContent = binary;
-            }
-        }
-        setInterval(updateBinaryParagraph, 5000);
-        updateBinaryParagraph();
+        
+        // Hide tickers functionality
+        document.getElementById('hide-tickers').addEventListener('click', function() {
+            const container = document.querySelector('.price-ticker-container');
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        });
 
-        // Action icons filter
-        document.querySelectorAll('.action-icon').forEach(btn => {
+        // Filter buttons for price actions
+        document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.querySelectorAll('.action-icon').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                // Implement filter logic here
-                console.log('Filtering by:', this.dataset.action);
+                btn.classList.toggle('active');
+                // Implement filtering logic here
             });
         });
+
+        // Binary text changing
+        function updateBinaryText() {
+            let binary = '';
+            for (let i = 0; i < 200; i++) {
+                binary += Math.random() < 0.5 ? '0' : '1';
+                if (i % 20 === 19) binary += '\n';
+            }
+            document.getElementById('binary-text').textContent = binary;
+        }
+        setInterval(updateBinaryText, 1000); // Change every second
+
+        // Encoded code scrolling
+        function updateEncodedCode() {
+            const code = 'const trade = await executeStrategy(params); if (trade.success) alert("Trade executed");';
+            document.getElementById('encoded-code').textContent = code;
+        }
+        updateEncodedCode();
     </script>
     {% block extra_js %}{% endblock %}
 </body>

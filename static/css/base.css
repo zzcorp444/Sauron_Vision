@@ -111,19 +111,36 @@ body {
     }
 }
 
-@keyframes pulse-intensity {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
+/* Binary paragraph top left */
+.binary-paragraph {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    font-size: 12px;
+    color: var(--tertiary-text);
+    opacity: 0.3;
+    z-index: 2;
+    white-space: pre-wrap;
 }
 
-@keyframes code-line-move {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+/* Encoded code line above tickers */
+.encoded-code-line {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    color: var(--secondary-text);
+    opacity: 0.5;
+    z-index: 3;
+    animation: ticker-move 60s linear infinite;
 }
 
-@keyframes notices-move {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+.encoded-code-line:hover {
+    animation-play-state: paused;
 }
 
 /* Matrix Background Effect */
@@ -234,7 +251,12 @@ body {
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
-    animation: pulse-intensity 2s ease-in-out infinite;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
 }
 
 /* Globe - 3D */
@@ -377,27 +399,27 @@ body {
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-45deg) rotateX(20deg) translateZ(180px);
+    transform: rotateY(-80deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(0deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(140deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(139deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(5deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(31deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(-10deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(22deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
 }
 
 .market-dot.sydney {
@@ -405,23 +427,23 @@ body {
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(43deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
-    transform: rotateY(72deg) rotateX(25deg) translateZ(180px);
+    transform: rotateY(72deg) rotateX(19deg) translateZ(180px);
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(-15deg) rotateX(47deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -468,68 +490,6 @@ body {
 .market-dot:hover::after {
     opacity: 1;
     bottom: 120%;
-}
-
-/* Binary paragraph */
-.binary-paragraph {
-    position: fixed;
-    top: 10%;
-    left: 10%;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--tertiary-text);
-    opacity: 0.3;
-    white-space: pre-wrap;
-    max-width: 300px;
-    line-height: 1.2;
-    z-index: 2;
-}
-
-/* Code line container */
-.code-line-container {
-    position: fixed;
-    bottom: 90px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    overflow: hidden;
-    z-index: 2;
-}
-
-.code-line {
-    position: absolute;
-    white-space: nowrap;
-    font-size: 12px;
-    color: var(--secondary-text);
-    opacity: 0.5;
-    animation: code-line-move 60s linear infinite;
-}
-
-/* Notices band */
-.notices-band {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    overflow: hidden;
-    background: var(--accent-bg);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 150;
-}
-
-.notices-content {
-    position: absolute;
-    display: flex;
-    gap: 50px;
-    white-space: nowrap;
-    animation: notices-move 60s linear infinite;
-    font-size: 14px;
-    color: var(--secondary-text);
-}
-
-.notices-content span {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 /* Code scroll container - Enhanced */
@@ -583,30 +543,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* Action icons */
-.action-icons {
-    display: flex;
-    gap: 10px;
-    padding: 5px 10px;
-    justify-content: center;
-}
-
-.action-icon {
-    padding: 5px 10px;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    color: var(--secondary-text);
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.action-icon:hover, .action-icon.active {
-    background: var(--glow-color);
-    color: var(--primary-bg);
-}
-
 .ticker-controls {
     position: absolute;
     top: 5px;
@@ -625,12 +561,53 @@ body {
     transition: all 0.3s ease;
 }
 
-.toggle-charts-btn:hover {
+.toggle-charts-btn:hover,
+.toggle-charts-btn.active {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
 
 .toggle-charts-btn.active {
+    background: var(--glow-color);
+    color: var(--primary-bg);
+}
+
+.hide-tickers-btn {
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--secondary-text);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hide-tickers-btn:hover {
+    border-color: var(--glow-color);
+    color: var(--primary-text);
+}
+
+.price-action-filters {
+    display: flex;
+    gap: 10px;
+    padding: 5px 15px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 3px 8px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--secondary-text);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
     background: var(--glow-color);
     color: var(--primary-bg);
 }
