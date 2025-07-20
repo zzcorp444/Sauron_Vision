@@ -120,9 +120,17 @@ class SauronDashboard {
             const signalEl = document.createElement('div');
             signalEl.className = 'signal-item';
             signalEl.innerHTML = `
-                <span class="signal-type ${signal.type.toLowerCase()}">${signal.type}</span>
-                <span class="signal-symbol">${signal.symbol}</span>
-                <span class="signal-time">${signal.time}</span>
+                <div class="signal-header">
+                    <div class="signal-info">
+                        <span class="signal-type ${signal.type.toLowerCase()}">${signal.type}</span>
+                        <span class="signal-symbol">${signal.symbol}</span>
+                        <span class="signal-meta">
+                            <span class="trade-tier">T${signal.tier}</span>
+                            <span class="elapsed-time">${signal.elapsed}</span>
+                        </span>
+                    </div>
+                    <span class="signal-time">${signal.status}</span>
+                </div>
             `;
             signalList.appendChild(signalEl);
         });
@@ -182,7 +190,7 @@ class SauronDashboard {
     }
 
     loadMarketScanner() {
-        fetch('/api/market-scanner/')
+        fetch('/api/market/scanner/')
             .then(response => response.json())
             .then(data => {
                 console.log('Market scanner data:', data);
