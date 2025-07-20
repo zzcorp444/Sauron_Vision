@@ -197,10 +197,6 @@
     font-weight: bold;
 }
 
-.blink {
-    animation: blink 1s infinite;
-}
-
 .logout-btn {
     padding: 0.5rem;
     background: transparent;
@@ -220,19 +216,20 @@
     color: var(--error-text);
 }
 
-/* Notice Band */
-.notice-band {
-    background: var(--accent-bg);
+/* Notices headband */
+.notices-headband {
+    background: var(--secondary-bg);
     height: 40px;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
-    z-index: 150;
 }
 
-.notice-scroller {
+.notices-ticker {
     display: flex;
+    gap: 40px;
     animation: ticker-move 60s linear infinite;
-    padding: 10px 0;
+    height: 100%;
+    align-items: center;
 }
 
 .notice-item {
@@ -240,24 +237,20 @@
     align-items: center;
     gap: 10px;
     white-space: nowrap;
-    margin-right: 50px;
     cursor: pointer;
-    color: var(--secondary-text);
 }
 
-.notice-item:hover {
+.notice-item i {
     color: var(--primary-text);
 }
 
-.notice-detail {
-    display: none;
-    font-size: 0.8rem;
-    color: var(--tertiary-text);
-    margin-left: 10px;
+.notice-title {
+    color: var(--secondary-text);
 }
 
-.notice-item.show-detail .notice-detail {
-    display: inline;
+.notice-detail {
+    color: var(--tertiary-text);
+    margin-left: 10px;
 }
 
 /* Main Layout Container */
@@ -591,6 +584,37 @@
     color: var(--primary-text);
 }
 
+.bulk-action-btn {
+    position: relative;
+}
+
+.bulk-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--accent-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    z-index: 100;
+}
+
+.bulk-menu button {
+    padding: 0.3rem 0.6rem;
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.bulk-menu button:hover {
+    color: var(--primary-text);
+}
+
 .overview-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -607,8 +631,8 @@
     overflow: hidden;
 }
 
-.overview-card.expanded {
-    height: auto;
+.overview-card.minimized {
+    height: 50px;
 }
 
 .overview-card:hover {
@@ -628,7 +652,7 @@
     gap: 1rem;
 }
 
-.card-controls {
+.card-icons {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -636,15 +660,14 @@
     gap: 5px;
 }
 
-.view-more, .toggle-size {
+.more-data, .reduce-card {
     background: transparent;
     border: none;
-    color: var(--tertiary-text);
+    color: var(--secondary-text);
     cursor: pointer;
-    font-size: 12px;
 }
 
-.view-more:hover, .toggle-size:hover {
+.more-data:hover, .reduce-card:hover {
     color: var(--primary-text);
 }
 
@@ -873,7 +896,13 @@
 .signal-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.signal-tier {
+    font-size: 0.8rem;
+    color: var(--warning-text);
 }
 
 .signal-details {
@@ -891,26 +920,22 @@
 }
 
 .signal-actions {
-    display: none;
+    display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 0.5rem;
-}
-
-.signal-item:hover .signal-actions {
-    display: flex;
+    margin-top: 5px;
 }
 
 .execute-btn {
-    padding: 5px 10px;
     background: var(--glow-color);
     color: var(--primary-bg);
+    padding: 5px 10px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
-.delete-btn {
+.delete-signal {
     background: transparent;
     border: none;
     color: var(--error-text);
@@ -1048,30 +1073,35 @@
     height: 100%;
 }
 
-/* Status Indicator */
-.status-indicator {
-    position: fixed;
-    top: 80px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--secondary-text);
-    font-size: 12px;
-    z-index: 100;
-}
-
+/* Status indicators */
 .status-dot {
+    position: fixed;
+    top: 70px;
+    right: 20px;
     width: 10px;
     height: 10px;
-    border-radius: 50%;
     background: var(--primary-text);
+    border-radius: 50%;
     animation: pulse 2s infinite;
+    z-index: 300;
+}
+
+.status-dot + span {
+    position: fixed;
+    top: 65px;
+    right: 40px;
+    color: var(--secondary-text);
+    font-size: 12px;
+    z-index: 300;
 }
 
 .time-ping {
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: 85px;
+    right: 20px;
+    color: var(--tertiary-text);
+    font-size: 12px;
+    z-index: 300;
 }
 
 /* Responsive Design */

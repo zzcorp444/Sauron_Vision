@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sauron Vision{% endblock %}</title>
     {% load static %}
-    <link rel="icon" href="{% static 'images/sv_logo_02.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'images/sv_logo_02_color.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,19 +89,19 @@
                     <div class="globe-line equator"></div>
                     
                     <!-- Market dots on globe surface - 13 total -->
-                    <div class="market-dot nyse" data-market="NYSE"></div>
-                    <div class="market-dot nasdaq" data-market="NASDAQ"></div>
-                    <div class="market-dot lse" data-market="London"></div>
-                    <div class="market-dot tokyo" data-market="Tokyo"></div>
-                    <div class="market-dot shanghai" data-market="Shanghai"></div>
-                    <div class="market-dot hongkong" data-market="Hong Kong"></div>
-                    <div class="market-dot frankfurt" data-market="Frankfurt"></div>
-                    <div class="market-dot sydney" data-market="Sydney"></div>
-                    <div class="market-dot toronto" data-market="Toronto"></div>
-                    <div class="market-dot singapore" data-market="Singapore"></div>
-                    <div class="market-dot mumbai" data-market="Mumbai"></div>
-                    <div class="market-dot dubai" data-market="Dubai"></div>
-                    <div class="market-dot zurich" data-market="Zurich"></div>
+                    <div class="market-dot nyse" data-market="NYSE" style="transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);"></div>
+                    <div class="market-dot nasdaq" data-market="NASDAQ" style="transform: rotateY(-45deg) rotateX(-30deg) translateZ(180px);"></div>
+                    <div class="market-dot lse" data-market="London" style="transform: rotateY(8deg) rotateX(51deg) translateZ(180px);"></div>
+                    <div class="market-dot tokyo" data-market="Tokyo" style="transform: rotateY(140deg) rotateX(35deg) translateZ(180px);"></div>
+                    <div class="market-dot shanghai" data-market="Shanghai" style="transform: rotateY(121deg) rotateX(-25deg) translateZ(180px);"></div>
+                    <div class="market-dot hongkong" data-market="Hong Kong" style="transform: rotateY(114deg) rotateX(10deg) translateZ(180px);"></div>
+                    <div class="market-dot frankfurt" data-market="Frankfurt" style="transform: rotateY(25deg) rotateX(48deg) translateZ(180px);"></div>
+                    <div class="market-dot sydney" data-market="Sydney" style="transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);"></div>
+                    <div class="market-dot toronto" data-market="Toronto" style="transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);"></div>
+                    <div class="market-dot singapore" data-market="Singapore" style="transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);"></div>
+                    <div class="market-dot mumbai" data-market="Mumbai" style="transform: rotateY(72deg) rotateX(25deg) translateZ(180px);"></div>
+                    <div class="market-dot dubai" data-market="Dubai" style="transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);"></div>
+                    <div class="market-dot zurich" data-market="Zurich" style="transform: rotateY(-15deg) rotateX(70deg) translateZ(180px);"></div>
                 </div>
             </div>
         </div>
@@ -110,7 +110,25 @@
     <!-- Binary paragraph top left -->
     <div class="binary-paragraph"></div>
     
-    <!-- Code scroll container - Enhanced variety -->
+    <!-- Encoded code line above tickers -->
+    <div class="code-ticker-container">
+        <div class="code-ticker">
+            <pre>def analyze_market(data): return insights;</pre>
+            <pre>strategy = generate_strategy(params); execute_trade(strategy);</pre>
+            <pre>if sentiment > 0.7: buy_asset();</pre>
+            <pre>risk = calculate_var(portfolio); alert if risk > threshold;</pre>
+            <pre>price = fetch_price(symbol); plot_chart(price);</pre>
+            <pre>model = train_ml_model(data); predict = model.predict();</pre>
+            <pre>optimize_portfolio(assets); rebalance();</pre>
+            <pre>signals = detect_patterns(chart); if signals: execute();</pre>
+            <pre>correlation = analyze_pairs(assets); hedge_position(correlation);</pre>
+            <pre>news = scrape_sentiment(sources); adjust_strategy(news);</pre>
+            <pre>backtest = run_simulation(strategy); optimize_parameters(backtest);</pre>
+            <pre>alert = monitor_markets(24/7); notify_trader(alert);</pre>
+        </div>
+    </div>
+    
+    <!-- Code bits scrolling - Enhanced variety -->
     <div class="code-scroll-container">
         <div class="code-bit">
             <pre>def analyze_market(data):<br>    return insights</pre>
@@ -150,19 +168,18 @@
         </div>
     </div>
     
-    <!-- Code line above tickers -->
-    <div class="code-line"></div>
+    <!-- Ticker icons container -->
+    <div class="ticker-icons-container">
+        <div class="ticker-icon" data-action="consolidation"><i class="fas fa-compress-arrows-alt"></i></div>
+        <div class="ticker-icon" data-action="setup"><i class="fas fa-tools"></i></div>
+        <div class="ticker-icon" data-action="signal"><i class="fas fa-bell"></i></div>
+        <div class="ticker-icon" data-action="increase"><i class="fas fa-arrow-up"></i></div>
+        <div class="ticker-icon" data-action="decrease"><i class="fas fa-arrow-down"></i></div>
+        <div class="ticker-icon" data-action="volume"><i class="fas fa-chart-bar"></i></div>
+    </div>
     
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
-        <div class="ticker-icons">
-            <i class="fas fa-chart-line" title="Consolidations"></i>
-            <i class="fas fa-wrench" title="Set Up Formation"></i>
-            <i class="fas fa-signal" title="Signal Live"></i>
-            <i class="fas fa-arrow-up" title="High Increase"></i>
-            <i class="fas fa-arrow-down" title="High Decrease"></i>
-            <i class="fas fa-chart-bar" title="High Volumes"></i>
-        </div>
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
@@ -546,10 +563,22 @@
         // Toggle ticker container
         document.getElementById('toggle-ticker').addEventListener('click', function() {
             const container = document.querySelector('.price-ticker-container');
-            container.classList.toggle('reduced');
+            container.classList.toggle('minimized');
             this.querySelector('i').classList.toggle('fa-chevron-down');
             this.querySelector('i').classList.toggle('fa-chevron-up');
         });
+        // Binary paragraph
+        function updateBinaryParagraph() {
+            const paragraph = document.querySelector('.binary-paragraph');
+            let binary = '';
+            for (let i = 0; i < 1000; i++) {
+                binary += Math.random() > 0.5 ? '1' : '0';
+                if (i % 50 === 49) binary += '\n';
+            }
+            paragraph.textContent = binary;
+        }
+        setInterval(updateBinaryParagraph, 5000);
+        updateBinaryParagraph();
     </script>
     {% block extra_js %}{% endblock %}
 </body>
