@@ -176,7 +176,7 @@
     font-size: 0.9rem;
 }
 
-.alerts {
+.notifications, .alerts {
     position: relative;
     cursor: pointer;
 }
@@ -195,6 +195,10 @@
     justify-content: center;
     font-size: 0.7rem;
     font-weight: bold;
+}
+
+.notifications.blink, .alerts.blink {
+    animation: pulse 1s infinite;
 }
 
 .logout-btn {
@@ -216,36 +220,39 @@
     color: var(--error-text);
 }
 
-/* Notices headband */
-.notices-headband {
+/* Notices Band */
+.notices-band {
     background: var(--accent-bg);
     height: 40px;
     overflow: hidden;
     position: relative;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .notices-scroller {
     display: flex;
+    gap: 50px;
+    position: absolute;
+    white-space: nowrap;
     animation: ticker-move 60s linear infinite;
-    gap: 20px;
 }
 
 .notice-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    white-space: nowrap;
     cursor: pointer;
+    color: var(--secondary-text);
 }
 
-.notice-title {
-    font-weight: bold;
+.notice-item:hover {
+    color: var(--primary-text);
 }
 
 .notice-detail {
     display: none;
     font-size: 0.8rem;
-    color: var(--secondary-text);
+    color: var(--tertiary-text);
 }
 
 .notice-item.expanded .notice-detail {
@@ -583,30 +590,38 @@
     color: var(--primary-text);
 }
 
-.bulk-action-btn {
-    position: relative;
+/* Bulk Actions */
+.bulk-actions {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 50;
 }
 
-.bulk-menu {
+.bulk-actions-menu {
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
     background: var(--secondary-bg);
-    border: 1px solid var(--glow-color);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
-.bulk-menu button {
+.bulk-actions-menu.show {
+    display: block;
+}
+
+.action-item {
     padding: 0.5rem 1rem;
-    background: var(--accent-bg);
-    border: none;
-    color: var(--primary-text);
     cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.action-item:hover {
+    background: var(--accent-bg);
 }
 
 .overview-grid {
@@ -623,6 +638,15 @@
     transition: all 0.3s ease;
     height: 250px;
     overflow: hidden;
+}
+
+.overview-card.fixed-height {
+    height: 250px;
+    overflow: hidden;
+}
+
+.overview-card.expanded {
+    height: auto;
 }
 
 .overview-card.reduced {
@@ -646,23 +670,43 @@
     gap: 1rem;
 }
 
+/* Card Controls */
 .card-controls {
     position: absolute;
     bottom: 10px;
     right: 10px;
     display: flex;
-    gap: 5px;
+    gap: 10px;
 }
 
-.view-more-btn, .reduce-btn {
-    background: transparent;
-    border: none;
-    color: var(--secondary-text);
+.card-controls i {
     cursor: pointer;
+    color: var(--secondary-text);
+    transition: color 0.2s ease;
 }
 
-.view-more-btn:hover, .reduce-btn:hover {
+.card-controls i:hover {
     color: var(--primary-text);
+}
+
+/* Expanded Content */
+.expanded-content {
+    display: none;
+}
+
+.expanded .expanded-content {
+    display: block;
+    margin-top: 1rem;
+}
+
+.graph-placeholder {
+    height: 150px;
+    background: var(--accent-bg);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tertiary-text);
 }
 
 /* Portfolio Status Grid */
@@ -670,19 +714,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-}
-
-.portfolio-graphs {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.graph-item {
-    flex: 1;
-    height: 100px;
-    background: var(--accent-bg);
-    border-radius: 5px;
 }
 
 .metric {
@@ -904,6 +935,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .signal-details {
@@ -918,6 +950,32 @@
     max-height: 150px;
     opacity: 1;
     margin-top: 0.5rem;
+}
+
+.signal-actions {
+    display: none;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.execute-btn {
+    padding: 5px 10px;
+    background: var(--primary-text);
+    color: var(--primary-bg);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.signal-actions i {
+    cursor: pointer;
+    color: var(--error-text);
+}
+
+.signal-tier {
+    font-size: 0.8rem;
+    color: var(--warning-text);
 }
 
 .detail-row {
@@ -978,27 +1036,6 @@
 .signal-time {
     font-size: 0.8rem;
     color: var(--tertiary-text);
-}
-
-.signal-actions {
-    display: none;
-    gap: 5px;
-}
-
-.execute-btn {
-    background: var(--glow-color);
-    color: var(--primary-bg);
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.trash-btn {
-    background: transparent;
-    border: none;
-    color: var(--error-text);
-    cursor: pointer;
 }
 
 /* AI Insights */

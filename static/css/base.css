@@ -111,36 +111,20 @@ body {
     }
 }
 
-/* Binary paragraph top left */
-.binary-paragraph {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 200px;
-    font-size: 12px;
-    color: var(--tertiary-text);
-    opacity: 0.3;
-    z-index: 2;
-    white-space: pre-wrap;
+@keyframes heartbeat-pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
 }
 
-/* Encoded code line above tickers */
-.encoded-code-line {
-    position: fixed;
-    bottom: 80px;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 14px;
-    color: var(--secondary-text);
-    opacity: 0.5;
-    z-index: 3;
-    animation: ticker-move 60s linear infinite;
+@keyframes binary-change {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
-.encoded-code-line:hover {
-    animation-play-state: paused;
+@keyframes code-move {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
 /* Matrix Background Effect */
@@ -251,12 +235,7 @@ body {
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
-    animation: pulse-glow 2s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
+    animation: heartbeat-pulse 2s ease-in-out infinite;
 }
 
 /* Globe - 3D */
@@ -399,7 +378,7 @@ body {
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-80deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(-90deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.lse {
@@ -407,7 +386,7 @@ body {
 }
 
 .market-dot.tokyo {
-    transform: rotateY(139deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(139deg) rotateX(36deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
@@ -492,6 +471,47 @@ body {
     bottom: 120%;
 }
 
+/* Binary paragraph */
+.binary-paragraph {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+#binary-text {
+    white-space: pre-wrap;
+    color: var(--tertiary-text);
+    font-size: 12px;
+    line-height: 1.2;
+    animation: binary-change 10s infinite;
+}
+
+/* Encoded code line */
+.encoded-code-line {
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#code-text {
+    white-space: nowrap;
+    color: var(--secondary-text);
+    font-size: 14px;
+    animation: code-move 60s linear infinite;
+}
+
 /* Code scroll container - Enhanced */
 .code-scroll-container {
     position: fixed;
@@ -541,6 +561,11 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
+    transition: height 0.3s ease;
+}
+
+.price-ticker-container.reduced {
+    height: 20px;
 }
 
 .ticker-controls {
@@ -550,7 +575,7 @@ body {
     z-index: 101;
 }
 
-.toggle-charts-btn {
+.toggle-charts-btn, .toggle-ticker-btn {
     padding: 5px 10px;
     background: var(--accent-bg);
     border: 1px solid var(--border-color);
@@ -562,7 +587,7 @@ body {
 }
 
 .toggle-charts-btn:hover,
-.toggle-charts-btn.active {
+.toggle-ticker-btn:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
@@ -572,44 +597,21 @@ body {
     color: var(--primary-bg);
 }
 
-.hide-tickers-btn {
-    padding: 5px 10px;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    color: var(--secondary-text);
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.hide-tickers-btn:hover {
-    border-color: var(--glow-color);
-    color: var(--primary-text);
-}
-
-.price-action-filters {
+.price-action-icons {
     display: flex;
     gap: 10px;
     padding: 5px 15px;
-    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.filter-btn {
-    padding: 3px 8px;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    color: var(--secondary-text);
-    font-size: 10px;
+.price-action-icons i {
     cursor: pointer;
-    transition: all 0.3s ease;
+    color: var(--secondary-text);
+    transition: color 0.3s ease;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--glow-color);
-    color: var(--primary-bg);
+.price-action-icons i.active {
+    color: var(--primary-text);
 }
 
 .price-ticker {

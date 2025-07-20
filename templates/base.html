@@ -107,9 +107,14 @@
         </div>
     </div>
     
-    <!-- Binary paragraph top left -->
+    <!-- Binary paragraph on top left -->
     <div class="binary-paragraph">
-        <p id="binary-text"></p>
+        <pre id="binary-text"></pre>
+    </div>
+    
+    <!-- Encoded code line above tickers -->
+    <div class="encoded-code-line">
+        <pre id="code-text"></pre>
     </div>
     
     <!-- Code bits scrolling - Enhanced variety -->
@@ -152,28 +157,24 @@
         </div>
     </div>
     
-    <!-- Encoded code line above tickers -->
-    <div class="encoded-code-line">
-        <code id="encoded-code">encoded code scrolling from right to left...</code>
-    </div>
-    
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
             </button>
-            <button class="hide-tickers-btn" id="hide-tickers">
-                <i class="fas fa-eye-slash"></i> Hide
+            <button class="toggle-ticker-btn" id="toggle-ticker">
+                <i class="fas fa-chevron-up"></i>
             </button>
         </div>
-        <div class="price-action-filters">
-            <button class="filter-btn" data-filter="consolidation"><i class="fas fa-compress-arrows-alt"></i> Consolidation</button>
-            <button class="filter-btn" data-filter="setup"><i class="fas fa-tools"></i> Setup</button>
-            <button class="filter-btn" data-filter="signal"><i class="fas fa-bell"></i> Signal</button>
-            <button class="filter-btn" data-filter="increase"><i class="fas fa-arrow-up"></i> Increase</button>
-            <button class="filter-btn" data-filter="decrease"><i class="fas fa-arrow-down"></i> Decrease</button>
-            <button class="filter-btn" data-filter="volume"><i class="fas fa-chart-bar"></i> High Volume</button>
+        <!-- Price action icons as filters -->
+        <div class="price-action-icons">
+            <i class="fas fa-compress-arrows-alt" data-action="consolidation" title="Consolidations"></i>
+            <i class="fas fa-tools" data-action="setup" title="Set Up Formation"></i>
+            <i class="fas fa-broadcast-tower" data-action="signal" title="Signal Live"></i>
+            <i class="fas fa-arrow-up" data-action="increase" title="High Increase"></i>
+            <i class="fas fa-arrow-down" data-action="decrease" title="High Decrease"></i>
+            <i class="fas fa-volume-up" data-action="volume" title="High Volumes"></i>
         </div>
         <div class="price-ticker">
             <!-- Extended ticker items -->
@@ -548,37 +549,19 @@
             });
         });
         
-        // Hide tickers functionality
-        document.getElementById('hide-tickers').addEventListener('click', function() {
+        // Toggle ticker container
+        document.getElementById('toggle-ticker').addEventListener('click', function() {
             const container = document.querySelector('.price-ticker-container');
-            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+            container.classList.toggle('reduced');
+            this.querySelector('i').classList.toggle('fa-chevron-up');
+            this.querySelector('i').classList.toggle('fa-chevron-down');
         });
-
-        // Filter buttons for price actions
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                btn.classList.toggle('active');
-                // Implement filtering logic here
-            });
+        
+        // Price action filters
+        document.querySelectorAll('.price-action-icons i').addEventListener('click', function() {
+            this.classList.toggle('active');
+            // Implement filtering logic here
         });
-
-        // Binary text changing
-        function updateBinaryText() {
-            let binary = '';
-            for (let i = 0; i < 200; i++) {
-                binary += Math.random() < 0.5 ? '0' : '1';
-                if (i % 20 === 19) binary += '\n';
-            }
-            document.getElementById('binary-text').textContent = binary;
-        }
-        setInterval(updateBinaryText, 1000); // Change every second
-
-        // Encoded code scrolling
-        function updateEncodedCode() {
-            const code = 'const trade = await executeStrategy(params); if (trade.success) alert("Trade executed");';
-            document.getElementById('encoded-code').textContent = code;
-        }
-        updateEncodedCode();
     </script>
     {% block extra_js %}{% endblock %}
 </body>

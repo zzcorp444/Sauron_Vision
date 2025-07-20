@@ -70,9 +70,13 @@
         <div class="header-right">
             <div class="user-info">
                 <span>{{ user.user_id }}</span>
-                <div class="alerts">
+                <div class="notifications">
                     <i class="fas fa-bell"></i>
-                    <span class="alert-count">{{ active_alerts }}</span>
+                    <span class="alert-count">0</span>
+                </div>
+                <div class="alerts">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="alert-count">0</span>
                 </div>
             </div>
             <a href="{% url 'logout' %}" class="logout-btn">
@@ -80,34 +84,34 @@
             </a>
         </div>
     </header>
-
-    <!-- Notices headband -->
-    <div class="notices-headband">
+    
+    <!-- Notices band -->
+    <div class="notices-band">
         <div class="notices-scroller">
             <div class="notice-item">
-                <i class="fas fa-brain"></i>
-                <span class="notice-title">Sauron AI Analysis Running</span>
-                <p class="notice-detail">Analyzing 50 symbols for patterns...</p>
+                <i class="fas fa-robot"></i>
+                <span class="notice-title">Sauron Vision scanning markets</span>
+                <span class="notice-detail">AI analysis in progress for 15 assets</span>
             </div>
             <div class="notice-item">
-                <i class="fas fa-shield-alt"></i>
-                <span class="notice-title">Risk Monitor Alert</span>
-                <p class="notice-detail">Portfolio risk approaching medium level</p>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-globe"></i>
-                <span class="notice-title">Global Announcement</span>
-                <p class="notice-detail">Fed rate decision tomorrow at 2 PM EST</p>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-chart-line"></i>
-                <span class="notice-title">Market Update</span>
-                <p class="notice-detail">Tech sector up 1.5% on AI news</p>
+                <i class="fas fa-tasks"></i>
+                <span class="notice-title">Strategy optimization complete</span>
+                <span class="notice-detail">Improved parameters for momentum strategy</span>
             </div>
             <div class="notice-item">
                 <i class="fas fa-bell"></i>
-                <span class="notice-title">System Task</span>
-                <p class="notice-detail">Backtesting strategy: Mean Reversion</p>
+                <span class="notice-title">Market alert: High volatility</span>
+                <span class="notice-detail">VIX spiked 15% in last hour</span>
+            </div>
+            <div class="notice-item">
+                <i class="fas fa-globe"></i>
+                <span class="notice-title">Global announcement: Fed meeting</span>
+                <span class="notice-detail">Interest rate decision tomorrow at 2PM EST</span>
+            </div>
+            <div class="notice-item">
+                <i class="fas fa-chart-line"></i>
+                <span class="notice-title">Portfolio update</span>
+                <span class="notice-detail">Daily P&L: +2.3% | Risk level: Medium</span>
             </div>
         </div>
     </div>
@@ -261,6 +265,19 @@
 
             <!-- Content Area -->
             <div class="content-area">
+                <!-- Bulk actions button -->
+                <div class="bulk-actions">
+                    <button class="control-btn" id="bulk-actions-btn">
+                        <i class="fas fa-th-large"></i> Cards
+                    </button>
+                    <div class="bulk-actions-menu">
+                        <div class="action-item" data-action="reduce-all">Reduce All</div>
+                        <div class="action-item" data-action="expand-all">Expand All</div>
+                        <div class="action-item" data-action="add-card">Add Card</div>
+                        <div class="action-item" data-action="remove-card">Remove Card</div>
+                    </div>
+                </div>
+                
                 <!-- Overview Section -->
                 <section id="overview" class="content-section active">
                     <div class="section-header">
@@ -269,14 +286,11 @@
                             <button class="control-btn">
                                 <i class="fas fa-refresh"></i>
                             </button>
-                            <button class="control-btn bulk-action-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
                         </div>
                     </div>
                     
                     <div class="overview-grid">
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Portfolio Status</h3>
                             <div class="card-content">
                                 <div class="portfolio-grid">
@@ -313,25 +327,19 @@
                                         <span class="label">Portfolio Score</span>
                                     </div>
                                 </div>
-                                <!-- Graphs for portfolio -->
-                                <div class="portfolio-graphs">
-                                    <div class="graph-item">
-                                        <svg class="pie-chart"></svg>
-                                        <span>Asset Allocation</span>
-                                    </div>
-                                    <div class="graph-item">
-                                        <svg class="line-chart"></svg>
-                                        <span>Performance Trend</span>
-                                    </div>
+                                <!-- Expanded graphs -->
+                                <div class="expanded-content">
+                                    <div class="graph-placeholder">Portfolio Value Chart</div>
+                                    <div class="graph-placeholder">P&L Distribution</div>
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
                         
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Active Positions</h3>
                             <div class="card-content">
                                 <div class="position-list">
@@ -619,12 +627,12 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
                         
-                        <div class="signals-overview">
+                        <div class="signals-overview fixed-height">
                             <h3>Trading Signals</h3>
                             <div class="card-content">
                                 <div class="signals-sections">
@@ -636,31 +644,12 @@
                                                     <span class="signal-type buy">BUY</span>
                                                     <span class="signal-symbol">TSLA</span>
                                                     <span class="signal-time">Active</span>
+                                                    <span class="signal-tier">Tier 3</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
                                                         <span class="detail-label">Probability:</span>
                                                         <span class="detail-value">85%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Current Price:</span>
-                                                        <span class="detail-value">$850.75</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$845.20</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Size:</span>
-                                                        <span class="detail-value">100 shares</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Risk:</span>
-                                                        <span class="detail-value">Medium (2.5%)</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">3/5</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
@@ -672,24 +661,24 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">15%</span>
+                                                        <span class="detail-value">12%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+5%</span>
+                                                        <span class="detail-value">+8%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 12:00</span>
+                                                        <span class="detail-value">15:30:45</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">24h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">2h</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="execute-btn">Execute</button>
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="signal-item">
@@ -697,6 +686,7 @@
                                                     <span class="signal-type sell">SELL</span>
                                                     <span class="signal-symbol">MSFT</span>
                                                     <span class="signal-time">Active</span>
+                                                    <span class="signal-tier">Tier 2</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -704,32 +694,12 @@
                                                         <span class="detail-value">72%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Current Price:</span>
-                                                        <span class="detail-value">$300.40</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$302.15</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Size:</span>
-                                                        <span class="detail-value">50 shares</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Risk:</span>
-                                                        <span class="detail-value">Low (1.2%)</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">2/5</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
                                                         <span class="detail-value">3%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">1x</span>
+                                                        <span class="detail-value">1.5x</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
@@ -737,20 +707,20 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">-3%</span>
+                                                        <span class="detail-value">-5%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 13:00</span>
+                                                        <span class="detail-value">14:45:30</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">12h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">1h</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="execute-btn">Execute</button>
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -764,6 +734,7 @@
                                                     <span class="signal-type watch">WATCH</span>
                                                     <span class="signal-symbol">NVDA</span>
                                                     <span class="signal-time">Forming</span>
+                                                    <span class="signal-tier">Tier 4</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -771,53 +742,33 @@
                                                         <span class="detail-value">78%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Current Price:</span>
-                                                        <span class="detail-value">$450.30</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$460.00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Pattern:</span>
-                                                        <span class="detail-value">Bull Flag</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Confidence:</span>
-                                                        <span class="detail-value">75%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">4/5</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
                                                         <span class="detail-value">4%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">3x</span>
+                                                        <span class="detail-value">2.5x</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">20%</span>
+                                                        <span class="detail-value">15%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+8%</span>
+                                                        <span class="detail-value">+10%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 14:00</span>
+                                                        <span class="detail-value">16:15:00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">48h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">3h</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="execute-btn">Execute</button>
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="signal-item">
@@ -825,6 +776,7 @@
                                                     <span class="signal-type watch">WATCH</span>
                                                     <span class="signal-symbol">AMD</span>
                                                     <span class="signal-time">Setup</span>
+                                                    <span class="signal-tier">Tier 1</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -832,53 +784,33 @@
                                                         <span class="detail-value">68%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Current Price:</span>
-                                                        <span class="detail-value">$120.45</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$122.00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Pattern:</span>
-                                                        <span class="detail-value">Support Test</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Confidence:</span>
-                                                        <span class="detail-value">68%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">1/5</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
                                                         <span class="detail-value">2%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">1.5x</span>
+                                                        <span class="detail-value">1x</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">10%</span>
+                                                        <span class="detail-value">5%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+2%</span>
+                                                        <span class="detail-value">+3%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 15:00</span>
+                                                        <span class="detail-value">13:30:15</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">6h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">45m</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="execute-btn">Execute</button>
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -892,6 +824,7 @@
                                                     <span class="signal-type hedge">HEDGE</span>
                                                     <span class="signal-symbol">SPY</span>
                                                     <span class="signal-time">Active</span>
+                                                    <span class="signal-tier">Tier 5</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -899,53 +832,33 @@
                                                         <span class="detail-value">65%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Current Price:</span>
-                                                        <span class="detail-value">$435.20</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$438.50</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Type:</span>
-                                                        <span class="detail-value">Put Protection</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Risk Reduction:</span>
-                                                        <span class="detail-value">15%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">5/5</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
                                                         <span class="detail-value">10%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">4x</span>
+                                                        <span class="detail-value">3x</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">25%</span>
+                                                        <span class="detail-value">20%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">-4%</span>
+                                                        <span class="detail-value">-2%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 16:00</span>
+                                                        <span class="detail-value">17:00:00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">72h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">4h</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="execute-btn">Execute</button>
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -959,6 +872,7 @@
                                                     <span class="signal-type buy">BUY</span>
                                                     <span class="signal-symbol">META</span>
                                                     <span class="signal-time">Closed +8%</span>
+                                                    <span class="signal-tier">Tier 3</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -966,36 +880,16 @@
                                                         <span class="detail-value">82%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$320.00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Exit Price:</span>
-                                                        <span class="detail-value">$345.60</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Profit:</span>
-                                                        <span class="detail-value">$2,400</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Duration:</span>
-                                                        <span class="detail-value">3 days</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Tier:</span>
-                                                        <span class="detail-value">4/5</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">6%</span>
+                                                        <span class="detail-value">4%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">2.5x</span>
+                                                        <span class="detail-value">2x</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">12%</span>
+                                                        <span class="detail-value">10%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Variation:</span>
@@ -1003,15 +897,16 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Timestamp:</span>
-                                                        <span class="detail-value">2024-01-01 10:00</span>
+                                                        <span class="detail-value">12:45:00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. Hold:</span>
-                                                        <span class="detail-value">24h</span>
+                                                        <span class="detail-label">Holding Time:</span>
+                                                        <span class="detail-value">3 days</span>
                                                     </div>
-                                                </div>
-                                                <div class="signal-actions">
-                                                    <button class="trash-btn"><i class="fas fa-trash"></i></button>
+                                                    <div class="signal-actions">
+                                                        <button class="execute-btn">Execute</button>
+                                                        <i class="fas fa-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1019,13 +914,13 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
 
                         <!-- AI Market Analysis Card -->
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>AI Market Analysis</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -1046,13 +941,13 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
 
                         <!-- Performance Metrics Card -->
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Performance Metrics</h3>
                             <div class="card-content">
                                 <div class="performance-grid">
@@ -1075,7 +970,7 @@
                                         <span class="value">65%</span>
                                         <span class="label">Win Rate</span>
                                     </div>
-                                    <divclass="metric-chart">
+                                    <div class="metric-chart">
                                         <svg class="line-chart">
                                             <polyline points="0,30 20,28 40,32 60,29 80,25 100,22" 
                                                       fill="none" stroke="var(--warning-text)" stroke-width="2"/>
@@ -1092,13 +987,13 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
                         
                         <!-- Market Intelligence Overview Card -->
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Market Intelligence Overview</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -1127,13 +1022,13 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
                         
                         <!-- Sauron's Vision Eye Card -->
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Sauron's Vision Eye</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -1162,35 +1057,43 @@
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
-
+                        
                         <!-- Risk Monitoring Card -->
-                        <div class="overview-card">
+                        <div class="overview-card fixed-height">
                             <h3>Risk Monitoring</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
-                                    <span class="insight-label">Portfolio Risk:</span>
+                                    <span class="insight-label">Overall Risk:</span>
                                     <span class="insight-value warning">Medium</span>
                                 </div>
                                 <div class="ai-insight">
-                                    <span class="insight-label">Max Drawdown:</span>
-                                    <span class="insight-value negative">-12.3%</span>
+                                    <span class="insight-label">VaR (95%):</span>
+                                    <span class="insight-value">-3.2%</span>
                                 </div>
                                 <div class="ai-insight">
-                                    <span class="insight-label">VaR:</span>
-                                    <span class="insight-value">-2.5%</span>
+                                    <span class="insight-label">CVaR:</span>
+                                    <span class="insight-value">-4.5%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Max Drawdown:</span>
+                                    <span class="insight-value">-12.3%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Sharpe Ratio:</span>
+                                    <span class="insight-value">1.82</span>
                                 </div>
                                 <div class="ai-insight">
                                     <span class="insight-label">Alerts:</span>
-                                    <span class="insight-value warning">3 Active</span>
+                                    <span class="insight-value warning">2 Active</span>
                                 </div>
                             </div>
                             <div class="card-controls">
-                                <button class="view-more-btn"><i class="fas fa-eye"></i></button>
-                                <button class="reduce-btn"><i class="fas fa-arrow-down"></i></button>
+                                <i class="fas fa-expand" title="View More"></i>
+                                <i class="fas fa-minus-square" title="Reduce"></i>
                             </div>
                         </div>
                     </div>
@@ -1265,64 +1168,63 @@ document.querySelectorAll('.news-item').forEach(item => {
     });
 });
 
-// Card controls
-document.querySelectorAll('.reduce-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const card = btn.closest('.overview-card');
-        card.classList.toggle('reduced');
+// Bulk actions menu
+document.getElementById('bulk-actions-btn').addEventListener('click', function() {
+    document.querySelector('.bulk-actions-menu').classList.toggle('show');
+});
+
+document.querySelectorAll('.action-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const action = this.dataset.action;
+        // Implement bulk actions
+        console.log(`Performing bulk action: ${action}`);
     });
 });
 
-document.querySelectorAll('.view-more-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        console.log('View more...');
-    });
+// Notices band hover pause
+const noticesScroller = document.querySelector('.notices-scroller');
+noticesScroller.addEventListener('mouseenter', () => {
+    noticesScroller.style.animationPlayState = 'paused';
+});
+noticesScroller.addEventListener('mouseleave', () => {
+    noticesScroller.style.animationPlayState = 'running';
 });
 
-// Bulk action button
-document.querySelector('.bulk-action-btn').addEventListener('click', function() {
-    const menu = document.createElement('div');
-    menu.className = 'bulk-menu';
-    menu.innerHTML = `
-        <button>Expand All</button>
-        <button>Reduce All</button>
-        <button>Add Card</button>
-        <button>Remove Card</button>
-    `;
-    document.body.appendChild(menu);
-    // Position menu
-    const rect = this.getBoundingClientRect();
-    menu.style.left = rect.left + 'px';
-    menu.style.top = rect.bottom + 'px';
-    
-    // Close on click outside
-    document.addEventListener('click', function close(e) {
-        if (!menu.contains(e.target) && e.target !== this) {
-            menu.remove();
-            document.removeEventListener('click', close);
-        }
-    }.bind(this));
-});
-
-// Notices hover to stop scrolling and show detail
-const scroller = document.querySelector('.notices-scroller');
-scroller.addEventListener('mouseover', () => scroller.style.animationPlayState = 'paused');
-scroller.addEventListener('mouseout', () => scroller.style.animationPlayState = 'running');
-
+// Notice click expand
 document.querySelectorAll('.notice-item').forEach(item => {
-    item.addEventListener('click', () => {
-        item.classList.toggle('expanded');
+    item.addEventListener('click', function() {
+        this.classList.toggle('expanded');
     });
 });
 
-// Signal actions
+// Signal actions on hover
 document.querySelectorAll('.signal-item').forEach(item => {
-    item.addEventListener('mouseover', () => {
+    item.addEventListener('mouseenter', () => {
         item.querySelector('.signal-actions').style.display = 'flex';
     });
-    item.addEventListener('mouseout', () => {
+    item.addEventListener('mouseleave', () => {
         item.querySelector('.signal-actions').style.display = 'none';
     });
 });
+
+// Card controls
+document.querySelectorAll('.card-controls i').forEach(icon => {
+    icon.addEventListener('click', function() {
+        const card = this.closest('.overview-card');
+        const action = this.classList.contains('fa-expand') ? 'expand' : 'reduce';
+        card.classList.toggle('expanded', action === 'expand');
+        card.classList.toggle('reduced', action === 'reduce');
+    });
+});
+
+// Alert and notification blink if count > 0
+const checkCounts = () => {
+    const notifCount = parseInt(document.querySelector('.notifications .alert-count').textContent);
+    const alertCount = parseInt(document.querySelector('.alerts .alert-count').textContent);
+    
+    document.querySelector('.notifications').classList.toggle('blink', notifCount > 0);
+    document.querySelector('.alerts').classList.toggle('blink', alertCount > 0);
+};
+setInterval(checkCounts, 1000);
 </script>
 {% endblock %}
