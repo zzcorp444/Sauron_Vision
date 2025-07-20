@@ -176,7 +176,7 @@
     font-size: 0.9rem;
 }
 
-.alerts, .activities, .critical-alerts {
+.alerts {
     position: relative;
     cursor: pointer;
 }
@@ -214,43 +214,6 @@
 .logout-btn:hover {
     border-color: var(--error-text);
     color: var(--error-text);
-}
-
-/* Notices headband */
-.notices-headband {
-    background: var(--secondary-bg);
-    height: 40px;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.notices-ticker {
-    display: flex;
-    gap: 40px;
-    animation: ticker-move 60s linear infinite;
-    height: 100%;
-    align-items: center;
-}
-
-.notice-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.notice-item i {
-    color: var(--primary-text);
-}
-
-.notice-title {
-    color: var(--secondary-text);
-}
-
-.notice-detail {
-    color: var(--tertiary-text);
-    margin-left: 10px;
 }
 
 /* Main Layout Container */
@@ -584,37 +547,6 @@
     color: var(--primary-text);
 }
 
-.bulk-action-btn {
-    position: relative;
-}
-
-.bulk-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--accent-bg);
-    border: 1px solid var(--glow-color);
-    border-radius: 5px;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    z-index: 100;
-}
-
-.bulk-menu button {
-    padding: 0.3rem 0.6rem;
-    background: transparent;
-    border: none;
-    color: var(--secondary-text);
-    cursor: pointer;
-    text-align: left;
-}
-
-.bulk-menu button:hover {
-    color: var(--primary-text);
-}
-
 .overview-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -629,10 +561,6 @@
     transition: all 0.3s ease;
     height: 200px;
     overflow: hidden;
-}
-
-.overview-card.minimized {
-    height: 50px;
 }
 
 .overview-card:hover {
@@ -650,25 +578,6 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}
-
-.card-icons {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
-}
-
-.more-data, .reduce-card {
-    background: transparent;
-    border: none;
-    color: var(--secondary-text);
-    cursor: pointer;
-}
-
-.more-data:hover, .reduce-card:hover {
-    color: var(--primary-text);
 }
 
 /* Portfolio Status Grid */
@@ -896,13 +805,7 @@
 .signal-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.signal-tier {
-    font-size: 0.8rem;
-    color: var(--warning-text);
+    justify-content: space-between;
 }
 
 .signal-details {
@@ -917,29 +820,6 @@
     max-height: 150px;
     opacity: 1;
     margin-top: 0.5rem;
-}
-
-.signal-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 5px;
-}
-
-.execute-btn {
-    background: var(--glow-color);
-    color: var(--primary-bg);
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.delete-signal {
-    background: transparent;
-    border: none;
-    color: var(--error-text);
-    cursor: pointer;
 }
 
 .detail-row {
@@ -1071,37 +951,6 @@
 .line-chart svg {
     width: 100%;
     height: 100%;
-}
-
-/* Status indicators */
-.status-dot {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    width: 10px;
-    height: 10px;
-    background: var(--primary-text);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-    z-index: 300;
-}
-
-.status-dot + span {
-    position: fixed;
-    top: 65px;
-    right: 40px;
-    color: var(--secondary-text);
-    font-size: 12px;
-    z-index: 300;
-}
-
-.time-ping {
-    position: fixed;
-    top: 85px;
-    right: 20px;
-    color: var(--tertiary-text);
-    font-size: 12px;
-    z-index: 300;
 }
 
 /* Responsive Design */

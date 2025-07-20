@@ -74,51 +74,12 @@
                     <i class="fas fa-bell"></i>
                     <span class="alert-count">{{ active_alerts }}</span>
                 </div>
-                <div class="activities">
-                    <i class="fas fa-tasks"></i>
-                    <span class="alert-count">0</span>
-                </div>
-                <div class="critical-alerts">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span class="alert-count">0</span>
-                </div>
             </div>
             <a href="{% url 'logout' %}" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </div>
     </header>
-    
-    <!-- Notices headband -->
-    <div class="notices-headband">
-        <div class="notices-ticker">
-            <div class="notice-item">
-                <i class="fas fa-robot"></i>
-                <span class="notice-title">Sauron Vision analyzing markets</span>
-                <span class="notice-detail hidden">Real-time analysis in progress</span>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-bell"></i>
-                <span class="notice-title">New signal generated</span>
-                <span class="notice-detail hidden">Buy AAPL at $150</span>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-chart-line"></i>
-                <span class="notice-title">Portfolio rebalanced</span>
-                <span class="notice-detail hidden">Adjusted positions for optimal risk</span>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span class="notice-title">Risk alert</span>
-                <span class="notice-detail hidden">High volatility detected</span>
-            </div>
-            <div class="notice-item">
-                <i class="fas fa-news"></i>
-                <span class="notice-title">Market news update</span>
-                <span class="notice-detail hidden">Fed rate decision incoming</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Dashboard Layout -->
     <div class="dashboard-layout">
@@ -277,9 +238,6 @@
                             <button class="control-btn">
                                 <i class="fas fa-refresh"></i>
                             </button>
-                            <button class="control-btn bulk-action-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
                         </div>
                     </div>
                     
@@ -321,10 +279,6 @@
                                         <span class="label">Portfolio Score</span>
                                     </div>
                                 </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
                             </div>
                         </div>
                         
@@ -333,9 +287,6 @@
                             <div class="card-content">
                                 <div class="position-list">
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">AAPL</span>
                                             <span class="value">$150.25</span>
@@ -377,16 +328,9 @@
                                             <span>1H</span>
                                             <span>Vol: 1.2M</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">GOOGL</span>
                                             <span class="value">$2750.50</span>
@@ -428,16 +372,9 @@
                                             <span>1H</span>
                                             <span>Vol: 850K</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">TSLA</span>
                                             <span class="value">$850.75</span>
@@ -479,16 +416,9 @@
                                             <span>1H</span>
                                             <span>Vol: 2.5M</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">MSFT</span>
                                             <span class="value">$300.40</span>
@@ -530,16 +460,9 @@
                                             <span>1H</span>
                                             <span>Vol: 950K</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">NVDA</span>
                                             <span class="value">$450.30</span>
@@ -581,16 +504,9 @@
                                             <span>1H</span>
                                             <span>Vol: 4.1M</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">META</span>
                                             <span class="value">$325.60</span>
@@ -632,10 +548,6 @@
                                             <span>1H</span>
                                             <span>Vol: 1.5M</span>
                                         </div>
-                                        <div class="card-icons">
-                                            <button class="more-data"><i class="fas fa-plus"></i></button>
-                                            <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -652,8 +564,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type buy">BUY</span>
                                                     <span class="signal-symbol">TSLA</span>
-                                                    <span class="signal-tier">Tier 3</span>
-                                                    <span class="signal-time">Active - 2h</span>
+                                                    <span class="signal-time">Active</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -661,32 +572,20 @@
                                                         <span class="detail-value">85%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">5%</span>
+                                                        <span class="detail-label">Current Price:</span>
+                                                        <span class="detail-value">$850.75</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">2x</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$845.20</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">15%</span>
+                                                        <span class="detail-label">Size:</span>
+                                                        <span class="detail-value">100 shares</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+10%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">14:30 - 16:30</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
-                                                        <span class="detail-value">24h</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
+                                                        <span class="detail-label">Risk:</span>
+                                                        <span class="detail-value">Medium (2.5%)</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -694,8 +593,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type sell">SELL</span>
                                                     <span class="signal-symbol">MSFT</span>
-                                                    <span class="signal-tier">Tier 2</span>
-                                                    <span class="signal-time">Active - 1h</span>
+                                                    <span class="signal-time">Active</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -703,32 +601,20 @@
                                                         <span class="detail-value">72%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">3%</span>
+                                                        <span class="detail-label">Current Price:</span>
+                                                        <span class="detail-value">$300.40</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">1.5x</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$302.15</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">10%</span>
+                                                        <span class="detail-label">Size:</span>
+                                                        <span class="detail-value">50 shares</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">-8%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">15:00 - 17:00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
-                                                        <span class="detail-value">12h</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
+                                                        <span class="detail-label">Risk:</span>
+                                                        <span class="detail-value">Low (1.2%)</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -742,8 +628,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type watch">WATCH</span>
                                                     <span class="signal-symbol">NVDA</span>
-                                                    <span class="signal-tier">Tier 4</span>
-                                                    <span class="signal-time">Forming - 30m</span>
+                                                    <span class="signal-time">Forming</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -751,32 +636,20 @@
                                                         <span class="detail-value">78%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">4%</span>
+                                                        <span class="detail-label">Current Price:</span>
+                                                        <span class="detail-value">$450.30</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">2.5x</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$460.00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">20%</span>
+                                                        <span class="detail-label">Pattern:</span>
+                                                        <span class="detail-value">Bull Flag</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+15%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">16:00 - 18:00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
-                                                        <span class="detail-value">48h</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
+                                                        <span class="detail-label">Confidence:</span>
+                                                        <span class="detail-value">75%</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -784,8 +657,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type watch">WATCH</span>
                                                     <span class="signal-symbol">AMD</span>
-                                                    <span class="signal-tier">Tier 1</span>
-                                                    <span class="signal-time">Setup - 45m</span>
+                                                    <span class="signal-time">Setup</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -793,32 +665,20 @@
                                                         <span class="detail-value">68%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">2%</span>
+                                                        <span class="detail-label">Current Price:</span>
+                                                        <span class="detail-value">$120.45</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">1x</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$122.00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">8%</span>
+                                                        <span class="detail-label">Pattern:</span>
+                                                        <span class="detail-value">Support Test</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+5%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">15:30 - 17:30</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
-                                                        <span class="detail-value">6h</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
+                                                        <span class="detail-label">Confidence:</span>
+                                                        <span class="detail-value">68%</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -832,8 +692,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type hedge">HEDGE</span>
                                                     <span class="signal-symbol">SPY</span>
-                                                    <span class="signal-tier">Tier 5</span>
-                                                    <span class="signal-time">Active - 3h</span>
+                                                    <span class="signal-time">Active</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -841,32 +700,20 @@
                                                         <span class="detail-value">65%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">10%</span>
+                                                        <span class="detail-label">Current Price:</span>
+                                                        <span class="detail-value">$435.20</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">3x</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$438.50</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">25%</span>
+                                                        <span class="detail-label">Type:</span>
+                                                        <span class="detail-value">Put Protection</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">-20%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">13:00 - 16:00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
-                                                        <span class="detail-value">72h</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
+                                                        <span class="detail-label">Risk Reduction:</span>
+                                                        <span class="detail-value">15%</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -880,8 +727,7 @@
                                                 <div class="signal-header">
                                                     <span class="signal-type buy">BUY</span>
                                                     <span class="signal-symbol">META</span>
-                                                    <span class="signal-tier">Tier 4</span>
-                                                    <span class="signal-time">Closed +8% - 4h</span>
+                                                    <span class="signal-time">Closed +8%</span>
                                                 </div>
                                                 <div class="signal-details">
                                                     <div class="detail-row">
@@ -889,32 +735,20 @@
                                                         <span class="detail-value">82%</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">6%</span>
+                                                        <span class="detail-label">Entry Price:</span>
+                                                        <span class="detail-value">$320.00</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Multiplier:</span>
-                                                        <span class="detail-value">2x</span>
+                                                        <span class="detail-label">Exit Price:</span>
+                                                        <span class="detail-value">$345.60</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">8%</span>
+                                                        <span class="detail-label">Profit:</span>
+                                                        <span class="detail-value">$2,400</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Variation:</span>
-                                                        <span class="detail-value">+8%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Timestamps:</span>
-                                                        <span class="detail-value">12:00 - 16:00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Hold Time:</span>
+                                                        <span class="detail-label">Duration:</span>
                                                         <span class="detail-value">3 days</span>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute</button>
-                                                        <button class="delete-signal"><i class="fas fa-trash"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -943,10 +777,6 @@
                                 <div class="ai-insight">
                                     <span class="insight-label">Recommended Action:</span>
                                     <span class="insight-value">Hold with trailing stop</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -990,10 +820,6 @@
                                         <span class="label">Profit Factor</span>
                                     </div>
                                 </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
                             </div>
                         </div>
                         
@@ -1025,10 +851,6 @@
                                     <span class="insight-label">Options Flow:</span>
                                     <span class="insight-value positive">Bullish Bias</span>
                                 </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
                             </div>
                         </div>
                         
@@ -1059,115 +881,6 @@
                                 <div class="ai-insight">
                                     <span class="insight-label">Next Major Event:</span>
                                     <span class="insight-value warning">Fed Meeting (3 days)</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Additional Cards -->
-                        <div class="overview-card">
-                            <h3>Risk Monitoring</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Current Risk:</span>
-                                    <span class="insight-value warning">Medium</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">VaR:</span>
-                                    <span class="insight-value">-2.5%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">CVaR:</span>
-                                    <span class="insight-value">-3.8%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Sharpe Ratio:</span>
-                                    <span class="insight-value">1.82</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="overview-card">
-                            <h3>Portfolio Management Directives</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Diversification:</span>
-                                    <span class="insight-value positive">Good</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Rebalance Needed:</span>
-                                    <span class="insight-value">No</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Cash Allocation:</span>
-                                    <span class="insight-value">12%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Next Action:</span>
-                                    <span class="insight-value">Monitor</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="overview-card">
-                            <h3>Market Correlations</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Tech Sector:</span>
-                                    <span class="insight-value">0.85</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Energy:</span>
-                                    <span class="insight-value">-0.42</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Bonds:</span>
-                                    <span class="insight-value">-0.65</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Commodities:</span>
-                                    <span class="insight-value">0.35</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="overview-card">
-                            <h3>Forecasting</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">1 Week Outlook:</span>
-                                    <span class="insight-value positive">Bullish</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Expected Return:</span>
-                                    <span class="insight-value">+3.2%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Volatility:</span>
-                                    <span class="insight-value">Medium</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Key Driver:</span>
-                                    <span class="insight-value">Earnings</span>
-                                </div>
-                                <div class="card-icons">
-                                    <button class="more-data"><i class="fas fa-plus"></i></button>
-                                    <button class="reduce-card"><i class="fas fa-arrow-down"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1242,68 +955,5 @@ document.querySelectorAll('.news-item').forEach(item => {
         console.log('Opening article...');
     });
 });
-
-// Notices hover functionality
-document.querySelectorAll('.notice-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        document.querySelector('.notices-ticker').style.animationPlayState = 'paused';
-        item.querySelector('.notice-detail').classList.remove('hidden');
-    });
-    item.addEventListener('mouseleave', () => {
-        document.querySelector('.notices-ticker').style.animationPlayState = 'running';
-        item.querySelector('.notice-detail').classList.add('hidden');
-    });
-});
-
-// Bulk action button
-document.querySelector('.bulk-action-btn').addEventListener('click', function() {
-    const menu = document.createElement('div');
-    menu.className = 'bulk-menu';
-    menu.innerHTML = `
-        <button onclick="toggleAllCards('minimize')">Minimize All</button>
-        <button onclick="toggleAllCards('maximize')">Maximize All</button>
-        <button onclick="addCard()">Add Card</button>
-        <button onclick="removeCard()">Remove Card</button>
-    `;
-    this.appendChild(menu);
-    setTimeout(() => document.addEventListener('click', () => menu.remove()), 0);
-});
-
-function toggleAllCards(action) {
-    document.querySelectorAll('.reduce-card').forEach(btn => {
-        if (action === 'minimize') btn.click();
-    });
-}
-
-// Card reduce/more data
-document.querySelectorAll('.reduce-card').forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.closest('.overview-card').classList.toggle('minimized');
-    });
-});
-
-document.querySelectorAll('.more-data').forEach(btn => {
-    btn.addEventListener('click', () => {
-        console.log('Loading more data...');
-    });
-});
-
-// Status indicators
-const statusDot = document.createElement('div');
-statusDot.className = 'status-dot';
-document.body.appendChild(statusDot);
-
-const statusText = document.createElement('span');
-statusText.textContent = 'Connected - Logged IN';
-statusDot.after(statusText);
-
-const timePing = document.createElement('div');
-timePing.className = 'time-ping';
-timePing.innerHTML = '14:30:45 | Ping: 12ms';
-document.body.appendChild(timePing);
-
-setInterval(() => {
-    timePing.innerHTML = `${new Date().toLocaleTimeString()} | Ping: ${Math.round(Math.random()*20)}ms`;
-}, 1000);
 </script>
 {% endblock %}

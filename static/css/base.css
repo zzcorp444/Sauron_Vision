@@ -111,13 +111,53 @@ body {
     }
 }
 
-@keyframes pulse-light {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+/* Binary paragraph */
+.binary-paragraph {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0.5;
 }
 
-@keyframes code-ticker-move {
-    0% { transform: translateX(0); }
+#binary-text {
+    color: var(--primary-text);
+    font-size: 12px;
+    line-height: 1.2;
+    animation: binary-change 5s infinite;
+}
+
+@keyframes binary-change {
+    0% { content: '0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101'; }
+    25% { content: '1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010'; }
+    50% { content: '0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101'; }
+    75% { content: '1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010'; }
+}
+
+/* Encoded code line */
+.encoded-code-line {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+#code-text {
+    white-space: nowrap;
+    animation: code-move 60s linear infinite;
+    color: var(--secondary-text);
+    font-size: 14px;
+}
+
+@keyframes code-move {
+    0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
 
@@ -225,11 +265,17 @@ body {
     overflow: hidden;
     position: relative;
     z-index: 10;
-    animation: pulse-light 2s infinite;
     box-shadow: 
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
+    animation: heart-pulse 2s infinite;
+}
+
+@keyframes heart-pulse {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.5); }
+    100% { filter: brightness(1); }
 }
 
 /* Globe - 3D */
@@ -372,51 +418,51 @@ body {
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-90deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(-45deg) rotateX(-30deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(0deg) rotateX(45deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(139deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(140deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(31deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(-25deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(22deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(10deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(8deg) rotateX(48deg) translateZ(180px);
+    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(43deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
-    transform: rotateY(77deg) rotateX(19deg) translateZ(180px);
+    transform: rotateY(72deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(25deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
+    transform: rotateY(-15deg) rotateX(70deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -465,41 +511,6 @@ body {
     bottom: 120%;
 }
 
-/* Binary paragraph */
-.binary-paragraph {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 200px;
-    height: 100px;
-    color: var(--tertiary-text);
-    font-size: 10px;
-    line-height: 1.2;
-    white-space: pre-wrap;
-    z-index: 2;
-    opacity: 0.6;
-}
-
-/* Code ticker container */
-.code-ticker-container {
-    position: fixed;
-    bottom: 60px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    overflow: hidden;
-    z-index: 50;
-    pointer-events: none;
-}
-
-.code-ticker {
-    display: flex;
-    white-space: nowrap;
-    animation: code-ticker-move 60s linear infinite;
-    color: var(--secondary-text);
-    font-size: 12px;
-}
-
 /* Code scroll container - Enhanced */
 .code-scroll-container {
     position: fixed;
@@ -536,34 +547,6 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Ticker icons container */
-.ticker-icons-container {
-    position: fixed;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 100;
-    background: rgba(26, 26, 26, 0.8);
-    padding: 5px 10px;
-    border-radius: 20px;
-}
-
-.ticker-icon {
-    cursor: pointer;
-    color: var(--secondary-text);
-    font-size: 16px;
-    padding: 5px;
-    border-radius: 50%;
-    transition: all 0.3s;
-}
-
-.ticker-icon:hover {
-    color: var(--primary-text);
-    background: var(--accent-bg);
-}
-
 /* Price ticker container - With gradient background */
 .price-ticker-container {
     position: fixed;
@@ -577,11 +560,6 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
-    transition: transform 0.3s ease;
-}
-
-.price-ticker-container.minimized {
-    transform: translateY(80%);
 }
 
 .ticker-controls {
@@ -589,11 +567,9 @@ body {
     top: 5px;
     right: 10px;
     z-index: 101;
-    display: flex;
-    gap: 5px;
 }
 
-.toggle-charts-btn, .toggle-ticker-btn {
+.toggle-charts-btn {
     padding: 5px 10px;
     background: var(--accent-bg);
     border: 1px solid var(--border-color);
@@ -604,7 +580,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.toggle-charts-btn:hover, .toggle-ticker-btn:hover {
+.toggle-charts-btn:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
