@@ -111,54 +111,90 @@ body {
     }
 }
 
-/* Binary paragraph */
-.binary-paragraph {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 200px;
-    height: 100px;
-    overflow: hidden;
-    z-index: 2;
-    opacity: 0.5;
+@keyframes binary-rain {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(100vh); opacity: 0; }
 }
 
-#binary-text {
-    color: var(--primary-text);
-    font-size: 12px;
-    line-height: 1.2;
-    animation: binary-change 5s infinite;
-}
-
-@keyframes binary-change {
-    0% { content: '0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101'; }
-    25% { content: '1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010'; }
-    50% { content: '0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101'; }
-    75% { content: '1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010'; }
-}
-
-/* Encoded code line */
-.encoded-code-line {
-    position: fixed;
-    bottom: 80px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    overflow: hidden;
-    z-index: 2;
-    opacity: 0.5;
-}
-
-#code-text {
-    white-space: nowrap;
-    animation: code-move 60s linear infinite;
-    color: var(--secondary-text);
-    font-size: 14px;
-}
-
-@keyframes code-move {
+@keyframes code-scroll {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
+}
+
+@keyframes heartbeat-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.8));
+        opacity: 1;
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(0, 255, 65, 1));
+        opacity: 0.7;
+    }
+}
+
+/* Binary Rain Background */
+.binary-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.binary-column {
+    position: absolute;
+    color: var(--tertiary-text);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    white-space: pre;
+    animation: binary-rain 15s linear infinite;
+}
+
+.binary-column:nth-child(1) { left: 0px; animation-delay: 0s; }
+.binary-column:nth-child(2) { left: 20px; animation-delay: -2s; }
+.binary-column:nth-child(3) { left: 40px; animation-delay: -4s; }
+.binary-column:nth-child(4) { left: 60px; animation-delay: -6s; }
+.binary-column:nth-child(5) { left: 80px; animation-delay: -8s; }
+
+/* Code Scroll Line */
+.code-scroll-line {
+    position: fixed;
+    top: calc(100vh - 150px);
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: rgba(26, 26, 26, 0.9);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 95;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.code-scroll-content {
+    display: flex;
+    align-items: center;
+    animation: code-scroll 25s linear infinite;
+    white-space: nowrap;
+    color: var(--secondary-text);
+    font-size: 12px;
+}
+
+.code-scroll-item {
+    margin-right: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.code-scroll-item i {
+    color: var(--warning-text);
 }
 
 /* Matrix Background Effect */
@@ -226,6 +262,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    animation: heartbeat-glow 3s ease-in-out infinite;
 }
 
 .eye-shape svg {
@@ -257,7 +294,7 @@ body {
     stroke-width: 1;
 }
 
-/* Pupil (container for globe) */
+/* Pupil with globe */
 .pupil {
     width: 360px;
     height: 360px;
@@ -269,13 +306,7 @@ body {
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
-    animation: heart-pulse 2s infinite;
-}
-
-@keyframes heart-pulse {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(1.5); }
-    100% { filter: brightness(1); }
+    animation: heartbeat-glow 3s ease-in-out infinite;
 }
 
 /* Globe - 3D */
@@ -394,7 +425,7 @@ body {
     box-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.4);
 }
 
-/* Market Dots - 3D Positioned on Globe Surface */
+/* Market Dots - Scattered Around Globe */
 .market-dot {
     position: absolute;
     width: 8px;
@@ -412,57 +443,57 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Market dot positions - properly scattered in 3D space */
+/* Market dot positions - Properly scattered around the globe */
 .market-dot.nyse {
     transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-45deg) rotateX(-30deg) translateZ(180px);
+    transform: rotateY(-76deg) rotateX(42deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(0deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(140deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(139deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(-25deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(31deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(10deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(22deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(50deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);
 }
 
 .market-dot.toronto {
-    transform: rotateY(-79deg) rotateX(65deg) translateZ(180px);
+    transform: rotateY(-79deg) rotateX(43deg) translateZ(180px);
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(-5deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
-    transform: rotateY(72deg) rotateX(25deg) translateZ(180px);
+    transform: rotateY(72deg) rotateX(19deg) translateZ(180px);
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(-15deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.zurich {
-    transform: rotateY(-15deg) rotateX(70deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
 }
 
 @keyframes pulse-red {
@@ -547,7 +578,7 @@ body {
 .code-bit:nth-child(11) { animation-delay: -20s; }
 .code-bit:nth-child(12) { animation-delay: -22s; }
 
-/* Price ticker container - With gradient background */
+/* Price ticker container - Enhanced with icons */
 .price-ticker-container {
     position: fixed;
     bottom: 0;
@@ -560,16 +591,57 @@ body {
         rgba(26, 26, 26, 0.1) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
+    transition: height 0.3s ease;
+    height: 120px;
+}
+
+.price-ticker-container.collapsed {
+    height: 40px;
+}
+
+.ticker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    background: rgba(26, 26, 26, 0.9);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ticker-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 10px;
+}
+
+.filter-icon.active {
+    border-color: var(--glow-color);
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.filter-icon i {
+    font-size: 8px;
 }
 
 .ticker-controls {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    z-index: 101;
+    display: flex;
+    gap: 5px;
 }
 
-.toggle-charts-btn {
+.toggle-charts-btn, .collapse-ticker-btn {
     padding: 5px 10px;
     background: var(--accent-bg);
     border: 1px solid var(--border-color);
@@ -580,7 +652,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.toggle-charts-btn:hover {
+.toggle-charts-btn:hover, .collapse-ticker-btn:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
@@ -595,6 +667,12 @@ body {
     gap: 20px;
     padding: 8px 15px;
     animation: ticker-move 120s linear infinite;
+    height: calc(100% - 40px);
+    align-items: center;
+}
+
+.price-ticker-container.collapsed .price-ticker {
+    height: auto;
 }
 
 .ticker-item {
@@ -603,6 +681,50 @@ body {
     min-width: 65px;
     padding: 3px;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.ticker-item::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.ticker-item.setup::before {
+    background: var(--warning-text);
+    opacity: 1;
+}
+
+.ticker-item.signal::before {
+    background: var(--primary-text);
+    opacity: 1;
+    animation: blink 1s infinite;
+}
+
+.ticker-item.high-increase::before {
+    background: #00ff00;
+    opacity: 1;
+}
+
+.ticker-item.high-decrease::before {
+    background: var(--error-text);
+    opacity: 1;
+}
+
+.ticker-item.high-volume::before {
+    background: #0099ff;
+    opacity: 1;
+}
+
+.ticker-item.consolidation::before {
+    background: #888;
+    opacity: 1;
 }
 
 .ticker-header {
@@ -990,6 +1112,10 @@ input, textarea, select {
     .price-ticker {
         font-size: 14px;
     }
+    
+    .binary-rain {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1027,7 +1153,9 @@ input, textarea, select {
     .eye-bg,
     .background-matrix,
     .code-scroll-container,
-    .price-ticker-container {
+    .price-ticker-container,
+    .binary-rain,
+    .code-scroll-line {
         display: none;
     }
 }
