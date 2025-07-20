@@ -182,7 +182,7 @@ body {
     animation-delay: calc(var(--row) * 0.1s);
 }
 
-/* Encoded Line */
+/* Encoded Line - Slower animation */
 .encoded-line {
     position: fixed;
     top: 150px;
@@ -198,7 +198,7 @@ body {
 .encoded-content {
     display: inline-block;
     white-space: nowrap;
-    animation: encoded-scroll 45s linear infinite;
+    animation: encoded-scroll 90s linear infinite; /* Slowed from 45s to 90s */
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--secondary-text);
@@ -568,36 +568,37 @@ body {
     transform: translateY(calc(100% - 30px));
 }
 
-/* Ticker Action Icons */
+/* Ticker Action Icons - Bigger size */
 .ticker-action-bar {
     position: absolute;
-    top: -25px;
+    top: -30px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     padding: 0 20px;
 }
 
 .ticker-action-icon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     background: var(--accent-bg);
     border: 1px solid var(--border-color);
-    border-radius: 3px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 10px;
+    font-size: 13px;
     color: var(--secondary-text);
 }
 
 .ticker-action-icon:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
+    transform: translateY(-2px);
 }
 
 .ticker-action-icon.active {
@@ -608,17 +609,18 @@ body {
 .ticker-action-icon[title]::before {
     content: attr(title);
     position: absolute;
-    bottom: 100%;
+    bottom: 110%;
     left: 50%;
     transform: translateX(-50%);
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
-    padding: 2px 6px;
-    font-size: 9px;
+    padding: 4px 8px;
+    font-size: 10px;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
+    border-radius: 3px;
 }
 
 .ticker-action-icon:hover::before {
@@ -670,6 +672,10 @@ body {
     min-width: 65px;
     padding: 3px;
     transition: all 0.3s ease;
+}
+
+.ticker-item.hidden {
+    display: none;
 }
 
 .ticker-header {

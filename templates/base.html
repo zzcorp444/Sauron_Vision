@@ -159,6 +159,9 @@
     <div class="price-ticker-container" id="ticker-container">
         <!-- Ticker Action Icons -->
         <div class="ticker-action-bar">
+            <div class="ticker-action-icon" data-filter="all" title="All Tickers">
+                <i class="fas fa-globe"></i>
+            </div>
             <div class="ticker-action-icon" data-filter="consolidation" title="Consolidation">
                 <i class="fas fa-compress"></i>
             </div>
@@ -575,29 +578,48 @@
             }
         });
         
-        // Ticker action filters
+        // Ticker action filters - Updated with "all" functionality
         document.querySelectorAll('.ticker-action-icon').forEach(icon => {
             icon.addEventListener('click', function() {
-                this.classList.toggle('active');
                 const filter = this.dataset.filter;
-                filterTickers();
+                
+                if (filter === 'all') {
+                    // Reset all filters and show all tickers
+                    document.querySelectorAll('.ticker-action-icon').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.ticker-item').forEach(item => {
+                        item.classList.remove('hidden');
+                        item.style.display = 'flex';
+                    });
+                } else {
+                    // Remove active from "all" if another filter is clicked
+                    document.querySelector('[data-filter="all"]').classList.remove('active');
+                    this.classList.toggle('active');
+                    filterTickers();
+                }
             });
         });
         
         function filterTickers() {
             const activeFilters = Array.from(document.querySelectorAll('.ticker-action-icon.active'))
-                .map(icon => icon.dataset.filter);
+                .map(icon => icon.dataset.filter)
+                .filter(f => f !== 'all');
             
             document.querySelectorAll('.ticker-item').forEach(item => {
                 if (activeFilters.length === 0) {
                     item.style.display = 'flex';
+                    item.classList.remove('hidden');
                 } else {
                     const itemActions = item.dataset.action.split(',');
                     const hasMatch = activeFilters.some(filter => itemActions.includes(filter));
                     item.style.display = hasMatch ? 'flex' : 'none';
+                    item.classList.toggle('hidden', !hasMatch);
                 }
             });
         }
+        
+        // Set "all" as active by default
+        document.querySelector('[data-filter="all"]').classList.add('active');
         
         // Binary matrix generation
         function generateBinaryMatrix() {
