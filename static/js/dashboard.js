@@ -3,6 +3,8 @@ class SauronDashboard {
     constructor() {
         this.activeSection = 'overview';
         this.websocket = null;
+        this.notificationCount = 0;
+        this.alertCount = 0;
         this.init();
     }
 
@@ -12,6 +14,10 @@ class SauronDashboard {
         this.setupWebSocket();
         this.startDataUpdates();
         this.setupEventListeners();
+        this.setupBinaryMatrix();
+        this.setupTickerFilters();
+        this.setupBlinkingIcons();
+        this.setupCardExpansion();
     }
 
     setupNavigation() {
@@ -286,6 +292,66 @@ class SauronDashboard {
     refreshCurrentSection() {
         this.loadSectionData(this.activeSection);
         this.showNotification('Section refreshed', 'success');
+    }
+
+    setupBinaryMatrix() {
+        const matrixEl = document.querySelector('.binary-matrix');
+        if (matrixEl) {
+            setInterval(() => {
+                let binary = '';
+                for (let i = 0; i < 200; i++) {
+                    binary += Math.random() < 0.5 ? '0' : '1';
+                    if (i % 20 === 19) binary += '\n';
+                }
+                matrixEl.textContent = binary;
+            }, 1000);
+        }
+    }
+
+    setupTickerFilters() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const action = btn.dataset.action;
+                const items = document.querySelectorAll('.ticker-item');
+                
+                items.forEach(item => {
+                    if (action === 'all' || item.dataset.action === action) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    setupBlinkingIcons() {
+        const notificationIcon = document.querySelector('.notifications');
+        const alertIcon = document.querySelector('.alerts');
+        
+        setInterval(() => {
+            if (this.notificationCount > 0) {
+                notificationIcon.classList.toggle('blink');
+            }
+            if (this.alertCount > 0) {
+                alertIcon.classList.toggle('blink');
+            }
+        }, 1000);
+    }
+
+    setupCardExpansion() {
+        document.querySelectorAll('.expand-arrow').forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const card = arrow.closest('.overview-card');
+                card.classList.toggle('expanded');
+                
+                const graphs = card.querySelector('.portfolio-graphs');
+                if (graphs) {
+                    graphs.classList.toggle('hidden');
+                }
+            });
+        });
     }
 }
 

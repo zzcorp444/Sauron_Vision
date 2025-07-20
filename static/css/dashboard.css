@@ -176,7 +176,7 @@
     font-size: 0.9rem;
 }
 
-.alerts {
+.alerts, .notifications {
     position: relative;
     cursor: pointer;
 }
@@ -197,6 +197,10 @@
     font-weight: bold;
 }
 
+.alerts.blink, .notifications.blink {
+    animation: pulse 1s infinite;
+}
+
 .logout-btn {
     padding: 0.5rem;
     background: transparent;
@@ -214,29 +218,6 @@
 .logout-btn:hover {
     border-color: var(--error-text);
     color: var(--error-text);
-}
-
-/* Notices band */
-.notices-band {
-    display: flex;
-    overflow: hidden;
-    background: var(--accent-bg);
-    border-bottom: 1px solid var(--border-color);
-    animation: ticker-move 60s linear infinite;
-}
-
-.notice-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 2rem;
-    white-space: nowrap;
-    color: var(--secondary-text);
-    font-size: 0.9rem;
-}
-
-.notice-item i {
-    color: var(--primary-text);
 }
 
 /* Main Layout Container */
@@ -582,33 +563,14 @@
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    position: relative;
-    height: 200px;  /* Fixed height */
+    height: 250px;
     overflow: hidden;
+    position: relative;
 }
 
 .overview-card:hover {
     border-color: var(--glow-color);
     box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-}
-
-.overview-card.expanded {
-    height: auto;
-}
-
-.expand-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    color: var(--primary-text);
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.expand-btn i.fa-arrow-up {
-    transform: rotate(180deg);
 }
 
 .overview-card h3 {
@@ -665,7 +627,7 @@
     gap: 0.5rem;
 }
 
-.position-item {
+.position-item, .signal-item {
     display: flex;
     flex-direction: column;
     padding: 0.75rem;
@@ -676,12 +638,12 @@
     transition: all 0.3s ease;
 }
 
-.position-item:hover {
+.position-item:hover, .signal-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
 }
 
-.position-header {
+.position-header, .signal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -708,7 +670,7 @@
     font-size: 10px;
 }
 
-.position-item:hover .chart-toggle {
+.position-item:hover .chart-toggle, .signal-item:hover .execute-btn {
     opacity: 1;
 }
 
@@ -779,6 +741,22 @@
     margin-top: 0.25rem;
 }
 
+.expand-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.expand-icon:hover {
+    color: var(--primary-text);
+}
+
 /* Signals Section - Vertical Layout */
 .signals-overview {
     background: var(--secondary-bg);
@@ -787,6 +765,8 @@
     padding: 1.5rem;
     transition: all 0.3s ease;
     grid-row: span 2;
+    height: 250px;
+    overflow: hidden;
 }
 
 .signals-overview:hover {
@@ -923,6 +903,23 @@
 .signal-time {
     font-size: 0.8rem;
     color: var(--tertiary-text);
+}
+
+.execute-btn {
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--glow-color);
+    color: var(--primary-text);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-family: var(--font-mono);
+    margin-top: 5px;
+}
+
+.execute-btn:hover {
+    background: var(--glow-color);
+    color: var(--primary-bg);
 }
 
 /* AI Insights */

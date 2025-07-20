@@ -106,14 +106,17 @@
             </div>
         </div>
     </div>
-
-    <!-- Binary code paragraph top left -->
-    <div class="binary-code">
-        01010101 00101010 11010101 10101010 01010101 00101010 11010101 10101010<br>
-        10101010 01010101 00101010 11010101 10101010 01010101 00101010 11010101<br>
-        11010101 10101010 01010101 00101010 11010101 10101010 01010101 00101010<br>
-        00101010 11010101 10101010 01010101 00101010 11010101 10101010 01010101<br>
-        01010101 00101010 11010101 10101010 01010101 00101010 11010101 10101010
+    
+    <!-- Binary paragraph top left -->
+    <div class="binary-paragraph" id="binary-paragraph">
+        <pre>01010101 01101001 00100000 01010011 01100001 01110101 01110010 01101111 01101110 00100000 01010110 01101001 01110011 01101001 01101111 01101110</pre>
+    </div>
+    
+    <!-- Code line above tickers -->
+    <div class="code-line-container">
+        <div class="code-line">
+            <pre>import trading_module; def execute_trade(): analyze_market() and generate_strategy(); run_backtest(); optimize_portfolio(); monitor_risks(); # Sauron Vision AI Core v1.0</pre>
+        </div>
     </div>
     
     <!-- Code bits scrolling - Enhanced variety -->
@@ -155,43 +158,31 @@
             <pre>alert = monitor_markets(24/7)<br>notify_trader(alert)</pre>
         </div>
     </div>
-
-    <!-- Code ticker above price ticker -->
-    <div class="code-ticker-container">
-        <div class="code-ticker">
-            <span>if (market.isBullish()) { executeBuy(); } else { hedgePositions(); }</span>
-            <span>const analysis = await ai.analyze(data);</span>
-            <span>portfolio.rebalance(0.5);</span>
-            <span>signals = detectPatterns(chart);</span>
-            <span>riskLevel = calculateVaR(portfolio);</span>
-            <span>sentiment = getSocialSentiment(symbol);</span>
-            <span>prediction = model.predict(future);</span>
-            <span>optimizeStrategy(parameters);</span>
-            <span>monitorAnomalies(realTime);</span>
-            <span>generateReport(daily);</span>
-            <!-- Repeat for continuous scrolling -->
-            <span>if (market.isBullish()) { executeBuy(); } else { hedgePositions(); }</span>
-            <span>const analysis = await ai.analyze(data);</span>
-            <span>portfolio.rebalance(0.5);</span>
-            <span>signals = detectPatterns(chart);</span>
-            <span>riskLevel = calculateVaR(portfolio);</span>
-            <span>sentiment = getSocialSentiment(symbol);</span>
-            <span>prediction = model.predict(future);</span>
-            <span>optimizeStrategy(parameters);</span>
-            <span>monitorAnomalies(realTime);</span>
-            <span>generateReport(daily);</span>
+    
+    <!-- Notices band below header -->
+    <div class="notices-band">
+        <div class="notices-content">
+            <span><i class="fas fa-brain"></i> Sauron AI analyzing markets...</span>
+            <span><i class="fas fa-chart-line"></i> Global markets open - Trading active</span>
+            <span><i class="fas fa-bell"></i> New signal detected in AAPL</span>
+            <span><i class="fas fa-shield-alt"></i> Risk level: Medium</span>
+            <span><i class="fas fa-newspaper"></i> Fed announcement in 2 hours</span>
+            <span><i class="fas fa-globe"></i> Crypto volatility high</span>
+            <span><i class="fas fa-rocket"></i> TSLA earnings beat estimates</span>
         </div>
     </div>
     
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
-        <div class="ticker-icons">
-            <i class="fas fa-compress-arrows-alt" title="Consolidation"></i>
-            <i class="fas fa-wrench" title="Setup Formation"></i>
-            <i class="fas fa-bell" title="Signal Live"></i>
-            <i class="fas fa-arrow-up" title="High Increase"></i>
-            <i class="fas fa-arrow-down" title="High Decrease"></i>
-            <i class="fas fa-chart-bar" title="High Volumes"></i>
+        <!-- Action icons above tickers -->
+        <div class="action-icons">
+            <button class="action-icon" data-action="all"><i class="fas fa-th"></i> All</button>
+            <button class="action-icon" data-action="consolidation"><i class="fas fa-compress-arrows-alt"></i> Consolidation</button>
+            <button class="action-icon" data-action="setup"><i class="fas fa-tools"></i> Set Up</button>
+            <button class="action-icon" data-action="signal"><i class="fas fa-bell"></i> Signal Live</button>
+            <button class="action-icon" data-action="increase"><i class="fas fa-arrow-up"></i> High Increase</button>
+            <button class="action-icon" data-action="decrease"><i class="fas fa-arrow-down"></i> High Decrease</button>
+            <button class="action-icon" data-action="volume"><i class="fas fa-volume-up"></i> High Volume</button>
         </div>
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
@@ -570,24 +561,31 @@
                 detail.classList.toggle('show');
             });
         });
-
-        // Binary code changing
-        function updateBinaryCode() {
-            const binaryDiv = document.querySelector('.binary-code');
-            if (binaryDiv) {
-                let text = binaryDiv.innerHTML.split('<br>');
-                text = text.map(line => {
-                    return line.split(' ').map(block => {
-                        if (Math.random() > 0.9) {
-                            return block.split('').map(char => Math.random() > 0.5 ? '0' : '1').join('');
-                        }
-                        return block;
-                    }).join(' ');
-                }).join('<br>');
-                binaryDiv.innerHTML = text;
+        // Binary paragraph update
+        function updateBinaryParagraph() {
+            const binaryEl = document.getElementById('binary-paragraph');
+            if (binaryEl) {
+                let binary = '';
+                for (let i = 0; i < 200; i++) {
+                    binary += Math.random() > 0.5 ? '1' : '0';
+                    if (i % 8 === 7) binary += ' ';
+                    if (i % 32 === 31) binary += '\n';
+                }
+                binaryEl.textContent = binary;
             }
         }
-        setInterval(updateBinaryCode, 2000);
+        setInterval(updateBinaryParagraph, 5000);
+        updateBinaryParagraph();
+
+        // Action icons filter
+        document.querySelectorAll('.action-icon').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.action-icon').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Implement filter logic here
+                console.log('Filtering by:', this.dataset.action);
+            });
+        });
     </script>
     {% block extra_js %}{% endblock %}
 </body>
