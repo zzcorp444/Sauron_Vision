@@ -12,28 +12,6 @@ class SauronDashboard {
         this.setupWebSocket();
         this.startDataUpdates();
         this.setupEventListeners();
-        this.setupBinaryAndCode();
-    }
-
-    setupBinaryAndCode() {
-        // Binary paragraph
-        const binaryText = document.getElementById('binary-text');
-        if (binaryText) {
-            setInterval(() => {
-                let binary = '';
-                for (let i = 0; i < 200; i++) {
-                    binary += Math.random() > 0.5 ? '1' : '0';
-                    if (i % 20 === 19) binary += '\n';
-                }
-                binaryText.textContent = binary;
-            }, 5000);
-        }
-        
-        // Code text
-        const codeText = document.getElementById('code-text');
-        if (codeText) {
-            codeText.textContent = 'const trade = await executeStrategy(params); if (risk.calculateVar() < threshold) { position.open(); } // Sauron sees all markets... '.repeat(10);
-        }
     }
 
     setupNavigation() {

@@ -111,20 +111,25 @@ body {
     }
 }
 
-@keyframes heartbeat-pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-}
-
 @keyframes binary-change {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+    0%, 50% { content: '0101010101010101010101010101010101010101010101010101010101010101'; }
+    51%, 100% { content: '1010101010101010101010101010101010101010101010101010101010101010'; }
 }
 
-@keyframes code-move {
+@keyframes code-line-move {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
+}
+
+@keyframes heart-pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
 }
 
 /* Matrix Background Effect */
@@ -159,6 +164,45 @@ body {
             var(--tertiary-text) 100px
         );
     animation: matrix-rain 20s linear infinite;
+}
+
+/* Binary Paragraph */
+.binary-paragraph {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 300px;
+    font-size: 12px;
+    color: var(--tertiary-text);
+    opacity: 0.3;
+    z-index: 2;
+    animation: binary-change 5s infinite;
+}
+
+.binary-paragraph::before {
+    content: '0101010101010101010101010101010101010101010101010101010101010101 1010101010101010101010101010101010101010101010101010101010101010 0101010101010101010101010101010101010101010101010101010101010101 1010101010101010101010101010101010101010101010101010101010101010';
+    white-space: pre-wrap;
+}
+
+/* Code Line Above Tickers */
+.code-line {
+    position: fixed;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    z-index: 3;
+    opacity: 0.5;
+}
+
+.code-line::before {
+    content: 'def analyze_market(data): return insights; strategy = generate_strategy(params); execute_trade(strategy); if sentiment > 0.7: buy_asset(); risk = calculate_var(portfolio); alert if risk > threshold; price = fetch_price(symbol); plot_chart(price);';
+    position: absolute;
+    white-space: nowrap;
+    animation: code-line-move 30s linear infinite;
+    color: var(--secondary-text);
+    font-size: 12px;
 }
 
 /* ===== EYE BACKGROUND ===== */
@@ -235,7 +279,7 @@ body {
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
-    animation: heartbeat-pulse 2s ease-in-out infinite;
+    animation: heart-pulse 2s ease-in-out infinite;
 }
 
 /* Globe - 3D */
@@ -378,31 +422,31 @@ body {
 }
 
 .market-dot.nasdaq {
-    transform: rotateY(-90deg) rotateX(35deg) translateZ(180px);
+    transform: rotateY(-95deg) rotateX(25deg) translateZ(180px);
 }
 
 .market-dot.lse {
-    transform: rotateY(0deg) rotateX(51deg) translateZ(180px);
+    transform: rotateY(8deg) rotateX(51deg) translateZ(180px);
 }
 
 .market-dot.tokyo {
-    transform: rotateY(139deg) rotateX(36deg) translateZ(180px);
+    transform: rotateY(140deg) rotateX(35deg) translateZ(180px);
 }
 
 .market-dot.shanghai {
-    transform: rotateY(121deg) rotateX(31deg) translateZ(180px);
+    transform: rotateY(121deg) rotateX(10deg) translateZ(180px);
 }
 
 .market-dot.hongkong {
-    transform: rotateY(114deg) rotateX(22deg) translateZ(180px);
+    transform: rotateY(114deg) rotateX(-10deg) translateZ(180px);
 }
 
 .market-dot.frankfurt {
-    transform: rotateY(8deg) rotateX(47deg) translateZ(180px);
+    transform: rotateY(25deg) rotateX(48deg) translateZ(180px);
 }
 
 .market-dot.sydney {
-    transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);
+    transform: rotateY(151deg) rotateX(-55deg) translateZ(180px);
 }
 
 .market-dot.toronto {
@@ -410,7 +454,7 @@ body {
 }
 
 .market-dot.singapore {
-    transform: rotateY(103deg) rotateX(1deg) translateZ(180px);
+    transform: rotateY(103deg) rotateX(-20deg) translateZ(180px);
 }
 
 .market-dot.mumbai {
@@ -418,7 +462,7 @@ body {
 }
 
 .market-dot.dubai {
-    transform: rotateY(55deg) rotateX(25deg) translateZ(180px);
+    transform: rotateY(55deg) rotateX(5deg) translateZ(180px);
 }
 
 .market-dot.zurich {
@@ -469,47 +513,6 @@ body {
 .market-dot:hover::after {
     opacity: 1;
     bottom: 120%;
-}
-
-/* Binary paragraph */
-.binary-paragraph {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 200px;
-    height: 150px;
-    overflow: hidden;
-    z-index: 2;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-#binary-text {
-    white-space: pre-wrap;
-    color: var(--tertiary-text);
-    font-size: 12px;
-    line-height: 1.2;
-    animation: binary-change 10s infinite;
-}
-
-/* Encoded code line */
-.encoded-code-line {
-    position: fixed;
-    bottom: 60px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    overflow: hidden;
-    z-index: 2;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-#code-text {
-    white-space: nowrap;
-    color: var(--secondary-text);
-    font-size: 14px;
-    animation: code-move 60s linear infinite;
 }
 
 /* Code scroll container - Enhanced */
@@ -566,6 +569,24 @@ body {
 
 .price-ticker-container.reduced {
     height: 20px;
+    overflow: hidden;
+}
+
+.ticker-icons {
+    display: flex;
+    gap: 10px;
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ticker-icons i {
+    cursor: pointer;
+    color: var(--secondary-text);
+}
+
+.ticker-icons i:hover {
+    color: var(--primary-text);
 }
 
 .ticker-controls {
@@ -573,6 +594,8 @@ body {
     top: 5px;
     right: 10px;
     z-index: 101;
+    display: flex;
+    gap: 5px;
 }
 
 .toggle-charts-btn, .toggle-ticker-btn {
@@ -587,7 +610,7 @@ body {
 }
 
 .toggle-charts-btn:hover,
-.toggle-ticker-btn:hover {
+.toggle-charts-btn.active {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
@@ -597,21 +620,8 @@ body {
     color: var(--primary-bg);
 }
 
-.price-action-icons {
-    display: flex;
-    gap: 10px;
-    padding: 5px 15px;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.price-action-icons i {
-    cursor: pointer;
-    color: var(--secondary-text);
-    transition: color 0.3s ease;
-}
-
-.price-action-icons i.active {
-    color: var(--primary-text);
+.toggle-ticker-btn:hover {
+    border-color: var(--glow-color);
 }
 
 .price-ticker {

@@ -176,7 +176,7 @@
     font-size: 0.9rem;
 }
 
-.notifications, .alerts {
+.alerts, .activities, .critical-alerts {
     position: relative;
     cursor: pointer;
 }
@@ -197,8 +197,8 @@
     font-weight: bold;
 }
 
-.notifications.blink, .alerts.blink {
-    animation: pulse 1s infinite;
+.blink {
+    animation: blink 1s infinite;
 }
 
 .logout-btn {
@@ -220,27 +220,27 @@
     color: var(--error-text);
 }
 
-/* Notices Band */
-.notices-band {
+/* Notice Band */
+.notice-band {
     background: var(--accent-bg);
     height: 40px;
     overflow: hidden;
-    position: relative;
     border-bottom: 1px solid var(--border-color);
+    z-index: 150;
 }
 
-.notices-scroller {
+.notice-scroller {
     display: flex;
-    gap: 50px;
-    position: absolute;
-    white-space: nowrap;
     animation: ticker-move 60s linear infinite;
+    padding: 10px 0;
 }
 
 .notice-item {
     display: flex;
     align-items: center;
     gap: 10px;
+    white-space: nowrap;
+    margin-right: 50px;
     cursor: pointer;
     color: var(--secondary-text);
 }
@@ -253,9 +253,10 @@
     display: none;
     font-size: 0.8rem;
     color: var(--tertiary-text);
+    margin-left: 10px;
 }
 
-.notice-item.expanded .notice-detail {
+.notice-item.show-detail .notice-detail {
     display: inline;
 }
 
@@ -590,40 +591,6 @@
     color: var(--primary-text);
 }
 
-/* Bulk Actions */
-.bulk-actions {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    z-index: 50;
-}
-
-.bulk-actions-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--secondary-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-}
-
-.bulk-actions-menu.show {
-    display: block;
-}
-
-.action-item {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.action-item:hover {
-    background: var(--accent-bg);
-}
-
 .overview-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -636,21 +603,12 @@
     border-radius: 10px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    height: 250px;
-    overflow: hidden;
-}
-
-.overview-card.fixed-height {
-    height: 250px;
+    height: 200px;
     overflow: hidden;
 }
 
 .overview-card.expanded {
     height: auto;
-}
-
-.overview-card.reduced {
-    height: 100px;
 }
 
 .overview-card:hover {
@@ -670,43 +628,24 @@
     gap: 1rem;
 }
 
-/* Card Controls */
 .card-controls {
     position: absolute;
     bottom: 10px;
     right: 10px;
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
-.card-controls i {
-    cursor: pointer;
-    color: var(--secondary-text);
-    transition: color 0.2s ease;
-}
-
-.card-controls i:hover {
-    color: var(--primary-text);
-}
-
-/* Expanded Content */
-.expanded-content {
-    display: none;
-}
-
-.expanded .expanded-content {
-    display: block;
-    margin-top: 1rem;
-}
-
-.graph-placeholder {
-    height: 150px;
-    background: var(--accent-bg);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.view-more, .toggle-size {
+    background: transparent;
+    border: none;
     color: var(--tertiary-text);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.view-more:hover, .toggle-size:hover {
+    color: var(--primary-text);
 }
 
 /* Portfolio Status Grid */
@@ -935,7 +874,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
 }
 
 .signal-details {
@@ -954,28 +892,29 @@
 
 .signal-actions {
     display: none;
-    gap: 10px;
-    margin-top: 10px;
     justify-content: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+
+.signal-item:hover .signal-actions {
+    display: flex;
 }
 
 .execute-btn {
     padding: 5px 10px;
-    background: var(--primary-text);
+    background: var(--glow-color);
     color: var(--primary-bg);
     border: none;
     border-radius: 3px;
     cursor: pointer;
 }
 
-.signal-actions i {
-    cursor: pointer;
+.delete-btn {
+    background: transparent;
+    border: none;
     color: var(--error-text);
-}
-
-.signal-tier {
-    font-size: 0.8rem;
-    color: var(--warning-text);
+    cursor: pointer;
 }
 
 .detail-row {
@@ -1107,6 +1046,32 @@
 .line-chart svg {
     width: 100%;
     height: 100%;
+}
+
+/* Status Indicator */
+.status-indicator {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--secondary-text);
+    font-size: 12px;
+    z-index: 100;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-text);
+    animation: pulse 2s infinite;
+}
+
+.time-ping {
+    display: flex;
+    flex-direction: column;
 }
 
 /* Responsive Design */

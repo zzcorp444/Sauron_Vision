@@ -107,17 +107,10 @@
         </div>
     </div>
     
-    <!-- Binary paragraph on top left -->
-    <div class="binary-paragraph">
-        <pre id="binary-text"></pre>
-    </div>
+    <!-- Binary paragraph top left -->
+    <div class="binary-paragraph"></div>
     
-    <!-- Encoded code line above tickers -->
-    <div class="encoded-code-line">
-        <pre id="code-text"></pre>
-    </div>
-    
-    <!-- Code bits scrolling - Enhanced variety -->
+    <!-- Code scroll container - Enhanced variety -->
     <div class="code-scroll-container">
         <div class="code-bit">
             <pre>def analyze_market(data):<br>    return insights</pre>
@@ -157,24 +150,26 @@
         </div>
     </div>
     
+    <!-- Code line above tickers -->
+    <div class="code-line"></div>
+    
     <!-- Price movements ticker with charts -->
     <div class="price-ticker-container">
+        <div class="ticker-icons">
+            <i class="fas fa-chart-line" title="Consolidations"></i>
+            <i class="fas fa-wrench" title="Set Up Formation"></i>
+            <i class="fas fa-signal" title="Signal Live"></i>
+            <i class="fas fa-arrow-up" title="High Increase"></i>
+            <i class="fas fa-arrow-down" title="High Decrease"></i>
+            <i class="fas fa-chart-bar" title="High Volumes"></i>
+        </div>
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
             </button>
             <button class="toggle-ticker-btn" id="toggle-ticker">
-                <i class="fas fa-chevron-up"></i>
+                <i class="fas fa-chevron-down"></i>
             </button>
-        </div>
-        <!-- Price action icons as filters -->
-        <div class="price-action-icons">
-            <i class="fas fa-compress-arrows-alt" data-action="consolidation" title="Consolidations"></i>
-            <i class="fas fa-tools" data-action="setup" title="Set Up Formation"></i>
-            <i class="fas fa-broadcast-tower" data-action="signal" title="Signal Live"></i>
-            <i class="fas fa-arrow-up" data-action="increase" title="High Increase"></i>
-            <i class="fas fa-arrow-down" data-action="decrease" title="High Decrease"></i>
-            <i class="fas fa-volume-up" data-action="volume" title="High Volumes"></i>
         </div>
         <div class="price-ticker">
             <!-- Extended ticker items -->
@@ -548,19 +543,12 @@
                 detail.classList.toggle('show');
             });
         });
-        
         // Toggle ticker container
         document.getElementById('toggle-ticker').addEventListener('click', function() {
             const container = document.querySelector('.price-ticker-container');
             container.classList.toggle('reduced');
-            this.querySelector('i').classList.toggle('fa-chevron-up');
             this.querySelector('i').classList.toggle('fa-chevron-down');
-        });
-        
-        // Price action filters
-        document.querySelectorAll('.price-action-icons i').addEventListener('click', function() {
-            this.classList.toggle('active');
-            // Implement filtering logic here
+            this.querySelector('i').classList.toggle('fa-chevron-up');
         });
     </script>
     {% block extra_js %}{% endblock %}
