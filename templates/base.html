@@ -15,14 +15,6 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Binary Matrix in top left -->
-    <div class="binary-matrix" id="binary-matrix"></div>
-    
-    <!-- Encoded line above ticker -->
-    <div class="encoded-line">
-        <div class="encoded-content" id="encoded-content"></div>
-    </div>
-    
     <!-- Eye background -->
     <div class="eye-bg">
         <div class="eye">
@@ -96,23 +88,33 @@
                     <!-- Equator -->
                     <div class="globe-line equator"></div>
                     
-                    <!-- Market dots on globe surface - 13 total - Better distributed -->
-                    <div class="market-dot nyse" data-market="NYSE"></div>
-                    <div class="market-dot nasdaq" data-market="NASDAQ"></div>
-                    <div class="market-dot lse" data-market="London"></div>
-                    <div class="market-dot tokyo" data-market="Tokyo"></div>
-                    <div class="market-dot shanghai" data-market="Shanghai"></div>
-                    <div class="market-dot hongkong" data-market="Hong Kong"></div>
-                    <div class="market-dot frankfurt" data-market="Frankfurt"></div>
-                    <div class="market-dot sydney" data-market="Sydney"></div>
-                    <div class="market-dot toronto" data-market="Toronto"></div>
-                    <div class="market-dot singapore" data-market="Singapore"></div>
-                    <div class="market-dot mumbai" data-market="Mumbai"></div>
-                    <div class="market-dot dubai" data-market="Dubai"></div>
-                    <div class="market-dot zurich" data-market="Zurich"></div>
+                    <!-- Market dots on globe surface - 13 total -->
+                    <div class="market-dot nyse" data-market="NYSE" style="transform: rotateY(-74deg) rotateX(40deg) translateZ(180px);"></div>
+                    <div class="market-dot nasdaq" data-market="NASDAQ" style="transform: rotateY(-80deg) rotateX(35deg) translateZ(180px);"></div>
+                    <div class="market-dot lse" data-market="London" style="transform: rotateY(0deg) rotateX(51deg) translateZ(180px);"></div>
+                    <div class="market-dot tokyo" data-market="Tokyo" style="transform: rotateY(139deg) rotateX(35deg) translateZ(180px);"></div>
+                    <div class="market-dot shanghai" data-market="Shanghai" style="transform: rotateY(121deg) rotateX(31deg) translateZ(180px);"></div>
+                    <div class="market-dot hongkong" data-market="Hong Kong" style="transform: rotateY(114deg) rotateX(22deg) translateZ(180px);"></div>
+                    <div class="market-dot frankfurt" data-market="Frankfurt" style="transform: rotateY(8deg) rotateX(47deg) translateZ(180px);"></div>
+                    <div class="market-dot sydney" data-market="Sydney" style="transform: rotateY(151deg) rotateX(-33deg) translateZ(180px);"></div>
+                    <div class="market-dot toronto" data-market="Toronto" style="transform: rotateY(-79deg) rotateX(44deg) translateZ(180px);"></div>
+                    <div class="market-dot singapore" data-market="Singapore" style="transform: rotateY(103deg) rotateX(1deg) translateZ(180px);"></div>
+                    <div class="market-dot mumbai" data-market="Mumbai" style="transform: rotateY(72deg) rotateX(19deg) translateZ(180px);"></div>
+                    <div class="market-dot dubai" data-market="Dubai" style="transform: rotateY(55deg) rotateX(25deg) translateZ(180px);"></div>
+                    <div class="market-dot zurich" data-market="Zurich" style="transform: rotateY(8deg) rotateX(47deg) translateZ(180px);"></div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Binary paragraph -->
+    <div class="binary-paragraph">
+        <span class="binary-text"></span>
+    </div>
+    
+    <!-- Encoded code line -->
+    <div class="encoded-code-line">
+        <span class="code-text"></span>
     </div>
     
     <!-- Code bits scrolling - Enhanced variety -->
@@ -156,43 +158,24 @@
     </div>
     
     <!-- Price movements ticker with charts -->
-    <div class="price-ticker-container" id="ticker-container">
-        <!-- Ticker Action Icons -->
-        <div class="ticker-action-bar">
-            <div class="ticker-action-icon" data-filter="all" title="All Tickers">
-                <i class="fas fa-globe"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="consolidation" title="Consolidation">
-                <i class="fas fa-compress"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="setup" title="Setup Formation">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="signal" title="Signal Live">
-                <i class="fas fa-bell"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="high-increase" title="High Increase">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="high-decrease" title="High Decrease">
-                <i class="fas fa-arrow-down"></i>
-            </div>
-            <div class="ticker-action-icon" data-filter="high-volume" title="High Volume">
-                <i class="fas fa-volume-up"></i>
-            </div>
+    <div class="price-ticker-container">
+        <div class="ticker-icons">
+            <i class="fas fa-compress-arrows-alt" title="Consolidation"></i>
+            <i class="fas fa-wrench" title="Setup Formation"></i>
+            <i class="fas fa-signal" title="Signal Live"></i>
+            <i class="fas fa-arrow-up" title="High Increase"></i>
+            <i class="fas fa-arrow-down" title="High Decrease"></i>
+            <i class="fas fa-chart-bar" title="High Volumes"></i>
+            <button class="toggle-ticker-btn"><i class="fas fa-arrow-up"></i></button>
         </div>
-        
         <div class="ticker-controls">
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
             </button>
-            <button class="minimize-ticker-btn" id="minimize-ticker">
-                <i class="fas fa-chevron-down"></i>
-            </button>
         </div>
         <div class="price-ticker">
             <!-- Extended ticker items -->
-            <div class="ticker-item" data-action="signal,high-volume">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">AAPL</span>
                     <span class="ticker-price">$150.25</span>
@@ -215,7 +198,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="consolidation">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">GOOGL</span>
                     <span class="ticker-price">$2750.50</span>
@@ -238,7 +221,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-increase,signal">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">TSLA</span>
                     <span class="ticker-price">$850.75</span>
@@ -261,7 +244,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="setup">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">MSFT</span>
                     <span class="ticker-price">$300.40</span>
@@ -284,7 +267,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-decrease">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">AMZN</span>
                     <span class="ticker-price">$3400.20</span>
@@ -307,7 +290,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-increase,high-volume">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">BTC</span>
                     <span class="ticker-price">$45000.00</span>
@@ -330,7 +313,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="consolidation">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">ETH</span>
                     <span class="ticker-price">$2800.00</span>
@@ -353,7 +336,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-increase,high-volume,signal">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">NVDA</span>
                     <span class="ticker-price">$450.30</span>
@@ -376,7 +359,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-decrease,setup">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">META</span>
                     <span class="ticker-price">$325.60</span>
@@ -399,7 +382,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-increase,setup">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">AMD</span>
                     <span class="ticker-price">$120.45</span>
@@ -422,7 +405,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="consolidation,signal">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">SPY</span>
                     <span class="ticker-price">$435.20</span>
@@ -445,7 +428,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="consolidation">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">QQQ</span>
                     <span class="ticker-price">$365.80</span>
@@ -468,7 +451,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="consolidation">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">GLD</span>
                     <span class="ticker-price">$185.30</span>
@@ -491,7 +474,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-decrease,high-volume">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">VIX</span>
                     <span class="ticker-price">$15.20</span>
@@ -514,7 +497,7 @@
                 </div>
             </div>
             
-            <div class="ticker-item" data-action="high-increase,setup">
+            <div class="ticker-item">
                 <div class="ticker-header">
                     <span class="ticker-symbol">NFLX</span>
                     <span class="ticker-price">$425.10</span>
@@ -545,6 +528,16 @@
         {% block content %}{% endblock %}
     </div>
     
+    <!-- Status indicator -->
+    <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-text">Connected - Logged In</span>
+        <div class="system-info">
+            <span class="local-time"></span>
+            <span class="ping">Ping: 0ms</span>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/terminal.js' %}"></script>
     <script>
@@ -562,113 +555,48 @@
                 detail.classList.toggle('show');
             });
         });
-        
-        // Minimize ticker functionality
-        document.getElementById('minimize-ticker').addEventListener('click', function() {
-            const container = document.getElementById('ticker-container');
-            const icon = this.querySelector('i');
-            
-            container.classList.toggle('minimized');
-            this.classList.toggle('active');
-            
-            if (container.classList.contains('minimized')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
-            }
+
+        // Binary paragraph
+        function updateBinary() {
+            const binaryText = Array.from({length: 200}, () => Math.random() < 0.5 ? '0' : '1').join('');
+            document.querySelector('.binary-text').textContent = binaryText;
+        }
+        setInterval(updateBinary, 2000);
+        updateBinary();
+
+        // Encoded code line
+        const codeSnippets = [
+            'def analyze_market(data): return insights',
+            'strategy = generate_strategy(params)',
+            'if sentiment > 0.7: buy_asset()',
+            'risk = calculate_var(portfolio)',
+            'price = fetch_price(symbol)'
+        ];
+        let codeIndex = 0;
+        function updateCodeLine() {
+            document.querySelector('.code-text').textContent = codeSnippets[codeIndex];
+            codeIndex = (codeIndex + 1) % codeSnippets.length;
+        }
+        setInterval(updateCodeLine, 5000);
+        updateCodeLine();
+
+        // Toggle ticker
+        document.querySelector('.toggle-ticker-btn').addEventListener('click', function() {
+            document.querySelector('.price-ticker-container').classList.toggle('collapsed');
+            this.querySelector('i').classList.toggle('fa-arrow-up');
+            this.querySelector('i').classList.toggle('fa-arrow-down');
         });
-        
-        // Ticker action filters - Updated with "all" functionality
-        document.querySelectorAll('.ticker-action-icon').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const filter = this.dataset.filter;
-                
-                if (filter === 'all') {
-                    // Reset all filters and show all tickers
-                    document.querySelectorAll('.ticker-action-icon').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    document.querySelectorAll('.ticker-item').forEach(item => {
-                        item.classList.remove('hidden');
-                        item.style.display = 'flex';
-                    });
-                } else {
-                    // Remove active from "all" if another filter is clicked
-                    document.querySelector('[data-filter="all"]').classList.remove('active');
-                    this.classList.toggle('active');
-                    filterTickers();
-                }
-            });
-        });
-        
-        function filterTickers() {
-            const activeFilters = Array.from(document.querySelectorAll('.ticker-action-icon.active'))
-                .map(icon => icon.dataset.filter)
-                .filter(f => f !== 'all');
-            
-            document.querySelectorAll('.ticker-item').forEach(item => {
-                if (activeFilters.length === 0) {
-                    item.style.display = 'flex';
-                    item.classList.remove('hidden');
-                } else {
-                    const itemActions = item.dataset.action.split(',');
-                    const hasMatch = activeFilters.some(filter => itemActions.includes(filter));
-                    item.style.display = hasMatch ? 'flex' : 'none';
-                    item.classList.toggle('hidden', !hasMatch);
-                }
-            });
+
+        // Update time and ping
+        function updateSystemInfo() {
+            document.querySelector('.local-time').textContent = new Date().toLocaleTimeString();
+            document.querySelector('.ping').textContent = `Ping: ${Math.round(Math.random() * 50)}ms`;
         }
-        
-        // Set "all" as active by default
-        document.querySelector('[data-filter="all"]').classList.add('active');
-        
-        // Binary matrix generation
-        function generateBinaryMatrix() {
-            const matrix = document.getElementById('binary-matrix');
-            const rows = 15;
-            const cols = 20;
-            
-            let content = '';
-            for (let i = 0; i < rows; i++) {
-                content += `<div class="binary-row" style="--row: ${i}">`;
-                for (let j = 0; j < cols; j++) {
-                    content += Math.random() > 0.5 ? '1' : '0';
-                }
-                content += '</div>';
-            }
-            matrix.innerHTML = content;
-        }
-        
-        // Update binary matrix periodically
-        generateBinaryMatrix();
-        setInterval(() => {
-            generateBinaryMatrix();
-        }, 2000);
-        
-        // Generate encoded line content
-        function generateEncodedLine() {
-            const encodedContent = document.getElementById('encoded-content');
-            const codes = [
-                'SHA256:a8f5f167f44f4964e6c998dee827110c',
-                'MARKET_DATA:AAPL:150.25:+1.2%',
-                'SIGNAL:BUY:NVDA:0.85:CONFIDENCE',
-                'RISK_ALERT:PORTFOLIO:VAR:-2.5%',
-                'PATTERN:ASCENDING_TRIANGLE:TSLA',
-                'SENTIMENT:BULLISH:0.72:HIGH',
-                'VOLUME_SPIKE:ETH:3.2M:ANOMALY',
-                'CORRELATION:SPY:QQQ:0.82',
-                'AI_PREDICTION:MSFT:315:3_DAYS',
-                'ORDER_FLOW:DARK_POOL:AAPL:1.5M'
-            ];
-            
-            let fullContent = '';
-            for (let i = 0; i < 5; i++) {
-                fullContent += codes.join(' | ') + ' | ';
-            }
-            
-            encodedContent.textContent = fullContent;
-        }
-        
-        generateEncodedLine();
+        setInterval(updateSystemInfo, 1000);
+        updateSystemInfo();
+
+        // Globe pulsing
+        document.querySelector('.pupil').style.animation = 'heart-pulse 2s infinite';
     </script>
     {% block extra_js %}{% endblock %}
 </body>
