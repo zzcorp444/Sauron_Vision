@@ -79,33 +79,16 @@ body {
         filter: brightness(1) drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
     }
     50% { 
-        filter: brightness(1.2) drop-shadow(0 0 40px rgba(0, 255, 65, 0.8));
+        filter: brightness(1.2) drop-shadow(0 0 40px rgba(0, 255, 65, 0.9));
     }
 }
 
-@keyframes heart-glow {
+@keyframes heartbeat-glow {
     0%, 100% { 
         filter: brightness(1) drop-shadow(0 0 30px rgba(0, 255, 65, 0.4));
     }
     50% { 
-        filter: brightness(1.3) drop-shadow(0 0 60px rgba(0, 255, 65, 0.8));
-    }
-}
-
-@keyframes particles-flow {
-    0% {
-        transform: translateX(-100px);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px));
-        opacity: 0;
+        filter: brightness(1.3) drop-shadow(0 0 50px rgba(0, 255, 65, 0.8));
     }
 }
 
@@ -115,25 +98,13 @@ body {
 }
 
 @keyframes scroll-code {
-    0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 0.25; }
-    80% { opacity: 0.25; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
 @keyframes ticker-move {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
-}
-
-@keyframes code-stream {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-@keyframes binary-change {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
 }
 
 @keyframes circuit-flow {
@@ -151,41 +122,29 @@ body {
     }
 }
 
-/* Matrix Background Effect */
-.background-matrix {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.1;
+@keyframes particle-float {
+    0% {
+        transform: translateX(-100px) translateY(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(-20px) scale(0.8);
+        opacity: 0;
+    }
 }
 
-.background-matrix::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 98px,
-            var(--tertiary-text) 100px
-        ),
-        repeating-linear-gradient(
-            transparent,
-            transparent 98px,
-            var(--tertiary-text) 100px
-        );
-    animation: matrix-rain 20s linear infinite;
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
 }
 
-/* Binary Matrix Background */
+/* Matrix Binary Background - Top Left */
 .binary-matrix {
     position: fixed;
     top: 20px;
@@ -195,68 +154,81 @@ body {
     font-family: var(--font-mono);
     font-size: 14px;
     color: var(--tertiary-text);
-    line-height: 1.2;
-    pointer-events: none;
-    z-index: 2;
+    opacity: 0.3;
+    z-index: 1;
     overflow: hidden;
-    opacity: 0.4;
+    pointer-events: none;
+    line-height: 1.2;
 }
 
-.binary-row {
-    animation: binary-change 2s infinite;
+.binary-text {
+    animation: matrix-change 2s steps(10) infinite;
 }
 
-/* Code Stream */
+@keyframes matrix-change {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+}
+
+/* Encoded Code Stream - Above Ticker */
 .code-stream {
     position: fixed;
-    top: 60px;
+    bottom: 100px;
     left: 0;
     width: 100%;
     height: 30px;
     overflow: hidden;
-    z-index: 3;
-    pointer-events: none;
-    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8) 10%, rgba(0, 0, 0, 0.8) 90%, transparent);
-}
-
-.code-line {
-    position: absolute;
-    white-space: nowrap;
-    color: var(--tertiary-text);
-    font-size: 12px;
-    animation: code-stream 30s linear infinite;
-}
-
-/* Status Indicator */
-.system-status {
-    position: fixed;
-    top: 65px;
-    right: 20px;
-    z-index: 5;
+    z-index: 99;
+    opacity: 0.4;
+    font-family: var(--font-mono);
     font-size: 11px;
     color: var(--secondary-text);
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 3px;
+    align-items: center;
 }
 
-.status-indicator-dot {
+.code-stream-text {
+    white-space: nowrap;
+    animation: scroll-code 60s linear infinite;
+}
+
+/* Status Indicator - Top Right */
+.system-status {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 200;
+    font-size: 11px;
+    text-align: right;
+    color: var(--secondary-text);
+}
+
+.status-dot {
+    display: inline-block;
     width: 8px;
     height: 8px;
     background: var(--primary-text);
     border-radius: 50%;
-    display: inline-block;
     margin-right: 8px;
-    animation: glow-pulse 2s infinite;
+    animation: heartbeat-glow 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--glow-color);
 }
 
-.system-time {
-    font-family: var(--font-mono);
+.status-text {
+    display: block;
+    margin-top: 5px;
 }
 
-.system-ping {
+.status-time {
+    display: block;
     color: var(--tertiary-text);
+    font-size: 10px;
+}
+
+.status-ping {
+    display: block;
+    color: var(--tertiary-text);
+    font-size: 10px;
 }
 
 /* ===== EYE BACKGROUND ===== */
@@ -272,6 +244,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Green Particles */
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: var(--primary-text);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+    animation: particle-float 15s linear infinite;
+}
+
+.particle.small {
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
+.particle.medium {
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+}
+
+.particle.large {
+    width: 12px;
+    height: 12px;
+    box-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color);
+}
+
+.particle.far {
+    opacity: 0.3;
+    filter: blur(1px);
+    animation-duration: 20s;
+}
+
+.particle.mid {
+    opacity: 0.6;
+    animation-duration: 15s;
+}
+
+.particle.near {
+    opacity: 0.9;
+    animation-duration: 10s;
 }
 
 /* Eye - Almond Shape */
@@ -290,8 +312,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    filter: drop-shadow(0 0 40px rgba(0, 255, 65, 0.6)) 
-            drop-shadow(0 0 80px rgba(0, 255, 65, 0.4));
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
 }
 
 .eye-shape svg {
@@ -306,6 +327,7 @@ body {
     filter: drop-shadow(0 0 40px rgba(0, 255, 65, 1)) 
             drop-shadow(0 0 80px rgba(0, 255, 65, 0.6))
             drop-shadow(0 0 120px rgba(0, 255, 65, 0.3));
+    animation: glow-pulse 3s ease-in-out infinite;
 }
 
 /* Electronic Circuit Veins */
@@ -323,53 +345,6 @@ body {
     stroke-width: 1;
 }
 
-/* Green Particles */
-.particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--primary-text);
-    border-radius: 50%;
-    filter: blur(0.5px);
-    animation: particles-flow 20s linear infinite;
-    box-shadow: 0 0 10px var(--glow-color);
-}
-
-.particle.large {
-    width: 8px;
-    height: 8px;
-    filter: blur(1px);
-    animation-duration: 15s;
-}
-
-.particle.small {
-    width: 2px;
-    height: 2px;
-    filter: blur(0px);
-    animation-duration: 25s;
-}
-
-.particle.far {
-    opacity: 0.3;
-    filter: blur(2px);
-}
-
-.particle.close {
-    opacity: 0.8;
-    z-index: 3;
-}
-
 /* Pupil (container for globe) */
 .pupil {
     width: 360px;
@@ -382,7 +357,7 @@ body {
         inset 0 0 20px rgba(0, 255, 65, 0.3),
         0 0 30px rgba(0, 255, 65, 0.2);
     perspective: 1000px;
-    animation: heart-glow 2s ease-in-out infinite;
+    animation: heartbeat-glow 2s ease-in-out infinite;
 }
 
 /* Globe - 3D */
@@ -554,7 +529,7 @@ body {
 }
 
 .price-ticker-container.minimized {
-    transform: translateY(calc(100% - 40px));
+    transform: translateY(calc(100% - 30px));
 }
 
 .ticker-controls {
@@ -564,10 +539,10 @@ body {
     z-index: 101;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
-.toggle-charts-btn,
-.minimize-ticker-btn {
+.ticker-minimize-btn {
     padding: 5px 10px;
     background: var(--accent-bg);
     border: 1px solid var(--border-color);
@@ -578,8 +553,78 @@ body {
     transition: all 0.3s ease;
 }
 
-.toggle-charts-btn:hover,
-.minimize-ticker-btn:hover {
+.ticker-minimize-btn:hover {
+    border-color: var(--glow-color);
+    color: var(--primary-text);
+}
+
+/* Price Action Icons */
+.price-action-filters {
+    display: flex;
+    gap: 5px;
+    margin-right: 15px;
+}
+
+.action-filter {
+    width: 24px;
+    height: 24px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.action-filter:hover {
+    border-color: var(--glow-color);
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.action-filter.active {
+    background: var(--glow-color);
+    color: var(--primary-bg);
+}
+
+.action-filter i {
+    font-size: 12px;
+}
+
+.action-tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.action-filter:hover .action-tooltip {
+    opacity: 1;
+}
+
+.toggle-charts-btn {
+    padding: 5px 10px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--secondary-text);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-charts-btn:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
 }
@@ -588,51 +633,6 @@ body {
     background: var(--glow-color);
     color: var(--primary-bg);
 }
-
-/* Asset Action Icons */
-.asset-action-icons {
-    display: flex;
-    gap: 5px;
-    position: absolute;
-    top: -25px;
-    left: 0;
-    right: 0;
-    justify-content: center;
-    z-index: 102;
-}
-
-.action-icon {
-    width: 30px;
-    height: 20px;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 10px;
-    color: var(--secondary-text);
-    transition: all 0.2s ease;
-}
-
-.action-icon:hover {
-    border-color: var(--glow-color);
-    color: var(--primary-text);
-    transform: translateY(-2px);
-}
-
-.action-icon.active {
-    background: var(--glow-color);
-    color: var(--primary-bg);
-}
-
-.action-icon[data-action="consolidation"] i { color: #ffa500; }
-.action-icon[data-action="setup"] i { color: #00bfff; }
-.action-icon[data-action="signal"] i { color: #00ff41; }
-.action-icon[data-action="increase"] i { color: #00ff41; }
-.action-icon[data-action="decrease"] i { color: #ff3333; }
-.action-icon[data-action="volume"] i { color: #9370db; }
 
 .price-ticker {
     display: flex;
@@ -652,6 +652,23 @@ body {
 
 .ticker-item.hidden {
     display: none;
+}
+
+/* Price Action Indicator */
+.price-action-icon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: var(--primary-text);
 }
 
 .ticker-header {
@@ -726,73 +743,6 @@ body {
 
 .chart-details.show {
     opacity: 1;
-}
-
-/* Info Banner */
-.info-banner {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background: var(--secondary-bg);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 99;
-    overflow: hidden;
-}
-
-.info-banner-content {
-    display: flex;
-    animation: ticker-move 60s linear infinite;
-    height: 100%;
-    align-items: center;
-}
-
-.info-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 20px;
-    white-space: nowrap;
-    cursor: pointer;
-    position: relative;
-}
-
-.info-item:hover .info-banner-content {
-    animation-play-state: paused;
-}
-
-.info-icon {
-    color: var(--primary-text);
-    font-size: 14px;
-}
-
-.info-title {
-    color: var(--secondary-text);
-    font-size: 12px;
-}
-
-.info-detail {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    padding: 5px 10px;
-    font-size: 11px;
-    color: var(--tertiary-text);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 103;
-    white-space: normal;
-    max-width: 200px;
-}
-
-.info-item:hover .info-detail {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 /* Global Styles */
@@ -1088,12 +1038,21 @@ input, textarea, select {
         width: 180px;
         height: 180px;
     }
+    
     .code-scroll-container {
         width: 150px;
         right: 2%;
     }
     .price-ticker {
         font-size: 14px;
+    }
+    
+    .binary-matrix {
+        display: none;
+    }
+    
+    .code-stream {
+        display: none;
     }
 }
 
@@ -1132,7 +1091,11 @@ input, textarea, select {
     .eye-bg,
     .background-matrix,
     .code-scroll-container,
-    .price-ticker-container {
+    .price-ticker-container,
+    .particles-container,
+    .binary-matrix,
+    .code-stream,
+    .system-status {
         display: none;
     }
 }

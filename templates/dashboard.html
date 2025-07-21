@@ -69,109 +69,89 @@
         </div>
         <div class="header-right">
             <div class="user-info">
-                <i class="fas fa-cog settings-icon">
-                    <div class="hover-tooltip">Settings</div>
-                </i>
+                <div class="settings-icon">
+                    <i class="fas fa-cog"></i>
+                    <span class="settings-tooltip">Settings</span>
+                </div>
                 <div class="user-id-wrapper">
                     <span>{{ user.user_id }}</span>
-                    <div class="hover-tooltip">Profile</div>
+                    <span class="profile-tooltip">Profile</span>
                 </div>
-                
-                <!-- Notifications -->
-                <div class="icon-wrapper">
-                    <div class="notification-icon {% if notifications_count > 0 %}icon-blinking{% endif %}">
+                <div class="icon-group">
+                    <div class="icon-item {% if active_alerts > 0 %}has-items{% endif %}" id="notification-icon">
                         <i class="fas fa-bell"></i>
-                        {% if notifications_count > 0 %}
-                        <span class="icon-count">{{ notifications_count }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="icon-popup">
-                        <div class="popup-header">
-                            <span>Notifications</span>
-                            <i class="fas fa-thumbs-up" style="color: var(--primary-text);"></i>
-                        </div>
-                        <div class="popup-content">
-                            <div class="popup-item">
-                                <i class="fas fa-check-circle" style="color: var(--primary-text);"></i>
-                                <span>Strategy optimization complete</span>
+                        {% if active_alerts > 0 %}<span class="icon-count">{{ active_alerts }}</span>{% endif %}
+                        <div class="icon-popup">
+                            <div class="popup-header">
+                                <span class="popup-title">Notifications</span>
+                                <span style="color: var(--tertiary-text); font-size: 0.8rem;">{{ active_alerts }} new</span>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-info-circle" style="color: var(--secondary-text);"></i>
-                                <span>Market scan finished - 5 opportunities</span>
+                            <div class="popup-content">
+                                <div class="popup-item">
+                                    <strong>Market Alert</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">AAPL reached target price</p>
+                                </div>
+                                <div class="popup-item">
+                                    <strong>Strategy Update</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">Mean Reversion completed backtest</p>
+                                </div>
+                                <div class="popup-item">
+                                    <strong>Risk Warning</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">Portfolio volatility increased</p>
+                                </div>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-chart-line" style="color: var(--warning-text);"></i>
-                                <span>New pattern detected on AAPL</span>
+                            <div class="popup-footer">
+                                <a href="#" class="view-more-btn">View All Notifications</a>
                             </div>
-                        </div>
-                        <div class="popup-footer">
-                            <button class="view-more-btn">View All Notifications</button>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Activity -->
-                <div class="icon-wrapper">
-                    <div class="activity-icon {% if activity_count > 0 %}icon-blinking{% endif %}">
-                        <i class="fas fa-pulse"></i>
-                        {% if activity_count > 0 %}
-                        <span class="icon-count">{{ activity_count }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="icon-popup">
-                        <div class="popup-header">
-                            <span>Activity Monitor</span>
-                            <i class="fas fa-thumbs-up" style="color: var(--primary-text);"></i>
-                        </div>
-                        <div class="popup-content">
-                            <div class="popup-item">
-                                <i class="fas fa-brain" style="color: var(--primary-text);"></i>
-                                <span>AI Analysis: 15 patterns processing</span>
+                    <div class="icon-item" id="activity-icon">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="icon-popup">
+                            <div class="popup-header">
+                                <span class="popup-title">Activity</span>
+                                <i class="fas fa-thumbs-up" style="color: var(--primary-text);"></i>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-sync" style="color: var(--secondary-text);"></i>
-                                <span>Strategy backtesting in progress</span>
+                            <div class="popup-content">
+                                <div class="popup-item">
+                                    <strong>Recent Trades</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">5 trades executed today</p>
+                                </div>
+                                <div class="popup-item">
+                                    <strong>Strategy Performance</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">+2.3% daily return</p>
+                                </div>
+                                <div class="popup-item">
+                                    <strong>Market Scans</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">12 opportunities found</p>
+                                </div>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-download" style="color: var(--warning-text);"></i>
-                                <span>Downloading market data...</span>
+                            <div class="popup-footer">
+                                <a href="#" class="view-more-btn">View Activity Log</a>
                             </div>
-                        </div>
-                        <div class="popup-footer">
-                            <button class="view-more-btn">View Activity Log</button>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Alerts -->
-                <div class="icon-wrapper">
-                    <div class="alerts-icon {% if active_alerts > 0 %}icon-blinking{% endif %}">
+                    <div class="icon-item {% if active_alerts > 0 %}has-items{% endif %}" id="alerts-icon">
                         <i class="fas fa-exclamation-triangle"></i>
-                        {% if active_alerts > 0 %}
-                        <span class="icon-count">{{ active_alerts }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="icon-popup">
-                        <div class="popup-header">
-                            <span>Active Alerts</span>
-                            <i class="fas fa-thumbs-up" style="color: var(--primary-text);"></i>
-                        </div>
-                        <div class="popup-content">
-                            <div class="popup-item">
-                                <i class="fas fa-exclamation" style="color: var(--error-text);"></i>
-                                <span>Risk limit approaching on TSLA</span>
+                        {% if active_alerts > 0 %}<span class="icon-count">2</span>{% endif %}
+                        <div class="icon-popup">
+                            <div class="popup-header">
+                                <span class="popup-title">Alerts</span>
+                                <span style="color: var(--error-text); font-size: 0.8rem;">2 critical</span>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-bolt" style="color: var(--warning-text);"></i>
-                                <span>Volatility spike detected</span>
+                            <div class="popup-content">
+                                <div class="popup-item">
+                                    <strong style="color: var(--error-text);">Risk Limit Breach</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">Portfolio beta exceeded 1.5</p>
+                                </div>
+                                <div class="popup-item">
+                                    <strong style="color: var(--warning-text);">Anomaly Detected</strong>
+                                    <p style="font-size: 0.75rem; color: var(--tertiary-text); margin: 0;">Unusual volume on TSLA</p>
+                                </div>
                             </div>
-                            <div class="popup-item">
-                                <i class="fas fa-chart-line" style="color: var(--primary-text);"></i>
-                                <span>Price target reached: AAPL</span>
+                            <div class="popup-footer">
+                                <a href="#" class="view-more-btn">View All Alerts</a>
                             </div>
-                        </div>
-                        <div class="popup-footer">
-                            <button class="view-more-btn">Manage Alerts</button>
                         </div>
                     </div>
                 </div>
@@ -179,6 +159,62 @@
             <a href="{% url 'logout' %}" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
+        </div>
+        
+        <!-- Activity Ticker Bar -->
+        <div class="activity-ticker-bar">
+            <div class="activity-ticker" id="activity-ticker">
+                <div class="activity-item">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Analysis Running</span>
+                    <div class="activity-detail">Processing market patterns for 15 symbols</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-sync"></i>
+                    <span>Strategy Optimization</span>
+                    <div class="activity-detail">Backtesting momentum strategy parameters</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Fed Meeting Today</span>
+                    <div class="activity-detail">Interest rate decision at 2:00 PM EST</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-database"></i>
+                    <span>Data Collection Active</span>
+                    <div class="activity-detail">Scraping 50+ sources in real-time</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Risk Monitor Alert</span>
+                    <div class="activity-detail">VaR approaching threshold on 3 positions</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Sentiment Analysis</span>
+                    <div class="activity-detail">Processing 10,000+ social media posts</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Pattern Detection</span>
+                    <div class="activity-detail">Head and shoulders forming on SPY</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-satellite"></i>
+                    <span>Alternative Data</span>
+                    <div class="activity-detail">Satellite imagery processed for retail traffic</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Correlation Update</span>
+                    <div class="activity-detail">Cross-asset correlations recalculated</div>
+                </div>
+                <div class="activity-item">
+                    <i class="fas fa-server"></i>
+                    <span>System Performance</span>
+                    <div class="activity-detail">All systems operating at peak efficiency</div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -295,103 +331,105 @@
             <!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
                 <button class="sidebar-toggle" id="sidebar-toggle">
-                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-left"></i>
                 </button>
                 <nav class="nav-menu">
-                    <a href="#" class="nav-item active" data-section="overview">
-                        <i class="fas fa-eye"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Vision</span>
-                            <span class="nav-sub">Overview/Dashboard</span>
+                    <a href="#" class="nav-item active" data-section="vision">
+                        <div class="nav-category">
+                            <i class="fas fa-eye"></i>
+                            <span class="nav-category-name">Vision</span>
                         </div>
+                        <span class="nav-subtitle">Overview/Dashboard</span>
                     </a>
-                    <a href="#" class="nav-item" data-section="market-scanner">
-                        <i class="fas fa-search"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Market</span>
-                            <span class="nav-sub">Scanner & Intelligence</span>
+                    <a href="#" class="nav-item" data-section="market">
+                        <div class="nav-category">
+                            <i class="fas fa-search"></i>
+                            <span class="nav-category-name">Market</span>
                         </div>
+                        <span class="nav-subtitle">Scanner & Intelligence</span>
                     </a>
-                    <a href="#" class="nav-item" data-section="strategy-builder">
-                        <i class="fas fa-cogs"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Strategy</span>
-                            <span class="nav-sub">Builder & Generation</span>
+                    <a href="#" class="nav-item" data-section="strategy">
+                        <div class="nav-category">
+                            <i class="fas fa-cogs"></i>
+                            <span class="nav-category-name">Strategy</span>
                         </div>
+                        <span class="nav-subtitle">Builder & Generation</span>
                     </a>
-                    <a href="#" class="nav-item" data-section="risk-monitor">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Risk</span>
-                            <span class="nav-sub">Management & Metrics</span>
+                    <a href="#" class="nav-item" data-section="risk">
+                        <div class="nav-category">
+                            <i class="fas fa-shield-alt"></i>
+                            <span class="nav-category-name">Risk</span>
                         </div>
+                        <span class="nav-subtitle">Management & Metrics</span>
                     </a>
-                    <a href="#" class="nav-item" data-section="sentiment-analysis">
-                        <i class="fas fa-brain"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Sentiment</span>
-                            <span class="nav-sub">Analysis & Indicators</span>
+                    <a href="#" class="nav-item" data-section="sentiment">
+                        <div class="nav-category">
+                            <i class="fas fa-brain"></i>
+                            <span class="nav-category-name">Sentiment</span>
                         </div>
+                        <span class="nav-subtitle">Analysis & Indicators</span>
                     </a>
                     <a href="#" class="nav-item" data-section="execution">
-                        <i class="fas fa-bolt"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Execution</span>
-                            <span class="nav-sub">Trading & Orders</span>
+                        <div class="nav-category">
+                            <i class="fas fa-bolt"></i>
+                            <span class="nav-category-name">Execution</span>
                         </div>
+                        <span class="nav-subtitle">Trading & Orders</span>
                     </a>
                     <a href="#" class="nav-item" data-section="anomaly">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Anomaly</span>
-                            <span class="nav-sub">Detection & Alerts</span>
+                        <div class="nav-category">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="nav-category-name">Anomaly</span>
                         </div>
+                        <span class="nav-subtitle">Detection & Alerts</span>
                     </a>
                     <a href="#" class="nav-item" data-section="terminal">
-                        <i class="fas fa-terminal"></i>
-                        <div class="nav-text">
-                            <span class="nav-main">Terminal</span>
-                            <span class="nav-sub">Console Interface</span>
+                        <div class="nav-category">
+                            <i class="fas fa-terminal"></i>
+                            <span class="nav-category-name">Terminal</span>
                         </div>
+                        <span class="nav-subtitle">Console Interface</span>
                     </a>
                 </nav>
             </aside>
 
             <!-- Content Area -->
             <div class="content-area">
-                <!-- Overview Section -->
-                <section id="overview" class="content-section active">
+                <!-- Vision (Overview) Section -->
+                <section id="vision" class="content-section active">
                     <div class="section-header">
-                        <h2>Market Overview</h2>
+                        <h2>Vision Overview</h2>
                         <div class="section-controls">
                             <button class="control-btn">
-                                <i class="fas fa-refresh"></i>
+                                <i class="fas fa-refresh"></i> Refresh
                             </button>
-                            <button class="bulk-actions-btn" id="bulk-actions">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <div class="bulk-menu">
-                                    <div class="bulk-menu-item" onclick="expandAllCards()">
+                            <div class="bulk-actions-dropdown">
+                                <button class="control-btn">
+                                    <i class="fas fa-th"></i> Bulk Actions
+                                </button>
+                                <div class="bulk-actions-menu">
+                                    <div class="bulk-action-item" onclick="expandAllCards()">
                                         <i class="fas fa-expand"></i> Expand All Cards
                                     </div>
-                                    <div class="bulk-menu-item" onclick="collapseAllCards()">
+                                    <div class="bulk-action-item" onclick="collapseAllCards()">
                                         <i class="fas fa-compress"></i> Collapse All Cards
                                     </div>
-                                    <div class="bulk-menu-item" onclick="addCard()">
+                                    <div class="bulk-action-item">
                                         <i class="fas fa-plus"></i> Add Card
                                     </div>
-                                    <div class="bulk-menu-item" onclick="removeCard()">
+                                    <div class="bulk-action-item">
                                         <i class="fas fa-minus"></i> Remove Card
                                     </div>
-                                    <div class="bulk-menu-item" onclick="resetLayout()">
-                                        <i class="fas fa-undo"></i> Reset Layout
+                                    <div class="bulk-action-item">
+                                        <i class="fas fa-cog"></i> Configure Layout
                                     </div>
                                 </div>
-                            </button>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="overview-grid">
-                        <div class="overview-card" id="portfolio-status">
+                        <div class="overview-card" id="portfolio-card">
                             <h3>Portfolio Status</h3>
                             <div class="card-content">
                                 <div class="portfolio-grid">
@@ -428,56 +466,68 @@
                                         <span class="label">Portfolio Score</span>
                                     </div>
                                 </div>
-                                <!-- Graphs for expanded view -->
-                                <div class="portfolio-graphs" style="display: none;">
-                                    <canvas id="portfolio-chart"></canvas>
+                                
+                                <!-- Portfolio Charts (shown when expanded) -->
+                                <div class="portfolio-charts" style="display: none;">
+                                    <div class="chart-container">
+                                        <div class="chart-title">Value Over Time</div>
+                                        <canvas id="portfolio-value-chart"></canvas>
+                                    </div>
+                                    <div class="chart-container">
+                                        <div class="chart-title">Asset Allocation</div>
+                                        <canvas id="portfolio-allocation-chart"></canvas>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-expand"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('portfolio')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
                         
-                        <div class="overview-card" id="positions-card">
-                            <h3>Active Positions</h3>
+                        <div class="overview-card large">
+                            <h3>Portfolio</h3>
                             <div class="card-content">
+                                <!-- Active Positions Section -->
+                                <h4 style="color: var(--secondary-text); font-size: 0.95rem; margin-bottom: 0.8rem;">Active Positions</h4>
                                 <div class="position-list">
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">AAPL</span>
                                             <span class="value">$150.25</span>
                                             <span class="change positive">+1.25%</span>
                                         </div>
+                                        <div class="position-prices">
+                                            <div class="price-info">
+                                                <span class="price-label">Bid</span>
+                                                <span class="price-value">$150.20</span>
+                                            </div>
+                                            <div class="price-info">
+                                                <span class="price-label">Ask</span>
+                                                <span class="price-value">$150.30</span>
+                                            </div>
+                                        </div>
                                         <div class="mini-chart-container">
                                             <div class="mini-chart">
-                                                <svg class="chart-svg">
-                                                    <polyline class="price-line" points="0,25 15,23 30,20 45,22 60,18 75,16 90,14 100,12" />
-                                                    <rect class="volume-bars" x="0" y="26" width="8" height="4" />
-                                                    <rect class="volume-bars" x="15" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="30" y="25" width="8" height="5" />
-                                                    <rect class="volume-bars" x="45" y="23" width="8" height="7" />
-                                                    <rect class="volume-bars" x="60" y="26" width="8" height="4" />
-                                                    <rect class="volume-bars" x="75" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="90" y="25" width="8" height="5" />
+                                                <svg class="chart-svg" viewBox="0 0 100 40">
+                                                    <polyline class="price-line" points="0,35 10,33 20,30 30,32 40,28 50,26 60,24 70,22 80,20 90,18 100,16" />
+                                                    <rect class="volume-bars" x="0" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="10" y="34" width="8" height="6" />
+                                                    <rect class="volume-bars" x="20" y="35" width="8" height="5" />
+                                                    <rect class="volume-bars" x="30" y="33" width="8" height="7" />
+                                                    <rect class="volume-bars" x="40" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="50" y="34" width="8" height="6" />
+                                                    <rect class="volume-bars" x="60" y="35" width="8" height="5" />
+                                                    <rect class="volume-bars" x="70" y="34" width="8" height="6" />
+                                                    <rect class="volume-bars" x="80" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="90" y="35" width="8" height="5" />
                                                 </svg>
                                             </div>
                                             <div class="position-data">
-                                                <div class="data-row">
-                                                    <span class="data-label">Bid:</span>
-                                                    <span class="data-value">$150.20</span>
-                                                </div>
-                                                <div class="data-row">
-                                                    <span class="data-label">Ask:</span>
-                                                    <span class="data-value">$150.30</span>
-                                                </div>
                                                 <div class="data-row">
                                                     <span class="data-label">Risk:</span>
                                                     <span class="data-value">Low</span>
@@ -486,53 +536,59 @@
                                                     <span class="data-label">Sentiment:</span>
                                                     <span class="data-value">Bullish</span>
                                                 </div>
+                                                <div class="data-row">
+                                                    <span class="data-label">Action:</span>
+                                                    <span class="data-value">Hold</span>
+                                                </div>
+                                                <div class="data-row">
+                                                    <span class="data-label">Target:</span>
+                                                    <span class="data-value">$165</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="position-actions">
-                                            <a href="/charts/AAPL" class="position-btn">
+                                            <a href="#" class="position-action-btn">
                                                 <i class="fas fa-chart-line"></i> Chart
                                             </a>
-                                            <a href="/positions/AAPL" class="position-btn">
+                                            <a href="#" class="position-action-btn">
                                                 <i class="fas fa-info-circle"></i> Details
                                             </a>
-                                        </div>
-                                        <div class="chart-info">
-                                            <span>1H</span>
-                                            <span>Vol: 1.2M</span>
                                         </div>
                                     </div>
                                     
                                     <div class="position-item">
-                                        <button class="chart-toggle" onclick="toggleChart(this)">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
                                         <div class="position-header">
                                             <span class="symbol">GOOGL</span>
                                             <span class="value">$2750.50</span>
                                             <span class="change negative">-0.75%</span>
                                         </div>
+                                        <div class="position-prices">
+                                            <div class="price-info">
+                                                <span class="price-label">Bid</span>
+                                                <span class="price-value">$2750.25</span>
+                                            </div>
+                                            <div class="price-info">
+                                                <span class="price-label">Ask</span>
+                                                <span class="price-value">$2750.75</span>
+                                            </div>
+                                        </div>
                                         <div class="mini-chart-container">
                                             <div class="mini-chart">
-                                                <svg class="chart-svg">
-                                                    <polyline class="price-line" points="0,8 15,10 30,12 45,10 60,15 75,17 90,19 100,21" />
-                                                    <rect class="volume-bars" x="0" y="26" width="8" height="4" />
-                                                    <rect class="volume-bars" x="15" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="30" y="27" width="8" height="3" />
-                                                    <rect class="volume-bars" x="45" y="23" width="8" height="7" />
-                                                    <rect class="volume-bars" x="60" y="25" width="8" height="5" />
-                                                    <rect class="volume-bars" x="75" y="24" width="8" height="6" />
-                                                    <rect class="volume-bars" x="90" y="26" width="8" height="4" />
+                                                <svg class="chart-svg" viewBox="0 0 100 40">
+                                                    <polyline class="price-line" points="0,10 10,12 20,15 30,13 40,18 50,20 60,22 70,24 80,26 90,28 100,30" />
+                                                    <rect class="volume-bars" x="0" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="10" y="34" width="8" height="6" />
+                                                    <rect class="volume-bars" x="20" y="37" width="8" height="3" />
+                                                    <rect class="volume-bars" x="30" y="33" width="8" height="7" />
+                                                    <rect class="volume-bars" x="40" y="35" width="8" height="5" />
+                                                    <rect class="volume-bars" x="50" y="34" width="8" height="6" />
+                                                    <rect class="volume-bars" x="60" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="70" y="35" width="8" height="5" />
+                                                    <rect class="volume-bars" x="80" y="36" width="8" height="4" />
+                                                    <rect class="volume-bars" x="90" y="35" width="8" height="5" />
                                                 </svg>
                                             </div>
                                             <div class="position-data">
-                                                <div class="data-row">
-                                                    <span class="data-label">Bid:</span>
-                                                    <span class="data-value">$2750.45</span>
-                                                </div>
-                                                <div class="data-row">
-                                                    <span class="data-label">Ask:</span>
-                                                    <span class="data-value">$2750.55</span>
-                                                </div>
                                                 <div class="data-row">
                                                     <span class="data-label">Risk:</span>
                                                     <span class="data-value">Medium</span>
@@ -541,51 +597,55 @@
                                                     <span class="data-label">Sentiment:</span>
                                                     <span class="data-value">Bearish</span>
                                                 </div>
+                                                <div class="data-row">
+                                                    <span class="data-label">Action:</span>
+                                                    <span class="data-value">Watch</span>
+                                                </div>
+                                                <div class="data-row">
+                                                    <span class="data-label">Target:</span>
+                                                    <span class="data-value">$2650</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="position-actions">
-                                            <a href="/charts/GOOGL" class="position-btn">
+                                            <a href="#" class="position-action-btn">
                                                 <i class="fas fa-chart-line"></i> Chart
                                             </a>
-                                            <a href="/positions/GOOGL" class="position-btn">
+                                            <a href="#" class="position-action-btn">
                                                 <i class="fas fa-info-circle"></i> Details
                                             </a>
-                                        </div>
-                                        <div class="chart-info">
-                                            <span>1H</span>
-                                            <span>Vol: 850K</span>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <!-- Orders Section -->
+                                <!-- Orders to Market Section -->
                                 <div class="orders-section">
-                                    <h4>Orders to Market</h4>
-                                    <div class="orders-list">
-                                        <div class="order-item">
-                                            <span class="order-type limit">LIMIT</span>
-                                            <span>NVDA @ $455.00</span>
-                                            <span>100 shares</span>
-                                        </div>
-                                        <div class="order-item">
-                                            <span class="order-type stop">STOP</span>
-                                            <span>TSLA @ $825.00</span>
-                                            <span>50 shares</span>
-                                        </div>
+                                    <h4 style="color: var(--secondary-text); font-size: 0.95rem;">Orders to Market</h4>
+                                    <div class="order-item">
+                                        <span class="order-type buy">BUY</span>
+                                        <span>TSLA @ $845.00</span>
+                                        <span>100 shares</span>
+                                        <span style="color: var(--tertiary-text);">Pending</span>
+                                    </div>
+                                    <div class="order-item">
+                                        <span class="order-type sell">SELL</span>
+                                        <span>MSFT @ $305.00</span>
+                                        <span>50 shares</span>
+                                        <span style="color: var(--tertiary-text);">Limit</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-compress"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('positions')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
                         
-                        <div class="signals-overview" id="signals-card">
+                        <div class="signals-overview overview-card large">
                             <h3>Trading Signals</h3>
                             <div class="card-content">
                                 <div class="signals-sections">
@@ -594,18 +654,15 @@
                                         <div class="signal-section-list">
                                             <div class="signal-item">
                                                 <div class="signal-header">
-                                                    <span class="signal-type buy">BUY</span>
-                                                    <span class="signal-symbol">TSLA</span>
-                                                    <span class="signal-time">Active</span>
-                                                </div>
-                                                <div class="signal-meta">
-                                                    <div class="signal-tier">
-                                                        <span>Tier:</span>
-                                                        <span class="tier-stars">★★★★☆</span>
+                                                    <div class="signal-info">
+                                                        <span class="signal-type buy">BUY</span>
+                                                        <span class="signal-symbol">TSLA</span>
                                                     </div>
-                                                    <div class="signal-elapsed">
-                                                        <i class="fas fa-clock"></i>
-                                                        <span>2h 15m</span>
+                                                    <div class="signal-meta">
+                                                        <span class="signal-tier">
+                                                            <span class="tier-stars">★★★★☆</span> Tier 4
+                                                        </span>
+                                                        <span class="signal-time">2h 15m ago</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-details">
@@ -615,7 +672,7 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">3.5%</span>
+                                                        <span class="detail-value">12.5%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
@@ -623,23 +680,23 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">+12.5%</span>
+                                                        <span class="detail-value">+15.2%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Target Move:</span>
-                                                        <span class="detail-value">+$15.50</span>
+                                                        <span class="detail-value">+$25.50</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Hold Time:</span>
                                                         <span class="detail-value">3-5 days</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Entry Time:</span>
-                                                        <span class="detail-value">10:45 AM</span>
+                                                        <span class="detail-label">Entry:</span>
+                                                        <span class="detail-value">$845.20</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Exit Time:</span>
-                                                        <span class="detail-value">Est. 3:30 PM</span>
+                                                        <span class="detail-label">Stop Loss:</span>
+                                                        <span class="detail-value">$825.00</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-actions">
@@ -649,20 +706,18 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            
                                             <div class="signal-item">
                                                 <div class="signal-header">
-                                                    <span class="signal-type sell">SELL</span>
-                                                    <span class="signal-symbol">MSFT</span>
-                                                    <span class="signal-time">Active</span>
-                                                </div>
-                                                <div class="signal-meta">
-                                                    <div class="signal-tier">
-                                                        <span>Tier:</span>
-                                                        <span class="tier-stars">★★★☆☆</span>
+                                                    <div class="signal-info">
+                                                        <span class="signal-type sell">SELL</span>
+                                                        <span class="signal-symbol">MSFT</span>
                                                     </div>
-                                                    <div class="signal-elapsed">
-                                                        <i class="fas fa-clock"></i>
-                                                        <span>45m</span>
+                                                    <div class="signal-meta">
+                                                        <span class="signal-tier">
+                                                            <span class="tier-stars">★★★☆☆</span> Tier 3
+                                                        </span>
+                                                        <span class="signal-time">45m ago</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-details">
@@ -672,7 +727,7 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Portfolio %:</span>
-                                                        <span class="detail-value">2.0%</span>
+                                                        <span class="detail-value">8.2%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Multiplier:</span>
@@ -680,23 +735,23 @@
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Est. ROI:</span>
-                                                        <span class="detail-value">+5.8%</span>
+                                                        <span class="detail-value">+8.5%</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Target Move:</span>
-                                                        <span class="detail-value">-$8.25</span>
+                                                        <span class="detail-value">-$12.30</span>
                                                     </div>
                                                     <div class="detail-row">
                                                         <span class="detail-label">Hold Time:</span>
                                                         <span class="detail-value">1-2 days</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Entry Time:</span>
-                                                        <span class="detail-value">2:15 PM</span>
+                                                        <span class="detail-label">Entry:</span>
+                                                        <span class="detail-value">$302.15</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Exit Time:</span>
-                                                        <span class="detail-value">Tomorrow AM</span>
+                                                        <span class="detail-label">Stop Loss:</span>
+                                                        <span class="detail-value">$306.00</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-actions">
@@ -714,18 +769,15 @@
                                         <div class="signal-section-list">
                                             <div class="signal-item">
                                                 <div class="signal-header">
-                                                    <span class="signal-type watch">WATCH</span>
-                                                    <span class="signal-symbol">NVDA</span>
-                                                    <span class="signal-time">Forming</span>
-                                                </div>
-                                                <div class="signal-meta">
-                                                    <div class="signal-tier">
-                                                        <span>Tier:</span>
-                                                        <span class="tier-stars">★★★★★</span>
+                                                    <div class="signal-info">
+                                                        <span class="signal-type watch">WATCH</span>
+                                                        <span class="signal-symbol">NVDA</span>
                                                     </div>
-                                                    <div class="signal-elapsed">
-                                                        <i class="fas fa-clock"></i>
-                                                        <span>Pending</span>
+                                                    <div class="signal-meta">
+                                                        <span class="signal-tier">
+                                                            <span class="tier-stars">★★★★★</span> Tier 5
+                                                        </span>
+                                                        <span class="signal-time">Forming</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-details">
@@ -738,20 +790,12 @@
                                                         <span class="detail-value">Bull Flag</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Entry Price:</span>
-                                                        <span class="detail-value">$460.00</span>
+                                                        <span class="detail-label">Entry Zone:</span>
+                                                        <span class="detail-value">$458-$462</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Target:</span>
-                                                        <span class="detail-value">$485.00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Stop Loss:</span>
-                                                        <span class="detail-value">$445.00</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Risk/Reward:</span>
-                                                        <span class="detail-value">1:3.2</span>
+                                                        <span class="detail-label">Confidence:</span>
+                                                        <span class="detail-value">75%</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -763,18 +807,15 @@
                                         <div class="signal-section-list">
                                             <div class="signal-item">
                                                 <div class="signal-header">
-                                                    <span class="signal-type hedge">HEDGE</span>
-                                                    <span class="signal-symbol">SPY</span>
-                                                    <span class="signal-time">Active</span>
-                                                </div>
-                                                <div class="signal-meta">
-                                                    <div class="signal-tier">
-                                                        <span>Tier:</span>
-                                                        <span class="tier-stars">★★★☆☆</span>
+                                                    <div class="signal-info">
+                                                        <span class="signal-type hedge">HEDGE</span>
+                                                        <span class="signal-symbol">SPY</span>
                                                     </div>
-                                                    <div class="signal-elapsed">
-                                                        <i class="fas fa-clock"></i>
-                                                        <span>1d 4h</span>
+                                                    <div class="signal-meta">
+                                                        <span class="signal-tier">
+                                                            <span class="tier-stars">★★★☆☆</span> Tier 3
+                                                        </span>
+                                                        <span class="signal-time">Active</span>
                                                     </div>
                                                 </div>
                                                 <div class="signal-details">
@@ -783,16 +824,8 @@
                                                         <span class="detail-value">Put Protection</span>
                                                     </div>
                                                     <div class="detail-row">
-                                                        <span class="detail-label">Coverage:</span>
-                                                        <span class="detail-value">25% Portfolio</span>
-                                                    </div>
-                                                    <div class="detail-row">
                                                         <span class="detail-label">Risk Reduction:</span>
                                                         <span class="detail-value">15%</span>
-                                                    </div>
-                                                    <div class="detail-row">
-                                                        <span class="detail-label">Cost:</span>
-                                                        <span class="detail-value">0.8% Portfolio</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -802,16 +835,16 @@
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-compress"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('signals')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
 
                         <!-- AI Market Analysis Card -->
-                        <div class="overview-card" id="ai-analysis-card">
+                        <div class="overview-card">
                             <h3>AI Market Analysis</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -833,86 +866,16 @@
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-expand"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('ai-analysis')">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Risk Monitoring Card -->
-                        <div class="overview-card" id="risk-monitoring-card">
-                            <h3>Risk Monitoring</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Portfolio VaR (1d):</span>
-                                    <span class="insight-value negative">-$2,845</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Max Drawdown:</span>
-                                    <span class="insight-value">-8.5%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Correlation Risk:</span>
-                                    <span class="insight-value warning">Medium</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Leverage Used:</span>
-                                    <span class="insight-value">1.5x</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Margin Available:</span>
-                                    <span class="insight-value positive">$45,250</span>
-                                </div>
-                            </div>
-                            <div class="card-controls">
-                                <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
-                                </button>
-                                <button class="card-control-btn" onclick="viewMore('risk')">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Portfolio Management Directives Card -->
-                        <div class="overview-card" id="portfolio-directives-card">
-                            <h3>Portfolio Management Directives</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Rebalance Required:</span>
-                                    <span class="insight-value warning">Yes - Tech Overweight</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Suggested Action:</span>
-                                    <span class="insight-value">Reduce NVDA by 20%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Sector Rotation:</span>
-                                    <span class="insight-value">Energy → Technology</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Cash Position:</span>
-                                    <span class="insight-value positive">Increase to 15%</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Next Review:</span>
-                                    <span class="insight-value">Friday EOD</span>
-                                </div>
-                            </div>
-                            <div class="card-controls">
-                                <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
-                                </button>
-                                <button class="card-control-btn" onclick="viewMore('portfolio-mgmt')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
 
                         <!-- Performance Metrics Card -->
-                        <div class="overview-card" id="performance-card">
+                        <div class="overview-card">
                             <h3>Performance Metrics</h3>
                             <div class="card-content">
                                 <div class="performance-grid">
@@ -953,16 +916,86 @@
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-expand"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('performance')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Risk Monitoring Card -->
+                        <div class="overview-card">
+                            <h3>Risk Monitoring</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Portfolio VaR (1d):</span>
+                                    <span class="insight-value negative">-$2,845</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Correlation Risk:</span>
+                                    <span class="insight-value warning">Elevated</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Liquidity Score:</span>
+                                    <span class="insight-value positive">Good (8.5/10)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Exposure Limits:</span>
+                                    <span class="insight-value">Within Range</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Stress Test Result:</span>
+                                    <span class="insight-value warning">-12.5% (worst case)</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Portfolio Management Directives Card -->
+                        <div class="overview-card">
+                            <h3>Portfolio Management Directives</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Rebalance Status:</span>
+                                    <span class="insight-value warning">Due in 3 days</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Optimization:</span>
+                                    <span class="insight-value">Reduce GOOGL by 5%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Tax Harvesting:</span>
+                                    <span class="insight-value positive">$1,250 available</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Cash Allocation:</span>
+                                    <span class="insight-value">Increase to 15%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Next Action:</span>
+                                    <span class="insight-value">Review tech exposure</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
                         
                         <!-- Market Intelligence Overview Card -->
-                        <div class="overview-card" id="market-intelligence-card">
+                        <div class="overview-card">
                             <h3>Market Intelligence Overview</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -992,16 +1025,16 @@
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-expand"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('market-intel')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
                         
                         <!-- Sauron's Vision Eye Card -->
-                        <div class="overview-card" id="sauron-eye-card">
+                        <div class="overview-card">
                             <h3>Sauron's Vision Eye</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
@@ -1031,10 +1064,10 @@
                             </div>
                             <div class="card-controls">
                                 <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand-alt"></i>
+                                    <i class="fas fa-expand"></i>
                                 </button>
-                                <button class="card-control-btn" onclick="viewMore('sauron-eye')">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
                                 </button>
                             </div>
                         </div>
@@ -1061,72 +1094,15 @@ document.getElementById('sidebar-toggle').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
     const newsBar = document.getElementById('news-bar');
     
-    sidebar.classList.toggle('expanded');
+    sidebar.classList.toggle('retracted');
     
     // Toggle news bar visibility
-    if (!sidebar.classList.contains('expanded')) {
+    if (sidebar.classList.contains('retracted')) {
         newsBar.classList.add('visible');
     } else {
         newsBar.classList.remove('visible');
     }
 });
-
-// Bulk actions toggle
-document.getElementById('bulk-actions').addEventListener('click', function() {
-    this.classList.toggle('active');
-});
-
-// Card functions
-function toggleCardSize(btn) {
-    const card = btn.closest('.overview-card');
-    card.classList.toggle('expanded');
-    
-    const icon = btn.querySelector('i');
-    if (card.classList.contains('expanded')) {
-        icon.className = 'fas fa-compress-alt';
-        // Show additional content if expanded
-        const graphs = card.querySelector('.portfolio-graphs');
-        if (graphs) graphs.style.display = 'block';
-    } else {
-        icon.className = 'fas fa-expand-alt';
-        const graphs = card.querySelector('.portfolio-graphs');
-        if (graphs) graphs.style.display = 'none';
-    }
-}
-
-function viewMore(section) {
-    console.log('Opening detailed view for:', section);
-    // Navigate to detailed view
-}
-
-function expandAllCards() {
-    document.querySelectorAll('.overview-card').forEach(card => {
-        card.classList.add('expanded');
-        const btn = card.querySelector('.card-control-btn i');
-        if (btn) btn.className = 'fas fa-compress-alt';
-    });
-}
-
-function collapseAllCards() {
-    document.querySelectorAll('.overview-card').forEach(card => {
-        card.classList.remove('expanded');
-        const btn = card.querySelector('.card-control-btn i');
-        if (btn) btn.className = 'fas fa-expand-alt';
-    });
-}
-
-function addCard() {
-    console.log('Adding new card...');
-}
-
-function removeCard() {
-    console.log('Removing card...');
-}
-
-function resetLayout() {
-    console.log('Resetting layout...');
-    collapseAllCards();
-}
 
 // News filter functionality
 document.querySelectorAll('.news-filter-btn').forEach(btn => {
@@ -1145,19 +1121,43 @@ document.querySelectorAll('.news-filter-btn').forEach(btn => {
     });
 });
 
-// Chart toggle functionality
-function toggleChart(button) {
-    const container = button.parentElement.querySelector('.mini-chart-container');
+// Card size toggle functionality
+function toggleCardSize(button) {
+    const card = button.closest('.overview-card');
     const icon = button.querySelector('i');
     
-    button.classList.toggle('locked');
-    container.classList.toggle('show');
+    card.classList.toggle('expanded');
     
-    if (button.classList.contains('locked')) {
-        icon.className = 'fas fa-chevron-up';
+    if (card.classList.contains('expanded')) {
+        icon.className = 'fas fa-compress';
+        // Show additional content if portfolio card
+        if (card.id === 'portfolio-card') {
+            card.querySelector('.portfolio-charts').style.display = 'grid';
+        }
     } else {
-        icon.className = 'fas fa-chevron-down';
+        icon.className = 'fas fa-expand';
+        // Hide additional content if portfolio card
+        if (card.id === 'portfolio-card') {
+            card.querySelector('.portfolio-charts').style.display = 'none';
+        }
     }
+}
+
+// Bulk actions
+function expandAllCards() {
+    document.querySelectorAll('.overview-card').forEach(card => {
+        card.classList.add('expanded');
+        const btn = card.querySelector('.card-control-btn i');
+        if (btn) btn.className = 'fas fa-compress';
+    });
+}
+
+function collapseAllCards() {
+    document.querySelectorAll('.overview-card').forEach(card => {
+        card.classList.remove('expanded');
+        const btn = card.querySelector('.card-control-btn i');
+        if (btn) btn.className = 'fas fa-expand';
+    });
 }
 
 // Make news items clickable
@@ -1166,10 +1166,5 @@ document.querySelectorAll('.news-item').forEach(item => {
         console.log('Opening article...');
     });
 });
-
-// Initialize counts (would come from backend)
-const notificationsCount = 3;
-const activityCount = 2;
-const alertsCount = 2;
 </script>
 {% endblock %}
