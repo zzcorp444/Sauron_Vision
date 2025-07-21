@@ -15,14 +15,81 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Binary Matrix Background - Top Left -->
-    <div class="binary-matrix">
-        <div class="matrix-content"></div>
+    <!-- System Status Indicator -->
+    <div class="system-status">
+        <div>
+            <span class="status-indicator-dot"></span>
+            <span class="status-text">Sauron Vision - Connected</span>
+        </div>
+        <div class="system-time" id="system-time"></div>
+        <div class="system-ping">Ping: <span id="system-ping">12</span>ms</div>
     </div>
 
-    <!-- Code Stream - Above Ticker -->
+    <!-- Binary Matrix Background -->
+    <div class="binary-matrix" id="binary-matrix"></div>
+
+    <!-- Code Stream -->
     <div class="code-stream">
-        <div class="code-stream-content"></div>
+        <div class="code-line">const analyze = (data) => { return ai.predict(data.patterns, data.volume, data.sentiment) || strategy.generate(); } // Real-time market analysis...</div>
+    </div>
+
+    <!-- Green Particles -->
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Info Banner -->
+    <div class="info-banner">
+        <div class="info-banner-content">
+            <div class="info-item">
+                <i class="fas fa-brain info-icon"></i>
+                <span class="info-title">AI Analysis Running</span>
+                <div class="info-detail">Processing 1,247 data points per second</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-chart-line info-icon"></i>
+                <span class="info-title">Pattern Detection Active</span>
+                <div class="info-detail">17 patterns identified in last hour</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-shield-alt info-icon"></i>
+                <span class="info-title">Risk Monitor Online</span>
+                <div class="info-detail">Portfolio VaR: -$2,845 (1 day)</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-bell info-icon"></i>
+                <span class="info-title">Fed Meeting Tomorrow</span>
+                <div class="info-detail">Rate decision expected at 2:00 PM EST</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-exclamation-triangle info-icon"></i>
+                <span class="info-title">High Volatility Alert</span>
+                <div class="info-detail">VIX above 20 - increased market uncertainty</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-robot info-icon"></i>
+                <span class="info-title">Strategy Optimization</span>
+                <div class="info-detail">Mean reversion strategy improved by 3.2%</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-network-wired info-icon"></i>
+                <span class="info-title">Neural Network Update</span>
+                <div class="info-detail">Model retrained with 2M new data points</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-newspaper info-icon"></i>
+                <span class="info-title">Breaking: Tech Earnings</span>
+                <div class="info-detail">AAPL, MSFT report after close</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-globe info-icon"></i>
+                <span class="info-title">Global Markets</span>
+                <div class="info-detail">Asian markets closed mixed, Europe up 0.5%</div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-cog info-icon"></i>
+                <span class="info-title">System Maintenance</span>
+                <div class="info-detail">Scheduled update at 3:00 AM EST</div>
+            </div>
+        </div>
     </div>
 
     <!-- Eye background -->
@@ -31,20 +98,8 @@
             <!-- Eye Shape SVG -->
             <div class="eye-shape">
                 <svg viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Eye outline with shadow filter -->
-                    <defs>
-                        <filter id="eye-shadow">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
-                            <feOffset dx="0" dy="5" result="offsetblur"/>
-                            <feFlood flood-color="#000000" flood-opacity="0.5"/>
-                            <feComposite in2="offsetblur" operator="in"/>
-                            <feMerge>
-                                <feMergeNode/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <path class="eye-outline" d="M 50 225 Q 200 100, 450 50 Q 700 100, 850 225 Q 700 350, 450 400 Q 200 350, 50 225 Z" filter="url(#eye-shadow)"/>
+                    <!-- Eye outline - almond shape with thicker center -->
+                    <path class="eye-outline" d="M 50 225 Q 200 100, 450 50 Q 700 100, 850 225 Q 700 350, 450 400 Q 200 350, 50 225 Z" />
                     
                     <!-- Electronic Circuit Veins - Left Side -->
                     <g class="circuit-group left">
@@ -112,23 +167,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Green Particles -->
-        <div class="particles-container">
-            <!-- Particles will be generated by JavaScript -->
-        </div>
-    </div>
-    
-    <!-- System Status Indicator -->
-    <div class="system-status">
-        <div class="status-dot"></div>
-        <div class="status-text">
-            <span class="status-state">Connected - Logged In</span>
-            <div class="status-details">
-                <span class="local-time"></span>
-                <span class="ping">Ping: <span class="ping-value">--</span>ms</span>
-            </div>
-        </div>
     </div>
     
     <!-- Code bits scrolling - Enhanced variety -->
@@ -172,44 +210,41 @@
     </div>
     
     <!-- Price movements ticker with charts -->
-    <div class="price-ticker-container">
+    <div class="price-ticker-container" id="price-ticker-container">
         <div class="ticker-controls">
-            <div class="ticker-filters">
-                <button class="ticker-filter active" data-filter="all" title="All Assets">
-                    <i class="fas fa-th"></i>
-                </button>
-                <button class="ticker-filter" data-filter="consolidating" title="Consolidating">
-                    <i class="fas fa-compress"></i>
-                </button>
-                <button class="ticker-filter" data-filter="setup" title="Setup Formation">
-                    <i class="fas fa-chart-line"></i>
-                </button>
-                <button class="ticker-filter" data-filter="signal" title="Live Signal">
-                    <i class="fas fa-bell"></i>
-                </button>
-                <button class="ticker-filter" data-filter="high-increase" title="High Increase">
-                    <i class="fas fa-rocket"></i>
-                </button>
-                <button class="ticker-filter" data-filter="high-decrease" title="High Decrease">
-                    <i class="fas fa-arrow-down"></i>
-                </button>
-                <button class="ticker-filter" data-filter="high-volume" title="High Volume">
-                    <i class="fas fa-chart-bar"></i>
-                </button>
-            </div>
-            <button class="toggle-ticker-btn" id="toggle-ticker">
-                <i class="fas fa-chevron-down"></i>
-            </button>
             <button class="toggle-charts-btn" id="toggle-charts">
                 <i class="fas fa-chart-line"></i> Charts
             </button>
+            <button class="minimize-ticker-btn" id="minimize-ticker">
+                <i class="fas fa-chevron-down"></i>
+            </button>
         </div>
+        
+        <!-- Asset Action Icons -->
+        <div class="asset-action-icons">
+            <div class="action-icon" data-action="consolidation" title="Consolidating">
+                <i class="fas fa-compress"></i>
+            </div>
+            <div class="action-icon" data-action="setup" title="Setup Forming">
+                <i class="fas fa-flag"></i>
+            </div>
+            <div class="action-icon" data-action="signal" title="Active Signal">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="action-icon" data-action="increase" title="High Increase">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="action-icon" data-action="decrease" title="High Decrease">
+                <i class="fas fa-chart-line fa-rotate-180"></i>
+            </div>
+            <div class="action-icon" data-action="volume" title="High Volume">
+                <i class="fas fa-volume-up"></i>
+            </div>
+        </div>
+        
         <div class="price-ticker">
-            <!-- Extended ticker items with status icons -->
-            <div class="ticker-item" data-status="consolidating">
-                <div class="ticker-status-icon">
-                    <i class="fas fa-compress"></i>
-                </div>
+            <!-- Extended ticker items -->
+            <div class="ticker-item" data-action="increase">
                 <div class="ticker-header">
                     <span class="ticker-symbol">AAPL</span>
                     <span class="ticker-price">$150.25</span>
@@ -232,7 +267,214 @@
                 </div>
             </div>
             
-            <!-- More ticker items would follow the same pattern -->
+            <div class="ticker-item" data-action="consolidation">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">GOOGL</span>
+                    <span class="ticker-price">$2750.50</span>
+                    <span class="ticker-change negative">-0.5%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,4 8,6 16,9 24,7 32,12 40,14 48,16 56,19 65,21" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="23" width="6" height="2" />
+                        <rect class="volume-bar" x="30" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="40" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="50" y="22" width="6" height="3" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 850K</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="signal">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">TSLA</span>
+                    <span class="ticker-price">$850.75</span>
+                    <span class="ticker-change positive">+3.1%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,22 8,20 16,17 24,14 32,11 40,9 48,6 56,3 65,1" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="20" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="30" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="40" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="50" y="19" width="6" height="6" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 2.5M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="setup">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">MSFT</span>
+                    <span class="ticker-price">$300.40</span>
+                    <span class="ticker-change positive">+0.8%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,18 8,16 16,14 24,16 32,13 40,11 48,9 56,7 65,5" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="23" width="6" height="2" />
+                        <rect class="volume-bar" x="50" y="22" width="6" height="3" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 950K</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="decrease">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">AMZN</span>
+                    <span class="ticker-price">$3400.20</span>
+                    <span class="ticker-change negative">-1.2%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,12 8,10 16,8 24,10 32,13 40,15 48,17 56,19 65,21" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="30" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="40" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 760K</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="volume">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">BTC</span>
+                    <span class="ticker-price">$45000.00</span>
+                    <span class="ticker-change positive">+2.5%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,20 8,18 16,15 24,13 32,10 40,8 48,6 56,4 65,2" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="20" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="30" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="40" y="17" width="6" height="8" />
+                        <rect class="volume-bar" x="50" y="19" width="6" height="6" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 3.2M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">ETH</span>
+                    <span class="ticker-price">$2800.00</span>
+                    <span class="ticker-change negative">-0.3%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,15 8,13 16,10 24,12 32,9 40,7 48,9 56,11 65,13" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 2.8M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="volume,increase">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">NVDA</span>
+                    <span class="ticker-price">$450.30</span>
+                    <span class="ticker-change positive">+5.2%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,25 8,23 16,20 24,17 32,14 40,11 48,8 56,5 65,2" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="20" y="17" width="6" height="8" />
+                        <rect class="volume-bar" x="30" y="16" width="6" height="9" />
+                        <rect class="volume-bar" x="40" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="50" y="18" width="6" height="7" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 4.1M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">META</span>
+                    <span class="ticker-price">$325.60</span>
+                    <span class="ticker-change negative">-1.8%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,8 8,10 16,13 24,15 32,18 40,20 48,22 56,20 65,23" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="20" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="30" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="40" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="50" y="21" width="6" height="4" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 1.5M</span>
+                </div>
+            </div>
+            
+            <div class="ticker-item" data-action="setup">
+                <div class="ticker-header">
+                    <span class="ticker-symbol">AMD</span>
+                    <span class="ticker-price">$120.45</span>
+                    <span class="ticker-change positive">+2.3%</span>
+                </div>
+                <div class="ticker-chart">
+                    <svg class="chart-svg" viewBox="0 0 65 25">
+                        <polyline class="chart-line" points="0,19 8,17 16,14 24,16 32,13 40,10 48,8 56,6 65,4" />
+                        <rect class="volume-bar" x="0" y="22" width="6" height="3" />
+                        <rect class="volume-bar" x="10" y="20" width="6" height="5" />
+                        <rect class="volume-bar" x="20" y="19" width="6" height="6" />
+                        <rect class="volume-bar" x="30" y="21" width="6" height="4" />
+                        <rect class="volume-bar" x="40" y="18" width="6" height="7" />
+                        <rect class="volume-bar" x="50" y="20" width="6" height="5" />
+                    </svg>
+                </div>
+                <div class="chart-details">
+                    <span>1H</span>
+                    <span>Vol: 2.1M</span>
+                </div>
+            </div>
+            
+            <!-- Continue with more assets... -->
         </div>
     </div>
     
@@ -242,87 +484,72 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/terminal.js' %}"></script>
-    <script src="{% static 'js/particles.js' %}"></script>
     <script>
-        // Binary Matrix Animation
-        function generateBinaryMatrix() {
-            const matrix = document.querySelector('.matrix-content');
-            let binaryString = '';
-            for (let i = 0; i < 200; i++) {
-                binaryString += Math.random() > 0.5 ? '1 ' : '0 ';
-                if (i % 20 === 19) binaryString += '<br>';
+        // Initialize Binary Matrix
+        function initBinaryMatrix() {
+            const matrix = document.getElementById('binary-matrix');
+            let binaryContent = '';
+            for (let i = 0; i < 15; i++) {
+                let row = '';
+                for (let j = 0; j < 30; j++) {
+                    row += Math.random() > 0.5 ? '1' : '0';
+                }
+                binaryContent += `<div class="binary-row">${row}</div>`;
             }
-            matrix.innerHTML = binaryString;
-        }
-        
-        setInterval(generateBinaryMatrix, 1000);
-        generateBinaryMatrix();
-        
-        // Code Stream Animation
-        function generateCodeStream() {
-            const codeExamples = [
-                'const prediction = await AI.predict(marketData);',
-                'if (rsi < 30 && volume > avgVolume * 1.5) { signal("BUY"); }',
-                'portfolio.optimize({ risk: "medium", return: "maximize" });',
-                'anomaly.detect(priceAction, { sensitivity: 0.95 });',
-                'strategy.backtest(historicalData, { period: "1Y" });',
-                'const correlation = assets.correlate(["AAPL", "MSFT"]);',
-                'sentiment.analyze(newsData, { source: "all" });',
-                'risk.calculate({ method: "VaR", confidence: 0.95 });'
-            ];
+            matrix.innerHTML = binaryContent;
             
-            const stream = document.querySelector('.code-stream-content');
-            const code = codeExamples[Math.floor(Math.random() * codeExamples.length)];
-            stream.textContent = code;
-        }
-        
-        setInterval(generateCodeStream, 5000);
-        generateCodeStream();
-        
-        // System Status Updates
-        function updateSystemStatus() {
-            const timeElement = document.querySelector('.local-time');
-            const pingElement = document.querySelector('.ping-value');
-            
-            // Update time
-            const now = new Date();
-            timeElement.textContent = now.toLocaleTimeString();
-            
-            // Simulate ping
-            const ping = Math.floor(Math.random() * 30 + 10);
-            pingElement.textContent = ping;
-        }
-        
-        setInterval(updateSystemStatus, 1000);
-        updateSystemStatus();
-        
-        // Toggle ticker container
-        document.getElementById('toggle-ticker').addEventListener('click', function() {
-            const container = document.querySelector('.price-ticker-container');
-            const icon = this.querySelector('i');
-            
-            container.classList.toggle('minimized');
-            icon.className = container.classList.contains('minimized') ? 
-                'fas fa-chevron-up' : 'fas fa-chevron-down';
-        });
-        
-        // Ticker filters
-        document.querySelectorAll('.ticker-filter').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.ticker-filter').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                document.querySelectorAll('.ticker-item').forEach(item => {
-                    if (filter === 'all' || item.dataset.status === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
+            // Update binary values
+            setInterval(() => {
+                const rows = matrix.querySelectorAll('.binary-row');
+                rows.forEach(row => {
+                    let newRow = '';
+                    for (let j = 0; j < 30; j++) {
+                        newRow += Math.random() > 0.5 ? '1' : '0';
                     }
+                    row.textContent = newRow;
                 });
-            });
-        });
-        
+            }, 1000);
+        }
+
+        // Initialize Particles
+        function initParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                if (Math.random() > 0.7) particle.classList.add('large');
+                else if (Math.random() < 0.3) particle.classList.add('small');
+                
+                // Random distance
+                if (Math.random() > 0.5) particle.classList.add('far');
+                else particle.classList.add('close');
+                
+                // Random position
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Update System Time
+        function updateSystemTime() {
+            const timeEl = document.getElementById('system-time');
+            const now = new Date();
+            timeEl.textContent = now.toLocaleTimeString();
+        }
+
+        // Update Ping
+        function updatePing() {
+            const pingEl = document.getElementById('system-ping');
+            const ping = Math.floor(Math.random() * 20) + 10;
+            pingEl.textContent = ping;
+        }
+
         // Toggle charts functionality
         document.getElementById('toggle-charts').addEventListener('click', function() {
             this.classList.toggle('active');
@@ -337,6 +564,44 @@
                 detail.classList.toggle('show');
             });
         });
+
+        // Minimize ticker
+        document.getElementById('minimize-ticker').addEventListener('click', function() {
+            const container = document.getElementById('price-ticker-container');
+            container.classList.toggle('minimized');
+            
+            const icon = this.querySelector('i');
+            if (container.classList.contains('minimized')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        });
+
+        // Asset Action Filters
+        document.querySelectorAll('.action-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const action = this.dataset.action;
+                
+                // Filter ticker items
+                document.querySelectorAll('.ticker-item').forEach(item => {
+                    if (this.classList.contains('active')) {
+                        if (!item.dataset.action || !item.dataset.action.includes(action)) {
+                            item.classList.add('hidden');
+                        }
+                    } else {
+                        item.classList.remove('hidden');
+                    }
+                });
+            });
+        });
+
+        // Initialize
+        initBinaryMatrix();
+        initParticles();
+        setInterval(updateSystemTime, 1000);
+        setInterval(updatePing, 5000);
     </script>
     {% block extra_js %}{% endblock %}
 </body>
