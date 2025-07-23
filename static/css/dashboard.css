@@ -65,7 +65,7 @@
 
 .activity-detail {
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 0;
     background: var(--secondary-bg);
     border: 1px solid var(--glow-color);
@@ -75,9 +75,10 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 200;
+    z-index: 210;
     min-width: 200px;
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    margin-bottom: 5px;
 }
 
 .header-left {
@@ -460,23 +461,60 @@
     position: relative;
 }
 
-/* News Intelligence Bar - Behind Sidebar */
+/* News Intelligence Bar - Fixed Position */
 .news-intelligence-bar {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 110px;
     left: 0;
     width: 260px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 110px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 150;
+    z-index: 180;
     overflow-y: auto;
-    transform: translateX(-260px);
+    transform: translateX(-240px);
     transition: transform 0.3s ease;
 }
 
 .news-intelligence-bar.visible {
     transform: translateX(0);
+}
+
+.news-intelligence-bar.retracted:not(.visible) {
+    transform: translateX(-240px);
+}
+
+/* News Bar Toggle */
+.news-bar-toggle {
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    width: 30px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.news-bar-toggle:hover {
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-bar-toggle i {
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.news-intelligence-bar.visible .news-bar-toggle i {
+    transform: rotate(180deg);
 }
 
 .news-bar-header {
@@ -636,16 +674,18 @@
     border-color: #000;
 }
 
-/* Sidebar */
+/* Sidebar - Fixed Position */
 .sidebar {
+    position: fixed;
+    top: 110px;
+    left: 0;
     width: 250px;
     background: var(--secondary-bg);
     border-right: 1px solid var(--border-color);
     padding: 1rem 0;
-    position: relative;
-    transition: width 0.3s ease;
-    z-index: 200;
-    height: calc(100vh - 150px);
+    transition: all 0.3s ease;
+    z-index: 170;
+    height: calc(100vh - 110px);
     overflow-y: auto;
 }
 
@@ -760,6 +800,11 @@
     padding-bottom: 150px;
     overflow-y: auto;
     transition: all 0.3s ease;
+    margin-left: 250px;
+}
+
+.sidebar.retracted ~ .content-area {
+    margin-left: 60px;
 }
 
 .content-section {
@@ -823,6 +868,7 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    z-index: 500;
 }
 
 .bulk-actions-dropdown:hover .bulk-actions-menu {
@@ -963,7 +1009,7 @@
     color: var(--secondary-text);
 }
 
-/* Active Positions Enhanced */
+/* Active Positions Enhanced with Hover */
 .position-list {
     display: flex;
     flex-direction: column;
@@ -979,6 +1025,7 @@
     font-size: 0.9rem;
     position: relative;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .position-item:hover {
@@ -986,11 +1033,23 @@
     box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
 }
 
-.position-header {
+.position-item .position-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.8rem;
+}
+
+.position-item .position-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.position-item:hover .position-details {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 0.8rem;
 }
 
 .position-prices {
@@ -1128,40 +1187,7 @@
     color: var(--primary-bg);
 }
 
-/* Enhanced Signals Section */
-.signals-sections {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-height: 450px;
-    overflow-y: auto;
-}
-
-.signal-section {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-}
-
-.signal-section:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.signal-section h4 {
-    color: var(--primary-text);
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.signal-section-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
+/* Enhanced Signals Section with Hover */
 .signal-item {
     display: flex;
     flex-direction: column;
@@ -1178,6 +1204,25 @@
     background: rgba(0, 255, 65, 0.1);
     border: 1px solid var(--glow-color);
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.signal-item .signal-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signal-item .signal-full-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.signal-item:hover .signal-full-details {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: 0.8rem;
 }
 
 .signal-header {
@@ -1269,15 +1314,11 @@
 }
 
 .signal-actions {
-    display: none;
+    display: flex;
     gap: 0.5rem;
     justify-content: center;
     padding-top: 0.8rem;
     border-top: 1px solid var(--border-color);
-}
-
-.signal-item:hover .signal-actions {
-    display: flex;
 }
 
 .execute-btn {
@@ -1425,21 +1466,19 @@
         position: relative;
         width: 100%;
         height: 200px;
-        order: 1;
         transform: translateX(0);
-    }
-    
-    .dashboard-main {
-        order: 2;
+        top: auto;
     }
     
     .sidebar {
+        position: relative;
         width: 100%;
-        order: 3;
+        top: auto;
+        height: auto;
     }
     
     .content-area {
-        order: 4;
+        margin-left: 0;
     }
     
     .nav-menu {
