@@ -13,21 +13,36 @@
     background: var(--secondary-bg);
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    z-index: 200;
-    position: relative;
+    z-index: 300;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.dashboard-header.scrolled {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(10px);
 }
 
 /* Activity Ticker Bar */
 .activity-ticker-bar {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 80px;
     left: 0;
     right: 0;
     height: 30px;
     background: var(--accent-bg);
     border-bottom: 1px solid var(--border-color);
     overflow: hidden;
-    z-index: 190;
+    z-index: 290;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.activity-ticker-bar.scrolled {
+    background: rgba(42, 42, 42, 0.7);
+    backdrop-filter: blur(10px);
 }
 
 .activity-ticker {
@@ -75,7 +90,7 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 210;
+    z-index: 350;
     min-width: 200px;
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
     margin-bottom: 5px;
@@ -85,6 +100,42 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.header-left:hover .sauron-info-popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sauron-info-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 10px;
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 10px;
+    padding: 1rem;
+    min-width: 250px;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    z-index: 400;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sauron-info-popup::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--glow-color);
 }
 
 .header-logo {
@@ -145,7 +196,7 @@
     padding: 1rem;
     min-width: 250px;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-    z-index: 100;
+    z-index: 400;
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -349,7 +400,7 @@
     min-width: 250px;
     max-width: 300px;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-    z-index: 300;
+    z-index: 400;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -452,7 +503,7 @@
     display: flex;
     flex: 1;
     position: relative;
-    margin-top: 30px; /* Space for activity ticker */
+    margin-top: 110px; /* Space for header + activity bar */
 }
 
 .dashboard-main {
@@ -461,18 +512,138 @@
     position: relative;
 }
 
-/* News Intelligence Bar - Fixed Position */
-.news-intelligence-bar {
+/* Sidebar - Above News Bar */
+.sidebar {
     position: fixed;
     top: 110px;
     left: 0;
+    width: 250px;
+    background: var(--secondary-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    z-index: 250;
+    height: calc(100vh - 110px);
+    overflow-y: auto;
+}
+
+.sidebar.retracted {
+    width: 60px;
+}
+
+.sidebar.retracted .nav-item span,
+.sidebar.retracted .nav-category-name {
+    display: none;
+}
+
+.sidebar.retracted .nav-item {
+    justify-content: center;
+    padding: 1rem 0.5rem;
+}
+
+.sidebar.retracted .nav-item i {
+    font-size: 1.2rem;
+}
+
+.sidebar.retracted .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 1rem;
+    right: -15px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    border-color: var(--glow-color);
+}
+
+.sidebar-toggle i {
+    color: var(--secondary-text);
+    transition: transform 0.3s ease;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    color: var(--secondary-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.nav-item:hover {
+    background: var(--accent-bg);
+    color: var(--primary-text);
+    border-left-color: var(--glow-color);
+}
+
+.nav-item.active {
+    background: var(--accent-bg);
+    color: var(--primary-text);
+    border-left-color: var(--glow-color);
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.nav-category {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.nav-category i {
+    width: 20px;
+    text-align: center;
+}
+
+.nav-category-name {
+    font-weight: 600;
+}
+
+.nav-subtitle {
+    font-size: 0.75rem;
+    color: var(--tertiary-text);
+    margin-top: 0.2rem;
+    margin-left: 2.2rem;
+}
+
+.sidebar.retracted .nav-subtitle {
+    display: none;
+}
+
+/* News Intelligence Bar - Below Sidebar */
+.news-intelligence-bar {
+    position: fixed;
+    top: 110px;
+    left: 250px;
     width: 260px;
     height: calc(100vh - 110px);
     background: rgba(255, 255, 255, 0.95);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 180;
+    z-index: 240;
     overflow-y: auto;
-    transform: translateX(-240px);
+    transform: translateX(-260px);
     transition: transform 0.3s ease;
 }
 
@@ -480,16 +651,15 @@
     transform: translateX(0);
 }
 
-.news-intelligence-bar.retracted:not(.visible) {
-    transform: translateX(-240px);
+.sidebar.retracted ~ .news-intelligence-bar {
+    left: 60px;
 }
 
 /* News Bar Toggle */
 .news-bar-toggle {
     position: absolute;
-    top: 50%;
+    top: 60px;
     right: -30px;
-    transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-left: none;
@@ -501,6 +671,7 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .news-bar-toggle:hover {
@@ -674,126 +845,6 @@
     border-color: #000;
 }
 
-/* Sidebar - Fixed Position */
-.sidebar {
-    position: fixed;
-    top: 110px;
-    left: 0;
-    width: 250px;
-    background: var(--secondary-bg);
-    border-right: 1px solid var(--border-color);
-    padding: 1rem 0;
-    transition: all 0.3s ease;
-    z-index: 170;
-    height: calc(100vh - 110px);
-    overflow-y: auto;
-}
-
-.sidebar.retracted {
-    width: 60px;
-}
-
-.sidebar.retracted .nav-item span,
-.sidebar.retracted .nav-category-name {
-    display: none;
-}
-
-.sidebar.retracted .nav-item {
-    justify-content: center;
-    padding: 1rem 0.5rem;
-}
-
-.sidebar.retracted .nav-item i {
-    font-size: 1.2rem;
-}
-
-.sidebar.retracted .sidebar-toggle i {
-    transform: rotate(180deg);
-}
-
-.sidebar-toggle {
-    position: absolute;
-    top: 1rem;
-    right: -15px;
-    background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 30;
-    transition: all 0.3s ease;
-}
-
-.sidebar-toggle:hover {
-    border-color: var(--glow-color);
-}
-
-.sidebar-toggle i {
-    color: var(--secondary-text);
-    transition: transform 0.3s ease;
-}
-
-.nav-menu {
-    display: flex;
-    flex-direction: column;
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 1.5rem;
-    color: var(--secondary-text);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-    position: relative;
-}
-
-.nav-item:hover {
-    background: var(--accent-bg);
-    color: var(--primary-text);
-    border-left-color: var(--glow-color);
-}
-
-.nav-item.active {
-    background: var(--accent-bg);
-    color: var(--primary-text);
-    border-left-color: var(--glow-color);
-    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
-}
-
-.nav-category {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-}
-
-.nav-category i {
-    width: 20px;
-    text-align: center;
-}
-
-.nav-category-name {
-    font-weight: 600;
-}
-
-.nav-subtitle {
-    font-size: 0.75rem;
-    color: var(--tertiary-text);
-    margin-top: 0.2rem;
-    margin-left: 2.2rem;
-}
-
-.sidebar.retracted .nav-subtitle {
-    display: none;
-}
-
 .content-area {
     flex: 1;
     padding: 2rem;
@@ -803,8 +854,16 @@
     margin-left: 250px;
 }
 
-.sidebar.retracted ~ .content-area {
+.sidebar.retracted ~ .news-intelligence-bar ~ .content-area {
     margin-left: 60px;
+}
+
+.news-intelligence-bar.visible ~ .content-area {
+    margin-left: 510px;
+}
+
+.sidebar.retracted ~ .news-intelligence-bar.visible ~ .content-area {
+    margin-left: 320px;
 }
 
 .content-section {
@@ -820,6 +879,11 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    background: var(--primary-bg);
+    padding: 1rem 0;
+    z-index: 200;
 }
 
 .section-header h2 {
@@ -1037,6 +1101,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.position-symbol-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.position-side {
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.position-side.buy {
+    background: var(--primary-text);
+    color: var(--primary-bg);
+}
+
+.position-side.sell {
+    background: var(--error-text);
+    color: var(--primary-bg);
 }
 
 .position-item .position-details {
@@ -1462,19 +1549,20 @@
         flex-direction: column;
     }
     
-    .news-intelligence-bar {
-        position: relative;
-        width: 100%;
-        height: 200px;
-        transform: translateX(0);
-        top: auto;
-    }
-    
     .sidebar {
         position: relative;
         width: 100%;
         top: auto;
         height: auto;
+    }
+    
+    .news-intelligence-bar {
+        position: relative;
+        width: 100%;
+        left: 0;
+        top: auto;
+        height: 200px;
+        transform: translateX(0);
     }
     
     .content-area {

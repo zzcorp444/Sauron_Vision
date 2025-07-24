@@ -9,10 +9,40 @@
 {% block content %}
 <div class="dashboard-container">
     <!-- Header -->
-    <header class="dashboard-header">
-        <div class="header-left">
+    <header class="dashboard-header" id="dashboard-header">
+        <div class="header-left" onclick="goToDashboard()">
             <img src="{% static 'images/sv_logo_00.png' %}" alt="SV" class="header-logo">
             <h1>SAURON VISION</h1>
+            
+            <!-- Sauron Info Popup -->
+            <div class="sauron-info-popup">
+                <div class="popup-header">
+                    <span class="popup-title">Sauron Vision System</span>
+                    <i class="fas fa-eye" style="color: var(--primary-text);"></i>
+                </div>
+                <div class="popup-content">
+                    <div class="popup-item">
+                        <strong>System Status:</strong>
+                        <p style="font-size: 0.75rem; color: var(--primary-text); margin: 0;">All systems operational</p>
+                    </div>
+                    <div class="popup-item">
+                        <strong>AI Engine:</strong>
+                        <p style="font-size: 0.75rem; color: var(--primary-text); margin: 0;">Running at 99.7% efficiency</p>
+                    </div>
+                    <div class="popup-item">
+                        <strong>Market Coverage:</strong>
+                        <p style="font-size: 0.75rem; color: var(--secondary-text); margin: 0;">15 exchanges, 10,000+ assets</p>
+                    </div>
+                    <div class="popup-item">
+                        <strong>Data Latency:</strong>
+                        <p style="font-size: 0.75rem; color: var(--primary-text); margin: 0;">< 50ms average</p>
+                    </div>
+                    <div class="popup-item">
+                        <strong>Prediction Accuracy:</strong>
+                        <p style="font-size: 0.75rem; color: var(--primary-text); margin: 0;">78.5% (7-day average)</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="header-center">
             <div class="market-status">
@@ -162,7 +192,7 @@
         </div>
         
         <!-- Activity Ticker Bar -->
-        <div class="activity-ticker-bar">
+        <div class="activity-ticker-bar" id="activity-ticker-bar">
             <div class="activity-ticker" id="activity-ticker">
                 <div class="activity-item">
                     <i class="fas fa-robot"></i>
@@ -220,115 +250,6 @@
 
     <!-- Dashboard Layout -->
     <div class="dashboard-layout">
-        <!-- News Intelligence Bar - Behind Sidebar -->
-        <div class="news-intelligence-bar" id="news-bar">
-            <button class="news-bar-toggle" onclick="toggleNewsBar()">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="news-bar-header">
-                <div class="news-bar-title">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Market Intelligence</span>
-                </div>
-                <div class="news-bar-controls">
-                    <button class="news-filter-btn active" data-filter="all">All</button>
-                    <button class="news-filter-btn" data-filter="news">News</button>
-                    <button class="news-filter-btn" data-filter="social">Social</button>
-                    <button class="news-filter-btn" data-filter="analysis">Analysis</button>
-                    <button class="news-filter-btn" data-filter="alerts">Alerts</button>
-                </div>
-            </div>
-            
-            <div class="news-content">
-                <!-- News Items -->
-                <div class="news-item" data-type="news">
-                    <div class="news-source">
-                        <span class="news-source-name">Bloomberg</span>
-                        <span class="news-time">2 min ago</span>
-                    </div>
-                    <h4 class="news-headline">Fed Signals Pause in Rate Hikes as Inflation Shows Signs of Cooling</h4>
-                    <p class="news-summary">Federal Reserve officials indicated they may hold interest rates steady in the upcoming meeting...</p>
-                    <div class="news-meta">
-                        <div class="sentiment-indicator positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>Bullish</span>
-                        </div>
-                        <div class="social-metrics">
-                            <span class="social-metric"><i class="fab fa-twitter"></i> 1.2k</span>
-                            <span class="social-metric"><i class="fas fa-comments"></i> 342</span>
-                        </div>
-                    </div>
-                    <div class="news-tags">
-                        <span class="news-tag">Fed</span>
-                        <span class="news-tag">Rates</span>
-                        <span class="news-tag ticker">SPY</span>
-                    </div>
-                </div>
-                
-                <div class="news-item" data-type="social">
-                    <div class="news-source">
-                        <span class="news-source-name">Reddit - WSB</span>
-                        <span class="news-time">5 min ago</span>
-                    </div>
-                    <h4 class="news-headline">Unusual Options Activity Detected on NVDA</h4>
-                    <p class="news-summary">Massive call option purchases for NVDA $500 strike...</p>
-                    <div class="news-meta">
-                        <div class="sentiment-indicator positive">
-                            <i class="fas fa-fire"></i>
-                            <span>Hot</span>
-                        </div>
-                        <div class="social-metrics">
-                            <span class="social-metric"><i class="fas fa-arrow-up"></i> 5.8k</span>
-                        </div>
-                    </div>
-                    <div class="news-tags">
-                        <span class="news-tag ticker">NVDA</span>
-                        <span class="news-tag">Options</span>
-                    </div>
-                </div>
-                
-                <div class="news-item" data-type="analysis">
-                    <div class="news-source">
-                        <span class="news-source-name">Sauron AI</span>
-                        <span class="news-time">10 min ago</span>
-                    </div>
-                    <h4 class="news-headline">Pattern Alert: AAPL Ascending Triangle</h4>
-                    <p class="news-summary">Bullish pattern formation with 85% success rate...</p>
-                    <div class="news-meta">
-                        <div class="sentiment-indicator positive">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Buy Signal</span>
-                        </div>
-                    </div>
-                    <div class="news-tags">
-                        <span class="news-tag ticker">AAPL</span>
-                        <span class="news-tag">Technical</span>
-                    </div>
-                </div>
-                
-                <div class="news-item" data-type="news">
-                    <div class="news-source">
-                        <span class="news-source-name">Reuters</span>
-                        <span class="news-time">15 min ago</span>
-                    </div>
-                    <h4 class="news-headline">Tesla Q4 Deliveries Beat Estimates</h4>
-                    <p class="news-summary">484,507 vehicles delivered, beating expectations...</p>
-                    <div class="news-meta">
-                        <div class="sentiment-indicator positive">
-                            <i class="fas fa-rocket"></i>
-                            <span>Bullish</span>
-                        </div>
-                    </div>
-                    <div class="news-tags">
-                        <span class="news-tag ticker">TSLA</span>
-                        <span class="news-tag">Earnings</span>
-                    </div>
-                </div>
-                
-                <!-- More news items... -->
-            </div>
-        </div>
-
         <!-- Main Content -->
         <main class="dashboard-main">
             <!-- Sidebar -->
@@ -395,6 +316,115 @@
                     </a>
                 </nav>
             </aside>
+
+            <!-- News Intelligence Bar - Below Sidebar -->
+            <div class="news-intelligence-bar" id="news-bar">
+                <button class="news-bar-toggle" onclick="toggleNewsBar()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="news-bar-header">
+                    <div class="news-bar-title">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Market Intelligence</span>
+                    </div>
+                    <div class="news-bar-controls">
+                        <button class="news-filter-btn active" data-filter="all">All</button>
+                        <button class="news-filter-btn" data-filter="news">News</button>
+                        <button class="news-filter-btn" data-filter="social">Social</button>
+                        <button class="news-filter-btn" data-filter="analysis">Analysis</button>
+                        <button class="news-filter-btn" data-filter="alerts">Alerts</button>
+                    </div>
+                </div>
+                
+                <div class="news-content">
+                    <!-- News Items -->
+                    <div class="news-item" data-type="news">
+                        <div class="news-source">
+                            <span class="news-source-name">Bloomberg</span>
+                            <span class="news-time">2 min ago</span>
+                        </div>
+                        <h4 class="news-headline">Fed Signals Pause in Rate Hikes as Inflation Shows Signs of Cooling</h4>
+                        <p class="news-summary">Federal Reserve officials indicated they may hold interest rates steady in the upcoming meeting...</p>
+                        <div class="news-meta">
+                            <div class="sentiment-indicator positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Bullish</span>
+                            </div>
+                            <div class="social-metrics">
+                                <span class="social-metric"><i class="fab fa-twitter"></i> 1.2k</span>
+                                <span class="social-metric"><i class="fas fa-comments"></i> 342</span>
+                            </div>
+                        </div>
+                        <div class="news-tags">
+                            <span class="news-tag">Fed</span>
+                            <span class="news-tag">Rates</span>
+                            <span class="news-tag ticker">SPY</span>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item" data-type="social">
+                        <div class="news-source">
+                            <span class="news-source-name">Reddit - WSB</span>
+                            <span class="news-time">5 min ago</span>
+                        </div>
+                        <h4 class="news-headline">Unusual Options Activity Detected on NVDA</h4>
+                        <p class="news-summary">Massive call option purchases for NVDA $500 strike...</p>
+                        <div class="news-meta">
+                            <div class="sentiment-indicator positive">
+                                <i class="fas fa-fire"></i>
+                                <span>Hot</span>
+                            </div>
+                            <div class="social-metrics">
+                                <span class="social-metric"><i class="fas fa-arrow-up"></i> 5.8k</span>
+                            </div>
+                        </div>
+                        <div class="news-tags">
+                            <span class="news-tag ticker">NVDA</span>
+                            <span class="news-tag">Options</span>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item" data-type="analysis">
+                        <div class="news-source">
+                            <span class="news-source-name">Sauron AI</span>
+                            <span class="news-time">10 min ago</span>
+                        </div>
+                        <h4 class="news-headline">Pattern Alert: AAPL Ascending Triangle</h4>
+                        <p class="news-summary">Bullish pattern formation with 85% success rate...</p>
+                        <div class="news-meta">
+                            <div class="sentiment-indicator positive">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Buy Signal</span>
+                            </div>
+                        </div>
+                        <div class="news-tags">
+                            <span class="news-tag ticker">AAPL</span>
+                            <span class="news-tag">Technical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="news-item" data-type="news">
+                        <div class="news-source">
+                            <span class="news-source-name">Reuters</span>
+                            <span class="news-time">15 min ago</span>
+                        </div>
+                        <h4 class="news-headline">Tesla Q4 Deliveries Beat Estimates</h4>
+                        <p class="news-summary">484,507 vehicles delivered, beating expectations...</p>
+                        <div class="news-meta">
+                            <div class="sentiment-indicator positive">
+                                <i class="fas fa-rocket"></i>
+                                <span>Bullish</span>
+                            </div>
+                        </div>
+                        <div class="news-tags">
+                            <span class="news-tag ticker">TSLA</span>
+                            <span class="news-tag">Earnings</span>
+                        </div>
+                    </div>
+                    
+                    <!-- More news items... -->
+                </div>
+            </div>
 
             <!-- Content Area -->
             <div class="content-area">
@@ -500,9 +530,14 @@
                                 <div class="position-list">
                                     <div class="position-item">
                                         <div class="position-header">
-                                            <span class="symbol">AAPL</span>
-                                            <span class="value">$150.25</span>
-                                            <span class="change positive">+1.25%</span>
+                                            <div class="position-symbol-info">
+                                                <span class="position-side buy">BUY</span>
+                                                <span class="symbol">AAPL</span>
+                                            </div>
+                                            <div>
+                                                <span class="value">$150.25</span>
+                                                <span class="change positive">+1.25%</span>
+                                            </div>
                                         </div>
                                         <div class="position-details">
                                             <div class="position-prices">
@@ -563,9 +598,14 @@
                                     
                                     <div class="position-item">
                                         <div class="position-header">
-                                            <span class="symbol">GOOGL</span>
-                                            <span class="value">$2750.50</span>
-                                            <span class="change negative">-0.75%</span>
+                                            <div class="position-symbol-info">
+                                                <span class="position-side sell">SELL</span>
+                                                <span class="symbol">GOOGL</span>
+                                            </div>
+                                            <div>
+                                                <span class="value">$2750.50</span>
+                                                <span class="change negative">-0.75%</span>
+                                            </div>
                                         </div>
                                         <div class="position-details">
                                             <div class="position-prices">
@@ -626,9 +666,14 @@
                                     
                                     <div class="position-item">
                                         <div class="position-header">
-                                            <span class="symbol">TSLA</span>
-                                            <span class="value">$850.75</span>
-                                            <span class="change positive">+3.10%</span>
+                                            <div class="position-symbol-info">
+                                                <span class="position-side buy">BUY</span>
+                                                <span class="symbol">TSLA</span>
+                                            </div>
+                                            <div>
+                                                <span class="value">$850.75</span>
+                                                <span class="change positive">+3.10%</span>
+                                            </div>
                                         </div>
                                         <div class="position-details">
                                             <div class="position-prices">
@@ -778,135 +823,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="signal-item">
-                                                <div class="signal-summary">
-                                                    <div class="signal-info">
-                                                        <span class="signal-type sell">SELL</span>
-                                                        <span class="signal-symbol">MSFT</span>
-                                                    </div>
-                                                    <div class="signal-meta">
-                                                        <span class="signal-tier">
-                                                            <span class="tier-stars">★★★☆☆</span> Tier 3
-                                                        </span>
-                                                        <span class="signal-time">45m ago</span>
-                                                    </div>
-                                                </div>
-                                                <div class="signal-full-details">
-                                                    <div class="signal-details">
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Probability:</span>
-                                                            <span class="detail-value">72%</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Portfolio %:</span>
-                                                            <span class="detail-value">8.2%</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Multiplier:</span>
-                                                            <span class="detail-value">1.5x</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Est. ROI:</span>
-                                                            <span class="detail-value">+8.5%</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Target Move:</span>
-                                                            <span class="detail-value">-$12.30</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Hold Time:</span>
-                                                            <span class="detail-value">1-2 days</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Entry:</span>
-                                                            <span class="detail-value">$302.15</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Stop Loss:</span>
-                                                            <span class="detail-value">$306.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="signal-actions">
-                                                        <button class="execute-btn">Execute Trade</button>
-                                                        <button class="delete-signal-btn">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="signal-section">
-                                        <h4><i class="fas fa-clock"></i> Forming Set Ups</h4>
-                                        <div class="signal-section-list">
-                                            <div class="signal-item">
-                                                <div class="signal-summary">
-                                                    <div class="signal-info">
-                                                        <span class="signal-type watch">WATCH</span>
-                                                        <span class="signal-symbol">NVDA</span>
-                                                    </div>
-                                                    <div class="signal-meta">
-                                                        <span class="signal-tier">
-                                                            <span class="tier-stars">★★★★★</span> Tier 5
-                                                        </span>
-                                                        <span class="signal-time">Forming</span>
-                                                    </div>
-                                                </div>
-                                                <div class="signal-full-details">
-                                                    <div class="signal-details">
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Probability:</span>
-                                                            <span class="detail-value">78%</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Pattern:</span>
-                                                            <span class="detail-value">Bull Flag</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Entry Zone:</span>
-                                                            <span class="detail-value">$458-$462</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Confidence:</span>
-                                                            <span class="detail-value">75%</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="signal-section">
-                                        <h4><i class="fas fa-shield-alt"></i> Hedge Signals</h4>
-                                        <div class="signal-section-list">
-                                            <div class="signal-item">
-                                                <div class="signal-summary">
-                                                    <div class="signal-info">
-                                                        <span class="signal-type hedge">HEDGE</span>
-                                                        <span class="signal-symbol">SPY</span>
-                                                    </div>
-                                                    <div class="signal-meta">
-                                                        <span class="signal-tier">
-                                                            <span class="tier-stars">★★★☆☆</span> Tier 3
-                                                        </span>
-                                                        <span class="signal-time">Active</span>
-                                                    </div>
-                                                </div>
-                                                <div class="signal-full-details">
-                                                    <div class="signal-details">
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Type:</span>
-                                                            <span class="detail-value">Put Protection</span>
-                                                        </div>
-                                                        <div class="detail-row">
-                                                            <span class="detail-label">Risk Reduction:</span>
-                                                            <span class="detail-value">15%</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -921,25 +837,206 @@
                             </div>
                         </div>
 
-                        <!-- AI Market Analysis Card -->
+                        <!-- Additional Overview Cards (3-6 new ones) -->
+                        
+                        <!-- 1. Machine Learning Models Card -->
                         <div class="overview-card">
-                            <h3>AI Market Analysis</h3>
+                            <h3>ML Model Performance</h3>
                             <div class="card-content">
                                 <div class="ai-insight">
-                                    <span class="insight-label">Market Sentiment:</span>
-                                    <span class="insight-value positive">Bullish (72%)</span>
+                                    <span class="insight-label">Prediction Model:</span>
+                                    <span class="insight-value positive">98.5% accuracy</span>
                                 </div>
                                 <div class="ai-insight">
-                                    <span class="insight-label">Trend Strength:</span>
-                                    <span class="insight-value">Strong Uptrend</span>
+                                    <span class="insight-label">Neural Network:</span>
+                                    <span class="insight-value">Training complete</span>
                                 </div>
                                 <div class="ai-insight">
-                                    <span class="insight-label">Risk Level:</span>
-                                    <span class="insight-value warning">Medium</span>
+                                    <span class="insight-label">Feature Engineering:</span>
+                                    <span class="insight-value positive">345 features active</span>
                                 </div>
                                 <div class="ai-insight">
-                                    <span class="insight-label">Recommended Action:</span>
-                                    <span class="insight-value">Hold with trailing stop</span>
+                                    <span class="insight-label">Model Drift:</span>
+                                    <span class="insight-value">Within tolerance</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Learning Rate:</span>
+                                    <span class="insight-value positive">Optimal (0.001)</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 2. Cross-Asset Correlations Card -->
+                        <div class="overview-card">
+                            <h3>Cross-Asset Correlations</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Stocks vs Bonds:</span>
+                                    <span class="insight-value negative">-0.65 correlation</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">USD vs Gold:</span>
+                                    <span class="insight-value negative">-0.78 correlation</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Tech vs SPY:</span>
+                                    <span class="insight-value positive">+0.85 correlation</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Crypto vs Stocks:</span>
+                                    <span class="insight-value">+0.32 correlation</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Oil vs Energy:</span>
+                                    <span class="insight-value positive">+0.92 correlation</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 3. Volatility Surface Card -->
+                        <div class="overview-card">
+                            <h3>Volatility Surface</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Implied Vol (SPY):</span>
+                                    <span class="insight-value">18.5% (35th percentile)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Term Structure:</span>
+                                    <span class="insight-value warning">Contango</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Skew:</span>
+                                    <span class="insight-value">Put skew elevated</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Vol of Vol:</span>
+                                    <span class="insight-value">0.85 (normal)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Gamma Exposure:</span>
+                                    <span class="insight-value positive">$2.1B positive</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 4. Sector Rotation Card -->
+                        <div class="overview-card">
+                            <h3>Sector Rotation Analysis</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Technology:</span>
+                                    <span class="insight-value positive">Outperforming (+2.1%)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Healthcare:</span>
+                                    <span class="insight-value positive">Defensive rotation (+0.8%)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Energy:</span>
+                                    <span class="insight-value negative">Underperforming (-1.5%)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Financials:</span>
+                                    <span class="insight-value">Neutral (0.1%)</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Consumer Disc.:</span>
+                                    <span class="insight-value warning">Weakness (-0.7%)</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 5. Insider Trading Monitor Card -->
+                        <div class="overview-card">
+                            <h3>Insider Trading Monitor</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">Recent Buys:</span>
+                                    <span class="insight-value positive">15 insider purchases</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Recent Sells:</span>
+                                    <span class="insight-value warning">8 insider sales</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Volume (7d):</span>
+                                    <span class="insight-value">$45.2M total value</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Notable Activity:</span>
+                                    <span class="insight-value warning">NVDA CEO sold $2M</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Bullish Ratio:</span>
+                                    <span class="insight-value positive">65% buy signals</span>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 6. Global Markets Overview Card -->
+                        <div class="overview-card">
+                            <h3>Global Markets Overview</h3>
+                            <div class="card-content">
+                                <div class="ai-insight">
+                                    <span class="insight-label">US Markets:</span>
+                                    <span class="insight-value positive">SPY +0.8%, QQQ +1.2%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">European Markets:</span>
+                                    <span class="insight-value">DAX +0.3%, FTSE -0.1%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Asian Markets:</span>
+                                    <span class="insight-value negative">Nikkei -0.5%, Hang Seng -0.8%</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Emerging Markets:</span>
+                                    <span class="insight-value warning">Mixed performance</span>
+                                </div>
+                                <div class="ai-insight">
+                                    <span class="insight-label">Currencies:</span>
+                                    <span class="insight-value">DXY 103.5 (+0.2%)</span>
                                 </div>
                             </div>
                             <div class="card-controls">
@@ -952,110 +1049,8 @@
                             </div>
                         </div>
 
-                        <!-- More Overview Cards... (keeping the same structure) -->
+                        <!-- Keep all existing cards... -->
                         
-                        <!-- Additional cards to meet request for more overview elements -->
-                        <div class="overview-card">
-                            <h3>Alternative Data Insights</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Satellite Traffic:</span>
-                                    <span class="insight-value positive">+3.2% vs last week</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Web Scraping:</span>
-                                    <span class="insight-value">12,534 data points</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Social Volume:</span>
-                                    <span class="insight-value warning">Elevated chatter</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Weather Impact:</span>
-                                    <span class="insight-value">Minimal disruption</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Supply Chain:</span>
-                                    <span class="insight-value positive">Normal flow</span>
-                                </div>
-                            </div>
-                            <div class="card-controls">
-                                <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                                <button class="card-control-btn">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="overview-card">
-                            <h3>Options Flow Analysis</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Put/Call Ratio:</span>
-                                    <span class="insight-value">0.65</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Unusual Activity:</span>
-                                    <span class="insight-value warning">5 alerts today</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Dark Pool:</span>
-                                    <span class="insight-value">$2.3B in prints</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Smart Money:</span>
-                                    <span class="insight-value positive">Accumulating tech</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">IV Rank:</span>
-                                    <span class="insight-value">32nd percentile</span>
-                                </div>
-                            </div>
-                            <div class="card-controls">
-                                <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                                <button class="card-control-btn">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="overview-card">
-                            <h3>Economic Calendar</h3>
-                            <div class="card-content">
-                                <div class="ai-insight">
-                                    <span class="insight-label">Today:</span>
-                                    <span class="insight-value warning">Fed Meeting 2PM</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Tomorrow:</span>
-                                    <span class="insight-value">CPI Data 8:30AM</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">This Week:</span>
-                                    <span class="insight-value">15 earnings reports</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Impact Rating:</span>
-                                    <span class="insight-value warning">High volatility expected</span>
-                                </div>
-                                <div class="ai-insight">
-                                    <span class="insight-label">Market Prep:</span>
-                                    <span class="insight-value">Hedges recommended</span>
-                                </div>
-                            </div>
-                            <div class="card-controls">
-                                <button class="card-control-btn" onclick="toggleCardSize(this)">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                                <button class="card-control-btn">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
@@ -1074,6 +1069,25 @@
 {% block extra_js %}
 <script src="{% static 'js/dashboard.js' %}"></script>
 <script>
+// Handle scrolling for header transparency
+window.addEventListener('scroll', function() {
+    const header = document.getElementById('dashboard-header');
+    const activityBar = document.getElementById('activity-ticker-bar');
+    
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        activityBar.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+        activityBar.classList.remove('scrolled');
+    }
+});
+
+// Go to dashboard function
+function goToDashboard() {
+    window.location.href = "{% url 'dashboard' %}";
+}
+
 // Fixed sidebar toggle functionality
 document.getElementById('sidebar-toggle').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
