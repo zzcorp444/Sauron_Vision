@@ -77,63 +77,77 @@ class SauronDashboard {
         const newsBar = document.querySelector('.news-intelligence-bar');
         const contentArea = document.querySelector('.content-area');
         
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Sidebar toggle clicked');
                 sidebar.classList.toggle('retracted');
                 
-                // Update content area margin
-                if (sidebar.classList.contains('retracted')) {
-                    if (newsBar && newsBar.classList.contains('visible')) {
-                        contentArea.style.marginLeft = '360px';
-                    } else {
-                        contentArea.style.marginLeft = '60px';
-                    }
-                } else {
-                    if (newsBar && newsBar.classList.contains('visible')) {
-                        contentArea.style.marginLeft = '550px';
-                    } else {
-                        contentArea.style.marginLeft = '250px';
-                    }
-                }
+                // Force a reflow to ensure the transition works
+                sidebar.offsetHeight;
+                
+                // Update content area margin with transition
+                setTimeout(() => {
+                    this.updateContentAreaMargin();
+                }, 50);
             });
+        }
+    }
+
+    updateContentAreaMargin() {
+        const sidebar = document.querySelector('.sidebar');
+        const newsBar = document.querySelector('.news-intelligence-bar');
+        const contentArea = document.querySelector('.content-area');
+        
+        if (!contentArea) return;
+        
+        let leftMargin = 250; // Default sidebar width
+        
+        if (sidebar && sidebar.classList.contains('retracted')) {
+            leftMargin = 60;
+        }
+        
+        if (newsBar && newsBar.classList.contains('visible')) {
+            leftMargin += 300; // Add news bar width
+        }
+        
+        contentArea.style.marginLeft = leftMargin + 'px';
+        
+        // Also update section header positioning
+        const sectionHeader = document.querySelector('.section-header');
+        if (sectionHeader) {
+            sectionHeader.style.left = leftMargin + 'px';
         }
     }
 
     setupNewsBarToggle() {
         const newsBarToggle = document.querySelector('.news-bar-toggle');
         const newsBar = document.querySelector('.news-intelligence-bar');
-        const contentArea = document.querySelector('.content-area');
-        const sidebar = document.querySelector('.sidebar');
         
         if (newsBarToggle && newsBar) {
-            newsBarToggle.addEventListener('click', () => {
+            newsBarToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 newsBar.classList.toggle('visible');
                 
                 // Update content area margin
-                if (newsBar.classList.contains('visible')) {
-                    if (sidebar.classList.contains('retracted')) {
-                        contentArea.style.marginLeft = '360px';
-                    } else {
-                        contentArea.style.marginLeft = '550px';
-                    }
-                } else {
-                    if (sidebar.classList.contains('retracted')) {
-                        contentArea.style.marginLeft = '60px';
-                    } else {
-                        contentArea.style.marginLeft = '250px';
-                    }
-                }
+                setTimeout(() => {
+                    this.updateContentAreaMargin();
+                }, 50);
             });
         }
     }
 
     setupTickerNavigation() {
         // Price ticker navigation
+        const priceTickerContainer = document.querySelector('.price-ticker-container');
         const priceTicker = document.querySelector('.price-ticker');
-        const priceTickerItems = document.querySelectorAll('.ticker-item');
         
-        if (priceTicker) {
-            // Create navigation arrows
+        if (priceTickerContainer && priceTicker) {
+            // Create navigation arrows for price ticker
             const leftArrow = document.createElement('div');
             leftArrow.className = 'ticker-nav-arrow left';
             leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
@@ -142,31 +156,44 @@ class SauronDashboard {
             rightArrow.className = 'ticker-nav-arrow right';
             rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
             
-            const container = document.querySelector('.price-ticker-container');
-            container.appendChild(leftArrow);
-            container.appendChild(rightArrow);
+            priceTickerContainer.appendChild(leftArrow);
+            priceTickerContainer.appendChild(rightArrow);
             
-            // Navigation functionality
-            leftArrow.addEventListener('click', () => {
+            // Navigation functionality for price ticker
+            leftArrow.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 priceTicker.classList.add('paused');
-                this.tickerPosition -= 85; // Width of one ticker item
+                this.tickerPosition += 100; // Move left (positive value)
                 priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
-                setTimeout(() => priceTicker.classList.remove('paused'), 100);
+                
+                // Resume animation after a short delay
+                setTimeout(() => {
+                    priceTicker.classList.remove('paused');
+                }, 500);
             });
             
-            rightArrow.addEventListener('click', () => {
+            rightArrow.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 priceTicker.classList.add('paused');
-                this.tickerPosition += 85;
+                this.tickerPosition -= 100; // Move right (negative value)
                 priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
-                setTimeout(() => priceTicker.classList.remove('paused'), 100);
+                
+                // Resume animation after a short delay
+                setTimeout(() => {
+                    priceTicker.classList.remove('paused');
+                }, 500);
             });
         }
         
         // Activity ticker navigation
+        const activityBar = document.querySelector('.activity-ticker-bar');
         const activityTicker = document.querySelector('.activity-ticker');
-        const activityItems = document.querySelectorAll('.activity-item');
         
-        if (activityTicker) {
+        if (activityBar && activityTicker) {
             // Create navigation arrows for activity ticker
             const leftArrow = document.createElement('div');
             leftArrow.className = 'ticker-nav-arrow left';
@@ -176,21 +203,36 @@ class SauronDashboard {
             rightArrow.className = 'ticker-nav-arrow right';
             rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
             
-            const activityBar = document.querySelector('.activity-ticker-bar');
             activityBar.appendChild(leftArrow);
             activityBar.appendChild(rightArrow);
             
-            // Navigation functionality
-            leftArrow.addEventListener('click', () => {
-                activityTicker.style.animationPlayState = 'paused';
-                this.activityTickerPosition -= 200;
+            // Navigation functionality for activity ticker
+            leftArrow.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                activityTicker.classList.add('paused');
+                this.activityTickerPosition += 200; // Move left
                 activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
+                
+                // Resume animation after a short delay
+                setTimeout(() => {
+                    activityTicker.style.animationPlayState = 'running';
+                }, 500);
             });
             
-            rightArrow.addEventListener('click', () => {
-                activityTicker.style.animationPlayState = 'paused';
-                this.activityTickerPosition += 200;
+            rightArrow.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                activityTicker.classList.add('paused');
+                this.activityTickerPosition -= 200; // Move right
                 activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
+                
+                // Resume animation after a short delay
+                setTimeout(() => {
+                    activityTicker.style.animationPlayState = 'running';
+                }, 500);
             });
         }
     }
@@ -409,13 +451,11 @@ class SauronDashboard {
 
     loadMarketScanner() {
         console.log('Loading Market Scanner...');
-        // Update market scanner data
         this.updateMarketScannerData();
         this.showNotification('Market Scanner data loaded', 'success');
     }
 
     updateMarketScannerData() {
-        // Simulate updating market scanner with real data
         const moversData = [
             { symbol: 'NVDA', price: 450.30, change: 5.2, volume: '25M' },
             { symbol: 'AMD', price: 120.45, change: 3.8, volume: '18M' },
@@ -445,7 +485,6 @@ class SauronDashboard {
 
     loadStrategyBuilder() {
         console.log('Loading Strategy Builder...');
-        // Initialize drag and drop for strategy components
         this.initializeStrategyDragDrop();
         this.showNotification('Strategy Builder initialized', 'success');
     }
@@ -495,25 +534,21 @@ class SauronDashboard {
 
     loadRiskMonitor() {
         console.log('Loading Risk Monitor...');
-        // Update risk metrics
         this.updateRiskMetrics();
         this.showNotification('Risk Monitor active', 'success');
     }
 
     updateRiskMetrics() {
-        // Update VaR
         const varElement = document.querySelector('#var-metric');
         if (varElement) {
             varElement.textContent = '-$2,845.32';
         }
 
-        // Update portfolio beta
         const betaElement = document.querySelector('#beta-metric');
         if (betaElement) {
             betaElement.textContent = '1.15';
         }
 
-        // Update Sharpe ratio
         const sharpeElement = document.querySelector('#sharpe-metric');
         if (sharpeElement) {
             sharpeElement.textContent = '1.67';
@@ -522,7 +557,6 @@ class SauronDashboard {
 
     loadTerminal() {
         console.log('Loading Terminal...');
-        // Initialize terminal if not already done
         if (!window.sauronTerminal) {
             window.sauronTerminal = new SauronTerminal();
         }
@@ -536,14 +570,12 @@ class SauronDashboard {
     }
 
     updateSentimentData() {
-        // Update overall sentiment
         const overallSentiment = document.querySelector('#overall-sentiment');
         if (overallSentiment) {
             overallSentiment.textContent = '72%';
             overallSentiment.classList.add('positive');
         }
 
-        // Update fear & greed index
         const fearGreed = document.querySelector('#fear-greed-index');
         if (fearGreed) {
             fearGreed.textContent = '68';
@@ -617,7 +649,6 @@ class SauronDashboard {
     }
 
     fetchMarketData() {
-        // Simulate market data updates
         const symbols = ['AAPL', 'GOOGL', 'TSLA', 'MSFT', 'NVDA', 'META'];
         const sampleData = {};
         
@@ -635,12 +666,10 @@ class SauronDashboard {
     }
 
     fetchDashboardData() {
-        // Simulate fetching additional dashboard data
         console.log('Updating dashboard data...');
     }
 
     updateTimeDisplays() {
-        // Update any time displays on the page
         const timeElements = document.querySelectorAll('.time-display');
         const now = new Date();
         
@@ -658,8 +687,6 @@ class SauronDashboard {
                 });
             }
         });
-        
-        // News bar toggle handled separately now
         
         // News filter buttons
         document.querySelectorAll('.news-filter-btn').forEach(btn => {
@@ -710,15 +737,12 @@ class SauronDashboard {
     }
 
     filterNews(filter) {
-        // Remove active class from all filter buttons
         document.querySelectorAll('.news-filter-btn').forEach(btn => {
             btn.classList.remove('active');
         });
         
-        // Add active class to clicked button
         event.target.classList.add('active');
         
-        // Filter news items
         document.querySelectorAll('.news-item').forEach(item => {
             if (filter === 'all' || item.dataset.type === filter) {
                 item.style.display = 'block';
@@ -740,7 +764,6 @@ class SauronDashboard {
         this.showNotification('Section refreshed', 'success');
     }
 
-    // Card management functions
     expandAllCards() {
         document.querySelectorAll('.overview-card').forEach(card => {
             card.classList.add('expanded');
@@ -759,7 +782,6 @@ class SauronDashboard {
         this.showNotification('All cards collapsed', 'info');
     }
 
-    // Utility functions
     formatNumber(num) {
         if (num >= 1000000) {
             return (num / 1000000).toFixed(1) + 'M';
@@ -801,7 +823,6 @@ function toggleCardSize(button) {
     
     if (card.classList.contains('expanded')) {
         icon.className = 'fas fa-compress';
-        // Show additional content if portfolio card
         if (card.id === 'portfolio-card') {
             const charts = card.querySelector('.portfolio-charts');
             if (charts) {
@@ -810,7 +831,6 @@ function toggleCardSize(button) {
         }
     } else {
         icon.className = 'fas fa-expand';
-        // Hide additional content if portfolio card
         if (card.id === 'portfolio-card') {
             const charts = card.querySelector('.portfolio-charts');
             if (charts) {
@@ -836,17 +856,14 @@ function collapseAllCards() {
 document.addEventListener('DOMContentLoaded', () => {
     window.sauronDashboard = new SauronDashboard();
     
-    // Initialize any other components
     console.log('🚀 Sauron Vision Dashboard initialized');
     
-    // Add some demo data updates
     setTimeout(() => {
         if (window.sauronDashboard) {
             window.sauronDashboard.showNotification('Market data synchronized', 'success');
         }
     }, 2000);
     
-    // Simulate some alerts
     setTimeout(() => {
         if (window.sauronDashboard) {
             window.sauronDashboard.showAlert({
@@ -858,7 +875,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
 });
 
-// Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         console.log('👁️ Sauron Vision going into background mode');
@@ -870,13 +886,10 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Handle window resize
 window.addEventListener('resize', () => {
-    // Adjust layouts if needed
     console.log('📐 Window resized, adjusting layouts');
 });
 
-// Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SauronDashboard;
 }
