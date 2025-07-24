@@ -4,16 +4,22 @@ class SauronDashboard {
     constructor() {
         this.activeSection = 'vision';
         this.websocket = null;
+        this.tickerPosition = 0;
+        this.activityTickerPosition = 0;
+        this.selectedFilters = new Set();
         this.init();
     }
 
     init() {
         this.setupNavigation();
         this.setupSidebarToggle();
+        this.setupNewsBarToggle();
         this.setupWebSocket();
         this.startDataUpdates();
         this.setupEventListeners();
         this.setupScrollHandler();
+        this.setupTickerNavigation();
+        this.setupPriceFilters();
     }
 
     setupScrollHandler() {
@@ -28,22 +34,10 @@ class SauronDashboard {
                 // User scrolled down
                 header.classList.add('scrolled');
                 activityBar.classList.add('hidden');
-                
-                // Hide header left and center content
-                const headerLeft = header.querySelector('.header-left');
-                const headerCenter = header.querySelector('.header-center');
-                if (headerLeft) headerLeft.style.opacity = '0';
-                if (headerCenter) headerCenter.style.opacity = '0';
             } else {
                 // User at top
                 header.classList.remove('scrolled');
                 activityBar.classList.remove('hidden');
-                
-                // Show header left and center content
-                const headerLeft = header.querySelector('.header-left');
-                const headerCenter = header.querySelector('.header-center');
-                if (headerLeft) headerLeft.style.opacity = '1';
-                if (headerCenter) headerCenter.style.opacity = '1';
             }
             
             lastScrollTop = scrollTop;
@@ -81,16 +75,168 @@ class SauronDashboard {
         const toggleBtn = document.getElementById('sidebar-toggle');
         const sidebar = document.querySelector('.sidebar');
         const newsBar = document.querySelector('.news-intelligence-bar');
+        const contentArea = document.querySelector('.content-area');
         
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('retracted');
-                // Adjust news bar position when sidebar retracts
-                if (newsBar) {
-                    newsBar.style.left = sidebar.classList.contains('retracted') ? '60px' : '250px';
+                
+                // Update content area margin
+                if (sidebar.classList.contains('retracted')) {
+                    if (newsBar && newsBar.classList.contains('visible')) {
+                        contentArea.style.marginLeft = '360px';
+                    } else {
+                        contentArea.style.marginLeft = '60px';
+                    }
+                } else {
+                    if (newsBar && newsBar.classList.contains('visible')) {
+                        contentArea.style.marginLeft = '550px';
+                    } else {
+                        contentArea.style.marginLeft = '250px';
+                    }
                 }
             });
         }
+    }
+
+    setupNewsBarToggle() {
+        const newsBarToggle = document.querySelector('.news-bar-toggle');
+        const newsBar = document.querySelector('.news-intelligence-bar');
+        const contentArea = document.querySelector('.content-area');
+        const sidebar = document.querySelector('.sidebar');
+        
+        if (newsBarToggle && newsBar) {
+            newsBarToggle.addEventListener('click', () => {
+                newsBar.classList.toggle('visible');
+                
+                // Update content area margin
+                if (newsBar.classList.contains('visible')) {
+                    if (sidebar.classList.contains('retracted')) {
+                        contentArea.style.marginLeft = '360px';
+                    } else {
+                        contentArea.style.marginLeft = '550px';
+                    }
+                } else {
+                    if (sidebar.classList.contains('retracted')) {
+                        contentArea.style.marginLeft = '60px';
+                    } else {
+                        contentArea.style.marginLeft = '250px';
+                    }
+                }
+            });
+        }
+    }
+
+    setupTickerNavigation() {
+        // Price ticker navigation
+        const priceTicker = document.querySelector('.price-ticker');
+        const priceTickerItems = document.querySelectorAll('.ticker-item');
+        
+        if (priceTicker) {
+            // Create navigation arrows
+            const leftArrow = document.createElement('div');
+            leftArrow.className = 'ticker-nav-arrow left';
+            leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            
+            const rightArrow = document.createElement('div');
+            rightArrow.className = 'ticker-nav-arrow right';
+            rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            
+            const container = document.querySelector('.price-ticker-container');
+            container.appendChild(leftArrow);
+            container.appendChild(rightArrow);
+            
+            // Navigation functionality
+            leftArrow.addEventListener('click', () => {
+                priceTicker.classList.add('paused');
+                this.tickerPosition -= 85; // Width of one ticker item
+                priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
+                setTimeout(() => priceTicker.classList.remove('paused'), 100);
+            });
+            
+            rightArrow.addEventListener('click', () => {
+                priceTicker.classList.add('paused');
+                this.tickerPosition += 85;
+                priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
+                setTimeout(() => priceTicker.classList.remove('paused'), 100);
+            });
+        }
+        
+        // Activity ticker navigation
+        const activityTicker = document.querySelector('.activity-ticker');
+        const activityItems = document.querySelectorAll('.activity-item');
+        
+        if (activityTicker) {
+            // Create navigation arrows for activity ticker
+            const leftArrow = document.createElement('div');
+            leftArrow.className = 'ticker-nav-arrow left';
+            leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            
+            const rightArrow = document.createElement('div');
+            rightArrow.className = 'ticker-nav-arrow right';
+            rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            
+            const activityBar = document.querySelector('.activity-ticker-bar');
+            activityBar.appendChild(leftArrow);
+            activityBar.appendChild(rightArrow);
+            
+            // Navigation functionality
+            leftArrow.addEventListener('click', () => {
+                activityTicker.style.animationPlayState = 'paused';
+                this.activityTickerPosition -= 200;
+                activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
+            });
+            
+            rightArrow.addEventListener('click', () => {
+                activityTicker.style.animationPlayState = 'paused';
+                this.activityTickerPosition += 200;
+                activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
+            });
+        }
+    }
+
+    setupPriceFilters() {
+        const filterButtons = document.querySelectorAll('.action-filter');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+                
+                // Toggle selection
+                if (this.selectedFilters.has(action)) {
+                    this.selectedFilters.delete(action);
+                    btn.classList.remove('active');
+                } else {
+                    this.selectedFilters.add(action);
+                    btn.classList.add('active');
+                }
+                
+                // Apply filters
+                this.applyPriceFilters();
+            });
+        });
+    }
+
+    applyPriceFilters() {
+        const tickerItems = document.querySelectorAll('.ticker-item');
+        
+        tickerItems.forEach(item => {
+            const itemActions = item.dataset.action ? item.dataset.action.split(' ') : [];
+            
+            if (this.selectedFilters.size === 0) {
+                // No filters selected, show all
+                item.classList.remove('hidden');
+            } else {
+                // Check if item matches any selected filter
+                const hasMatch = itemActions.some(action => this.selectedFilters.has(action));
+                
+                if (hasMatch) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            }
+        });
     }
 
     setupWebSocket() {
@@ -513,13 +659,7 @@ class SauronDashboard {
             }
         });
         
-        // News bar toggle
-        const newsBarToggle = document.querySelector('.news-bar-toggle');
-        if (newsBarToggle) {
-            newsBarToggle.addEventListener('click', () => {
-                this.toggleNewsBar();
-            });
-        }
+        // News bar toggle handled separately now
         
         // News filter buttons
         document.querySelectorAll('.news-filter-btn').forEach(btn => {
@@ -567,13 +707,6 @@ class SauronDashboard {
                 }
             }
         });
-    }
-
-    toggleNewsBar() {
-        const newsBar = document.getElementById('news-bar');
-        if (newsBar) {
-            newsBar.classList.toggle('visible');
-        }
     }
 
     filterNews(filter) {

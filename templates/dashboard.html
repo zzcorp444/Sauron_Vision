@@ -193,6 +193,7 @@
         
         <!-- Activity Ticker Bar -->
         <div class="activity-ticker-bar" id="activity-ticker-bar">
+            <!-- Navigation arrows will be added dynamically by JavaScript -->
             <div class="activity-ticker" id="activity-ticker">
                 <div class="activity-item">
                     <i class="fas fa-robot"></i>
@@ -1019,6 +1020,97 @@
                         </div>
 
                         <!-- Additional Overview Cards (3-6 new ones) -->
+
+                        <!-- News Intelligence Card -->
+                        <div class="overview-card news-analysis-card">
+                            <h3><i class="fas fa-newspaper"></i> News Intelligence & Impact</h3>
+                            <div class="card-content">
+                                <div class="news-summary">
+                                    <div class="summary-metric">
+                                        <span class="summary-value positive">72%</span>
+                                        <span class="summary-label">Overall Sentiment</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-value">247</span>
+                                        <span class="summary-label">Articles Today</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-value warning">High</span>
+                                        <span class="summary-label">Market Impact</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-value">15</span>
+                                        <span class="summary-label">Breaking News</span>
+                                    </div>
+                                </div>
+                                
+                                <h4 style="margin-top: 1rem; color: var(--primary-text); font-size: 0.95rem;">High Impact News</h4>
+                                <div class="news-impact-list">
+                                    <div class="impact-item">
+                                        <div class="impact-details">
+                                            <div class="impact-headline">Fed Signals Pause in Rate Hikes</div>
+                                            <div class="impact-source">Bloomberg • 15 min ago</div>
+                                        </div>
+                                        <div class="impact-score">
+                                            <span class="score-value positive">+8.5</span>
+                                            <span class="score-label">Impact</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="impact-item">
+                                        <div class="impact-details">
+                                            <div class="impact-headline">Tesla Beats Q4 Delivery Estimates</div>
+                                            <div class="impact-source">Reuters • 1 hour ago</div>
+                                        </div>
+                                        <div class="impact-score">
+                                            <span class="score-value positive">+6.2</span>
+                                            <span class="score-label">Impact</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="impact-item">
+                                        <div class="impact-details">
+                                            <div class="impact-headline">China Tech Regulatory Concerns Rise</div>
+                                            <div class="impact-source">WSJ • 2 hours ago</div>
+                                        </div>
+                                        <div class="impact-score">
+                                            <span class="score-value negative">-4.8</span>
+                                            <span class="score-label">Impact</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="impact-item">
+                                        <div class="impact-details">
+                                            <div class="impact-headline">AI Chip Demand Exceeds Supply</div>
+                                            <div class="impact-source">TechCrunch • 3 hours ago</div>
+                                        </div>
+                                        <div class="impact-score">
+                                            <span class="score-value positive">+7.1</span>
+                                            <span class="score-label">Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                                    <h4 style="color: var(--primary-text); font-size: 0.95rem; margin-bottom: 0.5rem;">Trending Topics</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                        <span style="padding: 0.3rem 0.6rem; background: var(--accent-bg); border-radius: 15px; font-size: 0.8rem; color: var(--secondary-text);">#Fed</span>
+                                        <span style="padding: 0.3rem 0.6rem; background: var(--accent-bg); border-radius: 15px; font-size: 0.8rem; color: var(--secondary-text);">#AI</span>
+                                        <span style="padding: 0.3rem 0.6rem; background: var(--accent-bg); border-radius: 15px; font-size: 0.8rem; color: var(--secondary-text);">#Tesla</span>
+                                        <span style="padding: 0.3rem 0.6rem; background: var(--accent-bg); border-radius: 15px; font-size: 0.8rem; color: var(--secondary-text);">#Earnings</span>
+                                        <span style="padding: 0.3rem 0.6rem; background: var(--accent-bg); border-radius: 15px; font-size: 0.8rem; color: var(--secondary-text);">#China</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-controls">
+                                <button class="card-control-btn" onclick="toggleCardSize(this)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-control-btn">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
                         
                         <!-- 1. Machine Learning Models Card -->
                         <div class="overview-card">
@@ -1235,6 +1327,385 @@
                     </div>
                 </section>
                 
+                <!-- Market Section -->
+                <section id="market" class="content-section">
+                    <div class="section-header">
+                        <h2>Market Scanner & Intelligence</h2>
+                        <div class="section-controls">
+                            <button class="control-btn">
+                                <i class="fas fa-refresh"></i> Refresh
+                            </button>
+                            <button class="control-btn">
+                                <i class="fas fa-filter"></i> Filters
+                            </button>
+                            <button class="control-btn">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="scanner-grid">
+                        <!-- Top Movers -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-fire"></i> Top Movers</h3>
+                                <span class="update-time">Updated: <span class="time-display">12:45:23</span></span>
+                            </div>
+                            <div class="scanner-list" id="top-movers-list">
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">NVDA</span>
+                                        <span class="price">$450.30</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+5.2%</span>
+                                        <span class="volume">Vol: 25M</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">AMD</span>
+                                        <span class="price">$120.45</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+3.8%</span>
+                                        <span class="volume">Vol: 18M</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">META</span>
+                                        <span class="price">$325.60</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change negative">-2.1%</span>
+                                        <span class="volume">Vol: 12M</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">AAPL</span>
+                                        <span class="price">$150.25</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+1.8%</span>
+                                        <span class="volume">Vol: 15M</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">TSLA</span>
+                                        <span class="price">$850.75</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+3.1%</span>
+                                        <span class="volume">Vol: 22M</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Unusual Activity -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-exclamation-triangle"></i> Unusual Activity</h3>
+                                <span class="update-time">Live</span>
+                            </div>
+                            <div class="scanner-list">
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">TSLA</span>
+                                        <span class="alert-type">Volume Spike</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change">3x avg</span>
+                                        <span class="time">2 min ago</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">SPY</span>
+                                        <span class="alert-type">Options Flow</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change">$5.2M Call</span>
+                                        <span class="time">5 min ago</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">AAPL</span>
+                                        <span class="alert-type">Dark Pool</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change">$10M Block</span>
+                                        <span class="time">15 min ago</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">QQQ</span>
+                                        <span class="alert-type">Whale Alert</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change">Large Buy</span>
+                                        <span class="time">20 min ago</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">NVDA</span>
+                                        <span class="alert-type">Insider Buy</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change">$2M</span>
+                                        <span class="time">1 hour ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pattern Detection -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-chart-line"></i> Pattern Detection</h3>
+                                <span class="update-time">AI Powered</span>
+                            </div>
+                            <div class="scanner-list">
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">MSFT</span>
+                                        <span class="pattern">Bull Flag</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="confidence">85% conf</span>
+                                        <span class="target">Target: $310</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">GOOGL</span>
+                                        <span class="pattern">Double Bottom</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="confidence">78% conf</span>
+                                        <span class="target">Target: $2850</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">BTC</span>
+                                        <span class="pattern">Ascending Triangle</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="confidence">92% conf</span>
+                                        <span class="target">Target: $48K</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">ETH</span>
+                                        <span class="pattern">Cup & Handle</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="confidence">81% conf</span>
+                                        <span class="target">Target: $3000</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">AMZN</span>
+                                        <span class="pattern">Breakout</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="confidence">88% conf</span>
+                                        <span class="target">Target: $3500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sector Performance -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-industry"></i> Sector Performance</h3>
+                                <span class="update-time">Today</span>
+                            </div>
+                            <div class="scanner-list">
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">Technology</span>
+                                        <span class="index">XLK</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+2.1%</span>
+                                        <span class="leaders">NVDA, AAPL</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">Healthcare</span>
+                                        <span class="index">XLV</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+0.8%</span>
+                                        <span class="leaders">JNJ, PFE</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">Energy</span>
+                                        <span class="index">XLE</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change negative">-1.5%</span>
+                                        <span class="leaders">XOM, CVX</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">Financials</span>
+                                        <span class="index">XLF</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change positive">+0.5%</span>
+                                        <span class="leaders">JPM, BAC</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">Consumer</span>
+                                        <span class="index">XLY</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="change negative">-0.3%</span>
+                                        <span class="leaders">AMZN, TSLA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Market Breadth -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-chart-bar"></i> Market Breadth</h3>
+                                <span class="update-time">Live</span>
+                            </div>
+                            <div class="breadth-metrics">
+                                <div class="breadth-item">
+                                    <span class="breadth-label">Advancers</span>
+                                    <span class="breadth-value positive">2,847</span>
+                                    <div class="breadth-bar">
+                                        <div class="breadth-fill positive" style="width: 68%;"></div>
+                                    </div>
+                                </div>
+                                <div class="breadth-item">
+                                    <span class="breadth-label">Decliners</span>
+                                    <span class="breadth-value negative">1,253</span>
+                                    <div class="breadth-bar">
+                                        <div class="breadth-fill negative" style="width: 32%;"></div>
+                                    </div>
+                                </div>
+                                <div class="breadth-item">
+                                    <span class="breadth-label">New Highs</span>
+                                    <span class="breadth-value">127</span>
+                                </div>
+                                <div class="breadth-item">
+                                    <span class="breadth-label">New Lows</span>
+                                    <span class="breadth-value">45</span>
+                                </div>
+                                <div class="breadth-item">
+                                    <span class="breadth-label">A/D Line</span>
+                                    <span class="breadth-value positive">+1,594</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Options Flow -->
+                        <div class="scanner-card">
+                            <div class="scanner-header">
+                                <h3 class="scanner-title"><i class="fas fa-exchange-alt"></i> Options Flow</h3>
+                                <span class="update-time">Real-time</span>
+                            </div>
+                            <div class="scanner-list">
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">SPY</span>
+                                        <span class="option-type call">CALL</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="strike">$440 Strike</span>
+                                        <span class="premium">$2.5M Premium</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">QQQ</span>
+                                        <span class="option-type put">PUT</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="strike">$360 Strike</span>
+                                        <span class="premium">$1.8M Premium</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">TSLA</span>
+                                        <span class="option-type call">CALL</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="strike">$900 Strike</span>
+                                        <span class="premium">$3.2M Premium</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">AAPL</span>
+                                        <span class="option-type call">CALL</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="strike">$155 Strike</span>
+                                        <span class="premium">$1.5M Premium</span>
+                                    </div>
+                                </div>
+                                <div class="scanner-item">
+                                    <div class="scanner-symbol">
+                                        <span class="symbol">VIX</span>
+                                        <span class="option-type put">PUT</span>
+                                    </div>
+                                    <div class="scanner-metrics">
+                                        <span class="strike">$14 Strike</span>
+                                        <span class="premium">$950K Premium</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Market Overview Stats -->
+                    <div class="market-overview-stats" style="margin-top: 2rem;">
+                        <h3 style="color: var(--primary-text); margin-bottom: 1rem;">Market Statistics</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div class="stat-card">
+                                <span class="stat-label">Market Cap</span>
+                                <span class="stat-value">$42.8T</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Total Volume</span>
+                                <span class="stat-value">8.2B</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">Put/Call Ratio</span>
+                                <span class="stat-value">0.78</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">VIX</span>
+                                <span class="stat-value">15.23</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Strategy Section -->
                 <section id="strategy" class="content-section">
                     <div class="section-header">

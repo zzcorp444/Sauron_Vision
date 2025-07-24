@@ -563,6 +563,48 @@ body {
     transform: translateY(calc(100% - 70px));
 }
 
+.price-ticker-container:hover .ticker-nav-arrow {
+    opacity: 1;
+}
+
+/* Navigation arrows for price ticker */
+.ticker-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60px;
+    background: rgba(26, 26, 26, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 102;
+}
+
+.ticker-nav-arrow.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(26, 26, 26, 0.95), transparent);
+    border-radius: 0 5px 5px 0;
+}
+
+.ticker-nav-arrow.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(26, 26, 26, 0.95), transparent);
+    border-radius: 5px 0 0 5px;
+}
+
+.ticker-nav-arrow:hover {
+    background: rgba(26, 26, 26, 1);
+}
+
+.ticker-nav-arrow i {
+    color: var(--primary-text);
+    font-size: 20px;
+}
+
 .ticker-controls {
     position: absolute;
     top: 10px;
@@ -589,7 +631,7 @@ body {
     color: var(--primary-text);
 }
 
-/* Price Action Icons */
+/* Price Action Icons - Modified for multiple selections */
 .price-action-filters {
     display: flex;
     gap: 5px;
@@ -618,6 +660,8 @@ body {
 .action-filter.active {
     background: var(--glow-color);
     color: var(--primary-bg);
+    border-color: var(--glow-color);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
 .action-filter i {
@@ -671,6 +715,11 @@ body {
     padding: 8px 15px;
     padding-top: 0;
     animation: ticker-move 180s linear infinite;
+    transition: transform 0.3s ease;
+}
+
+.price-ticker.paused {
+    animation-play-state: paused;
 }
 
 .ticker-item {
