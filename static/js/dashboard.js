@@ -17,18 +17,36 @@ class SauronDashboard {
     }
 
     setupScrollHandler() {
-        // Handle header transparency on scroll
+        let lastScrollTop = 0;
+        
         window.addEventListener('scroll', () => {
             const header = document.getElementById('dashboard-header');
             const activityBar = document.getElementById('activity-ticker-bar');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            if (window.scrollY > 50) {
+            if (scrollTop > 50) {
+                // User scrolled down
                 header.classList.add('scrolled');
-                activityBar.classList.add('scrolled');
+                activityBar.classList.add('hidden');
+                
+                // Hide header left and center content
+                const headerLeft = header.querySelector('.header-left');
+                const headerCenter = header.querySelector('.header-center');
+                if (headerLeft) headerLeft.style.opacity = '0';
+                if (headerCenter) headerCenter.style.opacity = '0';
             } else {
+                // User at top
                 header.classList.remove('scrolled');
-                activityBar.classList.remove('scrolled');
+                activityBar.classList.remove('hidden');
+                
+                // Show header left and center content
+                const headerLeft = header.querySelector('.header-left');
+                const headerCenter = header.querySelector('.header-center');
+                if (headerLeft) headerLeft.style.opacity = '1';
+                if (headerCenter) headerCenter.style.opacity = '1';
             }
+            
+            lastScrollTop = scrollTop;
         });
     }
 
@@ -62,10 +80,15 @@ class SauronDashboard {
     setupSidebarToggle() {
         const toggleBtn = document.getElementById('sidebar-toggle');
         const sidebar = document.querySelector('.sidebar');
+        const newsBar = document.querySelector('.news-intelligence-bar');
         
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('retracted');
+                // Adjust news bar position when sidebar retracts
+                if (newsBar) {
+                    newsBar.style.left = sidebar.classList.contains('retracted') ? '60px' : '250px';
+                }
             });
         }
     }
@@ -240,26 +263,115 @@ class SauronDashboard {
 
     loadMarketScanner() {
         console.log('Loading Market Scanner...');
-        // Simulate API call
-        setTimeout(() => {
-            this.showNotification('Market Scanner data loaded', 'success');
-        }, 1000);
+        // Update market scanner data
+        this.updateMarketScannerData();
+        this.showNotification('Market Scanner data loaded', 'success');
+    }
+
+    updateMarketScannerData() {
+        // Simulate updating market scanner with real data
+        const moversData = [
+            { symbol: 'NVDA', price: 450.30, change: 5.2, volume: '25M' },
+            { symbol: 'AMD', price: 120.45, change: 3.8, volume: '18M' },
+            { symbol: 'AAPL', price: 150.25, change: 2.1, volume: '15M' },
+            { symbol: 'MSFT', price: 300.40, change: 1.8, volume: '10M' },
+            { symbol: 'GOOGL', price: 2750.50, change: -0.5, volume: '8M' }
+        ];
+
+        const moversList = document.querySelector('#top-movers-list');
+        if (moversList) {
+            moversList.innerHTML = moversData.map(stock => `
+                <div class="scanner-item">
+                    <div class="scanner-symbol">
+                        <span class="symbol">${stock.symbol}</span>
+                        <span class="price">$${stock.price}</span>
+                    </div>
+                    <div class="scanner-metrics">
+                        <span class="change ${stock.change > 0 ? 'positive' : 'negative'}">
+                            ${stock.change > 0 ? '+' : ''}${stock.change}%
+                        </span>
+                        <span class="volume">Vol: ${stock.volume}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
     }
 
     loadStrategyBuilder() {
         console.log('Loading Strategy Builder...');
-        // Simulate API call
-        setTimeout(() => {
-            this.showNotification('Strategy Builder initialized', 'success');
-        }, 1000);
+        // Initialize drag and drop for strategy components
+        this.initializeStrategyDragDrop();
+        this.showNotification('Strategy Builder initialized', 'success');
+    }
+
+    initializeStrategyDragDrop() {
+        const components = document.querySelectorAll('.component-item');
+        const dropZone = document.querySelector('.strategy-drop-zone');
+        
+        if (!components.length || !dropZone) return;
+
+        components.forEach(component => {
+            component.draggable = true;
+            
+            component.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', component.dataset.component);
+                component.classList.add('dragging');
+            });
+            
+            component.addEventListener('dragend', () => {
+                component.classList.remove('dragging');
+            });
+        });
+
+        if (dropZone) {
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+            });
+            
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('drag-over');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+                const componentType = e.dataTransfer.getData('text/plain');
+                this.addStrategyComponent(componentType);
+            });
+        }
+    }
+
+    addStrategyComponent(type) {
+        console.log(`Adding strategy component: ${type}`);
+        this.showNotification(`Added ${type} to strategy`, 'success');
     }
 
     loadRiskMonitor() {
         console.log('Loading Risk Monitor...');
-        // Simulate API call
-        setTimeout(() => {
-            this.showNotification('Risk Monitor active', 'success');
-        }, 1000);
+        // Update risk metrics
+        this.updateRiskMetrics();
+        this.showNotification('Risk Monitor active', 'success');
+    }
+
+    updateRiskMetrics() {
+        // Update VaR
+        const varElement = document.querySelector('#var-metric');
+        if (varElement) {
+            varElement.textContent = '-$2,845.32';
+        }
+
+        // Update portfolio beta
+        const betaElement = document.querySelector('#beta-metric');
+        if (betaElement) {
+            betaElement.textContent = '1.15';
+        }
+
+        // Update Sharpe ratio
+        const sharpeElement = document.querySelector('#sharpe-metric');
+        if (sharpeElement) {
+            sharpeElement.textContent = '1.67';
+        }
     }
 
     loadTerminal() {
@@ -273,23 +385,72 @@ class SauronDashboard {
 
     loadSentimentAnalysis() {
         console.log('Loading Sentiment Analysis...');
-        setTimeout(() => {
-            this.showNotification('Sentiment Analysis loaded', 'success');
-        }, 1000);
+        this.updateSentimentData();
+        this.showNotification('Sentiment Analysis loaded', 'success');
+    }
+
+    updateSentimentData() {
+        // Update overall sentiment
+        const overallSentiment = document.querySelector('#overall-sentiment');
+        if (overallSentiment) {
+            overallSentiment.textContent = '72%';
+            overallSentiment.classList.add('positive');
+        }
+
+        // Update fear & greed index
+        const fearGreed = document.querySelector('#fear-greed-index');
+        if (fearGreed) {
+            fearGreed.textContent = '68';
+            fearGreed.classList.add('greed');
+        }
     }
 
     loadExecutionInterface() {
         console.log('Loading Execution Interface...');
-        setTimeout(() => {
-            this.showNotification('Execution Interface ready', 'success');
-        }, 1000);
+        this.updateExecutionStatus();
+        this.showNotification('Execution Interface ready', 'success');
+    }
+
+    updateExecutionStatus() {
+        const activeOrders = document.querySelector('#active-orders-count');
+        if (activeOrders) {
+            activeOrders.textContent = '5';
+        }
+
+        const executedToday = document.querySelector('#executed-today');
+        if (executedToday) {
+            executedToday.textContent = '12';
+        }
     }
 
     loadAnomalyDetection() {
         console.log('Loading Anomaly Detection...');
-        setTimeout(() => {
-            this.showNotification('Anomaly Detection active', 'success');
-        }, 1000);
+        this.updateAnomalyData();
+        this.showNotification('Anomaly Detection active', 'success');
+    }
+
+    updateAnomalyData() {
+        const anomalyList = document.querySelector('#anomaly-list');
+        if (anomalyList) {
+            const anomalies = [
+                { type: 'Volume Spike', symbol: 'TSLA', severity: 'high', time: '2 min ago' },
+                { type: 'Price Gap', symbol: 'NVDA', severity: 'medium', time: '15 min ago' },
+                { type: 'Order Flow', symbol: 'AAPL', severity: 'low', time: '1 hour ago' }
+            ];
+
+            anomalyList.innerHTML = anomalies.map(anomaly => `
+                <div class="anomaly-item ${anomaly.severity}">
+                    <div class="anomaly-header">
+                        <span class="anomaly-type">${anomaly.type}</span>
+                        <span class="anomaly-symbol">${anomaly.symbol}</span>
+                    </div>
+                    <div class="anomaly-meta">
+                        <span class="severity">${anomaly.severity}</span>
+                        <span class="time">${anomaly.time}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
     }
 
     startDataUpdates() {
