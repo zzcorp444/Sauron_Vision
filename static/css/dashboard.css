@@ -881,7 +881,6 @@
     margin-bottom: 2rem;
     position: sticky;
     top: 0;
-    background: var(--primary-bg);
     padding: 1rem 0;
     z-index: 200;
 }
@@ -892,7 +891,7 @@
 }
 
 .section-controls {
-    display: flex;
+    display: fixed;
     gap: 0.5rem;
 }
 
