@@ -551,8 +551,8 @@ body {
     background: linear-gradient(to top, 
         rgba(26, 26, 26, 0.95) 0%, 
         rgba(26, 26, 26, 0.5) 50%, 
-        rgba(26, 26, 26, 0.3) 80%, 
-        rgba(26, 26, 26, 0.1) 100%);
+        rgba(26, 26, 26, 0.2) 80%, 
+        rgba(26, 26, 26, 0.0) 100%);
     z-index: 100;
     backdrop-filter: blur(5px);
     transition: transform 0.3s ease;
