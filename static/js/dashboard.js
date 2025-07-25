@@ -4,8 +4,6 @@ class SauronDashboard {
     constructor() {
         this.activeSection = 'vision';
         this.websocket = null;
-        this.tickerPosition = 0;
-        this.activityTickerPosition = 0;
         this.selectedFilters = new Set();
         this.init();
     }
@@ -18,7 +16,6 @@ class SauronDashboard {
         this.startDataUpdates();
         this.setupEventListeners();
         this.setupScrollHandler();
-        this.setupTickerNavigation();
         this.setupPriceFilters();
     }
 
@@ -82,15 +79,17 @@ class SauronDashboard {
                 
                 sidebar.classList.toggle('retracted');
                 
-                // Update content area margin
-                this.updateContentAreaMargin();
+                // Update content area margin with transition
+                setTimeout(() => {
+                    this.updateContentAreaMargin();
+                }, 50);
             });
         }
     }
 
     updateContentAreaMargin() {
-        const sidebar = document.querySelector('.sidebar');
-        const newsBar = document.querySelector('.news-intelligence-bar');
+        const sidebar = document.getElementById('sidebar');
+        const newsBar = document.getElementById('news-bar');
         const contentArea = document.querySelector('.content-area');
         
         if (!contentArea) return;
@@ -108,29 +107,24 @@ class SauronDashboard {
         contentArea.style.marginLeft = leftMargin + 'px';
         
         // Also update section header positioning
-        const sectionHeader = document.querySelector('.section-header');
-        if (sectionHeader) {
-            sectionHeader.style.left = leftMargin + 'px';
-        }
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        sectionHeaders.forEach(header => {
+            header.style.left = leftMargin + 'px';
+        });
     }
 
     setupNewsBarToggle() {
-        const newsBarToggle = document.querySelector('.news-bar-toggle');
-        const newsBar = document.querySelector('.news-intelligence-bar');
-        
-        if (newsBarToggle && newsBar) {
-            newsBarToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
+        window.toggleNewsBar = () => {
+            const newsBar = document.getElementById('news-bar');
+            if (newsBar) {
                 newsBar.classList.toggle('visible');
                 
                 // Update content area margin
                 setTimeout(() => {
                     this.updateContentAreaMargin();
                 }, 50);
-            });
-        }
+            }
+        };
     }
 
     setupPriceFilters() {
