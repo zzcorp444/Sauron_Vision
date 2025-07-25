@@ -73,25 +73,17 @@ class SauronDashboard {
 
     setupSidebarToggle() {
         const toggleBtn = document.getElementById('sidebar-toggle');
-        const sidebar = document.querySelector('.sidebar');
-        const newsBar = document.querySelector('.news-intelligence-bar');
-        const contentArea = document.querySelector('.content-area');
+        const sidebar = document.getElementById('sidebar');
         
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                console.log('Sidebar toggle clicked');
                 sidebar.classList.toggle('retracted');
                 
-                // Force a reflow to ensure the transition works
-                sidebar.offsetHeight;
-                
-                // Update content area margin with transition
-                setTimeout(() => {
-                    this.updateContentAreaMargin();
-                }, 50);
+                // Update content area margin
+                this.updateContentAreaMargin();
             });
         }
     }
@@ -137,102 +129,6 @@ class SauronDashboard {
                 setTimeout(() => {
                     this.updateContentAreaMargin();
                 }, 50);
-            });
-        }
-    }
-
-    setupTickerNavigation() {
-        // Price ticker navigation
-        const priceTickerContainer = document.querySelector('.price-ticker-container');
-        const priceTicker = document.querySelector('.price-ticker');
-        
-        if (priceTickerContainer && priceTicker) {
-            // Create navigation arrows for price ticker
-            const leftArrow = document.createElement('div');
-            leftArrow.className = 'ticker-nav-arrow left';
-            leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            
-            const rightArrow = document.createElement('div');
-            rightArrow.className = 'ticker-nav-arrow right';
-            rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            
-            priceTickerContainer.appendChild(leftArrow);
-            priceTickerContainer.appendChild(rightArrow);
-            
-            // Navigation functionality for price ticker
-            leftArrow.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                priceTicker.classList.add('paused');
-                this.tickerPosition += 100; // Move left (positive value)
-                priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
-                
-                // Resume animation after a short delay
-                setTimeout(() => {
-                    priceTicker.classList.remove('paused');
-                }, 500);
-            });
-            
-            rightArrow.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                priceTicker.classList.add('paused');
-                this.tickerPosition -= 100; // Move right (negative value)
-                priceTicker.style.transform = `translateX(${this.tickerPosition}px)`;
-                
-                // Resume animation after a short delay
-                setTimeout(() => {
-                    priceTicker.classList.remove('paused');
-                }, 500);
-            });
-        }
-        
-        // Activity ticker navigation
-        const activityBar = document.querySelector('.activity-ticker-bar');
-        const activityTicker = document.querySelector('.activity-ticker');
-        
-        if (activityBar && activityTicker) {
-            // Create navigation arrows for activity ticker
-            const leftArrow = document.createElement('div');
-            leftArrow.className = 'ticker-nav-arrow left';
-            leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            
-            const rightArrow = document.createElement('div');
-            rightArrow.className = 'ticker-nav-arrow right';
-            rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            
-            activityBar.appendChild(leftArrow);
-            activityBar.appendChild(rightArrow);
-            
-            // Navigation functionality for activity ticker
-            leftArrow.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                activityTicker.classList.add('paused');
-                this.activityTickerPosition += 200; // Move left
-                activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
-                
-                // Resume animation after a short delay
-                setTimeout(() => {
-                    activityTicker.style.animationPlayState = 'running';
-                }, 500);
-            });
-            
-            rightArrow.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                activityTicker.classList.add('paused');
-                this.activityTickerPosition -= 200; // Move right
-                activityTicker.style.transform = `translateX(${this.activityTickerPosition}px)`;
-                
-                // Resume animation after a short delay
-                setTimeout(() => {
-                    activityTicker.style.animationPlayState = 'running';
-                }, 500);
             });
         }
     }

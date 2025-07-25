@@ -23,34 +23,38 @@
 }
 
 .dashboard-header.scrolled {
-    background: transparent;
-    border-bottom: none;
-    box-shadow: none;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .dashboard-header.scrolled .header-left {
     opacity: 0;
     visibility: hidden;
+    transform: translateX(-100px);
     transition: all 0.3s ease;
 }
 
 .dashboard-header.scrolled .header-center {
-    transform: translateX(calc(100vw - 400px));
+    transform: translateX(-150px);
     transition: all 0.3s ease;
 }
 
 .dashboard-header.scrolled .header-center .market-status {
-    background: rgba(26, 26, 26, 0.2);
+    background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(10px);
     padding: 0.5rem 1rem;
     border-radius: 10px;
+    border: 1px solid rgba(0, 255, 65, 0.1);
 }
 
 .dashboard-header.scrolled .header-right {
-    background: rgba(26, 26, 26, 0.2);
+    background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(10px);
     padding: 0.5rem 1rem;
     border-radius: 10px;
+    border: 1px solid rgba(0, 255, 65, 0.1);
 }
 
 /* Activity Ticker Bar - Attached to header */
@@ -1005,6 +1009,25 @@
 .dashboard-header.scrolled ~ .dashboard-layout .content-area .section-header {
     left: 0;
     padding-left: calc(250px + 2rem);
+}
+
+/* When header is scrolled, adjust sidebar and news bar */
+.dashboard-header.scrolled ~ .dashboard-layout .sidebar {
+    top: 80px; /* Reduced from 110px */
+    height: calc(100vh - 80px);
+}
+
+.dashboard-header.scrolled ~ .dashboard-layout .news-intelligence-bar {
+    top: 80px; /* Reduced from 110px */
+    height: calc(100vh - 80px);
+}
+
+/* Adjust section header when scrolled */
+.dashboard-header.scrolled ~ .dashboard-layout .content-area .section-header {
+    top: 80px; /* Reduced from 110px */
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
 
 .dashboard-header.scrolled ~ .dashboard-layout .sidebar.retracted ~ .content-area .section-header {
