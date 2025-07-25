@@ -12,7 +12,7 @@
     <header class="dashboard-header" id="dashboard-header">
         <div class="header-left" onclick="goToDashboard()">
             <img src="{% static 'images/sv_logo_00.png' %}" alt="SV" class="header-logo">
-            <h1>SAURON VISION</h1>
+            <h1>SAURON<span class="vision-text"> VISION</span></h1>
             
             <!-- Sauron Info Popup -->
             <div class="sauron-info-popup">
@@ -534,6 +534,7 @@
                                             <div class="position-symbol-info">
                                                 <span class="position-side buy">BUY</span>
                                                 <span class="symbol">AAPL</span>
+                                                <span class="hold-time">1h</span>
                                             </div>
                                             <div>
                                                 <span class="value">$150.25</span>
@@ -542,11 +543,11 @@
                                         </div>
                                         <div class="position-details">
                                             <div class="position-prices">
-                                                <div class="price-info">
+                                                <div class="price-info compact">
                                                     <span class="price-label">Bid</span>
                                                     <span class="price-value">$150.20</span>
                                                 </div>
-                                                <div class="price-info">
+                                                <div class="price-info compact">
                                                     <span class="price-label">Ask</span>
                                                     <span class="price-value">$150.30</span>
                                                 </div>
@@ -606,15 +607,16 @@
                                             <div>
                                                 <span class="value">$2750.50</span>
                                                 <span class="change negative">-0.75%</span>
+                                                <span class="hold-time">2d 4h</span> 
                                             </div>
                                         </div>
                                         <div class="position-details">
                                             <div class="position-prices">
-                                                <div class="price-info">
+                                                <div class="price-info compact">
                                                     <span class="price-label">Bid</span>
                                                     <span class="price-value">$2750.25</span>
                                                 </div>
-                                                <div class="price-info">
+                                                <div class="price-info compact">
                                                     <span class="price-label">Ask</span>
                                                     <span class="price-value">$2750.75</span>
                                                 </div>

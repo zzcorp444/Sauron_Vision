@@ -30,10 +30,24 @@
 }
 
 .dashboard-header.scrolled .header-left {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-100px);
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
     transition: all 0.3s ease;
+}
+
+.dashboard-header.scrolled .header-left h1 {
+    font-size: 1.2rem;
+}
+
+.dashboard-header.scrolled .header-left h1::after {
+    content: "/";
+    margin: 0 0.5rem;
+    color: var(--tertiary-text);
+}
+
+.dashboard-header.scrolled .header-left h1 span.vision-text {
+    display: none;
 }
 
 .dashboard-header.scrolled .header-center {
@@ -66,7 +80,7 @@
     height: 30px;
     background: var(--accent-bg);
     border-bottom: 1px solid var(--border-color);
-    overflow: hidden;
+    overflow-x: hidden;
     z-index: 295;
     transition: all 0.3s ease;
 }
@@ -145,14 +159,50 @@
     position: relative;
 }
 
-.activity-item i {
-    color: var(--primary-text);
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 50px;
+    white-space: nowrap;
+    color: var(--secondary-text);
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.activity-detail {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 11px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 500; /* High z-index */
+    min-width: 200px;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    margin-top: 5px;
+    pointer-events: none; /* Prevent interference */
 }
 
 .activity-item:hover .activity-detail {
     opacity: 1;
     visibility: visible;
-    z-index: 350;
+    pointer-events: auto; /* Re-enable when visible */
+}
+
+/* Ensure activity bar doesn't clip content */
+.activity-ticker-bar {
+    overflow: visible; /* Changed from hidden */
+}
+
+.activity-ticker {
+    overflow: visible; /* Changed from hidden */
 }
 
 .activity-detail {
@@ -603,7 +653,7 @@
     border-top: 1px solid var(--border-color);
     padding: 1rem 0;
     transition: all 0.3s ease;
-    z-index: 250;
+    z-index: 300;
     height: calc(100vh - 110px); /* From header to bottom */
     overflow-y: auto;
     top: 110px;
@@ -615,10 +665,7 @@
 
 .sidebar.retracted .nav-category-name,
 .sidebar.retracted .nav-subtitle {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-20px);
-    transition: all 0.3s ease;
+    display: none;
 }
 
 .sidebar.retracted .nav-item {
@@ -628,10 +675,11 @@
 
 .sidebar.retracted .nav-item i {
     font-size: 1.2rem;
+    margin: 0;
 }
 
 .sidebar.retracted .sidebar-toggle {
-    right: 5px;
+    right: 15px;
 }
 
 .sidebar.retracted .sidebar-toggle i {
@@ -1444,6 +1492,52 @@
     border-color: var(--glow-color);
     color: var(--primary-text);
     background: rgba(0, 255, 65, 0.1);
+}
+
+.position-symbol-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hold-time {
+    font-size: 0.75rem;
+    color: var(--tertiary-text);
+    margin-left: 0.5rem;
+}
+
+/* Compact bid/ask display */
+.price-info.compact {
+    padding: 0.3rem;
+}
+
+.price-info.compact .price-label {
+    font-size: 0.7rem;
+}
+
+.price-info.compact .price-value {
+    font-size: 0.85rem;
+}
+
+/* Fix position actions positioning */
+.position-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Ensure details don't overlap */
+.position-details {
+    padding-bottom: 0.5rem;
+}
+
+/* Reduce bid/ask section size */
+.position-prices {
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 /* Enhanced Orders Section - Single line when not hovered */
@@ -3001,6 +3095,39 @@
 .leaders {
     color: var(--secondary-text);
     font-size: 0.8rem;
+}
+
+/* Z-index hierarchy fix */
+.price-ticker-container {
+    z-index: 100;
+}
+
+.sidebar {
+    z-index: 300;
+}
+
+.news-intelligence-bar {
+    z-index: 290;
+}
+
+.dashboard-header {
+    z-index: 400;
+}
+
+.activity-ticker-bar {
+    z-index: 295;
+}
+
+.section-header {
+    z-index: 200;
+}
+
+/* Popups and overlays */
+.icon-popup,
+.market-status-popup,
+.sauron-info-popup,
+.activity-detail {
+    z-index: 500;
 }
 
 /* Responsive Design */
