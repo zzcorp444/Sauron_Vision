@@ -963,7 +963,7 @@
     padding: 1rem 2rem;
     background: linear-gradient(to bottom, 
         rgba(26, 26, 26, 0.95) 0%, 
-        rgba(26, 26, 26, 0.8) 50%, 
+        rgba(26, 26, 26, 0.5) 50%, 
         rgba(26, 26, 26, 0.3) 80%, 
         rgba(26, 26, 26, 0.1) 100%);
     backdrop-filter: blur(10px);
@@ -975,7 +975,7 @@
 /* When header is scrolled, adjust section header */
 .dashboard-header.scrolled ~ .dashboard-layout .content-area .section-header {
     top: 80px;
-    background: rgba(26, 26, 26, 0.9);
+    background: rgba(26, 26, 26, 0.4);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
