@@ -1082,14 +1082,6 @@
     top: 80px; /* Reduced from 110px */
 }
 
-.dashboard-header.scrolled ~ .dashboard-layout .news-intelligence-bar.visible ~ .content-area .section-header {
-    padding-left: calc(550px + 2rem);
-}
-
-.dashboard-header.scrolled ~ .dashboard-layout .sidebar.retracted ~ .news-intelligence-bar.visible ~ .content-area .section-header {
-    padding-left: calc(360px + 2rem);
-}
-
 .section-header h2 {
     color: var(--primary-text);
     text-shadow: 0 0 5px var(--glow-color);
