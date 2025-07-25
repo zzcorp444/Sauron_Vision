@@ -1031,15 +1031,25 @@
     left: 250px;
     right: 0;
     padding: 1rem 2rem;
+    /* background: linear-gradient(to bottom, 
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(26, 26, 26, 0.8) 50%, 
+        rgba(26, 26, 26, 0.3) 80%, 
+        rgba(26, 26, 26, 0.1) 100%);
+    backdrop-filter: blur(10px); */
+    z-index: 200;
+    /* border-bottom: 1px solid var(--border-color); */
+    transition: all 0.3s ease;
+}
+
+.section-header h2 {
     background: linear-gradient(to bottom, 
         rgba(26, 26, 26, 0.95) 0%, 
         rgba(26, 26, 26, 0.8) 50%, 
         rgba(26, 26, 26, 0.3) 80%, 
         rgba(26, 26, 26, 0.1) 100%);
     backdrop-filter: blur(10px);
-    z-index: 200;
-    border-bottom: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    padding: 10px;
 }
 
 .sidebar.retracted ~ .content-area .section-header {
@@ -1098,6 +1108,13 @@
 .section-controls {
     display: flex;
     gap: 0.5rem;
+    background: linear-gradient(to bottom, 
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(26, 26, 26, 0.8) 50%, 
+        rgba(26, 26, 26, 0.3) 80%, 
+        rgba(26, 26, 26, 0.1) 100%);
+    backdrop-filter: blur(10px);
+    padding: 10px;
 }
 
 .control-btn {
