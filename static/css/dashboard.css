@@ -1081,7 +1081,7 @@
 }
 
 /* Adjust section header when scrolled */
-.dashboard-header.scrolled ~ .dashboard-layout .content-area .section-header {
+.dashboard-header.scrolled ~ .dashboard-layout .content-area {
     top: 80px; /* Reduced from 110px */
     background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(10px);
@@ -1103,6 +1103,9 @@
 .section-header h2 {
     color: var(--primary-text);
     text-shadow: 0 0 5px var(--glow-color);
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    border-radius: 10px;
+
 }
 
 .section-controls {
@@ -1115,6 +1118,8 @@
         rgba(26, 26, 26, 0.1) 100%);
     backdrop-filter: blur(10px);
     padding: 10px;
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    border-radius: 10px;
 }
 
 .control-btn {
