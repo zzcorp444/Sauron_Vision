@@ -1088,6 +1088,10 @@
     border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
 
+.dashboard-header.scrolled ~ .section-header {
+    top: 80px; /* Reduced from 110px */
+}
+
 .dashboard-header.scrolled ~ .dashboard-layout .sidebar.retracted ~ .content-area .section-header {
     padding-left: calc(60px + 2rem);
 }
