@@ -30,11 +30,17 @@ class SauronDashboard {
             if (scrollTop > 50) {
                 // User scrolled down
                 header.classList.add('scrolled');
-                activityBar.classList.add('hidden');
+                if (activityBar) {
+                    activityBar.style.transform = 'translateY(-100%)';
+                    activityBar.style.opacity = '0';
+                }
             } else {
                 // User at top
                 header.classList.remove('scrolled');
-                activityBar.classList.remove('hidden');
+                if (activityBar) {
+                    activityBar.style.transform = 'translateY(0)';
+                    activityBar.style.opacity = '1';
+                }
             }
             
             lastScrollTop = scrollTop;
@@ -88,30 +94,30 @@ class SauronDashboard {
     }
 
     updateContentAreaMargin() {
-        const sidebar = document.getElementById('sidebar');
-        const newsBar = document.getElementById('news-bar');
-        const contentArea = document.querySelector('.content-area');
-        
-        if (!contentArea) return;
-        
-        let leftMargin = 250; // Default sidebar width
-        
-        if (sidebar && sidebar.classList.contains('retracted')) {
-            leftMargin = 60;
-        }
-        
-        if (newsBar && newsBar.classList.contains('visible')) {
-            leftMargin += 300; // Add news bar width
-        }
-        
-        contentArea.style.marginLeft = leftMargin + 'px';
-        
-        // Also update section header positioning
-        const sectionHeaders = document.querySelectorAll('.section-header');
-        sectionHeaders.forEach(header => {
-            header.style.left = leftMargin + 'px';
-        });
+    const sidebar = document.getElementById('sidebar');
+    const newsBar = document.getElementById('news-bar');
+    const contentArea = document.querySelector('.content-area');
+    
+    if (!contentArea) return;
+    
+    let leftMargin = 250; // Default sidebar width
+    
+    if (sidebar && sidebar.classList.contains('retracted')) {
+        leftMargin = 60; // Retracted sidebar width
     }
+    
+    if (newsBar && newsBar.classList.contains('visible')) {
+        leftMargin += 300; // Add news bar width
+    }
+    
+    contentArea.style.marginLeft = leftMargin + 'px';
+    
+    // Update section header positioning
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    sectionHeaders.forEach(header => {
+        header.style.left = leftMargin + 'px';
+    });
+}
 
     setupNewsBarToggle() {
         window.toggleNewsBar = () => {
@@ -795,20 +801,22 @@ setupAIChatInterface() {
     if (!chatInterface || !chatButton) return;
     
     // Handle main button click
-    chatButton.addEventListener('click', () => {
-        if (!chatInterface.classList.contains('expanded')) {
-            // Default to size 1 when opening
-            chatInterface.classList.add('expanded', 'size-1');
-            eyeText.textContent = '×';
-            chatInput.focus();
+    chatButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (chatInterface.classList.contains('expanded')) {
+            // Close chat
+            chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
+            eyeText.textContent = '<0>';
         }
     });
     
     // Handle close button
-    chatClose.addEventListener('click', () => {
-        chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
-        eyeText.textContent = '<0>';
-    });
+    if (chatClose) {
+        chatClose.addEventListener('click', () => {
+            chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
+            eyeText.textContent = '<0>';
+        });
+    }
     
     // Handle size buttons
     sizeButtons.forEach(btn => {
@@ -822,17 +830,22 @@ setupAIChatInterface() {
             // Add selected size and expand
             chatInterface.classList.add('expanded', `size-${size}`);
             eyeText.textContent = '×';
-            chatInput.focus();
+            
+            if (chatInput) {
+                setTimeout(() => chatInput.focus(), 100);
+            }
         });
     });
     
     // Handle chat input
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && e.target.value.trim()) {
-            this.sendAIMessage(e.target.value);
-            e.target.value = '';
-        }
-    });
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.target.value.trim()) {
+                this.sendAIMessage(e.target.value);
+                e.target.value = '';
+            }
+        });
+    }
     
     // Simulate thinking state
     this.simulateAIThinking();
@@ -887,23 +900,65 @@ setupScrollNavigation() {
     const scrollDown = document.getElementById('scroll-down');
     const contentArea = document.querySelector('.content-area');
     
-    if (scrollUp && scrollDown && contentArea) {
-        scrollUp.addEventListener('click', () => {
-            const viewportHeight = window.innerHeight;
-            contentArea.scrollBy({
-                top: -viewportHeight,
-                behavior: 'smooth'
-            });
-        });
+    if (!scrollUp || !scrollDown || !contentArea) return;
+    
+    // Function to update button states
+    const updateScrollButtons = () => {
+        const scrollTop = contentArea.scrollTop;
+        const scrollHeight = contentArea.scrollHeight;
+        const clientHeight = contentArea.clientHeight;
         
-        scrollDown.addEventListener('click', () => {
+        // Update up button
+        if (scrollTop <= 0) {
+            scrollUp.classList.add('disabled');
+        } else {
+            scrollUp.classList.remove('disabled');
+        }
+        
+        // Update down button
+        if (scrollTop + clientHeight >= scrollHeight - 5) {
+            scrollDown.classList.add('disabled');
+        } else {
+            scrollDown.classList.remove('disabled');
+        }
+    };
+    
+    // Initial update
+    updateScrollButtons();
+    
+    // Update on scroll
+    contentArea.addEventListener('scroll', updateScrollButtons);
+    
+    // Scroll up handler
+    scrollUp.addEventListener('click', () => {
+        if (!scrollUp.classList.contains('disabled')) {
             const viewportHeight = window.innerHeight;
             contentArea.scrollBy({
-                top: viewportHeight,
+                top: -viewportHeight * 0.8,
                 behavior: 'smooth'
             });
-        });
-    }
+            
+            // Update buttons after scroll animation
+            setTimeout(updateScrollButtons, 500);
+        }
+    });
+    
+    // Scroll down handler
+    scrollDown.addEventListener('click', () => {
+        if (!scrollDown.classList.contains('disabled')) {
+            const viewportHeight = window.innerHeight;
+            contentArea.scrollBy({
+                top: viewportHeight * 0.8,
+                behavior: 'smooth'
+            });
+            
+            // Update buttons after scroll animation
+            setTimeout(updateScrollButtons, 500);
+        }
+    });
+    
+    // Also update on window resize
+    window.addEventListener('resize', updateScrollButtons);
 }
 
 // Update the init method to include new setups
