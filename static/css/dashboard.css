@@ -80,7 +80,7 @@
 }
 
 .activity-ticker-bar.hidden {
-    transform: translateY(-30px);
+    transform: translateY(-100%);
     opacity: 0;
 }
 
@@ -586,6 +586,160 @@
     width: 60px;
 }
 
+.sidebar-toggle {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 0 5px 5px 0;
+    width: 25px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 261;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.sidebar-toggle:hover {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+.sidebar-toggle i {
+    color: var(--primary-text);
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+
+.sidebar.retracted .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+/* Navigation menu adjustments for retracted state */
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    color: var(--secondary-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar.retracted .nav-item {
+    padding: 1rem;
+    align-items: center;
+}
+
+.nav-category-name,
+.nav-subtitle {
+    transition: all 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar.retracted .nav-category-name,
+.sidebar.retracted .nav-subtitle {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.sidebar.retracted .nav-category {
+    justify-content: center;
+}
+
+.sidebar.retracted .nav-category i {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* Tooltip for retracted sidebar */
+.sidebar.retracted .nav-item:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--secondary-bg);
+    border: 1px solid var(--glow-color);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    z-index: 1000;
+    font-size: 0.85rem;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* News Bar with separate toggle */
+.news-intelligence-bar {
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    width: 300px;
+    height: calc(100vh - 110px);
+    background: rgba(255, 255, 255, 0.95);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 240;
+    overflow-y: auto;
+    transform: translateX(-300px);
+    transition: all 0.3s ease;
+    top: 110px;
+}
+
+.sidebar.retracted ~ .news-intelligence-bar {
+    left: 60px;
+}
+
+.news-bar-toggle {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%) translateY(100px);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0 5px 5px 0;
+    width: 25px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 241;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Content area adjustments */
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    padding-bottom: 200px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    margin-left: 250px;
+}
+
+.sidebar.retracted ~ .content-area {
+    margin-left: 60px;
+}
+
+.sidebar.retracted ~ .news-intelligence-bar.visible ~ .content-area {
+    margin-left: 360px;
+}
+
 .sidebar.retracted .nav-category-name,
 .sidebar.retracted .nav-subtitle {
     opacity: 0;
@@ -606,6 +760,10 @@
 .dashboard-header.scrolled ~ .dashboard-layout .sidebar {
     top: 80px;
     height: calc(100vh - 80px);
+}
+
+.sidebar.retracted {
+    transform: translateX(-190px);
 }
 
 .sidebar-toggle {
@@ -708,23 +866,6 @@
     white-space: nowrap;
 }
 
-/* News Intelligence Bar - Adjusted positioning with external toggle */
-.news-intelligence-bar {
-    position: fixed;
-    bottom: 0;
-    left: 250px;
-    width: 300px;
-    height: calc(100vh - 110px);
-    background: rgba(255, 255, 255, 0.95);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 240;
-    overflow-y: auto;
-    transform: translateX(-300px);
-    transition: all 0.3s ease;
-    top: 110px;
-}
-
 /* When header is scrolled, adjust news bar */
 .dashboard-header.scrolled ~ .dashboard-layout .news-intelligence-bar {
     top: 80px;
@@ -737,26 +878,6 @@
 
 .sidebar.retracted ~ .news-intelligence-bar {
     left: 60px;
-}
-
-/* News Bar Toggle - External */
-.news-bar-toggle {
-    position: fixed;
-    left: 250px;
-    top: 50%;
-    transform: translateY(-50%) translateY(100px);
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0 5px 5px 0;
-    width: 25px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 241;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar.retracted ~ .news-bar-toggle {
@@ -1048,27 +1169,20 @@
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--secondary-text);
+    opacity: 0.5;
 }
 
-.scroll-btn:hover:not(.disabled) {
-    border-color: var(--glow-color);
-    color: var(--primary-text);
-    background: rgba(0, 255, 65, 0.1);
+.scroll-btn.active {
+    opacity: 1;
+    cursor: pointer;
 }
 
-.scroll-btn.disabled {
-    opacity: 0.3;
+.scroll-btn:not(.active) {
     cursor: not-allowed;
-    background: var(--accent-bg);
-    border-color: var(--border-color);
-    color: var(--tertiary-text);
+    opacity: 0.3;
 }
 
-.scroll-btn:active:not(.disabled) {
-    transform: scale(0.95);
-}
-
-.scroll-btn:hover {
+.scroll-btn.active:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
     background: rgba(0, 255, 65, 0.1);
@@ -2026,6 +2140,7 @@
 }
 
 /* AI Chat Interface */
+./* AI Chat Interface */
 .ai-chat-interface {
     position: fixed;
     bottom: 160px;
@@ -2036,26 +2151,22 @@
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ai-chat-interface.expanded {
-    width: 400px;
-    height: 600px;
-}
-
 .ai-chat-interface.expanded.size-1 {
     width: 400px;
     height: 50vh;
+    bottom: 20px;
 }
 
 .ai-chat-interface.expanded.size-2 {
     width: 600px;
-    height: 100vh;
-    bottom: 0;
+    height: calc(100vh - 40px);
+    bottom: 20px;
 }
 
 .ai-chat-interface.expanded.size-3 {
     width: calc(100vw - 40px);
-    height: calc(100vh - 180px);
-    bottom: 160px;
+    height: calc(100vh - 40px);
+    bottom: 20px;
     right: 20px;
 }
 
@@ -2073,14 +2184,6 @@
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ai-chat-interface:hover .ai-chat-button {
-    transform: scale(1.1);
-}
-
-.ai-chat-interface.expanded .ai-chat-button {
-    transform: scale(1);
-}
-
 .ai-eye-container {
     width: 100%;
     height: 100%;
@@ -2089,38 +2192,34 @@
 
 .ai-eye-outer {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border: 3px solid var(--primary-text);
-    border-radius: 50%;
+    border-radius: 10px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: wavyBorder 3s ease-in-out infinite;
+    filter: url(#wavy);
+    animation: wave-motion 3s ease-in-out infinite;
 }
 
-@keyframes wavyBorder {
-    0%, 100% {
-        border-radius: 50% 40% 60% 30%;
-        transform: rotate(0deg);
+@keyframes wave-motion {
+    0%, 100% { 
+        border-radius: 10px 15px 10px 15px;
+        transform: scale(1);
     }
-    25% {
-        border-radius: 60% 50% 40% 60%;
-        transform: rotate(90deg);
+    25% { 
+        border-radius: 15px 10px 15px 10px;
+        transform: scale(1.02);
     }
-    50% {
-        border-radius: 40% 60% 50% 40%;
-        transform: rotate(180deg);
+    50% { 
+        border-radius: 10px 15px 10px 15px;
+        transform: scale(1);
     }
-    75% {
-        border-radius: 50% 40% 60% 50%;
-        transform: rotate(270deg);
+    75% { 
+        border-radius: 15px 10px 15px 10px;
+        transform: scale(0.98);
     }
-}
-
-.ai-chat-interface:hover .ai-eye-outer,
-.ai-chat-interface.thinking .ai-eye-outer {
-    animation-duration: 1s;
 }
 
 .ai-eye-inner {
@@ -2130,7 +2229,7 @@
     right: 20px;
     bottom: 20px;
     border: 2px solid var(--primary-text);
-    border-radius: 50%;
+    border-radius: 5px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
@@ -2142,21 +2241,21 @@
     font-size: 18px;
     color: var(--primary-text);
     font-weight: 600;
-    animation: float 3s ease-in-out infinite;
     transition: all 0.5s ease;
 }
 
 .ai-chat-interface.expanded .ai-eye-text {
     font-size: 24px;
+    transform: rotate(45deg);
 }
 
-/* Size selector circles - positioned on bottom right */
+/* Size selector circles - positioned at bottom right */
 .ai-size-selector {
     position: absolute;
-    bottom: -15px;
-    right: -15px;
+    bottom: -10px;
+    right: -10px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -2165,16 +2264,18 @@
 .ai-chat-interface:hover .ai-size-selector {
     opacity: 1;
     visibility: visible;
+    bottom: -40px;
+    right: 0;
 }
 
 .ai-size-btn {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background: var(--secondary-bg);
     border: 2px solid var(--primary-text);
     color: var(--primary-text);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2183,53 +2284,7 @@
     justify-content: center;
 }
 
-.ai-size-btn:hover {
-    background: var(--primary-text);
-    color: var(--primary-bg);
-    transform: scale(1.2);
-}
-
-/* Size selector circles */
-.ai-size-selector {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.ai-chat-interface:hover .ai-size-selector {
-    opacity: 1;
-    visibility: visible;
-}
-
-.ai-size-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--secondary-bg);
-    border: 2px solid var(--primary-text);
-    color: var(--primary-text);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ai-size-btn:hover {
-    background: var(--primary-text);
-    color: var(--primary-bg);
-    transform: scale(1.1);
-}
-
-/* Chat content */
+/* Chat content styles remain the same but adjust positioning */
 .ai-chat-content {
     position: absolute;
     top: 0;

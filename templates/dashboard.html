@@ -2513,10 +2513,15 @@
     </div>
 
     <!-- SVG Filters -->
-    <svg class="svg-filters">
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0;">
         <defs>
             <filter id="wavy">
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" />
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" seed="2">
+                    <animate attributeName="baseFrequency" 
+                        dur="60s" 
+                        values="0.02;0.03;0.02" 
+                        repeatCount="indefinite" />
+                </feTurbulence>
                 <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="3" />
             </filter>
         </defs>
