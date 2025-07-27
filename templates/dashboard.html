@@ -432,31 +432,41 @@
                 <section id="vision" class="content-section active">
                     <div class="section-header">
                         <h2>Vision Overview</h2>
-                        <div class="section-controls">
-                            <button class="control-btn">
-                                <i class="fas fa-refresh"></i> Refresh
-                            </button>
-                            <div class="bulk-actions-dropdown">
+                        <div class="section-controls-wrapper">
+                            <div class="section-controls">
                                 <button class="control-btn">
-                                    <i class="fas fa-th"></i> Bulk Actions
+                                    <i class="fas fa-refresh"></i> Refresh
                                 </button>
-                                <div class="bulk-actions-menu">
-                                    <div class="bulk-action-item" onclick="expandAllCards()">
-                                        <i class="fas fa-expand"></i> Expand All Cards
-                                    </div>
-                                    <div class="bulk-action-item" onclick="collapseAllCards()">
-                                        <i class="fas fa-compress"></i> Collapse All Cards
-                                    </div>
-                                    <div class="bulk-action-item">
-                                        <i class="fas fa-plus"></i> Add Card
-                                    </div>
-                                    <div class="bulk-action-item">
-                                        <i class="fas fa-minus"></i> Remove Card
-                                    </div>
-                                    <div class="bulk-action-item">
-                                        <i class="fas fa-cog"></i> Configure Layout
+                                <div class="bulk-actions-dropdown">
+                                    <button class="control-btn">
+                                        <i class="fas fa-th"></i> Bulk Actions
+                                    </button>
+                                    <div class="bulk-actions-menu">
+                                        <div class="bulk-action-item" onclick="expandAllCards()">
+                                            <i class="fas fa-expand"></i> Expand All Cards
+                                        </div>
+                                        <div class="bulk-action-item" onclick="collapseAllCards()">
+                                            <i class="fas fa-compress"></i> Collapse All Cards
+                                        </div>
+                                        <div class="bulk-action-item">
+                                            <i class="fas fa-plus"></i> Add Card
+                                        </div>
+                                        <div class="bulk-action-item">
+                                            <i class="fas fa-minus"></i> Remove Card
+                                        </div>
+                                        <div class="bulk-action-item">
+                                            <i class="fas fa-cog"></i> Configure Layout
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="scroll-nav">
+                                <button class="scroll-btn" id="scroll-up" title="Scroll Up">
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>
+                                <button class="scroll-btn" id="scroll-down" title="Scroll Down">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -533,6 +543,7 @@
                                             <div class="position-symbol-info">
                                                 <span class="position-side buy">BUY</span>
                                                 <span class="symbol">AAPL</span>
+                                                <span class="holding-time">3h</span>
                                             </div>
                                             <div>
                                                 <span class="value">$150.25</span>
@@ -601,6 +612,7 @@
                                             <div class="position-symbol-info">
                                                 <span class="position-side sell">SELL</span>
                                                 <span class="symbol">GOOGL</span>
+                                                <span class="holding-time">3d 5h</span>
                                             </div>
                                             <div>
                                                 <span class="value">$2750.50</span>
@@ -669,6 +681,7 @@
                                             <div class="position-symbol-info">
                                                 <span class="position-side buy">BUY</span>
                                                 <span class="symbol">TSLA</span>
+                                                <span class="holding-time">5d 22m</span>
                                             </div>
                                             <div>
                                                 <span class="value">$850.75</span>
@@ -2456,7 +2469,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Terminal Section -->
                 <section id="terminal" class="content-section">
                     {% include 'components/terminal.html' %}
@@ -2464,6 +2477,50 @@
             </div>
         </main>
     </div>
+    <!-- AI Chat Interface -->
+    <div class="ai-chat-interface" id="ai-chat-interface">
+        <button class="ai-chat-button" id="ai-chat-button">
+            <div class="ai-eye-container">
+                <div class="ai-eye-outer"></div>
+                <div class="ai-eye-inner">
+                    <span class="ai-eye-text" id="ai-eye-text">&lt;0&gt;</span>
+                </div>
+            </div>
+        </button>
+        
+        <!-- Size selector circles -->
+        <div class="ai-size-selector">
+            <button class="ai-size-btn" data-size="1">1</button>
+            <button class="ai-size-btn" data-size="2">2</button>
+            <button class="ai-size-btn" data-size="3">3</button>
+        </div>
+        
+        <!-- Chat content -->
+        <div class="ai-chat-content" id="ai-chat-content">
+            <div class="ai-chat-header">
+                <h3 class="ai-chat-title">Sauron AI Assistant</h3>
+                <button class="ai-chat-close" id="ai-chat-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ai-chat-messages" id="ai-chat-messages">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="ai-chat-input-container">
+                <input type="text" class="ai-chat-input" id="ai-chat-input" placeholder="Ask Sauron anything..." />
+            </div>
+        </div>
+    </div>
+
+    <!-- SVG Filters -->
+    <svg class="svg-filters">
+        <defs>
+            <filter id="wavy">
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" />
+                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="3" />
+            </filter>
+        </defs>
+    </svg>
 </div>
 {% endblock %}
 

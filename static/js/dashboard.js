@@ -783,3 +783,139 @@ window.addEventListener('resize', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SauronDashboard;
 }
+
+setupAIChatInterface() {
+    const chatInterface = document.getElementById('ai-chat-interface');
+    const chatButton = document.getElementById('ai-chat-button');
+    const chatClose = document.getElementById('ai-chat-close');
+    const eyeText = document.getElementById('ai-eye-text');
+    const sizeButtons = document.querySelectorAll('.ai-size-btn');
+    const chatInput = document.getElementById('ai-chat-input');
+    
+    if (!chatInterface || !chatButton) return;
+    
+    // Handle main button click
+    chatButton.addEventListener('click', () => {
+        if (!chatInterface.classList.contains('expanded')) {
+            // Default to size 1 when opening
+            chatInterface.classList.add('expanded', 'size-1');
+            eyeText.textContent = '×';
+            chatInput.focus();
+        }
+    });
+    
+    // Handle close button
+    chatClose.addEventListener('click', () => {
+        chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
+        eyeText.textContent = '<0>';
+    });
+    
+    // Handle size buttons
+    sizeButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const size = btn.dataset.size;
+            
+            // Remove all size classes
+            chatInterface.classList.remove('size-1', 'size-2', 'size-3');
+            
+            // Add selected size and expand
+            chatInterface.classList.add('expanded', `size-${size}`);
+            eyeText.textContent = '×';
+            chatInput.focus();
+        });
+    });
+    
+    // Handle chat input
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && e.target.value.trim()) {
+            this.sendAIMessage(e.target.value);
+            e.target.value = '';
+        }
+    });
+    
+    // Simulate thinking state
+    this.simulateAIThinking();
+}
+
+sendAIMessage(message) {
+    const messagesContainer = document.getElementById('ai-chat-messages');
+    const chatInterface = document.getElementById('ai-chat-interface');
+    
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.innerHTML = `
+        <div class="message-content">${message}</div>
+        <div class="message-time">${new Date().toLocaleTimeString()}</div>
+    `;
+    messagesContainer.appendChild(userMsg);
+    
+    // Show thinking state
+    chatInterface.classList.add('thinking');
+    
+    // Simulate AI response
+    setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'chat-message ai';
+        aiMsg.innerHTML = `
+            <div class="message-content">I'm analyzing your request: "${message}". The market patterns suggest interesting opportunities...</div>
+            <div class="message-time">${new Date().toLocaleTimeString()}</div>
+        `;
+        messagesContainer.appendChild(aiMsg);
+        chatInterface.classList.remove('thinking');
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 1500);
+}
+
+simulateAIThinking() {
+    setInterval(() => {
+        const chatInterface = document.getElementById('ai-chat-interface');
+        if (chatInterface && !chatInterface.classList.contains('expanded')) {
+            chatInterface.classList.add('thinking');
+            setTimeout(() => {
+                chatInterface.classList.remove('thinking');
+            }, 2000);
+        }
+    }, 10000);
+}
+
+setupScrollNavigation() {
+    const scrollUp = document.getElementById('scroll-up');
+    const scrollDown = document.getElementById('scroll-down');
+    const contentArea = document.querySelector('.content-area');
+    
+    if (scrollUp && scrollDown && contentArea) {
+        scrollUp.addEventListener('click', () => {
+            const viewportHeight = window.innerHeight;
+            contentArea.scrollBy({
+                top: -viewportHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        scrollDown.addEventListener('click', () => {
+            const viewportHeight = window.innerHeight;
+            contentArea.scrollBy({
+                top: viewportHeight,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// Update the init method to include new setups
+init() {
+    this.setupNavigation();
+    this.setupSidebarToggle();
+    this.setupNewsBarToggle();
+    this.setupWebSocket();
+    this.startDataUpdates();
+    this.setupEventListeners();
+    this.setupScrollHandler();
+    this.setupPriceFilters();
+    this.setupAIChatInterface(); // Add this
+    this.setupScrollNavigation(); // Add this
+}
