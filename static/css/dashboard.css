@@ -79,8 +79,8 @@
     transition: all 0.3s ease;
 }
 
-.activity-ticker-bar.hidden {
-    transform: translateY(-100%);
+.activity-ticker-bar.scrolled {
+    transform: translateY(-30px);
     opacity: 0;
 }
 
@@ -566,6 +566,7 @@
     position: relative;
 }
 
+/* Sidebar - Fixed with higher z-index and external toggle */
 .sidebar {
     position: fixed;
     bottom: 0;
@@ -576,184 +577,10 @@
     border-top: 1px solid var(--border-color);
     padding: 1rem 0;
     transition: all 0.3s ease;
-    z-index: 260;
+    z-index: 260; /* Higher than price ticker */
     height: calc(100vh - 110px);
     overflow-y: auto;
     top: 110px;
-}
-
-.sidebar.retracted {
-    width: 60px;
-}
-
-.sidebar-toggle {
-    position: absolute;
-    right: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--secondary-bg);
-    border: 1px solid var(--glow-color);
-    border-radius: 0 5px 5px 0;
-    width: 25px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 261;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-}
-
-.sidebar-toggle:hover {
-    background: rgba(0, 255, 65, 0.1);
-    border-color: var(--glow-color);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
-}
-
-.sidebar-toggle i {
-    color: var(--primary-text);
-    transition: transform 0.3s ease;
-    font-size: 12px;
-}
-
-.sidebar.retracted .sidebar-toggle i {
-    transform: rotate(180deg);
-}
-
-/* Navigation menu adjustments for retracted state */
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 1.5rem;
-    color: var(--secondary-text);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-    position: relative;
-    overflow: hidden;
-}
-
-.sidebar.retracted .nav-item {
-    padding: 1rem;
-    align-items: center;
-}
-
-.nav-category-name,
-.nav-subtitle {
-    transition: all 0.3s ease;
-    opacity: 1;
-    visibility: visible;
-}
-
-.sidebar.retracted .nav-category-name,
-.sidebar.retracted .nav-subtitle {
-    opacity: 0;
-    visibility: hidden;
-    width: 0;
-    height: 0;
-    margin: 0;
-}
-
-.sidebar.retracted .nav-category {
-    justify-content: center;
-}
-
-.sidebar.retracted .nav-category i {
-    font-size: 20px;
-    margin: 0;
-}
-
-/* Tooltip for retracted sidebar */
-.sidebar.retracted .nav-item:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 60px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--secondary-bg);
-    border: 1px solid var(--glow-color);
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    white-space: nowrap;
-    z-index: 1000;
-    font-size: 0.85rem;
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-}
-
-/* News Bar with separate toggle */
-.news-intelligence-bar {
-    position: fixed;
-    bottom: 0;
-    left: 250px;
-    width: 300px;
-    height: calc(100vh - 110px);
-    background: rgba(255, 255, 255, 0.95);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 240;
-    overflow-y: auto;
-    transform: translateX(-300px);
-    transition: all 0.3s ease;
-    top: 110px;
-}
-
-.sidebar.retracted ~ .news-intelligence-bar {
-    left: 60px;
-}
-
-.news-bar-toggle {
-    position: absolute;
-    right: -25px;
-    top: 50%;
-    transform: translateY(-50%) translateY(100px);
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0 5px 5px 0;
-    width: 25px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 241;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Content area adjustments */
-.content-area {
-    flex: 1;
-    padding: 2rem;
-    padding-bottom: 200px;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-    margin-left: 250px;
-}
-
-.sidebar.retracted ~ .content-area {
-    margin-left: 60px;
-}
-
-.sidebar.retracted ~ .news-intelligence-bar.visible ~ .content-area {
-    margin-left: 360px;
-}
-
-.sidebar.retracted .nav-category-name,
-.sidebar.retracted .nav-subtitle {
-    opacity: 0;
-    visibility: hidden;
-    width: 0;
-    overflow: hidden;
-}
-
-.sidebar.retracted .nav-category {
-    justify-content: center;
-}
-
-.sidebar.retracted .nav-item {
-    padding: 1rem 0.5rem;
 }
 
 /* When header is scrolled, adjust sidebar */
@@ -763,7 +590,7 @@
 }
 
 .sidebar.retracted {
-    transform: translateX(-190px);
+    width: 60px;
 }
 
 .sidebar-toggle {
@@ -801,7 +628,7 @@
     font-size: 12px;
 }
 
-.sidebar.retracted ~ .sidebar-toggle i {
+.sidebar.retracted .sidebar-toggle i {
     transform: rotate(180deg);
 }
 
@@ -822,6 +649,11 @@
     border-left: 3px solid transparent;
     position: relative;
     overflow: hidden;
+}
+
+.sidebar.retracted .nav-item {
+    padding: 1rem;
+    align-items: center;
 }
 
 .nav-item:hover {
@@ -857,6 +689,10 @@
     white-space: nowrap;
 }
 
+.sidebar.retracted .nav-category-name {
+    display: none;
+}
+
 .nav-subtitle {
     font-size: 0.75rem;
     color: var(--tertiary-text);
@@ -864,6 +700,27 @@
     margin-left: 2.2rem;
     transition: all 0.3s ease;
     white-space: nowrap;
+}
+
+.sidebar.retracted .nav-subtitle {
+    display: none;
+}
+
+/* News Intelligence Bar - Adjusted positioning with external toggle */
+.news-intelligence-bar {
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    width: 300px;
+    height: calc(100vh - 110px);
+    background: rgba(255, 255, 255, 0.95);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 240;
+    overflow-y: auto;
+    transform: translateX(-300px);
+    transition: all 0.3s ease;
+    top: 110px;
 }
 
 /* When header is scrolled, adjust news bar */
@@ -878,6 +735,26 @@
 
 .sidebar.retracted ~ .news-intelligence-bar {
     left: 60px;
+}
+
+/* News Bar Toggle - External */
+.news-bar-toggle {
+    position: fixed;
+    left: 250px;
+    top: 50%;
+    transform: translateY(-50%) translateY(100px);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0 5px 5px 0;
+    width: 25px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 241;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar.retracted ~ .news-bar-toggle {
@@ -1169,20 +1046,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--secondary-text);
-    opacity: 0.5;
 }
 
-.scroll-btn.active {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.scroll-btn:not(.active) {
-    cursor: not-allowed;
-    opacity: 0.3;
-}
-
-.scroll-btn.active:hover {
+.scroll-btn:hover {
     border-color: var(--glow-color);
     color: var(--primary-text);
     background: rgba(0, 255, 65, 0.1);
@@ -1190,6 +1056,17 @@
 
 .scroll-btn:active {
     transform: scale(0.95);
+}
+
+.scroll-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.scroll-btn:disabled:hover {
+    border-color: var(--border-color);
+    color: var(--secondary-text);
+    background: var(--accent-bg);
 }
 
 .control-btn {
@@ -2139,40 +2016,42 @@
     color: var(--primary-text);
 }
 
-/* AI Chat Interface */
-./* AI Chat Interface */
+/* AI Chat Interface - Enhanced */
 .ai-chat-interface {
     position: fixed;
     bottom: 160px;
     right: 20px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     z-index: 1000;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-chat-interface.expanded {
+    width: 400px;
+    height: 600px;
 }
 
 .ai-chat-interface.expanded.size-1 {
     width: 400px;
     height: 50vh;
-    bottom: 20px;
 }
 
 .ai-chat-interface.expanded.size-2 {
     width: 600px;
-    height: calc(100vh - 40px);
-    bottom: 20px;
+    height: calc(100vh - 180px);
 }
 
 .ai-chat-interface.expanded.size-3 {
     width: calc(100vw - 40px);
-    height: calc(100vh - 40px);
-    bottom: 20px;
+    height: calc(100vh - 180px);
+    bottom: 160px;
     right: 20px;
 }
 
 .ai-chat-button {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background: transparent;
     border: none;
     padding: 0;
@@ -2184,6 +2063,14 @@
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.ai-chat-interface:hover .ai-chat-button {
+    transform: scale(1.1);
+}
+
+.ai-chat-interface.expanded .ai-chat-button {
+    transform: scale(1);
+}
+
 .ai-eye-container {
     width: 100%;
     height: 100%;
@@ -2192,56 +2079,71 @@
 
 .ai-eye-outer {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     border: 3px solid var(--primary-text);
     border-radius: 10px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     filter: url(#wavy);
-    animation: wave-motion 3s ease-in-out infinite;
+    animation: wavy-animation 3s ease-in-out infinite;
 }
 
-@keyframes wave-motion {
-    0%, 100% { 
-        border-radius: 10px 15px 10px 15px;
-        transform: scale(1);
+@keyframes wavy-animation {
+    0%, 100% {
+        filter: url(#wavy);
     }
-    25% { 
-        border-radius: 15px 10px 15px 10px;
-        transform: scale(1.02);
+    50% {
+        filter: url(#wavy) brightness(1.2);
     }
-    50% { 
-        border-radius: 10px 15px 10px 15px;
-        transform: scale(1);
-    }
-    75% { 
-        border-radius: 15px 10px 15px 10px;
-        transform: scale(0.98);
-    }
+}
+
+.ai-chat-interface:hover .ai-eye-outer,
+.ai-chat-interface.thinking .ai-eye-outer {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    border-width: 4px;
 }
 
 .ai-eye-inner {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    border: 2px solid var(--primary-text);
-    border-radius: 5px;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    border: 3px solid var(--primary-text);
+    border-radius: 10px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.ai-chat-interface:hover .ai-eye-inner,
+.ai-chat-interface.thinking .ai-eye-inner {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 15px;
+}
+
 .ai-eye-text {
     font-family: var(--font-mono);
-    font-size: 18px;
+    font-size: 20px;
     color: var(--primary-text);
-    font-weight: 600;
+    font-weight: 700;
+    animation: float 3s ease-in-out infinite;
     transition: all 0.5s ease;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 .ai-chat-interface.expanded .ai-eye-text {
@@ -2264,27 +2166,35 @@
 .ai-chat-interface:hover .ai-size-selector {
     opacity: 1;
     visibility: visible;
-    bottom: -40px;
-    right: 0;
+    bottom: -20px;
+    right: -20px;
 }
 
 .ai-size-btn {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background: var(--secondary-bg);
-    border: 2px solid var(--primary-text);
+    border: 3px solid var(--primary-text);
     color: var(--primary-text);
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-/* Chat content styles remain the same but adjust positioning */
+.ai-size-btn:hover {
+    background: var(--primary-text);
+    color: var(--primary-bg);
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+/* Chat content */
 .ai-chat-content {
     position: absolute;
     top: 0;
@@ -2292,13 +2202,14 @@
     right: 0;
     bottom: 0;
     background: var(--secondary-bg);
-    border: 2px solid var(--primary-text);
-    border-radius: 10px;
+    border: 3px solid var(--primary-text);
+    border-radius: 15px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .ai-chat-interface.expanded .ai-chat-content {
@@ -2307,24 +2218,26 @@
 }
 
 .ai-chat-header {
-    padding: 1rem;
+    padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: rgba(0, 255, 65, 0.05);
 }
 
 .ai-chat-title {
     color: var(--primary-text);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
 .ai-chat-close {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: transparent;
-    border: 1px solid var(--error-text);
+    border: 2px solid var(--error-text);
     border-radius: 50%;
     color: var(--error-text);
     cursor: pointer;
@@ -2332,39 +2245,45 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
 }
 
 .ai-chat-close:hover {
     background: var(--error-text);
     color: var(--primary-bg);
+    transform: rotate(90deg);
 }
 
 .ai-chat-messages {
     flex: 1;
-    padding: 1rem;
+    padding: 1.5rem;
     overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .ai-chat-input-container {
-    padding: 1rem;
+    padding: 1.5rem;
     border-top: 1px solid var(--border-color);
+    background: rgba(0, 255, 65, 0.02);
 }
 
 .ai-chat-input {
     width: 100%;
-    padding: 0.8rem;
+    padding: 1rem;
     background: var(--accent-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     color: var(--primary-text);
     font-family: var(--font-mono);
     font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .ai-chat-input:focus {
     outline: none;
     border-color: var(--glow-color);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    background: rgba(0, 255, 65, 0.05);
 }
 
 /* SVG filter for wavy effect */
