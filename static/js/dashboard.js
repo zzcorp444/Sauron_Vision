@@ -1,5 +1,3 @@
-// static/js/dashboard.js
-
 class SauronDashboard {
     constructor() {
         this.activeSection = 'vision';
@@ -19,6 +17,7 @@ class SauronDashboard {
         this.setupPriceFilters();
         this.setupAIChatInterface();
         this.setupScrollNavigation();
+        this.addTooltipsToSidebar();
     }
 
     setupScrollHandler() {
@@ -44,6 +43,9 @@ class SauronDashboard {
             }
             
             lastScrollTop = scrollTop;
+            
+            // Update scroll button states
+            this.updateScrollButtonStates();
         });
     }
 
@@ -85,22 +87,23 @@ class SauronDashboard {
                 
                 sidebar.classList.toggle('retracted');
                 
-                // Update toggle button icon
-                const icon = toggleBtn.querySelector('i');
-                if (sidebar.classList.contains('retracted')) {
-                    icon.classList.remove('fa-chevron-left');
-                    icon.classList.add('fa-chevron-right');
-                } else {
-                    icon.classList.remove('fa-chevron-right');
-                    icon.classList.add('fa-chevron-left');
-                }
-                
                 // Update content area margin with transition
                 setTimeout(() => {
                     this.updateContentAreaMargin();
                 }, 50);
             });
         }
+    }
+
+    addTooltipsToSidebar() {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const categoryName = item.querySelector('.nav-category-name')?.textContent;
+            const subtitle = item.querySelector('.nav-subtitle')?.textContent;
+            if (categoryName) {
+                item.setAttribute('data-tooltip', `${categoryName}: ${subtitle || ''}`);
+            }
+        });
     }
 
     updateContentAreaMargin() {
@@ -185,163 +188,6 @@ class SauronDashboard {
                 }
             }
         });
-    }
-
-    setupAIChatInterface() {
-        const chatInterface = document.getElementById('ai-chat-interface');
-        const chatButton = document.getElementById('ai-chat-button');
-        const chatClose = document.getElementById('ai-chat-close');
-        const eyeText = document.getElementById('ai-eye-text');
-        const sizeButtons = document.querySelectorAll('.ai-size-btn');
-        const chatInput = document.getElementById('ai-chat-input');
-        
-        if (!chatInterface || !chatButton) return;
-        
-        // Handle main button click
-        chatButton.addEventListener('click', () => {
-            if (!chatInterface.classList.contains('expanded')) {
-                // Default to size 1 when opening
-                chatInterface.classList.add('expanded', 'size-1');
-                eyeText.textContent = '×';
-                if (chatInput) chatInput.focus();
-            }
-        });
-        
-        // Handle close button
-        if (chatClose) {
-            chatClose.addEventListener('click', () => {
-                chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
-                eyeText.textContent = '<0>';
-            });
-        }
-        
-        // Handle size buttons
-        sizeButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const size = btn.dataset.size;
-                
-                // Remove all size classes
-                chatInterface.classList.remove('size-1', 'size-2', 'size-3');
-                
-                // Add selected size and expand
-                chatInterface.classList.add('expanded', `size-${size}`);
-                eyeText.textContent = '×';
-                if (chatInput) chatInput.focus();
-            });
-        });
-        
-        // Handle chat input
-        if (chatInput) {
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && e.target.value.trim()) {
-                    this.sendAIMessage(e.target.value);
-                    e.target.value = '';
-                }
-            });
-        }
-        
-        // Simulate thinking state
-        this.simulateAIThinking();
-    }
-
-    sendAIMessage(message) {
-        const messagesContainer = document.getElementById('ai-chat-messages');
-        const chatInterface = document.getElementById('ai-chat-interface');
-        
-        if (!messagesContainer) return;
-        
-        // Add user message
-        const userMsg = document.createElement('div');
-        userMsg.className = 'chat-message user';
-        userMsg.innerHTML = `
-            <div class="message-content">${message}</div>
-            <div class="message-time">${new Date().toLocaleTimeString()}</div>
-        `;
-        messagesContainer.appendChild(userMsg);
-        
-        // Show thinking state
-        chatInterface.classList.add('thinking');
-        
-        // Simulate AI response
-        setTimeout(() => {
-            const aiMsg = document.createElement('div');
-            aiMsg.className = 'chat-message ai';
-            aiMsg.innerHTML = `
-                <div class="message-content">I'm analyzing your request: "${message}". The market patterns suggest interesting opportunities...</div>
-                <div class="message-time">${new Date().toLocaleTimeString()}</div>
-            `;
-            messagesContainer.appendChild(aiMsg);
-            chatInterface.classList.remove('thinking');
-            
-            // Scroll to bottom
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }, 1500);
-    }
-
-    simulateAIThinking() {
-        setInterval(() => {
-            const chatInterface = document.getElementById('ai-chat-interface');
-            if (chatInterface && !chatInterface.classList.contains('expanded')) {
-                chatInterface.classList.add('thinking');
-                setTimeout(() => {
-                    chatInterface.classList.remove('thinking');
-                }, 2000);
-            }
-        }, 10000);
-    }
-
-    setupScrollNavigation() {
-        const scrollUp = document.getElementById('scroll-up');
-        const scrollDown = document.getElementById('scroll-down');
-        const contentArea = document.querySelector('.content-area');
-        
-        if (scrollUp && scrollDown && contentArea) {
-            // Check scroll position and update button states
-            const updateScrollButtons = () => {
-                const scrollTop = contentArea.scrollTop;
-                const scrollHeight = contentArea.scrollHeight;
-                const clientHeight = contentArea.clientHeight;
-                
-                // Enable/disable up button
-                if (scrollTop <= 0) {
-                    scrollUp.disabled = true;
-                } else {
-                    scrollUp.disabled = false;
-                }
-                
-                // Enable/disable down button
-                if (scrollTop + clientHeight >= scrollHeight - 5) {
-                    scrollDown.disabled = true;
-                } else {
-                    scrollDown.disabled = false;
-                }
-            };
-            
-            // Initial check
-            updateScrollButtons();
-            
-            // Update on scroll
-            contentArea.addEventListener('scroll', updateScrollButtons);
-            
-            // Scroll up handler
-            scrollUp.addEventListener('click', () => {
-                const viewportHeight = contentArea.clientHeight;
-                contentArea.scrollBy({
-                    top: -viewportHeight * 0.8,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Scroll down handler
-            scrollDown.addEventListener('click', () => {
-                const viewportHeight = contentArea.clientHeight;
-                contentArea.scrollBy({
-                    top: viewportHeight * 0.8,
-                    behavior: 'smooth'
-                });
-            });
-        }
     }
 
     setupWebSocket() {
@@ -864,6 +710,168 @@ class SauronDashboard {
     calculatePercentageChange(current, previous) {
         return ((current - previous) / previous * 100).toFixed(2);
     }
+
+    setupAIChatInterface() {
+        const chatInterface = document.getElementById('ai-chat-interface');
+        const chatButton = document.getElementById('ai-chat-button');
+        const chatClose = document.getElementById('ai-chat-close');
+        const eyeText = document.getElementById('ai-eye-text');
+        const sizeButtons = document.querySelectorAll('.ai-size-btn');
+        const chatInput = document.getElementById('ai-chat-input');
+        
+        if (!chatInterface || !chatButton) return;
+        
+        // Handle main button click
+        chatButton.addEventListener('click', () => {
+            if (!chatInterface.classList.contains('expanded')) {
+                // Default to size 1 when opening
+                chatInterface.classList.add('expanded', 'size-1');
+                eyeText.textContent = '×';
+                if (chatInput) chatInput.focus();
+            }
+        });
+        
+        // Handle close button
+        if (chatClose) {
+            chatClose.addEventListener('click', () => {
+                chatInterface.classList.remove('expanded', 'size-1', 'size-2', 'size-3');
+                eyeText.textContent = '<0>';
+            });
+        }
+        
+        // Handle size buttons
+        sizeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const size = btn.dataset.size;
+                
+                // Remove all size classes
+                chatInterface.classList.remove('size-1', 'size-2', 'size-3');
+                
+                // Add selected size and expand
+                chatInterface.classList.add('expanded', `size-${size}`);
+                eyeText.textContent = '×';
+                if (chatInput) chatInput.focus();
+            });
+        });
+        
+        // Handle chat input
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && e.target.value.trim()) {
+                    this.sendAIMessage(e.target.value);
+                    e.target.value = '';
+                }
+            });
+        }
+        
+        // Simulate thinking state
+        this.simulateAIThinking();
+    }
+
+    sendAIMessage(message) {
+        const messagesContainer = document.getElementById('ai-chat-messages');
+        const chatInterface = document.getElementById('ai-chat-interface');
+        
+        if (!messagesContainer) return;
+        
+        // Add user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'chat-message user';
+        userMsg.innerHTML = `
+            <div class="message-content">${message}</div>
+            <div class="message-time">${new Date().toLocaleTimeString()}</div>
+        `;
+        messagesContainer.appendChild(userMsg);
+        
+        // Show thinking state
+        chatInterface.classList.add('thinking');
+        
+        // Simulate AI response
+        setTimeout(() => {
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'chat-message ai';
+            aiMsg.innerHTML = `
+                <div class="message-content">I'm analyzing your request: "${message}". The market patterns suggest interesting opportunities...</div>
+                <div class="message-time">${new Date().toLocaleTimeString()}</div>
+            `;
+            messagesContainer.appendChild(aiMsg);
+            chatInterface.classList.remove('thinking');
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1500);
+    }
+
+    simulateAIThinking() {
+        setInterval(() => {
+            const chatInterface = document.getElementById('ai-chat-interface');
+            if (chatInterface && !chatInterface.classList.contains('expanded')) {
+                chatInterface.classList.add('thinking');
+                setTimeout(() => {
+                    chatInterface.classList.remove('thinking');
+                }, 2000);
+            }
+        }, 10000);
+    }
+
+    setupScrollNavigation() {
+        const scrollUp = document.getElementById('scroll-up');
+        const scrollDown = document.getElementById('scroll-down');
+        const contentArea = document.querySelector('.content-area');
+        
+        if (scrollUp && scrollDown && contentArea) {
+            scrollUp.addEventListener('click', () => {
+                const viewportHeight = window.innerHeight;
+                contentArea.scrollBy({
+                    top: -viewportHeight,
+                    behavior: 'smooth'
+                });
+            });
+            
+            scrollDown.addEventListener('click', () => {
+                const viewportHeight = window.innerHeight;
+                contentArea.scrollBy({
+                    top: viewportHeight,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Update button states on scroll
+            contentArea.addEventListener('scroll', () => {
+                this.updateScrollButtonStates();
+            });
+            
+            // Initial state
+            this.updateScrollButtonStates();
+        }
+    }
+
+    updateScrollButtonStates() {
+        const scrollUp = document.getElementById('scroll-up');
+        const scrollDown = document.getElementById('scroll-down');
+        const contentArea = document.querySelector('.content-area');
+        
+        if (!scrollUp || !scrollDown || !contentArea) return;
+        
+        const scrollTop = contentArea.scrollTop;
+        const scrollHeight = contentArea.scrollHeight;
+        const clientHeight = contentArea.clientHeight;
+        
+        // Enable/disable scroll up button
+        if (scrollTop > 50) {
+            scrollUp.classList.add('enabled');
+        } else {
+            scrollUp.classList.remove('enabled');
+        }
+        
+        // Enable/disable scroll down button
+        if (scrollTop < scrollHeight - clientHeight - 50) {
+            scrollDown.classList.add('enabled');
+        } else {
+            scrollDown.classList.remove('enabled');
+        }
+    }
 }
 
 // Global functions for HTML onclick events
@@ -925,22 +933,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('🚀 Sauron Vision Dashboard initialized');
     
-    // Add wavy SVG filter to the page
-    const svgFilters = document.querySelector('.svg-filters');
-    if (!svgFilters) {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.classList.add('svg-filters');
-        svg.innerHTML = `
-            <defs>
-                <filter id="wavy">
-                    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" />
-                    <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="5" />
-                </filter>
-            </defs>
-        `;
-        document.body.appendChild(svg);
-    }
-    
     setTimeout(() => {
         if (window.sauronDashboard) {
             window.sauronDashboard.showNotification('Market data synchronized', 'success');
@@ -958,7 +950,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
 });
 
-// Handle visibility change
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         console.log('👁️ Sauron Vision going into background mode');
@@ -970,12 +961,13 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Handle window resize
 window.addEventListener('resize', () => {
     console.log('📐 Window resized, adjusting layouts');
+    if (window.sauronDashboard) {
+        window.sauronDashboard.updateScrollButtonStates();
+    }
 });
 
-// Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SauronDashboard;
 }
