@@ -2505,6 +2505,10 @@
             </div>
             <div class="ai-chat-messages" id="ai-chat-messages">
                 <!-- Messages will appear here -->
+                <div class="chat-message ai">
+                    <div class="message-content">Hello! I am Sauron, your AI trading assistant. How can I help you navigate the markets today?</div>
+                    <div class="message-time">${new Date().toLocaleTimeString()}</div>
+                </div>
             </div>
             <div class="ai-chat-input-container">
                 <input type="text" class="ai-chat-input" id="ai-chat-input" placeholder="Ask Sauron anything..." />
@@ -2517,20 +2521,10 @@
         <defs>
             <filter id="wavy">
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" />
-                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="3" />
+                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="5" />
             </filter>
         </defs>
     </svg>
-    <!-- SVG Filters -->
-    <svg class="svg-filters">
-        <defs>
-            <filter id="wavy">
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" seed="2" />
-                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-        </defs>
-    </svg>
-</div>
 {% endblock %}
 
 {% block extra_js %}
