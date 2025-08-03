@@ -461,7 +461,7 @@
                                 </div>
                             </div>
                             <div class="scroll-nav">
-                                <button class="scroll-btn" id="scroll-up" title="Scroll Up">
+                                <button class="scroll-btn" id="scroll-up" title="Scroll Up" disabled>
                                     <i class="fas fa-chevron-up"></i>
                                 </button>
                                 <button class="scroll-btn" id="scroll-down" title="Scroll Down">
@@ -2488,7 +2488,7 @@
             </div>
         </button>
         
-        <!-- Size selector circles -->
+        <!-- Size selector circles - Bottom position -->
         <div class="ai-size-selector">
             <button class="ai-size-btn" data-size="1">1</button>
             <button class="ai-size-btn" data-size="2">2</button>
@@ -2505,10 +2505,6 @@
             </div>
             <div class="ai-chat-messages" id="ai-chat-messages">
                 <!-- Messages will appear here -->
-                <div class="chat-message ai">
-                    <div class="message-content">Hello! I am Sauron, your AI trading assistant. How can I help you navigate the markets today?</div>
-                    <div class="message-time">${new Date().toLocaleTimeString()}</div>
-                </div>
             </div>
             <div class="ai-chat-input-container">
                 <input type="text" class="ai-chat-input" id="ai-chat-input" placeholder="Ask Sauron anything..." />
@@ -2521,7 +2517,7 @@
         <defs>
             <filter id="wavy">
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="5" result="turbulence" />
-                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="5" />
+                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="3" />
             </filter>
         </defs>
     </svg>
